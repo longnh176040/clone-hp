@@ -1,0 +1,25 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-12">
+      <app-orders
+        [totalItemQuantity_thisWeek]="totalItemQuantity_thisWeek"
+        [totalTransactionValue_thisWeek]="totalTransactionValue_thisWeek"
+        [totalItemQuantity_lastWeek]="totalItemQuantity_lastWeek"
+        [totalTransactionValue_lastWeek]="totalTransactionValue_lastWeek"
+        [differentTransaction]="differentTransaction"
+        [thisWeekOrders]="thisWeekOrders"
+      ></app-orders>
+    </div>
+    <div class="col-md-6 text-center">
+      <h5>Biểu đồ lượt người dùng theo phiên</h5>
+      <app-user-session [dataSet]="userSessionData"></app-user-session>
+    </div>
+    <div class="col-md-6 text-center">
+      <h5>Biểu đồ lượt truy cập theo thành phố</h5>
+      <app-location
+        [dataLabels]="locationLabels"
+        [dataSets]="locationData"
+      ></app-location>
+    </div>
+  </div>
+</div>

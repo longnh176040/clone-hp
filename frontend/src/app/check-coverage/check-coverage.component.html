@@ -1,0 +1,127 @@
+<app-banner
+  [pageTitle]="'Tra cứu bảo hành'"
+  [bannerImgUrl]="
+    '../../assets/banners/13403174_1186415931376786_1385363686404380935_o.jpg'
+  "
+></app-banner>
+
+<div class="coverage-wrapper products-showcase">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-8 col-xl-6" style="align-self: center">
+        <div class="check-form-wrapper">
+          <div class="check-form">
+            <div class="heading">
+              <span class="rectangle d-sm-flex d-none"><span>1</span></span>
+              <div class="heading-content">
+                <h5>Tra cứu thời gian bảo hành của sản phẩm</h5>
+                <p>Vui lòng nhập mã đơn hàng để tra cứu</p>
+              </div>
+            </div>
+            <form [formGroup] = coverageForm>
+              <input formControlName = "coverageId"
+              type="text"
+              placeholder="Mã đơn hàng"
+              autocomplete="off"/>
+              <button class="btn" (click)= "coverageId_submit()" data-toggle="modal" data-target="#coverage">
+                <i class="fas fa-search"></i>
+                <span class="d-sm-inline-block d-none ml-2">Tra cứu</span>
+              </button>
+            </form>
+
+            <div class="modal fade" id="coverage" tabindex="-1" role="dialog" aria-labelledby="coverageTitle" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="coverageTitle">Tra cứu thông tin bảo hành</h5>
+                  </div>
+                  <div class="modal-body" *ngIf = "coverage">
+                    <div>
+                    <div>Mã đơn hàng: {{coverage.order_id}}</div>
+                    <div>Ngày mua: {{coverage.created_at}}</div>
+                    <div>Người mua: {{coverage.username}}</div>
+                    <div *ngIf = "coverageTimeCheck">Sản phẩm còn được bảo hành đến: {{oneYearLater}}</div>
+                    <div *ngIf = "!coverageTimeCheck">Sản phẩm hết hạn bảo hành</div>
+                  </div>
+                  </div>
+                  <div class="modal-body" *ngIf = "!coverage">
+                    Không tìm thấy mã đơn hàng {{coverageId}}
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="check-form">
+            <div class="heading">
+              <span class="rectangle d-sm-flex d-none"><span>2</span></span>
+              <div class="heading-content">
+                <h5>Tra cứu thông tin sản phẩm đang gửi bảo hành</h5>
+                <p>
+                  Vui lòng nhập số điện thoại gủi bảo hành để tra cứu
+                </p>
+              </div>
+            </div>
+            <form [formGroup] = coverageForm>
+              <input formControlName = "coveragePhone"
+                type="text"
+                placeholder="Số điện thoại"
+              />
+              <button class="btn" (click)= "coveragePhone_submit()" data-toggle="modal" data-target="#coverage-status">
+                <i class="fas fa-search"></i>
+                <span class="d-sm-inline-block d-none ml-2">Tra cứu</span>
+              </button>
+            </form>
+
+            <div class="modal fade" id="coverage-status" tabindex="-1" role="dialog" aria-labelledby="coverage-statusTitle" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="coverage-statusTitle">Tra cứu tình trạng bảo hành</h5>
+                  </div>
+                  <div class="modal-body" *ngIf = "coverage">
+                    <div>
+                    <div>Số điện thoại: {{coverage.phone}} </div>
+                    <div>Sản phẩm gửi bảo hành: {{coverage.product}}</div>
+                    <div>Lý do bảo hành: {{coverage.reason}}</div>
+                    <div>Ngày gửi: {{coverage.date}}</div>
+                    <div>Tiến độ bảo hành: {{coverage.status}}</div>
+                    <div style="font-style:italic">Dự kiến nhận hàng trong vòng 1 tháng từ ngày gửi bảo hành</div>
+                  </div>
+                  </div>
+                  <div class="modal-body" *ngIf = "!coverage">
+                    Không tìm thấy số điện thoại {{coveragePhone}}
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-xl-3 d-none d-xl-block" style="margin-left: 50px">
+        <div class="policy">
+          <div class="illustration">
+            <img
+              src="../../assets/policies page/warranty policy illustration.png"
+              style="transform: scale(0.9)"
+            />
+          </div>
+          <div class="description">
+            <h5>Chính sách bảo hành</h5>
+            <p>Bảo hành chính hãng 12 tháng</p>
+          </div>
+          <div class="call-to-action">
+            <button class="btn" routerLink="/policies/warranty">
+              Xem chi tiết
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

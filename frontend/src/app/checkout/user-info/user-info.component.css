@@ -1,0 +1,47 @@
+form input,
+form textarea {
+  height: 50px;
+  padding: 12px 15px 15px !important;
+  background-color: #f6f6fa;
+  border: none !important;
+}
+form textarea {
+  height: 100px;
+}
+h3 {
+  color: #00447c;
+}
+.payment,
+.delivery {
+  margin-top: 30px;
+}
+
+button.place-order {
+  margin-top: 30px;
+  background: linear-gradient(
+    231deg,
+    rgba(59, 163, 235, 1) 0%,
+    rgba(58, 190, 174, 1) 100%
+  );
+  color: white;
+  width: 140px;
+  padding: 8px 0;
+  border-radius: 5px;
+  font-size: 18px;
+}
+
+button.cancel-order {
+  margin-left: 20px;
+  border: 1px solid #00447c;
+  color: #00447c;
+}
+
+.form-check-input {
+  margin-top: -13px !important;
+}
+
+@media (max-width: 576px) {
+  h3 {
+    font-size: 1.125rem;
+  }
+}

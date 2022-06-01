@@ -1,0 +1,2064 @@
+<app-banner
+  [pageTitle]="''"
+  [bannerImgUrl]="'../../assets/banners/elite-banner.png'"
+></app-banner>
+
+<div class="main-content-wrapper">
+  <div class="container">
+    <div class="row" *ngIf="laptop">
+      <div class="col-lg-6">
+        <div class="gallery">
+          <div
+            id="carouselExampleControls"
+            class="carousel slide"
+            data-ride="carousel"
+            data-interval="false"
+          >
+            <ol class="carousel-indicators">
+              <li
+                data-target="#carouselExampleControls"
+                data-slide-to="0"
+                class="active"
+              >
+                <img [src]="bucket + laptop.thumbnails[0]" />
+              </li>
+              <li
+                data-target="#carouselExampleControls"
+                *ngFor="
+                  let image of laptop.thumbnails | slice: 1;
+                  let id = index
+                "
+                [attr.data-slide-to]="id + 1"
+              >
+                <img [src]="bucket + image" />
+              </li>
+            </ol>
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <img
+                  class="d-block mx-auto img-fluid"
+                  [src]="bucket + laptop.thumbnails[0]"
+                />
+              </div>
+              <div
+                class="carousel-item"
+                *ngFor="let image of laptop.thumbnails | slice: 1"
+              >
+                <img class="d-block mx-auto img-fluid" [src]="bucket + image" />
+              </div>
+            </div>
+            <a
+              class="carousel-control-prev"
+              href="#carouselExampleControls"
+              role="button"
+              data-slide="prev"
+            >
+              <span
+                class="carousel-control carousel-control-prev-icon"
+                aria-hidden="true"
+                ><i class="fas fa-chevron-left"></i
+              ></span>
+            </a>
+            <a
+              class="carousel-control-next"
+              href="#carouselExampleControls"
+              role="button"
+              data-slide="next"
+            >
+              <span
+                class="carousel-control carousel-control-next-icon"
+                aria-hidden="true"
+                ><i class="fas fa-chevron-right"></i
+              ></span>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="brief-desc">
+          <h2 class="name">{{ laptop.name }}</h2>
+          <div class="users-overview">
+            {{ laptop.interaction.rating_point }}
+            <span class="stars-wrapper">
+              <span class="active-stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+              </span>
+              <!-- <span class="inactive-star">
+                <i class="fas fa-star"></i>
+              </span> -->
+            </span>
+            <span
+              (click)="goToComment(matTabGroup, comment)"
+              class="total-ratings"
+              >Xem <span>{{ laptop.interaction.comments }}</span> bình luận và
+              <span>{{ laptop.interaction.rates }}</span> đánh giá</span
+            >
+          </div>
+          <div class="price-wrapper">
+            <span class="sale" *ngIf="laptop.sale != 0"
+              >{{
+                laptop.price - (laptop.price / 100) * laptop.sale | convertPrice
+              }}
+              ₫</span
+            >
+            <span [class]="laptop.sale != 0 ? 'original' : 'originalp'"
+              >{{ laptop.price | convertPrice }} đ</span
+            >
+            <span class="discount" *ngIf="laptop.sale != 0"
+              >-{{ laptop.sale }}%</span
+            >
+          </div>
+          <ul class="specs-overview">
+            <li>
+              <img
+                src="../../../assets/product-detail/hardware-icons/036-windows-operating-system.png"
+              />
+              <span>{{ laptop.OS }}</span>
+            </li>
+            <li>
+              <img
+                src="../../../assets/product-detail/hardware-icons/013-processor.png"
+              />
+              <span>{{ laptop.CPU.name }}</span>
+            </li>
+            <li>
+              <img
+                src="../../../assets/product-detail/hardware-icons/022-memory.png"
+              />
+              <span>{{ laptop.RAM.capacity }}</span>
+            </li>
+            <li>
+              <img
+                src="../../../assets/product-detail/hardware-icons/006-ssd.png"
+              />
+              <span>{{ laptop.storage }}</span>
+            </li>
+            <li>
+              <img
+                src="../../../assets/product-detail/hardware-icons/021-monitor.png"
+              />
+              <span>{{ laptop.display }}</span>
+            </li>
+            <li>
+              <img
+                src="../../../assets/product-detail/hardware-icons/003-vga-card.png"
+              />
+              <span>{{ laptop.graphic }}</span>
+            </li>
+          </ul>
+          <div class="choose-colors">
+            <span class="mr-2">Chọn màu sắc</span>
+            <span
+              class="color"
+              (click)="chooseColor(id)"
+              *ngFor="let color of productColors; let id = index"
+              [ngStyle]="{ borderColor: color }"
+            >
+              <button
+                class="btn"
+                [ngStyle]="{ backgroundColor: color }"
+              ></button>
+            </span>
+          </div>
+          <button
+            class="btn purchase-now"
+            (click)="add_to_cart(laptop.laptop_id)"
+          >
+            Mua ngay
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <div class="product-info-wrapper" #comment>
+          <mat-tab-group mat-align-tabs="center" dynamicHeight #matTabGroup>
+            <mat-tab label="Khuyến mãi">
+              <div class="gifts">
+                <ng-template
+                  #promotion
+                  let-img="img"
+                  let-title="title"
+                  let-price="price"
+                  let-className="className"
+                >
+                  <div class="col-xl-3 col-md-4 col-sm-6 mb-sm-0 mb-30">
+                    <div class="single-gift" [class]="className">
+                      <div class="gift-img-wrapper">
+                        <img [src]="img" />
+                      </div>
+                      <div class="gift-info">
+                        <p class="title">{{ title }}</p>
+                        <p class="price mb-0">{{ price }}</p>
+                      </div>
+                    </div>
+                  </div>
+                </ng-template>
+
+                <div class="row gifts-group">
+                  <ng-container
+                    [ngTemplateOutlet]="promotion"
+                    [ngTemplateOutletContext]="{
+                      img: 'src=../../../assets/product-detail/gifts/Image 10.png',
+                      title: 'Balo laptop chống sốc HP',
+                      price: '450.000 đ'
+                    }"
+                  ></ng-container>
+
+                  <ng-container
+                    [ngTemplateOutlet]="promotion"
+                    [ngTemplateOutletContext]="{
+                      img: 'src=../../../assets/product-detail/gifts/Image 11.png',
+                      title: 'Bàn di chuột size lớn',
+                      price: '100.000 đ'
+                    }"
+                  ></ng-container>
+
+                  <ng-container
+                    [ngTemplateOutlet]="promotion"
+                    [ngTemplateOutletContext]="{
+                      img: 'src=../../../assets/product-detail/gifts/Image 12.png',
+                      title: 'Dán skin mặt lưng laptop',
+                      price: '200.000 đ',
+                      className: 'special-gift'
+                    }"
+                  ></ng-container>
+                </div>
+
+                <div class="row gifts-group group-2">
+                  <ng-container
+                    [ngTemplateOutlet]="promotion"
+                    [ngTemplateOutletContext]="{
+                      img: '../../../assets/product-detail/gifts/window_logo-removebg-preview.png',
+                      title: 'Win 10 bản quyền'
+                    }"
+                  ></ng-container>
+
+                  <ng-container
+                    [ngTemplateOutlet]="promotion"
+                    [ngTemplateOutletContext]="{
+                      img: '../../../assets/product-detail/gifts/warranty icon.png',
+                      title: 'Bảo hành trọn đời'
+                    }"
+                  ></ng-container>
+                </div>
+
+                <div class="row gifts-group group-3">
+                  <ng-template #policy let-img="img" let-title="title">
+                    <div class="col-xl-3 col-md-4 col-sm-6 mb-30">
+                      <div class="bonus">
+                        <img [src]="img" class="img-fluid" />
+                        <p>{{ title }}</p>
+                      </div>
+                    </div>
+                  </ng-template>
+
+                  <ng-container
+                    [ngTemplateOutlet]="policy"
+                    [ngTemplateOutletContext]="{
+                      img: '../../../assets/product-detail/gifts/undraw_On_the_way_re_swjt.png',
+                      title: 'Giao hàng tận nơi'
+                    }"
+                  ></ng-container>
+
+                  <ng-container
+                    [ngTemplateOutlet]="policy"
+                    [ngTemplateOutletContext]="{
+                      img: '../../../assets/product-detail/gifts/undraw_business_deal_cpi9.png',
+                      title: '1 đổi 1 trong 30 ngày đầu'
+                    }"
+                  ></ng-container>
+
+                  <ng-container
+                    [ngTemplateOutlet]="policy"
+                    [ngTemplateOutletContext]="{
+                      img: '../../../assets/product-detail/gifts/undraw_video_call_kxyp.png',
+                      title: 'Hỗ trợ kĩ thuật từ xa'
+                    }"
+                  ></ng-container>
+                </div>
+              </div>
+            </mat-tab>
+            <mat-tab label="Đánh giá chi tiết">
+              <div class="row features-specs-wrapper">
+                <div class="col-lg-6">
+                  <!-- <div class="features">
+                    <article class="jsx-1607660399 content">
+                      <h1 class="jsx-1607660399 thread-title">
+                        Trên tay HP Probook: nhỏ gọn, chất lượng cao và
+                        đầy bảo mật
+                      </h1>
+
+                      <div class="jsx-1607660399">
+                        <div class="jsx-1348315328">
+                          <div
+                            data-author="cuhiep"
+                            class="jsx-1348315328 xfBody big"
+                          >
+                            <ul>
+                              <li>
+                                Nhỏ gọn như một chiếc máy 11" nên dễ dàng bỏ vào
+                                bất cứ chiếc balo hay túi xách nào.
+                              </li>
+                              <li>
+                                Chất lượng hoàn thiện với nguyên vật liệu sử
+                                dụng chất lượng cao nên có vẻ đẹp của hàng xịn,
+                                cảm giác cầm
+                                <a
+                                  href="https://tinhte.vn/tags/tren-tay/"
+                                  class="Tinhte_XenTag_TagLink"
+                                  >trên tay</a
+                                >
+                                rất đã
+                              </li>
+                              <li>
+                                Màn hình trang bị sẵn công nghệ chống nhìn trộm
+                                <a
+                                  href="https://tinhte.vn/tags/hp-sure-view/"
+                                  class="Tinhte_XenTag_TagLink"
+                                  >HP Sure View</a
+                                >
+                                có thể tắt/mở dễ dàng, trong khi hình dạng bên
+                                ngoài thì không khác màn hình laptop bình thường
+                              </li>
+                              <li>
+                                Các tính năng bảo mật nghiêm nhất của
+                                <a
+                                  href="https://tinhte.vn/tags/hp/"
+                                  class="Tinhte_XenTag_TagLink"
+                                  >HP</a
+                                >
+                                như Sure Click, Sure
+                              </li>
+                            </ul>
+
+                            <div
+                              class="LinkExpander direct expanded type-ratio"
+                              data-type="ratio"
+                            >
+                              <div class="LinkExpander_Ratio">
+                                <iframe
+                                  width="100%"
+                                  height="450"
+                                  src="https://www.youtube.com/embed/EGDNCGMrbyo?wmode=opaque"
+                                  frameborder="0"
+                                  allowfullscreen=""
+                                ></iframe>
+                              </div>
+                            </div>
+                            <span class="xf-body-paragraph"
+                              ><br />
+                              <br />
+                            </span>
+                            <h2
+                              class="
+                                TinhteMods_HeadingTag TinhteMods_HeadingTagH2
+                              "
+                              id="menuid0"
+                            >
+                              <a
+                                href="https://tinhte.vn/tags/hp-elite-dragonfly/"
+                                class="Tinhte_XenTag_TagLink"
+                                >HP Elite DragonFly</a
+                              >: Nhỏ gọn nhẹ
+                            </h2>
+                            <span class="xf-body-paragraph"
+                              ><br />
+                              Đối với người phải luôn mang theo một chiếc máy
+                              tính để xử lý công việc bất cứ lúc nào thì yếu tố
+                              nhỏ gọn là quan trọng. Nhờ công nghệ màn hình viền
+                              mỏng mà các hãng máy tính đã làm ra những chiếc
+                              máy tính màn hình 13” nhưng trong thân của một
+                              chiếc máy 11”. Nhờ vậy, không chỉ nhỏ đi mà trọng
+                              lượng cũng giảm đi. HP
+                              <a
+                                href="https://tinhte.vn/tags/elite-dragonfly/"
+                                class="Tinhte_XenTag_TagLink"
+                                >Elite DragonFly</a
+                              >
+                              có trọng lượng ít hơn 1kg trong khi thân máy được
+                              làm từ kim loại và cảm giác cầm chắc chắn, bền bỉ.
+                              Chưa kể nó còn là một chiếc máy có thể gập màn
+                              hình hẳn ra sau để dùng như một chiếc máy tính
+                              bảng để bàn.<br />
+                              <br />
+                            </span>
+
+                            <span
+                              class="bdImage_attachImage"
+                              style="width: 2048px"
+                            >
+                              <span
+                                class="inner"
+                                style="padding-bottom: 66.650391%"
+                              >
+                                <img
+                                  alt="Hp_Elite_DragonFly.jpg"
+                                  data-height="1365"
+                                  src="https://photo2.tinhte.vn/data/attachment-files/2019/12/4855985_Hp_Elite_DragonFly.jpg"
+                                  data-width="2048"
+                                />
+                              </span>
+                            </span>
+
+                            <span class="xf-body-paragraph"
+                              ><br />
+                              Về bên ngoài mình còn thích màu sắc của chiếc này,
+                              mình không rõ có bao nhiêu màu được bán ra nhưng
+                              màu xanh đậm mình cầm thì nhìn nó rất khác biệt và
+                              cảm giác rất vui vẻ, thoải mái, trẻ trung, nó
+                              không mang phong cách nặng, sang trọng, kiểu cánh
+                              như những chiếc laptop cho doanh nhân khác.<br />
+                              <br />
+                              Nói chung về bên ngoài, việc cầm nắm trong quá
+                              trình sử dụng hay thao tác dùng, mang đi mang
+                              lại... HP Elite DragronFly gần như thoả mãn được
+                              những gì thực tế nhất của người dùng hiện đại.
+                            </span>
+                          </div>
+                        </div>
+                        <div class="jsx-1348315328">
+                          <div
+                            data-author="cuhiep"
+                            class="jsx-1348315328 xfBody big"
+                          >
+                            <br />
+                            <br />
+                            <h2
+                              class="
+                                TinhteMods_HeadingTag TinhteMods_HeadingTagH2
+                              "
+                            >
+                              <a
+                                href="https://tinhte.vn/tags/hp-sure/"
+                                class="Tinhte_XenTag_TagLink"
+                                >HP Sure</a
+                              >
+                              View và các công nghệ an toàn khác
+                            </h2>
+
+                            <span
+                              class="bdImage_attachImage"
+                              style="width: 2048px"
+                            >
+                              <span
+                                class="inner"
+                                style="padding-bottom: 66.650391%"
+                              >
+                                <img
+                                  alt="Hp_Elite_DragonFly-38.jpg"
+                                  data-height="1365"
+                                  src="https://photo2.tinhte.vn/data/attachment-files/2019/12/4855980_Hp_Elite_DragonFly-38.jpg"
+                                  data-width="2048"
+                                />
+                              </span>
+                            </span>
+
+                            <span class="xf-body-paragraph"
+                              ><br />
+                              <i
+                                >Màn hình đang mở, chỉ cần nhìn nghiêng chút
+                                thôi là không thấy được nội dung trên màn hình.
+                                Đó là công nghệ chống nhìn trộm HP Sure View.</i
+                              ></span
+                            ><span class="xf-body-paragraph"
+                              ><br />
+                              <br />
+                              Điểm mình thích nhất đó là công nghệ HP Sure View.
+                              Theo đó HP trang bị một màn hình chống nhìn trộm
+                              sẵn ở trong máy với công tắc để có thể tắt/mở chế
+                              độ này. Tức là bên ngoài anh em sẽ thấy nó giống
+                              như màn hình của bất cứ chiếc laptop bình thường
+                              nào, chứ không giống như những chiếc laptop có dán
+                              tấm chống nhìn trộm.<br />
+                              <br />
+                              Bình thường để chống nhìn trộm chúng ta sẽ dán một
+                              miếng film gồm các bức tường siêu mỏng xếp song
+                              song để chặn những góc nhìn xiên đến màn hình
+                              trong khi nhìn thẳng thì sẽ ít bị chặn hơn và vẫn
+                              nhìn được nội dung tuy không hoàn toàn. Và các máy
+                              có dán tấm film chống nhìn trộm thì luôn luôn là
+                              chống nhìn trộm nên người dùng mặc định bị mất đi
+                              một phần nội dung. Rồi từ ngoài nhìn vào thì tự
+                              nhiên thấy chiếc máy nó luôn mờ mờ, có một lớp
+                              film nhìn lạ lạ và rất kém thân thiện, có cảm giác
+                              bị đề phòng.<br />
+                              <br />
+                              HP Sure View như mình nói trên thì người xung
+                              quanh không nhận thức được máy của anh em có lớp
+                              chống nhìn trộm nên luôn thoải mái, thân thiện
+                              không có cảm giác bị đề phòng. Và khi tắt đi anh
+                              em lại trải nghiệm được trọn vẹn nội dung hiển
+                              thị. Nói thêm là với màn hình có độ sáng cao
+                              1000nit, kể cả anh em mở chế độ chống nhìn trộm
+                              thì màn hình HP Elite DragonFly cũng rất sáng.<br />
+                              <br />
+                            </span>
+
+                            <span
+                              class="bdImage_attachImage"
+                              style="width: 2048px"
+                            >
+                              <span
+                                class="inner"
+                                style="padding-bottom: 66.650391%"
+                              >
+                                <img
+                                  alt="Hp_Elite_DragonFly-9.jpg"
+                                  data-height="1365"
+                                  src="https://photo2.tinhte.vn/data/attachment-files/2019/12/4855950_Hp_Elite_DragonFly-9.jpg"
+                                  data-width="2048"
+                                />
+                              </span>
+                            </span>
+
+                            <span class="xf-body-paragraph"
+                              ><br />
+                              <i
+                                >Webcam đang ở trạng thái bị che lại bởi một cửa
+                                có thể gạt qua, gạt lại để đóng và mở. Một số
+                                người dùng miếng băng keo để dán webcam lại nhìn
+                                không đẹp và không thân thiện.</i
+                              ></span
+                            ><span class="xf-body-paragraph"
+                              ><br />
+                              <br />
+                              <b
+                                >Các công nghệ an ninh khác HP trang bị trên
+                                Elite DragonFly:</b
+                              ><br />
+                            </span>
+                            <ul>
+                              <li>
+                                HP Privacy Camera: có một cửa che camera phía
+                                trước có thể gạt qua để che hẳn webcam.
+                              </li>
+                              <li>
+                                HP Sure Sense dùng AI (phần cứng và mềm) để bảo
+                                vệ máy khỏi các malware hay các phần mềm độc
+                                hại, hacker...
+                              </li>
+                              <li>
+                                Touch Fingerprint Sensor: Bảo mật vân tay để
+                                đăng nhập vào máy
+                              </li>
+                              <li>
+                                HP Sure Recover: một bảo lưu trữ máy trên mây để
+                                có thể khôi phục lại bất cứ lúc nào máy gặp sự
+                                cố.
+                              </li>
+                              <li>
+                                HP Sure Click: khi nào xác định được rủi ro thì
+                                ngay cả những gì bạn nhấn đều được bảo vệ theo
+                                kiểu sandbox
+                              </li>
+                              <li>
+                                HP Sure Start Gen5: kiểm tra cấu trúc và kích
+                                thước Bios mỗi khi khởi động, nếu phát hiện có
+                                chỉnh sửa hay thay đổi gì sẽ biết và xử lý.
+                              </li>
+                            </ul>
+                            <h2
+                              class="
+                                TinhteMods_HeadingTag TinhteMods_HeadingTagH2
+                              "
+                            >
+                              Màn hình sáng và độ phân giải hợp lý:
+                            </h2>
+
+                            <span
+                              class="bdImage_attachImage"
+                              style="width: 2048px"
+                            >
+                              <span
+                                class="inner"
+                                style="padding-bottom: 66.650391%"
+                              >
+                                <img
+                                  alt="Hp_Elite_DragonFly-17.jpg"
+                                  data-height="1365"
+                                  src="https://photo2.tinhte.vn/data/attachment-files/2019/12/4855959_Hp_Elite_DragonFly-17.jpg"
+                                  data-width="2048"
+                                />
+                              </span>
+                            </span>
+
+                            <span class="xf-body-paragraph"
+                              ><br />
+                              <br />
+                              HP Elite DragonFly mình trên tay có màn hình 13”,
+                              độ sáng 1000nit, độ phân giải FullHD. Theo mình
+                              một chiếc máy tính chạy Windows kích thước 13” thì
+                              độ phân giải FullHD là hợp lý nhất. Nếu làm độ
+                              phân giải cao hơn thì người dùng sẽ rối vì nhiều
+                              ứng dụng trên Windows vẫn chưa hỗ trợ độ phân giải
+                              cao. Trong khi FullHD trên 13” cũng đã đạt mật độ
+                              điểm ảnh rất cao rồi.<br />
+                              <br />
+                              Rõ ràng là HP đã chọn giải pháp hợp lý. Thay vì
+                              chạy đua trang bị 4K để lấy tiếng. Ngoài ra màn
+                              hình rất sáng và chống nhìn trộm là những tính
+                              năng mà không nhiều máy có được. Màn hình sáng
+                              giúp anh em ngồi làm việc ngoài trời thoải mái và
+                              nội dung hiển thị chất lượng cao hơn nhiều.<br />
+                              <br />
+                            </span>
+                            <h2
+                              class="
+                                TinhteMods_HeadingTag TinhteMods_HeadingTagH2
+                              "
+                            >
+                              Bàn phím và chuột:
+                            </h2>
+
+                            <span
+                              class="bdImage_attachImage"
+                              style="width: 2048px"
+                            >
+                              <span
+                                class="inner"
+                                style="padding-bottom: 66.650391%"
+                              >
+                                <img
+                                  alt="Hp_Elite_DragonFly-39.jpg"
+                                  data-height="1365"
+                                  src="https://photo2.tinhte.vn/data/attachment-files/2019/12/4855981_Hp_Elite_DragonFly-39.jpg"
+                                  data-width="2048"
+                                />
+                              </span>
+                            </span>
+
+                            <span class="xf-body-paragraph"
+                              ><br />
+                              Bàn phím kích thước nhỏ, hành trình không quá dài
+                              và Feedback ấn tượng. Anh em có thể lướt được trên
+                              bàn phím này sau khi dùng nó khoảng 1 ngày.<br />
+                              <br />
+                            </span>
+
+                            <span
+                              class="bdImage_attachImage"
+                              style="width: 2048px"
+                            >
+                              <span
+                                class="inner"
+                                style="padding-bottom: 66.650391%"
+                              >
+                                <img
+                                  alt="Hp_Elite_DragonFly-20.jpg"
+                                  data-height="1365"
+                                  src="https://photo2.tinhte.vn/data/attachment-files/2019/12/4855962_Hp_Elite_DragonFly-20.jpg"
+                                  data-width="2048"
+                                />
+                              </span>
+                            </span>
+
+                            <span class="xf-body-paragraph"
+                              ><br />
+                              Chuột đa điểm rất nhạy kết hợp với Windows 10 nên
+                              anh em có thể dễ dàng tạo ra các không gian làm
+                              việc và thao tác vuốt qua lại các cửa sổ khác nhau
+                              dễ dàng hơn.<br />
+                              <br />
+                            </span>
+                            <h2
+                              class="
+                                TinhteMods_HeadingTag TinhteMods_HeadingTagH2
+                              "
+                            >
+                              Phụ kiện theo máy:
+                            </h2>
+                            <span class="xf-body-paragraph"
+                              >Theo máy HP kèm thêm một bộ USB-C HUB để mở rộng
+                              kết nối cổng LAN, VGA, thêm USB-A... Thực chất thì
+                              trên máy đã có đủ cổng cần thiết cho anh em rồi.
+                              Nhưng cục USB-C HUB này không những xịn mà còn đẹp
+                              nữa nên sẽ nhiều người thích nó và thấy nó có giá
+                              trị.<br />
+                              <br />
+                            </span>
+
+                            <span
+                              class="bdImage_attachImage"
+                              style="width: 2048px"
+                            >
+                              <span
+                                class="inner"
+                                style="padding-bottom: 66.650391%"
+                              >
+                                <img
+                                  alt="Hp_Elite_DragonFly-21.jpg"
+                                  data-height="1365"
+                                  src="https://photo2.tinhte.vn/data/attachment-files/2019/12/4855963_Hp_Elite_DragonFly-21.jpg"
+                                  data-width="2048"
+                                />
+                              </span>
+                            </span>
+
+                            <span class="xf-body-paragraph"
+                              ><br />
+                              <br />
+                              Tiếp theo là cây bút để vẽ lên Elite DragonFly ở
+                              chế độ tablet, mình thì không xài bút nên không
+                              biết nó làm được gì.<br />
+                              <br />
+                              Và cuối cùng là cục sạc, tuy là máy đi kèm thì
+                              phải có cục sạc, nhưng cục sạc đi theo máy này là
+                              cục sạc nhỏ gọn, có công suất sạc 65W với thiết kế
+                              và dây sạc rất đẹp. Sạc này mình thử thì thấy nó
+                              là chuẩn PD và có thể sạc cho các thiết bị khác
+                              nữa dùng chuẩn này chứ không nhất thiết là máy HP
+                              này.<br />
+                              <br />
+                            </span>
+                            <h2
+                              class="
+                                TinhteMods_HeadingTag TinhteMods_HeadingTagH2
+                              "
+                            >
+                              Các Cổng kết nối trên máy:
+                            </h2>
+                            <span class="xf-body-paragraph"
+                              >Nổi bật nhất có thể kể đến hai cổng Thunderbolt
+                              3, đây là cổng giao tiếp nhanh nhất hiện nay có
+                              trên các máy tính xách tay. Và với một chiếc máy
+                              nhỏ gọn như Elite DragonFly này mà HP trang bị đến
+                              hai cổng Thunderbolt 3 thì thực sự ấn tượng.<br />
+                              <br />
+                              Tiếp theo chúng ta còn có cổng USB-A, cổng HDMI
+                              1.4. Nói chung là mọi kết nối cơ bản đều có đủ và
+                              thậm chí còn mạnh.<br />
+                            </span>
+
+                            <div
+                              class="
+                                twentytwenty-wrapper twentytwenty-horizontal
+                              "
+                            >
+                              <div
+                                class="twentytwenty-container"
+                                style="height: 503px"
+                              >
+                                <img
+                                  alt="Hp_Elite_DragonFly-25.jpg"
+                                  data-height="1365"
+                                  src="https://photo2.tinhte.vn/data/attachment-files/2019/12/4855967_Hp_Elite_DragonFly-25.jpg"
+                                  data-width="2048"
+                                  class="twentytwenty-before"
+                                  style="clip: rect(0px, 711.5px, 503px, 0px)"
+                                /><img
+                                  src="https://tinhte.vn/appforo/index.php?attachments/4386020/data&amp;oauth_token=cc281f5d5a6cf26a1e41cff51b5f828d7f29ddab"
+                                  class="twentytwenty-after"
+                                  style="clip: rect(0px, 754px, 503px, 711.5px)"
+                                />
+                                <div
+                                  class="twentytwenty-handle"
+                                  style="left: 711.5px"
+                                >
+                                  <span class="twentytwenty-left-arrow"></span
+                                  ><span
+                                    class="twentytwenty-right-arrow"
+                                  ></span>
+                                </div>
+                              </div>
+                            </div>
+                            <br />
+                            <h2
+                              class="
+                                TinhteMods_HeadingTag TinhteMods_HeadingTagH2
+                              "
+                            >
+                              Cấu hình:
+                            </h2>
+                            <span class="xf-body-paragraph"
+                              >Tuy nhỏ nhưng cấu hình máy thuộc dạng rất mạnh
+                              với CPU Core i7 thế hệ thứ 8, RAM 16GB, ổ SSD
+                              512GB, pin 4 cell... nói chung với anh em xài máy
+                              nhỏ cỡ này thì cấu hình thoải mái thực thi hết.<br />
+                              <br />
+                              Hình ảnh khác:<br />
+                            </span>
+
+                            <span
+                              class="bdImage_attachImage"
+                              style="width: 2048px"
+                            >
+                              <span
+                                class="inner"
+                                style="padding-bottom: 66.650391%"
+                              >
+                                <img
+                                  alt="Hp_Elite_DragonFly-5.jpg"
+                                  data-height="1365"
+                                  src="https://photo2.tinhte.vn/data/attachment-files/2019/12/4855946_Hp_Elite_DragonFly-5.jpg"
+                                  data-width="2048"
+                                />
+                              </span>
+                            </span>
+
+                            <span class="xf-body-paragraph"> </span>
+
+                            <span
+                              class="bdImage_attachImage"
+                              style="width: 2048px"
+                            >
+                              <span
+                                class="inner"
+                                style="padding-bottom: 66.650391%"
+                              >
+                                <img
+                                  alt="Hp_Elite_DragonFly-6.jpg"
+                                  data-height="1365"
+                                  src="https://photo2.tinhte.vn/data/attachment-files/2019/12/4855947_Hp_Elite_DragonFly-6.jpg"
+                                  data-width="2048"
+                                />
+                              </span>
+                            </span>
+
+                            <span class="xf-body-paragraph"> </span>
+
+                            <span
+                              class="bdImage_attachImage"
+                              style="width: 2048px"
+                            >
+                              <span
+                                class="inner"
+                                style="padding-bottom: 66.650391%"
+                              >
+                                <img
+                                  alt="Hp_Elite_DragonFly-18.jpg"
+                                  data-height="1365"
+                                  src="https://photo2.tinhte.vn/data/attachment-files/2019/12/4855960_Hp_Elite_DragonFly-18.jpg"
+                                  data-width="2048"
+                                />
+                              </span>
+                            </span>
+
+                            <span class="xf-body-paragraph"> </span>
+
+                            <span
+                              class="bdImage_attachImage"
+                              style="width: 2048px"
+                            >
+                              <span
+                                class="inner"
+                                style="padding-bottom: 66.650391%"
+                              >
+                                <img
+                                  alt="Hp_Elite_DragonFly-22.jpg"
+                                  data-height="1365"
+                                  src="https://photo2.tinhte.vn/data/attachment-files/2019/12/4855964_Hp_Elite_DragonFly-22.jpg"
+                                  data-width="2048"
+                                />
+                              </span>
+                            </span>
+
+                            <span
+                              class="bdImage_attachImage"
+                              style="width: 2048px"
+                            >
+                              <span
+                                class="inner"
+                                style="padding-bottom: 66.650391%"
+                              >
+                                <img
+                                  alt="Hp_Elite_DragonFly-23.jpg"
+                                  data-height="1365"
+                                  src="https://photo2.tinhte.vn/data/attachment-files/2019/12/4855965_Hp_Elite_DragonFly-23.jpg"
+                                  data-width="2048"
+                                />
+                              </span>
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    </article>
+                  </div>
+                </div> -->
+                  <div [innerHtml]="blog"></div>
+                </div>
+                <div class="col-lg-6">
+                  <div class="specs pl-lg-5">
+                    <table
+                      style="width: 100%"
+                      border="1"
+                      width="100%"
+                      *ngIf="laptop"
+                    >
+                      <tbody>
+                        <tr>
+                          <td
+                            style="
+                              width: 226.95pt;
+                              padding: 0.75pt 0.75pt 0.75pt 0.75pt;
+                            "
+                            width="303"
+                          >
+                            <p style="margin: 0cm; margin-bottom: 0.0001pt">
+                              <span class="detail_table_column1"
+                                ><strong
+                                  ><span style="color: black"
+                                    >Hãng sản xuất</span
+                                  ></strong
+                                ></span
+                              >
+                            </p>
+                          </td>
+                          <td
+                            style="
+                              width: 578.2pt;
+                              padding: 0.75pt 0.75pt 0.75pt 0.75pt;
+                            "
+                            width="771"
+                          >
+                            <p style="margin: 0cm; margin-bottom: 0.0001pt">
+                              <span class="detail_table_column2"
+                                ><strong
+                                  ><span style="color: black">HP</span></strong
+                                ></span
+                              >
+                            </p>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            style="
+                              width: 226.95pt;
+                              padding: 0.75pt 0.75pt 0.75pt 0.75pt;
+                            "
+                            width="303"
+                          >
+                            <p style="margin: 0cm; margin-bottom: 0.0001pt">
+                              <span class="detail_table_column1"
+                                ><strong
+                                  ><span style="color: black"
+                                    >Tên sản phẩm</span
+                                  ></strong
+                                ></span
+                              >
+                            </p>
+                          </td>
+                          <td
+                            style="
+                              width: 578.2pt;
+                              padding: 0.75pt 0.75pt 0.75pt 0.75pt;
+                            "
+                            width="771"
+                          >
+                            <p style="margin: 0cm; margin-bottom: 0.0001pt">
+                              <span class="detail_table_column2"
+                                ><strong
+                                  ><span style="color: black"
+                                    >{{ laptop.name }}&nbsp;</span
+                                  ></strong
+                                ></span
+                              >
+                            </p>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            style="
+                              width: 806.65pt;
+                              padding: 0.75pt 0.75pt 0.75pt 0.75pt;
+                            "
+                            colspan="2"
+                            width="1076"
+                          >
+                            <p style="margin: 0cm; margin-bottom: 0.0001pt">
+                              <span class="detail_table_column2"
+                                ><strong
+                                  ><span style="color: black"
+                                    >Bộ vi xử lý</span
+                                  ></strong
+                                ></span
+                              >
+                            </p>
+                          </td>
+                        </tr>
+
+                        <tr>
+                          <td
+                            style="
+                              width: 226.95pt;
+                              padding: 0.75pt 0.75pt 0.75pt 0.75pt;
+                            "
+                            width="303"
+                          >
+                            <p style="margin: 0cm; margin-bottom: 0.0001pt">
+                              <span class="detail_table_column1"
+                                >Bộ vi xử lý</span
+                              >
+                            </p>
+                          </td>
+                          <td
+                            style="
+                              width: 578.2pt;
+                              padding: 0.75pt 0.75pt 0.75pt 0.75pt;
+                            "
+                            width="771"
+                          >
+                            <p style="margin: 0cm; margin-bottom: 0.0001pt">
+                              <span class="detail_table_column2">{{
+                                laptop.CPU.name
+                              }}</span>
+                            </p>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            style="
+                              width: 226.95pt;
+                              padding: 0.75pt 0.75pt 0.75pt 0.75pt;
+                            "
+                            width="303"
+                          >
+                            <p style="margin: 0cm; margin-bottom: 0.0001pt">
+                              <span class="detail_table_column1">Tốc độ</span>
+                            </p>
+                          </td>
+                          <td
+                            style="
+                              width: 578.2pt;
+                              padding: 0.75pt 0.75pt 0.75pt 0.75pt;
+                            "
+                            width="771"
+                          >
+                            <p style="margin: 0cm; margin-bottom: 0.0001pt">
+                              <span class="detail_table_column2"
+                                ><span class="detail_table_column2"
+                                  >{{ laptop.CPU.speed }}
+                                </span>
+                                <!-- <span style="color: black;"
+                                  >8 threads</span> -->
+                              </span>
+                            </p>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            style="
+                              width: 226.95pt;
+                              padding: 0.75pt 0.75pt 0.75pt 0.75pt;
+                            "
+                            width="303"
+                          >
+                            <p style="margin: 0cm; margin-bottom: 0.0001pt">
+                              <span class="detail_table_column1"
+                                >Bộ nhớ đệm</span
+                              >
+                            </p>
+                          </td>
+                          <td
+                            style="
+                              width: 578.2pt;
+                              padding: 0.75pt 0.75pt 0.75pt 0.75pt;
+                            "
+                            width="771"
+                          >
+                            <p style="margin: 0cm; margin-bottom: 0.0001pt">
+                              <span class="detail_table_column2">{{
+                                laptop.CPU.cache | exceptValue
+                              }}</span>
+                            </p>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            style="
+                              width: 806.65pt;
+                              padding: 0.75pt 0.75pt 0.75pt 0.75pt;
+                            "
+                            colspan="2"
+                            width="1076"
+                          >
+                            <p style="margin: 0cm; margin-bottom: 0.0001pt">
+                              <span class="detail_table_column2"
+                                ><strong
+                                  ><span style="color: black"
+                                    >Bộ nhớ trong (RAM)</span
+                                  ></strong
+                                ></span
+                              >
+                            </p>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            style="
+                              width: 226.95pt;
+                              padding: 0.75pt 0.75pt 0.75pt 0.75pt;
+                            "
+                            width="303"
+                          >
+                            <p style="margin: 0cm; margin-bottom: 0.0001pt">
+                              <span class="detail_table_column1"
+                                >Dung lượng</span
+                              >
+                            </p>
+                          </td>
+                          <td
+                            style="
+                              width: 578.2pt;
+                              padding: 0.75pt 0.75pt 0.75pt 0.75pt;
+                            "
+                            width="771"
+                          >
+                            <p style="margin: 0cm; margin-bottom: 0.0001pt">
+                              <span class="detail_table_column2">{{
+                                laptop.RAM.capacity | exceptValue
+                              }}</span>
+                            </p>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            style="
+                              width: 226.95pt;
+                              padding: 0.75pt 0.75pt 0.75pt 0.75pt;
+                            "
+                            width="303"
+                          >
+                            <p style="margin: 0cm; margin-bottom: 0.0001pt">
+                              <span class="detail_table_column1"
+                                >Số khe cắm</span
+                              >
+                            </p>
+                          </td>
+                          <td
+                            style="
+                              width: 578.2pt;
+                              padding: 0.75pt 0.75pt 0.75pt 0.75pt;
+                            "
+                            width="771"
+                          >
+                            <p style="margin: 0cm; margin-bottom: 0.0001pt">
+                              <span class="detail_table_column2"
+                                >{{
+                                  laptop.RAM.socket_number | exceptValue
+                                }}&nbsp;</span
+                              >
+                            </p>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            style="
+                              width: 806.65pt;
+                              padding: 0.75pt 0.75pt 0.75pt 0.75pt;
+                            "
+                            colspan="2"
+                            width="1076"
+                          >
+                            <p style="margin: 0cm; margin-bottom: 0.0001pt">
+                              <span class="detail_table_column2"
+                                ><strong
+                                  ><span style="color: black"
+                                    >Ổ cứng&nbsp;</span
+                                  ></strong
+                                ></span
+                              >
+                            </p>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            style="
+                              width: 226.95pt;
+                              padding: 0.75pt 0.75pt 0.75pt 0.75pt;
+                            "
+                            width="303"
+                          >
+                            <p style="margin: 0cm; margin-bottom: 0.0001pt">
+                              <span class="detail_table_column1"
+                                >Dung lượng</span
+                              >
+                            </p>
+                          </td>
+                          <td
+                            style="
+                              width: 578.2pt;
+                              padding: 0.75pt 0.75pt 0.75pt 0.75pt;
+                            "
+                            width="771"
+                          >
+                            <p style="margin: 0cm; margin-bottom: 0.0001pt">
+                              <span class="detail_table_column2">{{
+                                laptop.storage | exceptValue
+                              }}</span>
+                            </p>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            style="
+                              width: 226.95pt;
+                              padding: 0.75pt 0.75pt 0.75pt 0.75pt;
+                            "
+                            width="303"
+                          >
+                            <p style="margin: 0cm; margin-bottom: 0.0001pt">
+                              <span class="detail_table_column1"
+                                >Tốc độ vòng quay</span
+                              >
+                            </p>
+                          </td>
+                          <td
+                            style="
+                              width: 578.2pt;
+                              padding: 0.75pt 0.75pt 0.75pt 0.75pt;
+                            "
+                            width="771"
+                          >
+                            <p style="margin: 0cm; margin-bottom: 0.0001pt">
+                              <span class="detail_table_column2">&nbsp;</span>
+                            </p>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            style="
+                              width: 226.95pt;
+                              padding: 0.75pt 0.75pt 0.75pt 0.75pt;
+                            "
+                            width="303"
+                          >
+                            <p style="margin: 0cm; margin-bottom: 0.0001pt">
+                              <span class="detail_table_column2"
+                                ><strong
+                                  ><span style="color: black"
+                                    >Khe cắm SSD mở rộng</span
+                                  ></strong
+                                ></span
+                              >
+                            </p>
+                          </td>
+                          <td
+                            style="
+                              width: 578.2pt;
+                              padding: 0.75pt 0.75pt 0.75pt 0.75pt;
+                            "
+                            width="771"
+                          >
+                            <p style="margin: 0cm; margin-bottom: 0.0001pt">
+                              <span class="detail_table_column2">&nbsp;</span>
+                            </p>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            style="
+                              width: 226.95pt;
+                              padding: 0.75pt 0.75pt 0.75pt 0.75pt;
+                            "
+                            width="303"
+                          >
+                            <p style="margin: 0cm; margin-bottom: 0.0001pt">
+                              <span class="detail_table_column2"
+                                ><strong
+                                  ><span style="color: black"
+                                    >Ổ đĩa quang (ODD)&nbsp;</span
+                                  ></strong
+                                ></span
+                              >
+                            </p>
+                          </td>
+                          <td
+                            style="
+                              width: 578.2pt;
+                              padding: 0.75pt 0.75pt 0.75pt 0.75pt;
+                            "
+                            width="771"
+                          >
+                            <p style="margin: 0cm; margin-bottom: 0.0001pt">
+                              <span class="detail_table_column2">Không có</span>
+                            </p>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            style="
+                              width: 806.65pt;
+                              padding: 0.75pt 0.75pt 0.75pt 0.75pt;
+                            "
+                            colspan="2"
+                            width="1076"
+                          >
+                            <p style="margin: 0cm; margin-bottom: 0.0001pt">
+                              <span class="detail_table_column2"
+                                ><strong
+                                  ><span style="color: black"
+                                    >Hiển thị&nbsp;</span
+                                  ></strong
+                                ></span
+                              >
+                            </p>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            style="
+                              width: 226.95pt;
+                              padding: 0.75pt 0.75pt 0.75pt 0.75pt;
+                            "
+                            width="303"
+                          >
+                            <p style="margin: 0cm; margin-bottom: 0.0001pt">
+                              <span class="detail_table_column1">Màn hình</span>
+                            </p>
+                          </td>
+                          <td
+                            style="
+                              width: 578.2pt;
+                              padding: 0.75pt 0.75pt 0.75pt 0.75pt;
+                            "
+                            width="771"
+                          >
+                            <p style="margin: 0cm; margin-bottom: 0.0001pt">
+                              <span class="detail_table_column2"
+                                >{{ laptop.display | exceptValue }}&nbsp;</span
+                              >
+                            </p>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            style="
+                              width: 226.95pt;
+                              padding: 0.75pt 0.75pt 0.75pt 0.75pt;
+                            "
+                            width="303"
+                          >
+                            <p style="margin: 0cm; margin-bottom: 0.0001pt">
+                              <span class="detail_table_column1"
+                                >Độ phân giải</span
+                              >
+                            </p>
+                          </td>
+                          <td
+                            style="
+                              width: 578.2pt;
+                              padding: 0.75pt 0.75pt 0.75pt 0.75pt;
+                            "
+                            width="771"
+                          >
+                            <p style="margin: 0cm; margin-bottom: 0.0001pt">
+                              <span class="detail_table_column2"></span>
+                            </p>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            style="
+                              width: 806.65pt;
+                              padding: 0.75pt 0.75pt 0.75pt 0.75pt;
+                            "
+                            colspan="2"
+                            width="1076"
+                          >
+                            <p style="margin: 0cm; margin-bottom: 0.0001pt">
+                              <span class="detail_table_column2"
+                                ><strong
+                                  ><span style="color: black"
+                                    >Đồ Họa (VGA)&nbsp;</span
+                                  ></strong
+                                ></span
+                              >
+                            </p>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            style="
+                              width: 226.95pt;
+                              padding: 0.75pt 0.75pt 0.75pt 0.75pt;
+                            "
+                            width="303"
+                          >
+                            <p style="margin: 0cm; margin-bottom: 0.0001pt">
+                              <span class="detail_table_column1"
+                                >Card màn hình</span
+                              >
+                            </p>
+                          </td>
+                          <td
+                            style="
+                              width: 578.2pt;
+                              padding: 0.75pt 0.75pt 0.75pt 0.75pt;
+                            "
+                            width="771"
+                          >
+                            <p style="margin: 0cm; margin-bottom: 0.0001pt">
+                              <span class="detail_table_column2">{{
+                                laptop.graphic | exceptValue
+                              }}</span>
+                            </p>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            style="
+                              width: 806.65pt;
+                              padding: 0.75pt 0.75pt 0.75pt 0.75pt;
+                            "
+                            colspan="2"
+                            width="1076"
+                          >
+                            <p style="margin: 0cm; margin-bottom: 0.0001pt">
+                              <span class="detail_table_column2"
+                                ><strong
+                                  ><span style="color: black"
+                                    >Kết nối (Network)&nbsp;</span
+                                  ></strong
+                                ></span
+                              >
+                            </p>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            style="
+                              width: 226.95pt;
+                              padding: 0.75pt 0.75pt 0.75pt 0.75pt;
+                            "
+                            width="303"
+                          >
+                            <p style="margin: 0cm; margin-bottom: 0.0001pt">
+                              <span class="detail_table_column1">Wireless</span>
+                            </p>
+                          </td>
+                          <td
+                            style="
+                              width: 578.2pt;
+                              padding: 0.75pt 0.75pt 0.75pt 0.75pt;
+                            "
+                            width="771"
+                          >
+                            <p style="margin: 0cm; margin-bottom: 0.0001pt">
+                              <span class="detail_table_column2">{{
+                                laptop.wireless | exceptValue
+                              }}</span>
+                            </p>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            style="
+                              width: 226.95pt;
+                              padding: 0.75pt 0.75pt 0.75pt 0.75pt;
+                            "
+                            width="303"
+                          >
+                            <p style="margin: 0cm; margin-bottom: 0.0001pt">
+                              <span class="detail_table_column1">LAN</span>
+                            </p>
+                          </td>
+                          <td
+                            style="
+                              width: 578.2pt;
+                              padding: 0.75pt 0.75pt 0.75pt 0.75pt;
+                            "
+                            width="771"
+                          >
+                            <p style="margin: 0cm; margin-bottom: 0.0001pt">
+                              <span class="detail_table_column2"
+                                >{{ laptop.LAN | exceptValue }}&nbsp;</span
+                              >
+                            </p>
+                          </td>
+                        </tr>
+                        <!-- <tr>
+                          <td
+                            style="
+                              width: 226.95pt;
+                              padding: 0.75pt 0.75pt 0.75pt 0.75pt;
+                            "
+                            width="303"
+                          >
+                            <p style="margin: 0cm; margin-bottom: 0.0001pt">
+                              <span class="detail_table_column1"
+                                >Bluetooth</span
+                              >
+                            </p>
+                          </td>
+                          <td
+                            style="
+                              width: 578.2pt;
+                              padding: 0.75pt 0.75pt 0.75pt 0.75pt;
+                            "
+                            width="771"
+                          >
+                            <p style="margin: 0cm; margin-bottom: 0.0001pt">
+                              <span class="detail_table_column2"
+                                >&nbsp;</span
+                              >
+                            </p>
+                          </td>
+                        </tr> -->
+                        <tr>
+                          <td
+                            style="
+                              width: 806.65pt;
+                              padding: 0.75pt 0.75pt 0.75pt 0.75pt;
+                            "
+                            colspan="2"
+                            width="1076"
+                          >
+                            <p style="margin: 0cm; margin-bottom: 0.0001pt">
+                              <span class="detail_table_column2"
+                                ><strong
+                                  ><span style="color: black"
+                                    >Bàn phím , Chuột&nbsp;</span
+                                  ></strong
+                                ></span
+                              >
+                            </p>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            style="
+                              width: 226.95pt;
+                              padding: 0.75pt 0.75pt 0.75pt 0.75pt;
+                            "
+                            width="303"
+                          >
+                            <p style="margin: 0cm; margin-bottom: 0.0001pt">
+                              <span class="detail_table_column1"
+                                >Kiểu bàn phím</span
+                              >
+                            </p>
+                          </td>
+                          <td
+                            style="
+                              width: 578.2pt;
+                              padding: 0.75pt 0.75pt 0.75pt 0.75pt;
+                            "
+                            width="771"
+                          >
+                            <p style="margin: 0cm; margin-bottom: 0.0001pt">
+                              <span class="detail_table_column2"
+                                >{{ laptop.keyboard | exceptValue }}&nbsp;</span
+                              >
+                            </p>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            style="
+                              width: 226.95pt;
+                              padding: 0.75pt 0.75pt 0.75pt 0.75pt;
+                            "
+                            width="303"
+                          >
+                            <p style="margin: 0cm; margin-bottom: 0.0001pt">
+                              <span class="detail_table_column1">Chuột</span>
+                            </p>
+                          </td>
+                          <td
+                            style="
+                              width: 578.2pt;
+                              padding: 0.75pt 0.75pt 0.75pt 0.75pt;
+                            "
+                            width="771"
+                          >
+                            <p style="margin: 0cm; margin-bottom: 0.0001pt">
+                              <span class="detail_table_column2">&nbsp;</span>
+                            </p>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            style="
+                              width: 806.65pt;
+                              padding: 0.75pt 0.75pt 0.75pt 0.75pt;
+                            "
+                            colspan="2"
+                            width="1076"
+                          >
+                            <p style="margin: 0cm; margin-bottom: 0.0001pt">
+                              <span class="detail_table_column2"
+                                ><strong
+                                  ><span style="color: black"
+                                    >Giao tiếp mở rộng&nbsp;</span
+                                  ></strong
+                                ></span
+                              >
+                            </p>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            style="
+                              width: 226.95pt;
+                              padding: 0.75pt 0.75pt 0.75pt 0.75pt;
+                            "
+                            width="303"
+                          >
+                            <p style="margin: 0cm; margin-bottom: 0.0001pt">
+                              <span class="detail_table_column1"
+                                >Kết nối USB</span
+                              >
+                            </p>
+                          </td>
+                          <td
+                            style="
+                              width: 578.2pt;
+                              padding: 0.75pt 0.75pt 0.75pt 0.75pt;
+                            "
+                            width="771"
+                          >
+                            <div class="itemRow-data au-target">
+                              <span class="detail_table_column2">{{
+                                laptop.connection.USB | exceptValue
+                              }}</span>
+                            </div>
+                            <!-- <div class="itemRow-data au-target">
+                              <span class="detail_table_column2"
+                                >1x SuperSpeed USB Type-A 5Gbps signaling rate
+                                (HP Sleep and Charge)</span
+                              >
+                            </div>
+                            <div class="itemRow-data au-target">
+                              <span class="detail_table_column2"
+                                >1x SuperSpeed USB Type-A 5Gbps signaling
+                                rate</span
+                              >
+                            </div> -->
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            style="
+                              width: 226.95pt;
+                              padding: 0.75pt 0.75pt 0.75pt 0.75pt;
+                            "
+                            width="303"
+                          >
+                            <p style="margin: 0cm; margin-bottom: 0.0001pt">
+                              <span class="detail_table_column1"
+                                >Kết nối HDMI/VGA</span
+                              >
+                            </p>
+                          </td>
+                          <td
+                            style="
+                              width: 578.2pt;
+                              padding: 0.75pt 0.75pt 0.75pt 0.75pt;
+                            "
+                            width="771"
+                          >
+                            <p style="margin: 0cm; margin-bottom: 0.0001pt">
+                              <span class="detail_table_column2"
+                                >{{
+                                  laptop.connection.HDMI_VGA | exceptValue
+                                }}&nbsp;</span
+                              >
+                            </p>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            style="
+                              width: 226.95pt;
+                              padding: 0.75pt 0.75pt 0.75pt 0.75pt;
+                            "
+                            width="303"
+                          >
+                            <p style="margin: 0cm; margin-bottom: 0.0001pt">
+                              <span class="detail_table_column1">Tai nghe</span>
+                            </p>
+                          </td>
+                          <td
+                            style="
+                              width: 578.2pt;
+                              padding: 0.75pt 0.75pt 0.75pt 0.75pt;
+                            "
+                            width="771"
+                          >
+                            <p style="margin: 0cm; margin-bottom: 0.0001pt">
+                              <span class="detail_table_column2"></span>
+                            </p>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            style="
+                              width: 226.95pt;
+                              padding: 0.75pt 0.75pt 0.75pt 0.75pt;
+                            "
+                            width="303"
+                          >
+                            <p style="margin: 0cm; margin-bottom: 0.0001pt">
+                              <span class="detail_table_column1">Webcam</span>
+                            </p>
+                          </td>
+                          <td
+                            style="
+                              width: 578.2pt;
+                              padding: 0.75pt 0.75pt 0.75pt 0.75pt;
+                            "
+                            width="771"
+                          >
+                            <p style="margin: 0cm; margin-bottom: 0.0001pt">
+                              <span class="detail_table_column2">{{
+                                laptop.webcam | exceptValue
+                              }}</span>
+                            </p>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            style="
+                              width: 226.95pt;
+                              padding: 0.75pt 0.75pt 0.75pt 0.75pt;
+                            "
+                            width="303"
+                          >
+                            <p style="margin: 0cm; margin-bottom: 0.0001pt">
+                              <span class="detail_table_column1"
+                                >Card mở rộng</span
+                              >
+                            </p>
+                          </td>
+                          <td
+                            style="
+                              width: 578.2pt;
+                              padding: 0.75pt 0.75pt 0.75pt 0.75pt;
+                            "
+                            width="771"
+                          >
+                            <p style="margin: 0cm; margin-bottom: 0.0001pt">
+                              <span class="detail_table_column2"></span>
+                            </p>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            style="
+                              width: 226.95pt;
+                              padding: 0.75pt 0.75pt 0.75pt 0.75pt;
+                            "
+                            width="303"
+                          >
+                            <p style="margin: 0cm; margin-bottom: 0.0001pt">
+                              <span class="detail_table_column2"
+                                ><strong
+                                  ><span style="color: black"
+                                    >Audio</span
+                                  ></strong
+                                ></span
+                              >
+                            </p>
+                          </td>
+                          <td
+                            style="
+                              width: 578.2pt;
+                              padding: 0.75pt 0.75pt 0.75pt 0.75pt;
+                            "
+                            width="771"
+                          >
+                            <p style="margin: 0cm; margin-bottom: 0.0001pt">
+                              <span class="detail_table_column2">{{
+                                laptop.audio | exceptValue
+                              }}</span>
+                            </p>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            style="
+                              width: 226.95pt;
+                              padding: 0.75pt 0.75pt 0.75pt 0.75pt;
+                            "
+                            width="303"
+                          >
+                            <p style="margin: 0cm; margin-bottom: 0.0001pt">
+                              <span class="detail_table_column2"
+                                ><strong
+                                  ><span style="color: black"
+                                    >Bảo mật, công nghệ</span
+                                  ></strong
+                                ></span
+                              >
+                            </p>
+                          </td>
+                          <td
+                            style="
+                              width: 578.2pt;
+                              padding: 0.75pt 0.75pt 0.75pt 0.75pt;
+                            "
+                            width="771"
+                          >
+                            <p style="margin: 0cm; margin-bottom: 0.0001pt">
+                              <span class="detail_table_column2">{{
+                                laptop.security | exceptValue
+                              }}</span>
+                            </p>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            style="
+                              width: 226.95pt;
+                              padding: 0.75pt 0.75pt 0.75pt 0.75pt;
+                            "
+                            width="303"
+                          >
+                            <p style="margin: 0cm; margin-bottom: 0.0001pt">
+                              <span class="detail_table_column1"
+                                ><strong
+                                  ><span style="color: black"
+                                    >Kiểu Pin</span
+                                  ></strong
+                                ></span
+                              >
+                            </p>
+                          </td>
+                          <td
+                            style="
+                              width: 578.2pt;
+                              padding: 0.75pt 0.75pt 0.75pt 0.75pt;
+                            "
+                            width="771"
+                          >
+                            <p style="margin: 0cm; margin-bottom: 0.0001pt">
+                              <span class="detail_table_column2">{{
+                                laptop.battery | exceptValue
+                              }}</span>
+                            </p>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            style="
+                              width: 226.95pt;
+                              padding: 0.75pt 0.75pt 0.75pt 0.75pt;
+                            "
+                            width="303"
+                          >
+                            <p style="margin: 0cm; margin-bottom: 0.0001pt">
+                              <span class="detail_table_column2"
+                                ><strong
+                                  ><span style="color: black"
+                                    >Sạc pin</span
+                                  ></strong
+                                ></span
+                              >
+                            </p>
+                          </td>
+                          <td
+                            style="
+                              width: 578.2pt;
+                              padding: 0.75pt 0.75pt 0.75pt 0.75pt;
+                            "
+                            width="771"
+                          >
+                            <p style="margin: 0cm; margin-bottom: 0.0001pt">
+                              <span class="detail_table_column2">Đi kèm</span>
+                            </p>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            style="
+                              width: 226.95pt;
+                              padding: 0.75pt 0.75pt 0.75pt 0.75pt;
+                            "
+                            width="303"
+                          >
+                            <p style="margin: 0cm; margin-bottom: 0.0001pt">
+                              <span class="detail_table_column2"
+                                ><strong
+                                  ><span style="color: black"
+                                    >Hệ điều hành đi kèm (bản quyền)</span
+                                  ></strong
+                                ></span
+                              >
+                            </p>
+                          </td>
+                          <td
+                            style="
+                              width: 578.2pt;
+                              padding: 0.75pt 0.75pt 0.75pt 0.75pt;
+                            "
+                            width="771"
+                          >
+                            <p style="margin: 0cm; margin-bottom: 0.0001pt">
+                              <span class="detail_table_column2">{{
+                                laptop.OS
+                              }}</span>
+                            </p>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            style="
+                              width: 226.95pt;
+                              padding: 0.75pt 0.75pt 0.75pt 0.75pt;
+                            "
+                            width="303"
+                          >
+                            <p style="margin: 0cm; margin-bottom: 0.0001pt">
+                              <span class="detail_table_column2"
+                                ><strong
+                                  ><span style="color: black"
+                                    >Kích thước (Dài x Rộng x Cao)</span
+                                  ></strong
+                                ></span
+                              >
+                            </p>
+                          </td>
+                          <td
+                            style="
+                              width: 578.2pt;
+                              padding: 0.75pt 0.75pt 0.75pt 0.75pt;
+                            "
+                            width="771"
+                          >
+                            <p style="margin: 0cm; margin-bottom: 0.0001pt">
+                              <span class="detail_table_column2">{{
+                                laptop.dimension
+                              }}</span>
+                            </p>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            style="
+                              width: 226.95pt;
+                              padding: 0.75pt 0.75pt 0.75pt 0.75pt;
+                            "
+                            width="303"
+                          >
+                            <p style="margin: 0cm; margin-bottom: 0.0001pt">
+                              <span class="detail_table_column2"
+                                ><strong
+                                  ><span style="color: black"
+                                    >Trọng Lượng</span
+                                  ></strong
+                                ></span
+                              >
+                            </p>
+                          </td>
+                          <td
+                            style="
+                              width: 578.2pt;
+                              padding: 0.75pt 0.75pt 0.75pt 0.75pt;
+                            "
+                            width="771"
+                          >
+                            <p style="margin: 0cm; margin-bottom: 0.0001pt">
+                              <span class="detail_table_column2">{{
+                                laptop.weight
+                              }}</span>
+                            </p>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            style="
+                              width: 226.95pt;
+                              padding: 0.75pt 0.75pt 0.75pt 0.75pt;
+                            "
+                            width="303"
+                          >
+                            <p style="margin: 0cm; margin-bottom: 0.0001pt">
+                              <span class="detail_table_column2"
+                                ><strong
+                                  ><span style="color: black"
+                                    >Màu sắc</span
+                                  ></strong
+                                ></span
+                              >
+                            </p>
+                          </td>
+                          <td
+                            style="
+                              width: 578.2pt;
+                              padding: 0.75pt 0.75pt 0.75pt 0.75pt;
+                            "
+                            width="771"
+                          >
+                            <p style="margin: 0cm; margin-bottom: 0.0001pt">
+                              <span class="detail_table_column2"
+                                >{{ laptop.color }}&nbsp;</span
+                              >
+                            </p>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            style="
+                              width: 226.95pt;
+                              padding: 0.75pt 0.75pt 0.75pt 0.75pt;
+                            "
+                            width="303"
+                          >
+                            <p style="margin: 0cm; margin-bottom: 0.0001pt">
+                              <span class="detail_table_column2"
+                                ><strong
+                                  ><span style="color: black"
+                                    >Xuất Xứ</span
+                                  ></strong
+                                ></span
+                              >
+                            </p>
+                          </td>
+                          <td
+                            style="
+                              width: 578.2pt;
+                              padding: 0.75pt 0.75pt 0.75pt 0.75pt;
+                            "
+                            width="771"
+                          >
+                            <p style="margin: 0cm; margin-bottom: 0.0001pt">
+                              <span class="detail_table_column2"
+                                >Trung Quốc</span
+                              >
+                            </p>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </mat-tab>
+            <mat-tab label="Câu hỏi & Bình luận">
+              <ng-template matTabContent>
+                <div class="features-specs-wrapper">
+                  <span style="color: #00447c; font-size: 24px"
+                    ><strong>Nhận xét & Đánh giá</strong></span
+                  >
+                  <app-star [laptopId]="laptopId"></app-star>
+                  <div class="row justify-content-center">
+                    <div class="col-lg-10">
+                      <app-comments
+                        [laptopId]="laptopId"
+                        (commentEmitter)="getComments($event)"
+                        [storedComment]="comments"
+                      ></app-comments>
+                    </div>
+                  </div>
+                </div>
+              </ng-template>
+            </mat-tab>
+          </mat-tab-group>
+        </div>
+      </div>
+    </div>
+    <div class="related-products" *ngIf="similarProducts.length > 0">
+      <div class="heading-button">Sản phẩm tương tự</div>
+      <div class="products-wrapper row">
+        <div class="col-xl-3 col-lg-4 col-sm-6" *ngFor="let product of similarProducts">
+          <app-product-card [product]="product"></app-product-card>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

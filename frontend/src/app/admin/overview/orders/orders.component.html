@@ -1,0 +1,64 @@
+
+<mat-grid-list cols="3" rowHeight="4:1">
+  <mat-grid-tile>
+    <h5>Tổng giá trị đơn hàng tuần này:</h5>
+    <div class = "vnd">{{totalTransactionValue_thisWeek | currency: " ":"code":"3.0"}} VNĐ</div>
+  </mat-grid-tile>
+  <mat-grid-tile>
+    <h5>Tổng giá trị đơn hàng tuần trước:</h5>
+    <div class = "vnd">{{totalTransactionValue_lastWeek | currency: " ":"code":"3.0"}} VNĐ</div>
+
+  </mat-grid-tile>
+  <mat-grid-tile>
+    <!-- Chỗ này cho % tăng hoặc giảm -->
+    <div *ngIf= "differentTransaction < 0" id = "down">
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-chevron-double-down" viewBox="0 0 16 16">
+      <path fill-rule="evenodd" d="M1.646 6.646a.5.5 0 0 1 .708 0L8 12.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
+      <path fill-rule="evenodd" d="M1.646 2.646a.5.5 0 0 1 .708 0L8 8.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
+    </svg>
+    {{differentTransaction | currency: " ":"code":"3.0"}}
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-chevron-double-down" viewBox="0 0 16 16">
+      <path fill-rule="evenodd" d="M1.646 6.646a.5.5 0 0 1 .708 0L8 12.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
+      <path fill-rule="evenodd" d="M1.646 2.646a.5.5 0 0 1 .708 0L8 8.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
+    </svg>
+  </div>
+  <div *ngIf = "differentTransaction > 0" id = "up">
+        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-chevron-double-up" viewBox="0 0 16 16">
+          <path fill-rule="evenodd" d="M7.646 2.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 3.707 2.354 9.354a.5.5 0 1 1-.708-.708l6-6z"/>
+          <path fill-rule="evenodd" d="M7.646 6.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 7.707l-5.646 5.647a.5.5 0 0 1-.708-.708l6-6z"/>
+        </svg>
+        {{differentTransaction | currency: " ":"code":"3.0"}}
+        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-chevron-double-up" viewBox="0 0 16 16">
+          <path fill-rule="evenodd" d="M7.646 2.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 3.707 2.354 9.354a.5.5 0 1 1-.708-.708l6-6z"/>
+          <path fill-rule="evenodd" d="M7.646 6.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 7.707l-5.646 5.647a.5.5 0 0 1-.708-.708l6-6z"/>
+        </svg>
+  </div>
+  </mat-grid-tile>
+
+</mat-grid-list>
+
+
+<table mat-table [dataSource]="thisWeekOrders" class="mat-elevation-z8">
+
+  <ng-container matColumnDef="orderId">
+    <th mat-header-cell *matHeaderCellDef> Mã đơn hàng </th>
+    <td mat-cell *matCellDef="let element"> {{element.orderId}} </td>
+    <td mat-footer-cell *matFooterCellDef> Tổng cộng </td>
+  </ng-container>
+
+  <ng-container matColumnDef="quantity">
+    <th mat-header-cell *matHeaderCellDef> Số lượng sản phẩm </th>
+    <td mat-cell *matCellDef="let element"> {{element.quantity}} </td>
+    <td mat-footer-cell *matFooterCellDef> {{ totalItemQuantity_thisWeek}} (chiếc)</td>
+  </ng-container>
+
+  <ng-container matColumnDef="totalValue">
+    <th mat-header-cell *matHeaderCellDef> Giá trị (VNĐ) </th>
+    <td mat-cell *matCellDef="let element"> đ{{element.totalValue | currency: " ":"code":"3.0"}} </td>
+    <td mat-footer-cell *matFooterCellDef> đ{{ totalTransactionValue_thisWeek | currency: " ":"code":"3.0"}} </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  <tr mat-footer-row *matFooterRowDef="displayedColumns"></tr>
+</table>

@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "baseUrl": "scr",
+    "paths": {
+      "@configs/*": ["configs/*"],
+      "@controllers/*": ["controllers/*"],
+      "@middlewares/*": ["middlewares/*"],
+      "@models/*": ["models/*"],
+      "@routes/*": ["routes/*"],
+
+    }
+  }
+}

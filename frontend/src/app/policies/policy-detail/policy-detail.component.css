@@ -1,0 +1,41 @@
+.warranty-list,
+.return_list,
+.delivery-list {
+  padding: 70px 0;
+}
+.list01 {
+  font-size: 20px;
+  color: #276292;
+}
+.list02 {
+  color: #2689da;
+}
+
+li .list03 {
+  padding-top: 5px;
+}
+.service-table td {
+  width: 360px;
+  border-right: 1px solid #4ea5e3;
+  border-left: 1px solid #4ea5e3;
+  padding: 15px;
+  text-align: center;
+}
+.row02 {
+  background-color: #cbe3f1;
+  color: #0290cd;
+}
+.service-table tr {
+  border: 1px solid #1d5f8f;
+  text-align: center;
+  font-family: "Roboto", sans-serif;
+}
+.row01 {
+  background-color: #0096d6;
+  color: white;
+  font-size: 20px;
+  text-align: center;
+}
+.note {
+  padding-left: 30px;
+}

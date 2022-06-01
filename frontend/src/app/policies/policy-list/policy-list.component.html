@@ -1,0 +1,85 @@
+<app-banner
+  [pageTitle]="'Chính sách của chúng tôi'"
+  [bannerImgUrl]="
+    '../../../../assets/banners/87813264_3052802644738096_2921796054523314176_o.jpg'
+  "
+></app-banner>
+
+<ng-template
+  #policy
+  let-imgUrl="imgUrl"
+  let-title="title"
+  let-desc="desc"
+  let-routerLink="routerLink"
+>
+  <div class="policy">
+    <div class="illustration">
+      <img [src]="imgUrl" />
+    </div>
+    <div class="description">
+      <h5>{{ title }}</h5>
+      <p>{{ desc }}</p>
+    </div>
+    <div class="call-to-action">
+      <button class="btn" [routerLink]="'/policies/' + routerLink">
+        Xem chi tiết
+      </button>
+    </div>
+  </div>
+</ng-template>
+
+<section class="policies">
+  <div class="container">
+    <div class="policies-wrapper">
+      <ng-container
+        [ngTemplateOutlet]="policy"
+        [ngTemplateOutletContext]="{
+          imgUrl: '../../assets/policies page/return policy illustration.png',
+          title: 'Đổi trả hàng miễn phí',
+          desc: '1 đổi 1 trong 30 ngày đầu tiên',
+          routerLink: 'return'
+        }"
+      ></ng-container>
+
+      <ng-container
+        [ngTemplateOutlet]="policy"
+        [ngTemplateOutletContext]="{
+          imgUrl: '../../assets/policies page/quick delivery illustration.png',
+          title: 'Giao hàng nhanh 2h',
+          desc: 'Miễn phí vận chuyển',
+          routerLink: 'delivery'
+        }"
+      ></ng-container>
+
+      <ng-container
+        [ngTemplateOutlet]="policy"
+        [ngTemplateOutletContext]="{
+          imgUrl: '../../assets/policies page/warranty policy illustration.png',
+          title: 'Bảo hành chính hãng',
+          desc: '12 tháng',
+          routerLink: 'warranty'
+        }"
+      ></ng-container>
+    </div>
+    <!-- <div class="row">
+      <div class="col-md-3">
+        <div class="policy" style="margin-left: 128px">
+          <div class="illustration">
+            <img
+              src="../../assets/policies page/warranty policy illustration.png"
+            />
+          </div>
+          <div class="description">
+            <h5>Bảo hành chính hãng</h5>
+            <p>12 tháng</p>
+          </div>
+          <div class="call-to-action">
+            <button class="btn" routerLink="/policies/warranty">
+              Xem chi tiết
+            </button>
+          </div>
+        </div>
+      </div>
+    </div> -->
+  </div>
+</section>

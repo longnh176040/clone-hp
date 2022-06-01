@@ -1,0 +1,6 @@
+{
+  "devDependencies": {
+    "@editorjs/embed": "^2.4.6",
+    "@editorjs/link": "^2.3.1"
+  }
+}

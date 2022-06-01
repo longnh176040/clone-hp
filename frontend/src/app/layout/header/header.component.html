@@ -1,0 +1,136 @@
+<header id="header">
+  <div class="container">
+    <div class="header-content">
+      <div class="logo" style="width: 10%">
+        <img
+          src="../../../assets/products-list-page-banner/logo HP.png"
+          alt="logo HP"
+          [routerLink]="['/home']"
+          routerLinkActive="router-link-active"
+        />
+      </div>
+
+      <ul class="navigation d-none d-lg-block">
+        <li
+          [routerLink]="['/home']"
+          routerLinkActive="router-link-active"
+          class="desktop-nav-item"
+        >
+          Trang chủ
+        </li>
+        <li
+          [routerLink]="['/products']"
+          routerLinkActive="router-link-active"
+          class="desktop-nav-item"
+        >
+          Sản phẩm
+        </li>
+        <li
+          [routerLink]="['/policies']"
+          routerLinkActive="router-link-active"
+          class="desktop-nav-item"
+        >
+          Chính sách
+        </li>
+        <!-- <li>Liên hệ</li> -->
+        <li
+          [routerLink]="['/check-coverage']"
+          routerLinkActive="router-link-active"
+          class="desktop-nav-item"
+        >
+          Tra cứu bảo hành
+        </li>
+        <li
+          id="special"
+          [routerLink]="['/authentication']"
+          *ngIf="authService.getUser() && !authService.isAuthenticated()"
+        >
+          Đăng nhập / Đăng kí
+        </li>
+        <li
+          id="logout"
+          *ngIf="authService.getUser() && authService.isAuthenticated()"
+          (click)="doLogOut()"
+        >
+          Đăng xuất
+        </li>
+      </ul>
+
+      <div
+        class="mobile-menu"
+        [ngClass]="{ show: showMobileMenu }"
+        (click)="showMobileMenu = false"
+      >
+        <ul class="main-navigation">
+          <li [routerLink]="['/home']" routerLinkActive="router-link-active">
+            <i class="bx bx-home"></i> Trang chủ
+          </li>
+          <li
+            [routerLink]="['/products']"
+            routerLinkActive="router-link-active"
+          >
+            <i class="bx bx-cog"></i> Sản phẩm
+          </li>
+          <li
+            [routerLink]="['/policies']"
+            routerLinkActive="router-link-active"
+          >
+            <i class="bx bx-file"></i> Chính sách
+          </li>
+          <!-- <li>Liên hệ</li> -->
+          <li
+            [routerLink]="['/check-coverage']"
+            routerLinkActive="router-link-active"
+          >
+            <i class="bx bx-search"></i> Tra cứu bảo hành
+          </li>
+          <li
+            [routerLink]="['/authentication']"
+            class="mt-1"
+            *ngIf="authService.getUser() && !authService.isAuthenticated()"
+          >
+            <button class="btn auth-btn">Đăng nhập / Đăng kí</button>
+          </li>
+          <li
+            id="logout"
+            *ngIf="authService.getUser() && authService.isAuthenticated()"
+            (click)="doLogOut()"
+          >
+            Đăng xuất
+          </li>
+        </ul>
+      </div>
+
+      <div class="d-flex justify-content-end" style="width: 10%">
+        <div class="cart-icon" routerLink="checkout">
+          <!-- <img
+            src="https://img.icons8.com/clouds/55/000000/favorite-cart.png"
+          /> -->
+          <img
+            src="https://img.icons8.com/fluent/40/000000/shopping-cart.png"
+          />
+          <span *ngIf="amount != 0">{{ amount }}</span>
+        </div>
+        <!-- <div class="search-icon" style="padding-left: 1rem">
+          <img src="https://img.icons8.com/color/30/000000/search--v2.png" />
+        </div> -->
+
+        <div
+          id="hamburger-menu"
+          class="d-block d-lg-none"
+          (click)="showMobileMenu = true"
+        >
+          <i class="bx bx-menu"></i>
+        </div>
+
+        <li
+          id="email"
+          *ngIf="authService.getUser() && authService.isAuthenticated()"
+          class="desktop-nav-item"
+        >
+          {{ authService.getUser().getDisplayName() }}
+        </li>
+      </div>
+    </div>
+  </div>
+</header>

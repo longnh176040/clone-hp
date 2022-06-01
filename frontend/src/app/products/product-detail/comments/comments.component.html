@@ -1,0 +1,62 @@
+<div class="reviews-area">
+  <div class="your-cmt" *ngIf="authService.isAuthenticated()">
+    <div class="avatar">
+      <img src="https://img.icons8.com/ultraviolet/35/000000/why-us-male.png"/>
+    </div>
+    <form (ngSubmit)="addComment()" [formGroup]="form">
+      <input
+        type="text"
+        placeholder="Thêm câu hỏi & bình luận của bạn..."
+        formControlName="content"
+      />
+    </form>
+  </div>
+  <div class="your-cmt m-3" *ngIf="!authService.isAuthenticated()">
+    <p [routerLink]="['/authentication']" class="text-decoration-underline">Hãy <b>đăng nhập</b> để sử dụng tính năng bình luận</p>
+  </div>
+
+  <div class="buyer-cmts">
+    <div class="cmt" *ngFor="let comment of comments">
+      <div class="avatar">
+        <img src="https://img.icons8.com/ultraviolet/35/000000/why-us-male.png"/>
+      </div>
+      <div class="w-100">
+        <div class="content-wrapper">
+          <span>{{ comment.username }}</span>
+          <span>{{ comment.created_at }}</span>
+          <p>{{ comment.content }}</p>
+        </div>
+        <div class="replies-area" style="margin-top: 2%;">
+
+          <div class="replies-area">
+            <div class="cmt" *ngFor="let reply of comment.replies">
+              <div class="avatar">
+                <img src="https://img.icons8.com/ultraviolet/35/000000/why-us-male.png"/>
+              </div>
+              <div class="content-wrapper w-100">
+                <span>{{ reply.username }}</span>
+                <span>{{ reply.created_at }}</span>
+                <p>{{ reply.content }}</p>
+              </div>
+            </div>
+          </div>
+          <div class="your-cmt" *ngIf="authService.isAuthenticated()">
+            <div class="avatar">
+              <img src="https://img.icons8.com/ultraviolet/35/000000/why-us-male.png"/>
+            </div>
+            <form (ngSubmit)="addReply(comment._id)" [formGroup]="form">
+              <input
+                type="text"
+                placeholder="Trả lời bình luận này"
+                formControlName="content"
+              />
+            </form>
+          </div>
+          <div class="your-cmt m-3" *ngIf="!authService.isAuthenticated()">
+            <p class="text-decoration-underline" [routerLink]="['/authentication']">Hãy <b>đăng nhập</b> để trả lời bình luận này</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

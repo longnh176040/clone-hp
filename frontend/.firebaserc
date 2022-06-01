@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "support-hp-0103": {
+      "hosting": {
+        "frontend": [
+          "support-hp-0103"
+        ]
+      }
+    }
+  }
+}

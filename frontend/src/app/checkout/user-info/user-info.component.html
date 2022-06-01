@@ -1,0 +1,143 @@
+<form [formGroup]="checkoutForm" (ngSubmit)="createOrder()">
+  <div class="basic-info">
+    <h3>Thông tin khách hàng</h3>
+    <div class="row">
+      <div class="col-sm-6 mb-4 mb-sm-0">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Họ và tên*"
+          formControlName="username"
+        />
+      </div>
+      <div class="col-sm-6 mb-4 mg-sm-0">
+        <input
+          type="string"
+          placeholder="Số điện thoại*"
+          class="form-control"
+          formControlName="phone"
+        />
+      </div>
+      <div class="col-12 mb-4">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Địa chỉ giao hàng*"
+          formControlName="address"
+        />
+      </div>
+      <div class="col-12">
+        <textarea
+          class="form-control"
+          placeholder="Ghi chú"
+          formControlName="message"
+        ></textarea>
+      </div>
+    </div>
+  </div>
+  <div class="payment">
+    <h3>Phương thức thanh toán <span style="color: red"> *</span></h3>
+    <div class="row">
+      <div class="col-xl-6">
+        <div class="form-check">
+          <input
+            class="form-check-input"
+            type="radio"
+            id="cod_method"
+            formControlName="payment_method"
+            value="cod"
+          />
+          <label class="form-check-label" for="cod_method">
+            COD (giao hàng & thanh toán tại nhà)
+          </label>
+        </div>
+      </div>
+      <div class="col-xl-6">
+        <div class="form-check">
+          <input
+            class="form-check-input"
+            type="radio"
+            id="banking_method"
+            formControlName="payment_method"
+            value="banking"
+          />
+          <label class="form-check-label" for="banking_method">
+            Chuyển khoản ngân hàng
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <div
+      id="order"
+      style="font-size: 14px; margin-left: 20px"
+      *ngIf="checkoutForm.value.payment_method == 'banking'"
+    >
+      <br />
+      <p>Quý khách vui lòng nhập nội dung thanh toán theo cú pháp:</p>
+      <p style="padding-left: 20px">
+        "<span><strong>Tên Khách Hàng</strong></span
+        >[dấu cách]<span><b>Số điện thoại đặt hàng</b> </span>[dấu cách]<span
+          ><b>thanh toán</b></span
+        >"
+      </p>
+      <p>
+        Quý khách chuyển tiền cho chúng tôi vào một trong các tài khoản sau:
+      </p>
+      <p>- Tên tài khoản: <strong>LE NGOC HA</strong></p>
+      <p>- Số tài khoản: <strong>10115689xxx</strong></p>
+      <p>- Ngân hàng: <strong>Techcombank</strong></p>
+    </div>
+  </div>
+  <div class="delivery">
+    <h3>Hình thức nhận hàng<span style="color: red"> *</span></h3>
+    <div class="row">
+      <div class="col-xl-6">
+        <div class="form-check">
+          <input
+            class="form-check-input"
+            type="radio"
+            id="home_method"
+            formControlName="delivery_method"
+            value="home"
+          />
+          <label class="form-check-label" for="home_method">
+            Giao hàng tận nơi
+          </label>
+        </div>
+      </div>
+      <div class="col-xl-6">
+        <div class="form-check">
+          <input
+            class="form-check-input"
+            type="radio"
+            id="store_method"
+            formControlName="delivery_method"
+            value="store"
+          />
+          <label class="form-check-label" for="store_method">
+            Nhận hàng tại cửa hàng
+          </label>
+        </div>
+      </div>
+    </div>
+    <div
+      id="adress"
+      style="margin-left: 26px; font-size: 14px !important"
+      *ngIf="checkoutForm.value.delivery_method == 'store'"
+    >
+      <br />
+      <b>Địa chỉ : Chung cư skylight, ngõ Hòa Bình 6, Minh Khai, Hà Nội</b>
+    </div>
+  </div>
+  <div class="text-center">
+    <button
+      type="submit"
+      class="btn place-order"
+      [disabled]="checkoutForm.invalid"
+    >
+      Đặt hàng
+    </button>
+  </div>
+  <!-- <button class="btn cancel-order">Hủy đơn hàng</button> -->
+</form>

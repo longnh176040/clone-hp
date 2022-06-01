@@ -1,0 +1,262 @@
+section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #94b5c0;
+}
+
+/* style bac-button */
+.back-button {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid #0096d6;
+  color: #0096d6;
+  font-size: 20px;
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  cursor: pointer;
+  z-index: 10;
+  transition: all 0.5s;
+}
+.back-button:hover {
+  background-color: #0096d6;
+  color: white;
+}
+
+/* style log-in form */
+.form-wrapper {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  max-width: 1100px;
+  margin: 20px;
+  height: 600px;
+  background-color: #d7edfb;
+  border-radius: 10px;
+  box-shadow: 0px 0px 30px rgba(255, 255, 255, 0.05);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.form-box {
+  width: 45%;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.5s;
+}
+
+.form-box .log-in-form,
+.form-box .sign-up-form {
+  width: 100%;
+  transition: all 0.5s;
+}
+
+.form-box form {
+  position: relative;
+  width: 100%;
+  padding: 0 0 0 75px;
+}
+
+.form-box form h2 {
+  color: #047be0;
+  text-align: center;
+  font-weight: 600;
+  font-size: 32px;
+  text-transform: uppercase;
+  margin-bottom: 30px;
+  font-family: "Roboto", sans-serif;
+}
+
+.form-box .input-field {
+  position: relative;
+  margin-bottom: 25px;
+  margin-inline: auto;
+  width: min(400px, 100%);
+}
+
+.form-box .input-field input {
+  position: relative;
+  background: white;
+  outline: none;
+  width: 100%;
+  font-weight: 500;
+  color: #3ba3eb;
+  font-size: 18px;
+  border-radius: 5px;
+  padding: 0.5em 0.8em 0.5em 2.5em;
+  border: none;
+}
+.venus-mars {
+  background: transparent;
+  width: min(400px, 100%);
+  font-weight: 500;
+  color: #3ba3eb;
+  font-size: 18px;
+  margin-bottom: 20px;
+  margin-inline: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+input.mars,
+input.venus {
+  margin-right: 5px;
+  margin-left: 26px;
+}
+.fa-venus-mars:before {
+  content: "\f228";
+  margin-right: 5px;
+  margin-left: 5px;
+}
+.form-box .input-field input::placeholder {
+  font-weight: 500;
+  color: #3ba3eb;
+}
+
+.form-box .input-field i {
+  position: absolute;
+  top: 13px;
+  color: #3ba3eb;
+  left: 1rem;
+  font-size: 20px;
+}
+
+/* style sign-up form */
+.form-box .sign-up-form {
+  position: absolute;
+  opacity: 0;
+  left: -100%;
+  top: 23%;
+  transform: translateY(-50%);
+  width: 100%;
+  height: 100%;
+}
+
+.form-box .sign-up-form form {
+  height: 100%;
+  bottom: 0px;
+}
+
+.form-box.active .sign-up-form {
+  left: 0;
+  opacity: 1;
+}
+
+.form-box.active .log-in-form {
+  transform: translateX(-100%);
+  opacity: 0;
+}
+
+p.toggler {
+  margin-top: 30px;
+  text-align: center;
+  color: #3ba3eb;
+  font-weight: 500;
+}
+
+p.toggler span {
+  color: #3ac2a6;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+p.toggler span:hover {
+  color: #69b2a3;
+  cursor: pointer;
+}
+
+/* style submit button */
+.submit-btn {
+  text-align: center;
+}
+.submit-btn button {
+  padding: 10px 25px;
+  border-radius: 5px;
+  color: white;
+  transition: all 0.4s;
+  background: linear-gradient(
+    231deg,
+    rgba(59, 163, 235, 1) 0%,
+    rgba(58, 190, 174, 1) 100%
+  );
+  outline: none !important;
+  font-weight: 600;
+  font-family: "Noto Serif", sans-serif;
+  text-transform: uppercase;
+}
+
+/* style image box */
+.img-box {
+  position: relative;
+  width: 50%;
+  height: 100%;
+  border-radius: 0 20px 20px 0;
+  overflow: hidden;
+}
+
+.img-box::after {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #3ba3eb;
+  opacity: 0.4;
+  transform-origin: bottom;
+  transform: skewX(-25deg) translateX(10%);
+}
+
+.img-box img {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  object-fit: cover;
+  /* filter: saturate(3); */
+}
+
+@media (max-width: 992px) {
+  .form-box form h2 {
+    font-size: 27px;
+    margin-bottom: 25px;
+  }
+  .form-box form {
+    padding-left: 50px;
+  }
+  .back-button {
+    width: 35px;
+    height: 35px;
+  }
+}
+
+@media (max-width: 768px) {
+  .img-box {
+    display: none;
+  }
+  .form-box {
+    width: 100%;
+  }
+  .form-box form {
+    padding: 0 20px;
+  }
+  .form-box form h2 {
+    font-size: 24px;
+  }
+}

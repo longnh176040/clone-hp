@@ -1,0 +1,122 @@
+/* style main-content */
+.policies {
+  background-color: #efefef;
+}
+
+.policies-wrapper {
+  padding: 70px 0;
+  display: grid;
+  column-gap: 2rem;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.policy {
+  border-radius: 10px;
+  padding: 2.5rem 0;
+  background-color: white;
+  box-shadow: 0 10px 40px rgba(54, 54, 54, 0.05);
+}
+.policy .illustration {
+  height: 220px;
+  width: 100%;
+}
+.policy .illustration img {
+  height: 100%;
+  width: 100%;
+  object-fit: contain;
+  display: block;
+  margin-bottom: 20px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.policy .description {
+  text-align: center;
+}
+.policy .description h5 {
+  color: #00447c;
+  font-weight: 500;
+}
+.policy .description p {
+  color: #0c5794;
+  margin-bottom: 30px;
+}
+
+.call-to-action {
+  text-align: center;
+}
+.call-to-action button {
+  font-family: "Noto Serif", sans-serif;
+  padding: 10px 25px;
+  background-color: #3ba3eb;
+  color: white;
+}
+.call-to-action button:hover {
+  background-color: #276292;
+}
+
+@media (max-width: 992px) {
+  .policies-wrapper {
+    column-gap: 1rem;
+  }
+
+  .policy {
+    padding: 0 0 1rem 0;
+  }
+
+  .policy .description {
+    padding-inline: 1rem;
+  }
+
+  .policy .description p {
+    font-size: 0.875rem;
+  }
+
+  .policy .description h5 {
+    font-size: 1rem;
+  }
+
+  .policy .illustration {
+    height: 180px;
+  }
+  .policy .illustration img {
+    margin-bottom: 0;
+  }
+
+  .call-to-action button {
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+  }
+}
+
+@media (min-width: 576px) and (max-width: 768px) {
+  .policies-wrapper {
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 2rem;
+    grid-template-areas:
+      "a b"
+      "c  c";
+  }
+
+  .policies-wrapper .policy {
+    margin-bottom: 2rem;
+  }
+
+  .policies-wrapper .policy:last-child {
+    grid-area: c;
+    width: 245px;
+    margin-bottom: 0;
+    margin-inline: auto;
+  }
+}
+
+@media (max-width: 576px) {
+  .policies-wrapper {
+    justify-content: center;
+    grid-template-columns: repeat(1, 250px);
+  }
+
+  .policies-wrapper .policy:not(:last-child) {
+    margin-bottom: 2rem;
+    margin-inline: auto;
+  }
+}

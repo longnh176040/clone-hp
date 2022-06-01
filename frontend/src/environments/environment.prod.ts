@@ -1,0 +1,30 @@
+export const environment = {
+  production: true,
+  apiURL: "https://hp.minastik.com/api",
+  bucket: "https://s3-ap-southeast-1.amazonaws.com/hp.minastik.com/",
+  socketServer: "https://hp.minastik.com",
+
+  firebaseConfig: {
+    apiKey: "AIzaSyARr7HqnHfapA4QmEhA_ICfpj_d3SXeI04",
+    authDomain: "support-hp-0103.firebaseapp.com",
+    databaseURL: "https://support-hp-0103.firebaseio.com",
+    projectId: "support-hp-0103",
+    storageBucket: "support-hp-0103.appspot.com",
+    messagingSenderId: "897773920815",
+    appId: "1:897773920815:web:54b6c0513769a68a75dcda",
+    measurementId: "G-LZ27M5MC4E",
+  },
+
+  viewID: "ga:245019971",
+};
+
+// --------------- upload EC2 from frontend folder-----------------------------------------
+// cd dist/frontend && zip -r browser.zip browser && cd
+// scp -i minastik.pem Support-HP/frontend/dist/frontend/browser.zip ubuntu@ec2-13-213-43-40.ap-southeast-1.compute.amazonaws.com:hp.minastik.com/browser.zip
+
+// zip -r server.zip server && zip -r node_modules.zip node_modules && cd
+// scp -i minastik.pem Support-HP/frontend/server.zip ubuntu@ec2-13-213-43-40.ap-southeast-1.compute.amazonaws.com:hp.minastik.com/server.zip
+// scp -i minastik.pem Support-HP/frontend/node_modules.zip ubuntu@ec2-13-213-43-40.ap-southeast-1.compute.amazonaws.com:hp.minastik.com/node_modules.zip
+
+// --------------- connect EC2 ----------------------------------------
+// ssh -i "minastik.pem" ubuntu@ec2-13-213-43-40.ap-southeast-1.compute.amazonaws.com
