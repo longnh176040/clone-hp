@@ -1,0 +1,333 @@
+/* You can add global styles to this file, and also import other style files */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+a,
+li,
+p,
+button,
+span {
+  font-family: "Roboto", sans-serif;
+}
+a,
+button {
+  transition: all 0.4s ease-in-out;
+}
+
+a:focus,
+a:hover {
+  text-decoration: none;
+}
+button:disabled {
+  cursor: not-allowed;
+}
+
+a:focus,
+button:focus,
+li:focus,
+input:focus,
+textarea:focus,
+img:focus,
+div:focus {
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+ul {
+  margin: 0px;
+  padding: 0px;
+}
+li {
+  list-style: none;
+}
+
+.mb-30 {
+  margin-bottom: 2rem;
+}
+
+/* style product showcase section */
+.products-showcase {
+  padding: 70px 0;
+  background-color: #efefef;
+}
+.heading-button {
+  width: 260px;
+  height: 60px;
+  border-radius: 5px;
+  background: linear-gradient(
+    231deg,
+    rgba(59, 163, 235, 1) 0%,
+    rgba(58, 190, 174, 1) 100%
+  );
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 22px;
+  font-weight: 600;
+  margin: 0 auto;
+}
+.products-wrapper {
+  padding-top: 50px;
+}
+
+/* style angular material tabs */
+.mat-tab-group.mat-primary .mat-ink-bar {
+  background: #3ba3eb !important;
+}
+.mat-tab-label .mat-tab-label-content {
+  font-size: 18px;
+  font-weight: 500 !important;
+}
+.mat-tab-label-active .mat-tab-label-content {
+  color: #3ba3eb;
+}
+.mat-tab-header {
+  position: sticky !important;
+  top: 74px;
+  z-index: 99;
+  background-color: #efefef;
+}
+
+/* style filter bar */
+.ais-SearchBox {
+  margin-inline: auto;
+  position: relative;
+  width: min(400px, 100%);
+  height: 50px;
+  border-radius: 5px;
+}
+
+.ais-SearchBox form {
+  width: 100%;
+  height: 100%;
+}
+
+.ais-SearchBox input {
+  width: 100%;
+  height: 100%;
+  border-radius: 5px;
+  padding: 0.6rem 1.2rem;
+  font-size: 18px;
+  border: 1px solid rgba(59, 163, 235, 1);
+}
+
+button.ais-SearchBox-submit {
+  position: absolute;
+  right: 1.2rem;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+button.ais-SearchBox-reset {
+  display: none;
+}
+
+button.ais-SearchBox-submit svg {
+  width: 20px;
+  height: 20px;
+  fill: rgba(59, 163, 235, 1);
+}
+
+span.ais-RefinementList-count {
+  margin-left: auto;
+  float: right;
+}
+span.ais-RefinementList-count::before {
+  content: "(";
+}
+span.ais-RefinementList-count::after {
+  content: ")";
+}
+
+input.ais-RefinementList-checkbox {
+  cursor: pointer;
+}
+
+.filter-block {
+  padding: 0.5rem 1rem;
+}
+
+.filter-block:last-child {
+  margin-bottom: 0;
+}
+
+label.ais-RefinementList-label {
+  width: 100%;
+}
+
+span.ais-RefinementList-labelText {
+  margin-left: 0.625rem;
+}
+
+/* style produc price */
+.price {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.price span {
+  padding: 3px 0;
+  position: relative;
+}
+.price-wrapper span {
+  padding: 3px 0;
+  position: relative;
+}
+
+.price span.original::before {
+  content: "";
+  position: absolute;
+  left: -5%;
+  width: 110%;
+  height: 1px;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: #dd4f4f;
+}
+
+.price-wrapper span.original::before {
+  content: "";
+  position: absolute;
+  left: -5%;
+  width: 110%;
+  height: 1px;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: #dd4f4f;
+}
+
+.price span.sale {
+  font-weight: 500;
+  color: #d7410b;
+  border: 2px solid;
+  padding: 3px 5px;
+  border-radius: 5px;
+  margin-right: 1rem;
+}
+.price-wrapper span.sale {
+  font-weight: 500;
+  font-size: 20px;
+  color: #d7410b;
+  padding: 5px 8px 5px 8px;
+}
+.price span.original,
+.price-wrapper span.original {
+  color: rgb(134, 60, 60);
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.price span.originalp {
+  color: #d7410b;
+  font-weight: 500;
+  border: 2px solid #d7410b;
+  padding: 5px 10px 5px 10px;
+  border-radius: 5px;
+}
+.price-wrapper span.originalp {
+  color: #d7410b;
+  font-weight: 500;
+  font-size: 20px;
+  padding: 5px 10px 5px 10px;
+}
+
+.discount {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: linear-gradient(
+    231deg,
+    rgba(59, 163, 235, 1) 0%,
+    rgba(58, 190, 174, 1) 100%
+  );
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
+  color: white;
+  z-index: 2;
+}
+
+.modal-backdrop {
+  z-index: 0 !important;
+}
+
+@media (min-width: 1600px) {
+  .container {
+    max-width: 1400px;
+  }
+}
+
+@media (max-width: 1200px) {
+  .ais-SearchBox {
+    margin: 0;
+    width: 100%;
+  }
+}
+
+@media (max-width: 992px) {
+  .products-wrapper {
+    grid-template-columns: repeat(2, minmax(0, 1fr))!important;
+  }
+}
+
+@media (min-width: 576px) and (max-width: 768px) {
+  .container {
+    max-width: 700px;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  h1 {
+    /* h1 becomes h2 - 32px*/
+    font-size: 2rem;
+  }
+
+  h2 {
+    /* h2 becomes h3 - 28px*/
+    font-size: 1.75rem;
+  }
+
+  h3 {
+    /* h3 becomes h4 - 24px */
+    font-size: 1.5rem;
+  }
+
+  h4 {
+    /* h4 becomes h5 - 20px */
+    font-size: 1.25rem;
+  }
+
+  h5 {
+    /* 18px */
+    font-size: 1.125rem;
+  }
+
+  p,
+  li {
+    font-size: 0.875rem !important;
+  }
+
+  span,
+  button {
+    font-size: 0.8rem !important;
+  }
+
+  .ais-SearchBox {
+    height: 40px;
+  }
+}
+
+@media (max-width: 320px) {
+  .products-wrapper {
+    grid-template-columns: 100%;
+  }
+}

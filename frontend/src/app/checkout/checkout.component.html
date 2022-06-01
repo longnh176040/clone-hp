@@ -1,0 +1,225 @@
+<app-banner
+  [pageTitle]="''"
+  [bannerImgUrl]="'../../assets/banners/elite-banner.png'"
+></app-banner>
+
+<div class="checkout-wrapper" *ngIf="user_cart.length != 0">
+  <div class="checkout container">
+    <div class="row">
+      <div class="col-lg-6 mb-4 mb-lg-0">
+        <div class="billing-info">
+          <app-user-info
+            [cart]="user_cart"
+            [total_price]="old_price - sale"
+            [ecomerceItems] = "ecomerceItems"
+          ></app-user-info>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="order-info">
+          <div class="cart">
+            <div class="cart-overview d-flex justify-content-between">
+              <div class="overview-info">
+                <h3>Giỏ hàng của bạn</h3>
+                <p class="detail mb-0">({{ amount }} sản phẩm)</p>
+              </div>
+              <span class="product_plus" routerLink="/products">
+                Mua thêm sản phẩm</span
+              >
+            </div>
+          </div>
+          <hr style="color: #0096d6; border-top: 2px solid" />
+
+          <ng-container *ngFor="let laptop of user_cart">
+            <div class="row main-product position-relative">
+              <div
+                class="remove-item-btn"
+                style="cursor: pointer"
+                (click)="remove_product_from_cart(laptop.laptop_id)"
+              >
+                <img
+                  src="https://img.icons8.com/officel/20/000000/close-window.png"
+                />
+              </div>
+              <div
+                class="col-xl-3 col-lg-3 col-sm-3 col-8"
+                style="justify-self: center"
+              >
+                <div class="thumb-img">
+                  <img
+                    [src]="bucket + laptop.thumbnails[0]"
+                    class="img-fluid"
+                  />
+                </div>
+              </div>
+              <div class="col-xl-5 col-lg-4 col-sm-5 col-8">
+                <div class="product-info">
+                  <h6>{{ laptop.name }}</h6>
+                  <span class="d-sm-inline-block d-none"
+                    ><a (click)="goToDetailPage(laptop.laptop_id)"
+                      >Xem cấu hình chi tiết</a
+                    ></span
+                  >
+                </div>
+              </div>
+              <div class="col-xl-3 col-lg-4 col-sm-3 col-4 text-right">
+                <!-- <div class="price" *ngIf="laptop.sale != 0">
+                  {{
+                    laptop.price - (laptop.price / 100) * laptop.sale
+                      | convertPrice
+                  }}₫
+                </div> -->
+                <div class="product-action">
+                  <div class="price">{{ laptop.price | convertPrice }}₫</div>
+                  <div class="buttons_added">
+                    <input
+                      style="color: #0290cd; font-size: 18px; height: 30px"
+                      class="minus is-form"
+                      (click)="handleMinus(laptop.laptop_id)"
+                      type="button"
+                      value="-"
+                    />
+                    <input
+                      style="
+                        color: #0290cd;
+                        font-size: 18px;
+                        width: 36px;
+                        height: 30px;
+                      "
+                      aria-label="quantity"
+                      class="input-qty"
+                      max="10"
+                      min="1"
+                      name=""
+                      type="number"
+                      value="{{ laptop.amount }}"
+                    />
+                    <input
+                      style="color: #0290cd; font-size: 18px; height: 30px"
+                      class="plus is-form"
+                      (click)="handlePlus(laptop.laptop_id)"
+                      type="button"
+                      value="+"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <hr />
+          </ng-container>
+          <!-- end container -->
+
+          <hr color="#0096d6" />
+          <div class="row">
+            <div class="col-5">
+              <span style="font-size: 18px; padding-bottom: 5px; color: #00447c"
+                >Tạm tính:</span
+              >
+            </div>
+            <div class="col-7" *ngIf="old_price != 0">
+              <span class="temporary_price"
+                >{{ old_price | convertPrice }} ₫</span
+              >
+            </div>
+          </div>
+
+          <div
+            class="row"
+            style="padding-top: 10px; padding-bottom: 20px; color: #0290cd"
+          >
+            <div class="col-5">
+              <span style="font-size: 15px; font-weight: 300">Khuyến mãi:</span>
+            </div>
+            <div class="col-7" *ngIf="sale != 0">
+              <span class="temporary_sale">{{ sale | convertPrice }} ₫</span>
+            </div>
+            <div class="col-xl-9" *ngIf="sale == 0">
+              <span class="temporary_sale">0 ₫</span>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-5">
+              <span style="font-size: 21px; font-weight: 500; color: #00447c"
+                >Tổng tiền:</span
+              >
+            </div>
+            <div class="col-7">
+              <span class="total_price"
+                >{{ old_price - sale | convertPrice }} ₫</span
+              >
+            </div>
+          </div>
+
+          <br />
+          <div
+            class="col-12 gifts"
+            style="
+              border: 1px dashed #fd7e14;
+              padding: 1rem 0;
+              border-radius: 10px;
+            "
+          >
+            <div
+              class="col-12 mb-2"
+              style="align-self: center; justify-content: center"
+            >
+              <img
+                src="../../assets/promotional gifts/presents heading.png"
+                class="d-block mx-auto mb-2"
+              />
+              <p
+                class="text-center m-0"
+                style="color: #e2906e; font-weight: 500"
+              >
+                Quà tặng
+              </p>
+            </div>
+            <div class="col-12">
+              <div class="promotional-gifts">
+                <p class="single-gift">
+                  <span
+                    ><img
+                      src="../../assets/promotional gifts/Image 10.png"
+                      alt=""
+                  /></span>
+                  <span>Balo laptop chống sốc HP</span>
+                  <span class="price">450.000 đ</span>
+                </p>
+                <p class="single-gift">
+                  <span
+                    ><img
+                      src="../../assets/promotional gifts/Image 11.png"
+                      alt=""
+                  /></span>
+                  <span>Dán skin mặt lưng laptop</span>
+                  <span class="price">200.000 đ</span>
+                </p>
+                <p class="single-gift m-0">
+                  <span
+                    ><img
+                      src="../../assets/promotional gifts/Image 12.png"
+                      alt=""
+                  /></span>
+                  <span>Bàn di chuột size lớn</span>
+                  <span class="price">100.000 đ</span>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="user_cart.length == 0">
+  <h5 class="text">Không có sản phẩm nào trong giỏ hàng !</h5>
+  <span>
+    <img
+      src="../../assets/images/emptycart.png"
+      width="30%"
+      style="margin-left: 35%"
+    />
+  </span>
+</div>

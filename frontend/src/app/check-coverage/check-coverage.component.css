@@ -1,0 +1,142 @@
+/* style warranty policy */
+.policy {
+  border-radius: 10px;
+  padding: 10px 30px 30px;
+  background-color: white;
+  box-shadow: 0 10px 40px rgba(54, 54, 54, 0.05);
+  width: 109%;
+}
+.policy .illustration {
+  height: 220px;
+  width: 100%;
+}
+.policy .illustration img {
+  height: 100%;
+  width: 100%;
+  object-fit: contain;
+  display: block;
+  margin-bottom: 20px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.policy .description {
+  text-align: center;
+}
+.policy .description h5 {
+  color: #00447c;
+  font-weight: 500;
+}
+.policy .description p {
+  color: #0c5794;
+  margin-bottom: 30px;
+}
+
+.call-to-action {
+  text-align: center;
+}
+.call-to-action button {
+  font-family: "Noto Serif", sans-serif;
+  padding: 10px 25px;
+  background-color: #3ba3eb;
+  color: white;
+}
+.call-to-action button:hover {
+  background-color: #276292;
+}
+
+/* style check form */
+.check-form {
+  margin-bottom: 60px;
+}
+.check-form:last-child {
+  margin-bottom: 0px;
+}
+/* style heading */
+.check-form .heading {
+  display: flex;
+  margin-bottom: 2rem;
+}
+.check-form .heading span.rectangle {
+  width: 45px;
+  height: 45px;
+  transform: rotate(45deg);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #cddae3;
+  color: #00447c;
+  font-size: 25px;
+}
+.check-form .heading span.rectangle span {
+  transform: rotate(-45deg);
+}
+.check-form .heading .heading-content {
+  padding-left: 25px;
+}
+.check-form .heading .heading-content h5 {
+  color: #00447c;
+  margin-bottom: 3px;
+}
+.check-form .heading .heading-content p {
+  margin-bottom: 0px;
+  color: #276292;
+}
+
+/* style form */
+.check-form form {
+  width: 100%;
+  display: flex;
+}
+.check-form form input {
+  width: 80%;
+  padding: 10px 20px;
+  border: 1px solid white;
+  border-radius: 5px;
+  transition: all 0.4s ease-in-out;
+}
+.check-form form input:focus {
+  border: 1px solid #0c5794;
+}
+.check-form form button {
+  margin-left: 5px;
+  background-color: #3ba3eb;
+  color: white;
+  border-radius: 5px !important;
+  padding: 0.5rem;
+  align-self: center;
+  height: 45px;
+  flex-grow: 1;
+}
+.check-form form button:hover {
+  background-color: #276292;
+}
+
+@media (max-width: 576px) {
+  .check-form-wrapper {
+    padding: 0 1rem;
+  }
+
+  .check-form .heading {
+    margin-bottom: 1rem;
+  }
+
+  .check-form .heading .heading-content {
+    padding-left: 0;
+  }
+}
+
+.modal-header {
+  background: #3ba3eb;
+  color: #fff;}
+.btn.btn-secondary{
+  background: #3ba3eb;
+  margin-right: 6px;
+  border: none;
+}
+.modal-body{
+  line-height: 32px;
+}
+.modal-footer {
+  padding: 0.15rem !important;
+}
+

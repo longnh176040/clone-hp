@@ -1,0 +1,140 @@
+<div
+  id="carouselExampleIndicators"
+  class="carousel slide carousel-fade"
+  data-ride="carousel"
+  data-pause="false"
+  data-interval="5000"
+  (touchstart)="touchStart($event)"
+  (touchend)="touchEnd($event)"
+>
+  <ol class="carousel-indicators">
+    <li
+      data-target="#carouselExampleIndicators"
+      data-slide-to="0"
+      class="active"
+    ></li>
+    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+  </ol>
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <ng-container
+        [ngTemplateOutlet]="carouselItem"
+        [ngTemplateOutletContext]="{
+          imgUrl: '../../assets/slide show images/Image 3.png',
+          productTitle: 'Elite Dragonfly',
+          desc: 'Máy tính doanh nghiệp đa chế độ gọn nhẹ nhất thế giới sẽ theo bạn đến bất cứ đâu.'
+        }"
+      ></ng-container>
+    </div>
+    <div class="carousel-item">
+      <ng-container
+        [ngTemplateOutlet]="carouselItem"
+        [ngTemplateOutletContext]="{
+          imgUrl: '../../assets/slide show images/Image 6.png',
+          productTitle: 'HP Spectre x360',
+          desc: 'Hiệu suất đẳng cấp. Thiết kế linh động. Một giải pháp tuyệt vời cho tất cả mọi người'
+        }"
+      ></ng-container>
+    </div>
+    <div class="carousel-item">
+      <ng-container
+        [ngTemplateOutlet]="carouselItem"
+        [ngTemplateOutletContext]="{
+          imgUrl: '../../assets/slide show images/image - slide 2.png',
+          productTitle: 'HP Omen 15',
+          desc: 'Siêu mỏng. Siêu cấu hình. Bất cứ nơi đâu. Khai phóng tiềm năng sáng tạo trong bạn'
+        }"
+      ></ng-container>
+    </div>
+  </div>
+  <a
+    class="carousel-control-prev"
+    href="#carouselExampleIndicators"
+    role="button"
+    data-slide="prev"
+  >
+    <span class="carousel-control carousel-control-prev-icon" aria-hidden="true"
+      ><i class="fas fa-chevron-left"></i
+    ></span>
+  </a>
+  <a
+    class="carousel-control-next"
+    href="#carouselExampleIndicators"
+    role="button"
+    data-slide="next"
+  >
+    <span class="carousel-control carousel-control-next-icon" aria-hidden="true"
+      ><i class="fas fa-chevron-right"></i
+    ></span>
+  </a>
+</div>
+
+<div class="products-showcase">
+  <div class="container">
+    <div class="hot-deals">
+      <div class="heading-button">Deal sốc mỗi tuần</div>
+      <div class="products-wrapper">
+        <ng-container
+          [ngTemplateOutlet]="laptopList"
+          [ngTemplateOutletContext]="{ data: dealList }"
+        ></ng-container>
+      </div>
+    </div>
+    <div class="best-seller">
+      <div class="heading-button">Bán chạy nhất</div>
+      <div class="products-wrapper">
+        <ng-container
+          [ngTemplateOutlet]="laptopList"
+          [ngTemplateOutletContext]="{ data: bestList }"
+        ></ng-container>
+      </div>
+    </div>
+
+    <div class="featured-products">
+      <div class="heading-button">Sản phẩm nổi bật</div>
+      <div class="products-wrapper">
+        <ng-container
+          [ngTemplateOutlet]="laptopList"
+          [ngTemplateOutletContext]="{ data: promotionList }"
+        ></ng-container>
+      </div>
+      <button
+        class="load-more"
+        [routerLink]="['/products']"
+        routerLinkActive="router-link-active"
+      >
+        Xem thêm
+      </button>
+    </div>
+  </div>
+</div>
+
+<ng-template
+  #carouselItem
+  let-imgUrl="imgUrl"
+  let-productTitle="productTitle"
+  let-desc="desc"
+>
+  <img class="d-block w-100" [src]="imgUrl" />
+  <div class="carousel-caption container">
+    <div class="col-lg-6 col-10">
+      <h1>{{ productTitle }}</h1>
+      <p>
+        {{ desc }}
+      </p>
+      <div class="cta-buttons">
+        <button class="btn explore">Khám phá</button>
+        <button class="btn trailer"><i class="fas fa-play"></i></button>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #laptopList let-data="data">
+  <div
+    *ngFor="let product of data"
+  >
+    <app-product-card [product]="product" #product></app-product-card>
+  </div>
+</ng-template>

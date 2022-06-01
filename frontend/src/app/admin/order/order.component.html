@@ -1,0 +1,102 @@
+<div>
+  <div class="bg-light">
+    <h1 class="mx-4 pt-2 font-weight-bold">Quản lý đơn hàng</h1>
+    <div class="row ml-3">
+      <div class="col-sm-4 pt-3">
+        <form class="form-inline my-1 my-lg-0">
+          <label class="search-label"
+            ><i class="fa fa-search" aria-hidden="true"></i
+          ></label>
+          <mat-form-field class="example-full-width">
+            <mat-label>Tìm kiếm</mat-label>
+            <input matInput placeholder="Ex. HP" value="" />
+          </mat-form-field>
+        </form>
+      </div>
+      <div class="col-sm-4 my-1">
+        <div>
+          <mat-form-field appearance="fill">
+            <mat-label>Enter a date range</mat-label>
+            <mat-date-range-input [rangePicker]="picker">
+              <input matStartDate placeholder="Start date" #dateRangeStart />
+              <input
+                matEndDate
+                placeholder="End date"
+                #dateRangeEnd
+                (dateChange)="dateRangeChange(dateRangeStart, dateRangeEnd)"
+              />
+            </mat-date-range-input>
+            <mat-datepicker-toggle
+              matSuffix
+              [for]="picker"
+            ></mat-datepicker-toggle>
+            <mat-date-range-picker #picker></mat-date-range-picker>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="col-sm-3 my-1">
+        <div class="">
+          <mat-form-field appearance="fill">
+            <mat-label>Trạng thái</mat-label>
+            <select
+              matNativeControl
+              required
+              (change)="onChange($event.target.value)"
+            >
+              <option value="1">Tất cả</option>
+              <option value="2">Chưa xác nhận</option>
+              <option value="3">Đã xác nhận</option>
+              <option value="4">Đang giao hàng</option>
+              <option value="5">Đã giao hàng</option>
+              <option value="6">Đã hủy</option>
+            </select>
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- <div class="my-3">
+    <mat-paginator
+      [length]="10"
+      [pageSize]="2"
+      [pageSizeOptions]="[1, 2, 5, 10]"
+    >
+    </mat-paginator>
+  </div> -->
+  <div class="container-fluid">
+    <table class="table table-bordered table-hover table-striped table-md">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Ngày đặt</th>
+          <th>Tên khách hàng</th>
+          <th>Số điện thoại</th>
+          <th>Trạng thái</th>
+          <th>Địa chỉ nhận hàng</th>
+          <th>Giá</th>
+          <th>Chờ xác nhận</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let order of orders | async">
+          <td>{{ order.order_id }}</td>
+          <td>{{ order.created_at }}</td>
+          <td>{{ order.username }}</td>
+          <td>{{ order.phone }}</td>
+          <td>{{ order.status }}</td>
+          <td>{{ order.address }}</td>
+          <td>đ {{ order.total_price | currency: " ":"code":"3.0" }}</td>
+          <td>
+            <button
+              class="btn btn-outline-success"
+              type="submit"
+              (click)="onClick()"
+            >
+              Xác nhận đơn
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

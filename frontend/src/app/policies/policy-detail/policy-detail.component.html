@@ -1,0 +1,331 @@
+<!-- Đổi trả hàng miễn phí -->
+<div *ngIf="title == 'return'">
+  <app-banner
+    [pageTitle]="'Chính sách đổi trả hàng'"
+    [bannerImgUrl]="
+      '../../../assets/banners/84475910_2996648327020195_4959632468811448320_o.jpg'
+    "
+  ></app-banner>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="return_list">
+          <p style="color: red; font-size: 20px">
+            <em>Lưu ý: Các thiết bị bảo hành phải trong thời gian bảo hành </em>
+          </p>
+
+          <p class="list01">
+            <span>
+              <strong style="font-weight: 500"
+                >1. Quý khách được quyền đổi máy mới nếu máy của Quý khách mắc
+                lỗi kỹ thuật trong vòng 30 ngày kể từ thời điểm mua máy.
+              </strong>
+            </span>
+          </p>
+          <p style="padding-left: 20px">
+            • Lỗi kỹ thuật này được xác định do nhà sản xuất.
+          </p>
+
+          <span class="list01">
+            <strong style="font-weight: 500"
+              >2. Các sản phẩm của HP kinh doanh đều tuân thủ điều kiện bảo hành
+              của nhà cung cấp, của hãng sản xuất. Các trường hợp sau đây bị coi
+              là vi phạm điều kiện bảo hành và không được bảo hành:
+            </strong>
+          </span>
+          <br />
+          <div style="margin-left: 20px">
+            <div class="list03">
+              <ul style="margin-top: 16px">
+                <li>• Sản phẩm hết thời hạn bảo hành.</li>
+                <br />
+                <li>
+                  • Không có tem bảo hành hợp lệ của HP, nhà phân phối, hãng sản
+                  xuất hoặc bị rách, bị tẩy xóa, sửa chữa, mờ không đọc được,
+                  bong/tróc…
+                </li>
+                <br />
+                <li>
+                  • Trên sản phẩm không có số serial, mã vạch, thông số kỹ thuật
+                  hợp lệ hoặc các thông tin bị mờ không đọc được, bị cạo, bị
+                  sửa, bị rách, bị bong/tróc, bị thay đổi.
+                </li>
+                <br />
+                <li>
+                  • Sản phẩm bị lỗi do thiên tai, nguồn điện sử dụng không bình
+                  thường, sai điện áp quy định…
+                </li>
+                <br />
+                <li>
+                  • Sản phẩm bị lỗi do người sử dụng: bị biến dạng vật lý như
+                  trầy, xước, lồi, lõm, móp, méo, nứt, vỡ do bị rơi, bị va đập,
+                  do vận chuyển/lắp đặt sai quy cách, bị mốc, hoen rỉ, ẩm ướt,
+                  chất lỏng xâm nhập, ố vàng, mờ chữ, viết chữ không tẩy được,
+                  hư hỏng do chuột, bọ hoặc côn trùng xâm nhập…
+                </li>
+                <br />
+                <li>
+                  • Sản phẩm đã qua ép xung (Overclock) hoặc sử dụng sai theo
+                  thông số nhà sản xuất đưa ra.
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Bảo hành chính hãng -->
+<div *ngIf="title == 'warranty'">
+  <app-banner
+    [pageTitle]="'Chính sách bảo hành'"
+    [bannerImgUrl]="
+      '../../../assets/banners/27912461_1777126748972365_6631206558834973089_o.jpg'
+    "
+  ></app-banner>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="warranty-list">
+          <p>
+            <span class="list01">
+              <strong style="font-weight: 500">1. Thời gian bảo hành </strong>
+            </span>
+          </p>
+          <p>
+            <span>
+              Tất cả các dòng laptop HP đều có thời gian bảo hành chính hãng 1
+              năm tính từ ngày khách hàng cuối mua hàng. Khách hàng khi mua máy
+              yêu cầu cửa hàng cung cấp hóa đơn VAT có số Serial Number để giữ
+              làm phiếu bảo hành.
+            </span>
+          </p>
+
+          <p class="list01">
+            <strong style="font-weight: 500"
+              >2. Các trung tâm bảo hành chính hãng HP tại Việt Nam</strong
+            >
+          </p>
+          <div style="margin: 0px 0px 16px; padding-left: 30px">
+            <ul>
+              <li>• TP HCM: 162 Hai Bà Trưng, P. Đa Kao, Q1</li>
+              <li>• Hà Nội: 74 Cửa Bắc, Quận Ba Đình</li>
+              <li>• Đà Nẵng: 60 Nguyễn Du, Q. Hải Châu</li>
+              <li>• Cần Thơ: 129 Lý Tự Trọng, Q. Ninh Kiều</li>
+              <li>Hotline: 1800588868</li>
+            </ul>
+          </div>
+          <p class="list01">
+            <strong style="font-weight: 500"
+              >3. Các chương trình và chính sách bảo hành của HP</strong
+            >
+          </p>
+          <p class="list02">
+            <strong style="font-weight: 500"
+              >3.1 CALL CENTER SUPPORT 24/7 (Tổng đài hỗ trợ 24/7)</strong
+            >
+          </p>
+          <p>
+            - Call Center Support 24/7 là dịch vụ tổng đài hỗ trợ cho khách hàng
+            24h trên ngày và 7 ngày trong tuần
+          </p>
+          <p>
+            - Khi khách hàng sử dụng các sản phẩm của HP, trong quá trình sử
+            dụng bị lỗi khách hàng có thể liên hệ tổng đài 1800588868 bất cứ lúc
+            nào để được sự hỗ trợ tốt nhất từ đội ngũ kỹ sư của HP
+          </p>
+          <p class="list02">
+            <strong style="font-weight: 500"
+              >3.2 ONSITE WARRANTY SEVICES (Bảo hành tận nhà)</strong
+            >
+          </p>
+          <p>
+            - Onsite Sevices là dịch vụ bảo hành thay thế linh kiện tại nhà hoàn
+            toàn miễn phí được áp dụng cho các model sản phẩm sau: HP Pavilion,
+            HP Probook, HP Envy, HP Zbook.
+          </p>
+          <p class="list02">
+            <strong style="font-weight: 500"
+              >3.3 VIP WARRANTY SERVICE (Bảo Hành VIP)</strong
+            >
+          </p>
+          <p>
+            - VIP Services là dịch vụ bảo hành thay thế linh kiện trong vòng 30
+            phút được áp dụng hoàn toàn miễn phí cho các model sản phẩm sau: HP
+            Pavilion, HP Probook, HP Envy. Với 7 lỗi sau: Ram, HDD, ODD (DVD),
+            Keyboard, Battery, Adapter, Wifi card
+          </p>
+          <p>
+            - Dịch vụ bảo hành VIP sẽ được hỗ trợ toàn quốc với điều kiện sản
+            phẩm đó phải được phân phối chính hãng tại Việt Nam và phải còn
+            trong thời gian bảo hành trên hệ thống của HP với những lỗi do nhà
+            sản xuất.
+          </p>
+          <p class="list02">
+            <strong style="font-weight: 500"
+              >3.4. PICKUP & RETURN WARRANTY SERVICE (Giao Nhận Miễn Phí Tại
+              Nhà)</strong
+            >
+          </p>
+          <p>
+            - Pickup & Return Warranty Sevice là dịch vụ bảo hành giao và nhận
+            tại nhà hoàn toàn miễn phí tại 63 tỉnh thành, 64 điểm giao nhận và
+            được HP áp dụng cho sản phẩm: Notebook
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Giao hàng nhanh 2h -->
+<div *ngIf="title == 'delivery'">
+  <app-banner
+    [pageTitle]="'Chính sách giao hàng'"
+    [bannerImgUrl]="
+      '../../../assets/banners/21949760_1634236303261411_3080631426095855081_o.jpg'
+    "
+  ></app-banner>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="delivery-list">
+          <p class="list01">
+            <strong style="font-weight: 500">1. Lưu ý: </strong>
+          </p>
+          <div style="margin: 0px 0px 16px; padding-left: 30px">
+            <p>
+              - Sau khi bạn đặt hàng, trong vòng 12 giờ làm việc chúng tôi sẽ
+              liên lạc lại để xác nhận và kiểm tra thông tin.
+            </p>
+            <p>
+              - Những rủi ro phát sinh trong quá trình vận chuyển (va đập, ẩm
+              ướt, tai nạn..) có thể ảnh hưởng đến hàng hóa, vì thế xin Quý
+              Khách vui lòng kiểm tra hàng hóa thật kỹ trước khi ký nhận. Máy
+              tính Hà Nội sẽ không chịu trách nhiệm với những sai lệch hình thức
+              của hàng hóa sau khi Quý khách đã ký nhận hàng.
+            </p>
+          </div>
+          <p class="list01">
+            <strong style="font-weight: 500"
+              >2. Bảng giá dịch vụ giao hàng</strong
+            >
+          </p>
+          <table class="service-table">
+            <tbody>
+              <tr class="row01">
+                <td>Theo giá trị đơn hàng</td>
+                <td>Số Km được miễn phí</td>
+                <td>Thời gian đáp ứng</td>
+                <td>Thu phí</td>
+              </tr>
+              <tr class="row02">
+                <td>Dưới 200.000đ</td>
+                <td></td>
+                <td>Giao hàng trong vòng 6h</td>
+                <td>
+                  30.000đ/ 1 lần giao (trong vòng 10km) 40.000đ/1 lần giao
+                  (trong vòng 15km) 50.000đ/1 lần giao (trong vòng 20km)
+                </td>
+              </tr>
+              <tr class="row02">
+                <td>Trên 200.000đ</td>
+                <td></td>
+                <td>Giao hàng trong vòng 2h(*)</td>
+                <td>
+                  <p>20.000đ/1 lần giao (trong vòng 15km)</p>
+                  Từ km thứ 16 thu phí 6.000đ/km (chở hàng bằng ô tô thu phí
+                  10.000đ/km)
+                </td>
+              </tr>
+              <tr class="row02">
+                <td>Trên 500.000đ</td>
+                <td>20 km</td>
+                <td>Giao hàng trong vòng 2h(*)</td>
+                <td>
+                  Từ km 21 thu phí 6.000đ/km (chở hàng bằng ô tô thu phí
+                  10.000đ/km)
+                </td>
+              </tr>
+              <tr class="row02">
+                <td>Trên 1 triệu đồng</td>
+                <td>25 km</td>
+                <td>Giao hàng trong vòng 3h(*)</td>
+                <td>
+                  Từ km 26 thu phí 6.000đ/km (chở hàng bằng ô tô thu phí
+                  10.000đ/km)
+                </td>
+              </tr>
+              <tr class="row02">
+                <td>Trên 3 triệu đồng</td>
+                <td>35 km</td>
+                <td>Giao hàng trong vòng 24h(36km-45km)</td>
+                <td>
+                  Từ km 36 thu phí 6.000đ/km (chở hàng bằng ô tô thu phí
+                  10.000đ/km)
+                </td>
+              </tr>
+              <tr class="row02">
+                <td>Trên 50 triệu đồng</td>
+                <td>50 km</td>
+                <td>Theo thỏa thuận với khách hàng</td>
+                <td>
+                  Từ km 51 thu phí 10.000đ/km hoặc theo tư vấn nhân viên bán
+                  hàng
+                </td>
+              </tr>
+              <tr class="row02">
+                <td>Trên 100 triệu đồng</td>
+                <td>100 km</td>
+                <td>Theo thỏa thuận với khách hàng</td>
+                <td>
+                  Từ km 101 thu phí 10.000đ/km hoặc theo tư vấn nhân viên bán
+                  hàng
+                </td>
+              </tr>
+              <tr class="row02">
+                <td>Trên 200 triệu đồng</td>
+                <td>200 km</td>
+                <td>Theo thỏa thuận với khách hàng</td>
+                <td>
+                  Từ km 201 thu phí 10.000đ/km hoặc theo tư vấn nhân viên bán
+                  hàng
+                </td>
+              </tr>
+              <tr class="row02">
+                <td>Trên 300 triệu đồng</td>
+                <td>300 km</td>
+                <td>Theo thỏa thuận với khách hàng</td>
+                <td>
+                  Từ km 301 thu phí 10.000đ/km hoặc theo tư vấn nhân viên bán
+                  hàng
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="note">
+            <p style="margin-top: 10px; color: red">Ghi chú (*):</p>
+            <p>
+              - Giao hàng nhanh 2h áp dụng cho những sản phẩm trong kho của HP
+              trong cùng tỉnh thành với điểm nhận hàng của khách hàng
+            </p>
+            <p>
+              - Giao hàng nhanh 2h áp dụng trong bán kính 2km từ các showroom
+              bán hàng của HP
+            </p>
+            <p>
+              - Giao hàng nhanh 2h chỉ áp dụng cho các đơn hàng bán lẻ (sản phẩm
+              có kích thước nhỏ gọn, các sản phẩm không yêu cầu lắp ráp, cài đặt
+              trước khi giao
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

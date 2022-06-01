@@ -1,0 +1,27 @@
+.form-inline {
+    position: relative;
+}
+
+.search-label {
+    position: absolute;
+    right: 40%;
+    top: 30%;
+    cursor: pointer;
+}
+
+.status-filter {
+    border-radius: 15px;
+    width: 50%;
+}
+
+.nav-link {
+    color: #141414
+}
+
+.dropdown-item-text {
+    cursor: pointer;
+}
+
+.mat-form-field {
+    width: 60%
+}

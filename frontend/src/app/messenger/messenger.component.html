@@ -1,0 +1,99 @@
+<!--The content below is only a placeholder and can be replaced.-->
+
+<div class="container" *ngIf="!isOpenChatBox">
+  <button
+    class="Chat-icon"
+    id="chatbot"
+    (click)="isOpenChatBox = true"
+  ></button>
+  <div class="newMes" *ngIf="newMes">!</div>
+</div>
+
+<!-- Modal -->
+<div *ngIf="isOpenChatBox">
+  <div id="modal-dialog" role="document">
+    <section class="modal-content">
+      <div class="card">
+        <div class="bot_image">
+          <!-- <img class="header-img" src="../../../assets/products-list-page-banner/logo HP.png" /> -->
+          <span class="title-box"
+            ><span style="font-weight: 500">Hỗ trợ trực tuyến</span></span
+          >
+          <i
+            class="close"
+            id="close"
+            class="fa fa-times"
+            (click)="isOpenChatBox = false"
+          ></i>
+        </div>
+        <!-- <div class="card-body" id="chatlogs" #chatlogs>
+          <div class="card-body-item">
+            <div class="support-title">
+              <a>
+                <span class="content-item">Bạn cần hỗ trợ điều gì?</span>
+              </a>
+            </div>
+            <div class="support-content">
+              <ul>
+                <li class="item-support">
+                  <a><i class="bx bx-card"></i>Tư vấn sản phẩm</a>
+                </li>
+                <li class="item-support">
+                  <a><i class="bx bx-cog"></i> Hỗ trợ kỹ thuật</a>
+                </li>
+                <li class="item-support">
+                  <a><i class="bx bx-search-alt"></i>Tra cứu bảo hành</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div> -->
+        <body>
+          <div id="live-chat" #scrollMe class="mt-3">
+            <div
+              class="message"
+              *ngFor="let message of messages"
+              [class]="uid === message.uid ? 'text-right' : 'text-left'"
+            >
+              <span
+                id="text"
+                [class]="uid === message.uid ? 'my-mes' : 'other-mes'"
+                >{{ message.content }}</span
+              >
+              <div id="time">{{ message.created_at }}</div>
+            </div>
+          </div>
+        </body>
+
+        <div id="chat_footer">
+          <div class="input-bar">
+            <div class="input-bar-item width100">
+              <form (ngSubmit)="send()">
+                <div class="input-field">
+                  <input
+                    required
+                    placeholder="Enter Message here"
+                    type="text"
+                    class="input"
+                    [(ngModel)]="message"
+                    name="message"
+                    autocomplete="off"
+                  />
+                  <span>
+                    <button
+                      type="submit"
+                      class="btn p-0"
+                      style="color: #0096d6"
+                    >
+                      <i class="fa fa-paper-plane" aria-hidden="true"></i>
+                    </button>
+                  </span>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>

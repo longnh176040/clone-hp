@@ -1,0 +1,294 @@
+<app-banner
+  [pageTitle]="'Sản phẩm của chúng tôi'"
+  [bannerImgUrl]="
+    '../../../assets/banners/US_premium_laptops_tablet_mobile_tcm245_3176765_tcm245_3176745_tcm245-3176765.png'
+  "
+></app-banner>
+
+<div class="products-showcase">
+  <div class="container">
+    <ais-instantsearch [config]="config">
+      <div>
+        <div class="searchbox-filter-wrapper d-xl-none">
+          <ais-search-box></ais-search-box>
+          <button
+            class="filter-btn btn d-xl-none d-inline-flex"
+            (click)="showComparison()"
+          >
+            <i class="bx bx-filter-alt mr-2"></i> So sánh
+          </button>
+          <button
+            class="filter-btn btn d-xl-none d-inline-flex"
+            (click)="showMobileFiters = true"
+          >
+            <i class="bx bx-filter-alt mr-2"></i> Bộ lọc
+          </button>
+        </div>
+        <div class="row">
+          <div
+            class="col-xl-3 become-fixed"
+            (click)="showMobileFiters = false"
+            [ngClass]="{ show: showMobileFiters }"
+          >
+            <div class="filters-wrapper">
+              <!-- <ais-clear-refinements
+              [autoHideContainer]="true"
+            ></ais-clear-refinements> -->
+
+              <div class="searchbox-filter-wrapper d-none d-xl-block mb-3">
+                <ais-search-box></ais-search-box>
+                <!-- <button
+                  class="filter-btn btn"
+                  (click)="showMobileFiters = true"
+                >
+                  <i class="bx bx-filter-alt mr-2"></i> Bộ lọc
+                </button> -->
+              </div>
+
+              <div class="filter-block">
+                <button class="btn p-0 filter-heading mb-2">
+                  <span>Thương hiệu</span>
+                  <span style="opacity: 0; pointer-events: none"
+                    ><i class="fas fa-caret-up"></i
+                  ></span>
+                </button>
+                <ais-refinement-list
+                  attribute="series"
+                  [transformItems]="transformSeriesName"
+                ></ais-refinement-list>
+              </div>
+
+              <div class="filter-block">
+                <button class="btn p-0 filter-heading mb-2">
+                  <span>CPU</span>
+                  <span style="opacity: 0; pointer-events: none"
+                    ><i class="fas fa-caret-up"></i
+                  ></span>
+                </button>
+                <ais-refinement-list
+                  attribute="filter.cpu"
+                  [sortBy]="['count:asc']"
+                ></ais-refinement-list>
+              </div>
+
+              <div class="filter-block">
+                <button class="btn p-0 filter-heading mb-2">
+                  <span>RAM</span>
+                  <span style="opacity: 0; pointer-events: none"
+                    ><i class="fas fa-caret-up"></i
+                  ></span>
+                </button>
+                <ais-refinement-list
+                  attribute="filter.ram"
+                ></ais-refinement-list>
+              </div>
+
+              <div class="filter-block">
+                <button class="btn p-0 filter-heading mb-2">
+                  <span>Ổ cứng</span>
+                  <span style="opacity: 0; pointer-events: none"
+                    ><i class="fas fa-caret-up"></i
+                  ></span>
+                </button>
+                <ais-refinement-list
+                  attribute="filter.storage"
+                ></ais-refinement-list>
+              </div>
+
+              <div class="filter-block">
+                <button class="btn p-0 filter-heading mb-2">
+                  <span>Nhu cầu sử dụng</span>
+                  <span style="opacity: 0; pointer-events: none"
+                    ><i class="fas fa-caret-up"></i
+                  ></span>
+                </button>
+                <ais-refinement-list
+                  attribute="filter.need"
+                ></ais-refinement-list>
+              </div>
+
+              <div class="filter-block">
+                <button class="btn p-0 filter-heading mb-2">
+                  <span>Khoảng giá</span>
+                  <span style="opacity: 0; pointer-events: none"
+                    ><i class="fas fa-caret-up"></i
+                  ></span>
+                </button>
+                <ais-refinement-list
+                  attribute="filter.price_range"
+                ></ais-refinement-list>
+              </div>
+
+              <div class="filter-block">
+                <button class="btn p-0 filter-heading mb-2">
+                  <span>VGA - Card màn hình</span>
+                  <span style="opacity: 0; pointer-events: none"
+                    ><i class="fas fa-caret-up"></i
+                  ></span>
+                </button>
+                <ais-refinement-list
+                  attribute="filter.vga"
+                ></ais-refinement-list>
+              </div>
+
+              <div class="filter-block">
+                <button class="btn p-0 filter-heading mb-2">
+                  <span>Kích thước màn hình</span>
+                  <span style="opacity: 0; pointer-events: none"
+                    ><i class="fas fa-caret-up"></i
+                  ></span>
+                </button>
+                <ais-refinement-list
+                  attribute="filter.screen_size"
+                ></ais-refinement-list>
+              </div>
+
+              <div class="filters-actions d-xl-none">
+                <button class="btn remove-filters-btn">Bỏ lọc</button>
+                <button class="btn apply-filters-btn">Áp dụng</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-xl-9">
+            <ais-infinite-hits>
+              <ng-template
+                let-hits="hits"
+                let-results="results"
+                let-refine="showMore"
+              >
+                <div class="products-wrapper pt-0">
+                  <div
+                    *ngFor="let hit of hits"
+                    #productHTML
+                  >
+                    <app-product-card
+                      [product]="hit"
+                      #product
+                      [comparable]="true"
+                      (startComparing)="addToCompare($event)"
+                      (removingFromComparison)="
+                        removeComparedItem($event.laptop_id)
+                      "
+                    ></app-product-card>
+                  </div>
+                </div>
+                <button class="btn btn-primary load-more" (click)="refine()">
+                  Xem Thêm
+                </button>
+              </ng-template>
+            </ais-infinite-hits>
+          </div>
+
+          <!-- <div class="col-12 d-xl-none">
+            <div class="actions-wrapper">
+              <div class="main-actions">
+                <button
+                  class="filter-btn btn d-xl-none d-block"
+                  (click)="showMobileFiters = true"
+                >
+                  
+                  Bộ lọc
+                </button>
+
+                <ais-search-box></ais-search-box>
+
+                <button
+                  class="compare-btn btn d-xl-none d-block"
+                  (click)="showMobileFiters = true"
+                >
+                 
+                  So sánh
+                </button>
+              </div>
+            </div>
+          </div> -->
+        </div>
+      </div>
+    </ais-instantsearch>
+  </div>
+</div>
+
+<!-- compare section -->
+<div class="comparison-wrapper" *ngIf="compareList.length > 0 && onComparing">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-2" style="align-self: center">
+        <div class="compare-buttons-wrapper">
+          <button
+            class="start-comparing btn"
+            data-toggle="modal"
+            data-target="#modalCompare"
+          >
+            So sánh
+          </button>
+          <button class="clear-all btn" (click)="clearComparedItems()">
+            Xóa tất cả
+          </button>
+          <p>Bạn có thể so sánh tối đa 3 sản phẩm cùng lúc</p>
+        </div>
+      </div>
+      <div class="col-lg-10">
+        <div class="row">
+          <div
+            class="col-sm-4"
+            *ngFor="let product of compareList; let id = index"
+          >
+            <div class="compared-product">
+              <img [src]="bucket + product.thumbnails[0]" class="img-fluid" />
+              <p>{{ product.name }}</p>
+              <span>{{ id }}</span>
+              <i
+                class="fas fa-times"
+                (click)="removeComparedItem(product.laptop_id, id)"
+              ></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ------------------------------------- compare modal ------------------------------------------------ -->
+<div
+  class="modal fade bd-example-modal-lg"
+  id="modalCompare"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true"
+>
+  <div
+    class="modal-dialog modal-lg"
+    [class]="compareList.length > 2 ? 'modal-lgp' : ''"
+    role="document"
+  >
+    <div class="modal-content">
+      <table class="table">
+        <tr>
+          <th>#</th>
+          <th scope="col" *ngFor="let laptop of compareList">
+            {{ laptop.name }}
+          </th>
+        </tr>
+        <tr>
+          <th scope="col">CPU</th>
+          <td *ngFor="let laptop of compareList">{{ laptop.CPU.name }}</td>
+        </tr>
+        <tr>
+          <th scope="col">RAM</th>
+          <td *ngFor="let laptop of compareList">{{ laptop.RAM.capacity }}</td>
+        </tr>
+        <tr>
+          <th scope="col">Màn hình</th>
+          <td *ngFor="let laptop of compareList">{{ laptop.display }}</td>
+        </tr>
+        <tr>
+          <th scope="col">Card đồ họa</th>
+          <td *ngFor="let laptop of compareList">{{ laptop.graphic }}</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>

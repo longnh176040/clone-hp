@@ -1,0 +1,72 @@
+
+<div class="row rounded-lg container-fluid">
+  <!-- Users box-->
+  <div class="col-3 px-0">
+    <div class="chat-list">
+      <div class="header">
+        <p class="header-text">Recent: {{ users.length }}</p>
+      </div>
+
+      <div class="messages-box">
+        <div
+          class="list-group rounded-0 border-bottom my-3"
+          *ngFor="let user of users; let i = index"
+          id="{{ user.room_id }}"
+          (click)="getUserMessage(user.room_id, user.socketId, user.uid)"
+        >
+          <div class="infor">
+            <div class="d-flex align-items-center justify-content-between mb-1">
+              <ul>
+                <li class = "newMes" *ngIf="newMes">!</li>
+                <li class="mb-0">{{ user.name }}</li>
+              </ul>
+              <!-- <small class="small font-weight-bold">Date</small> -->
+            </div>
+            <p class="font-italic mb-0 text-small" *ngIf="user.new_message">
+              {{ user.new_message }}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Chat Box-->
+  <div class="col-9 px-0" *ngIf="messages">
+    <div class = "content">
+    <!-- <div class="header">
+      <p class="header-text">User</p>
+    </div> -->
+    <div id = "live-chat" #scrollMe>
+      <div class="message" *ngFor="let message of messages"  [class]="adminId === message.uid ? 'text-right' : 'text-left'">
+        <div>
+          <span id="text" [class]="adminId === message.uid ? 'my-mes' : 'other-mes'">{{
+            message.content
+          }}</span>
+          <p  id="time">{{ message.created_at }}</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Typing area -->
+    <form class="bg-light" (ngSubmit)="send()">
+      <div class="input-group">
+        <input
+          type="text"
+          placeholder="Type a message"
+          aria-describedby="button-addon2"
+          class="form-control rounded-0 border-0 py-4 bg-light"
+          id = "input"
+          [(ngModel)]="message"
+          name="message"
+          autocomplete="off"
+        />
+        <div class="input-group-append">
+          <button id="button-addon2" type="submit" class="btn btn-link">
+            <i class="fa fa-paper-plane"></i>
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+  </div>
+</div>
