@@ -42,6 +42,9 @@ import { MessengerComponent } from './messenger/messenger.component';
 import { StarComponent } from './products/product-detail/star/star.component';
 import { MatTabsModule } from "@angular/material/tabs";
 import { MatSnackBarModule } from "@angular/material/snack-bar";
+import { NzFormModule } from 'ng-zorro-antd/form';
+import { NzInputModule } from 'ng-zorro-antd/input';
+import { NzButtonModule } from 'ng-zorro-antd/button';
 
 
 // Alogila search
@@ -50,6 +53,8 @@ import { NgAisModule } from 'angular-instantsearch';
 import { UserInfoComponent } from './checkout/user-info/user-info.component';
 import { BannerComponent } from './shared/components/banner/banner.component';
 import { ProductCardComponent } from './shared/components/product-card/product-card.component';
+import { ContactComponent } from './contact/contact.component';
+import { RecruitmentComponent } from './recruitment/recruitment.component';
 
 // Socket.io
 
@@ -77,6 +82,8 @@ import { ProductCardComponent } from './shared/components/product-card/product-c
     UserInfoComponent,
     BannerComponent,
     ProductCardComponent,
+    ContactComponent,
+    RecruitmentComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: "serverApp" }),
@@ -85,6 +92,9 @@ import { ProductCardComponent } from './shared/components/product-card/product-c
     AngularFireAuthModule,
     AngularFirestoreModule,
     AdminModule,
+    NzFormModule,
+    NzInputModule,
+    NzButtonModule,
     BrowserAnimationsModule,
     BrowserTransferStateModule,
     HttpClientModule,

@@ -3,7 +3,7 @@ section {
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background-color: #94b5c0;
+  background-color: #00395a;
 }
 
 /* style bac-button */
@@ -14,8 +14,8 @@ section {
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 2px solid #0096d6;
-  color: #0096d6;
+  border: 2px solid #ff4040;
+  color: #ff4040;
   font-size: 20px;
   position: absolute;
   top: 20px;
@@ -25,7 +25,7 @@ section {
   transition: all 0.5s;
 }
 .back-button:hover {
-  background-color: #0096d6;
+  background-color: #ff4040;
   color: white;
 }
 
@@ -37,7 +37,7 @@ section {
   max-width: 1100px;
   margin: 20px;
   height: 600px;
-  background-color: #d7edfb;
+  background-color: #efefef;
   border-radius: 10px;
   box-shadow: 0px 0px 30px rgba(255, 255, 255, 0.05);
   display: flex;
@@ -67,7 +67,7 @@ section {
 }
 
 .form-box form h2 {
-  color: #047be0;
+  color: #ff4040;
   text-align: center;
   font-weight: 600;
   font-size: 32px;
@@ -85,48 +85,26 @@ section {
 
 .form-box .input-field input {
   position: relative;
-  background: white;
-  outline: none;
+  background: #efefef;
   width: 100%;
   font-weight: 500;
-  color: #3ba3eb;
-  font-size: 18px;
-  border-radius: 5px;
+  color: #ff4040;
   padding: 0.5em 0.8em 0.5em 2.5em;
   border: none;
-}
-.venus-mars {
-  background: transparent;
-  width: min(400px, 100%);
-  font-weight: 500;
-  color: #3ba3eb;
+  outline: none;
   font-size: 18px;
-  margin-bottom: 20px;
-  margin-inline: auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  border-bottom: 2px solid gray;
 }
 
-input.mars,
-input.venus {
-  margin-right: 5px;
-  margin-left: 26px;
-}
-.fa-venus-mars:before {
-  content: "\f228";
-  margin-right: 5px;
-  margin-left: 5px;
-}
 .form-box .input-field input::placeholder {
   font-weight: 500;
-  color: #3ba3eb;
+  color: #ff4040;
 }
 
 .form-box .input-field i {
   position: absolute;
   top: 13px;
-  color: #3ba3eb;
+  color: #ff4040;
   left: 1rem;
   font-size: 20px;
 }
@@ -136,7 +114,7 @@ input.venus {
   position: absolute;
   opacity: 0;
   left: -100%;
-  top: 23%;
+  top: 35%;
   transform: translateY(-50%);
   width: 100%;
   height: 100%;
@@ -161,11 +139,11 @@ p.toggler {
   margin-top: 30px;
   text-align: center;
   color: #3ba3eb;
-  font-weight: 500;
+  font-weight: 550;
 }
 
 p.toggler span {
-  color: #3ac2a6;
+  color: #ff4040;
   text-transform: uppercase;
   letter-spacing: 0.5px;
   font-weight: 500;
@@ -174,7 +152,7 @@ p.toggler span {
 }
 
 p.toggler span:hover {
-  color: #69b2a3;
+  color: #ff4040;
   cursor: pointer;
 }
 
@@ -183,15 +161,12 @@ p.toggler span:hover {
   text-align: center;
 }
 .submit-btn button {
+  border: none;
   padding: 10px 25px;
   border-radius: 5px;
   color: white;
   transition: all 0.4s;
-  background: linear-gradient(
-    231deg,
-    rgba(59, 163, 235, 1) 0%,
-    rgba(58, 190, 174, 1) 100%
-  );
+  background: linear-gradient( 91deg, rgb(1 30 50) 0%, rgb(255 0 0) 100% );
   outline: none !important;
   font-weight: 600;
   font-family: "Noto Serif", sans-serif;

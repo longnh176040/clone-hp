@@ -17,19 +17,37 @@ header.sticky {
 .header-content {
   display: flex;
   justify-content: space-between;
+  padding-right: 10px;
 }
 
 /* style logo */
-.logo img {
-  width: 45px;
-  height: 45px;
+.logo{
+  align-self: center;
+}
+
+.logo a {
+  font-size: 24px;
+  text-decoration: none;
+  display: block;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.logo a span {
+  color:#ff4040;
   cursor: pointer;
+  pointer-events: all;
+}
+
+.logo a span i{
+  color: #ff4040;
 }
 
 /* style navigation */
 ul.navigation {
   align-self: center;
 }
+
 ul.navigation li,
 #email {
   font-weight: 550;
@@ -59,27 +77,33 @@ ul.navigation li:not(:last-child)::before {
   background: white;
   transition: all 0.4s ease-in-out;
 }
+
 ul.navigation li:not(:last-child):hover::before {
   width: 50px;
   transform-origin: right;
 }
+
 li#special,
 li#logout {
   padding: 10px 15px;
   margin-left: 15px;
   border-radius: 5px;
-  background-color: #0096d6;
+  background-color: #ff4040;
 }
+
 li#logout {
   margin-right: 79px;
 }
+
 li#logout,
 li#special:hover {
   color: white;
 }
+
 li#special.sticky {
   background-color: #cbe3f1 !important;
 }
+
 li#logout.sticky {
   background-color: #cbe3f1 !important;
   margin-right: 79px;
@@ -88,10 +112,12 @@ li#logout.sticky {
 li.router-link-active:not(:last-child)::before {
   width: 50px !important;
 }
+
 header.sticky li.router-link-active:not(:last-child)::before {
   color: black;
-  background: #0290cd;
+  background: #ff4040;
 }
+
 /* style search icon, cart-icon */
 .search-icon {
   align-self: center;
@@ -126,14 +152,15 @@ header.sticky li.router-link-active:not(:last-child)::before {
 
 #hamburger-menu {
   font-size: 2rem;
-  color: #2e7ad5;
+  color: #ff4040;
   padding-left: 1rem;
   height: 40px;
+  cursor: pointer;
 }
 
 li.sticky,
 li#email.sticky {
-  color: #0290cd !important;
+  color: #ff4040 !important;
 }
 
 /* style mobile menu */
@@ -173,7 +200,7 @@ li#email.sticky {
 }
 
 .mobile-menu ul.main-navigation li.router-link-active {
-  color: #2e7ad5;
+  color: #ff4040;
 }
 
 .mobile-menu ul.main-navigation li i {
@@ -183,7 +210,7 @@ li#email.sticky {
 
 .mobile-menu ul.main-navigation li button.auth-btn {
   color: white;
-  background-color: #0096d6;
+  background-color: #ff4040;
   border-radius: 5px;
   font-weight: 500;
   padding: 0.5rem 1rem;

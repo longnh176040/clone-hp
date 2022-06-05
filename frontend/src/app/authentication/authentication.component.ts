@@ -1,7 +1,6 @@
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ShowOnDirtyErrorStateMatcher } from '@angular/material/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../shared/services/auth.service';
 
@@ -40,7 +39,6 @@ export class AuthenticationComponent implements OnInit {
         Validators.minLength(8),
       ]),
       phone: new FormControl('',[Validators.required]),
-      gender: new FormControl('')
     });
   }
 
@@ -50,7 +48,6 @@ export class AuthenticationComponent implements OnInit {
 
   onLogin(): void {
     this.authService.doEmailLogin(this.loginForm.value).then(res => {
-      // this.router.navigate(['/']);
       this.location.back();
     }).catch(err => {
       alert(err.message);
@@ -79,12 +76,6 @@ export class AuthenticationComponent implements OnInit {
     }
 
     
-  }
-
-  
-
-  goToPreviousPage(): void {
-    this.location.back();
   }
 
   toggleForm(): void {

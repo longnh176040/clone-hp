@@ -1,0 +1,95 @@
+<div class="contact-main-layout">
+  <img
+    src="../../../assets/images/events-details.png"
+    alt=""
+    class="img-slider"
+  />
+  <div class="body-layout">
+    <div class="locate">
+      <div class="locate-title">
+        <div class="date">
+          <span>Hôm nay, 31/03/2022 </span>
+        </div>
+        <div class="clock">
+          <span class="material-icons">
+            schedule
+            </span><span>22:34 </span>
+        </div>
+        <div class="location">
+          <span class="material-icons">
+            location_on
+            </span><span>Vị trí hiện tại </span>
+        </div>
+      </div>
+      <div class="map">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3724.640819290305!2d105.84094731533185!3d21.007030293894687!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135ac76ccab6dd7%3A0x55e92a5b07a97d03!2zVHLGsOG7nW5nIMSQ4bqhaSBo4buNYyBCw6FjaCBraG9hIEjDoCBO4buZaQ!5e0!3m2!1svi!2s!4v1653805646995!5m2!1svi!2s"
+          width="600"
+          height="450"
+          style="border: 0"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+        ></iframe>
+      </div>
+    </div>
+    <div class="info">
+      <div class="info-title">
+        <div>Thông tin</div>
+      </div>
+      <div class="info-main">
+        <p>Địa chỉ: Hai Bà Trưng - Hà Nội</p>
+        <p>Điện thoại: +84 977567846</p>
+        <p>Email: longluucong1308@gmail.com</p>
+        <p>Fax: (+20) 01234567</p>
+      </div>
+      <div class="contact-title">
+        <div>Nhận thông tin</div>
+      </div>
+      <div class="contact-main">
+        <form nz-form [formGroup]="ContactForm" (ngSubmit)="submitForm()">
+          <div nz-row [nzGutter]="8">
+            <div nz-col nzSpan="24">
+              <nz-form-item>
+                <nz-form-control nzErrorTip="Please input your username!">
+                  <nz-input-group>
+                    <input
+                      formControlName="username"
+                      nz-input
+                      placeholder="Họ và tên"
+                    />
+                  </nz-input-group>
+                </nz-form-control>
+              </nz-form-item>
+              <nz-form-item>
+                <nz-form-control nzErrorTip="The input is not valid E-mail!">
+                  <nz-input-group>
+                    <input
+                      nz-input
+                      formControlName="email"
+                      id="email"
+                      placeholder="Email"
+                    />
+                  </nz-input-group>
+                </nz-form-control>
+              </nz-form-item>
+              <nz-form-item>
+                <nz-form-control nzErrorTip="Please input your content!">
+                  <nz-input-group>
+                    <textarea nz-input formControlName="content" id="content" placeholder="Nội dung" [nzAutosize]="{ minRows: 5, maxRows: 7 }">
+                    </textarea>
+                  </nz-input-group>
+                </nz-form-control>
+              </nz-form-item>
+              <nz-form-item>
+                <nz-form-control>
+                  <button nz-button nzType="primary">Gửi</button>
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
