@@ -1,105 +1,101 @@
-footer {
-  background-image: url("../../../assets/banners/pngtree-blue-tech-business-atmosphere-background-image_209739.jpg");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-color: #efefef;
-  position: relative;
-  overflow: hidden;
+body {
+  font-family: 'Muli', sans-serif;
+  height: 100% !important;
+  background-color: #fff !important;
+  padding-bottom: 0 !important;
+  margin-bottom: 0 !important;
+  color: #000 !
+}
+
+.row-1 p {
+  font-size: calc(12px + (14 - 12) * ((100vw - 360px) / (1600 - 360))) !important;
   text-align: center;
+  color: #2CB8FE
 }
 
-.footer-top {
-  padding: 44px 0;
+h5 {
+  font-size: calc(16px + (22 - 16) * ((100vw - 360px) / (1600 - 360))) !important
 }
-.footer-top .logo {
-  max-width: 100px;
-  margin: 0 auto 30px;
+
+.list-menu li {
+  cursor: pointer
 }
-.footer-top .logo img {
-  display: block;
-  margin: 0 auto;
-  background-color: white;
-  border-radius: 30px;
+
+li {
+  margin-top: 8px;
+  margin-bottom: 8px;
+  color: #ff4040;
+  font-weight: 550;
 }
-.footer-top .social-icons {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-.footer-top .social-icons span {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-right: 10px;
-  font-size: 22px;
+
+.carousel-indicators li {
   cursor: pointer;
-}
-.footer-top .social-icons span.facebook {
-  color: white;
-  background: #3b5998;
-}
-.footer-top .social-icons span.whatsapp {
-  color: white;
-  background-color: #0dc143;
-}
-.footer-top .social-icons span.whatsapp i {
-  margin-left: 2px;
-  margin-bottom: 3px;
-  font-size: 30px;
-}
-.footer-top .social-icons span.gmail {
-  color: white;
-  background-color: #d7410b;
-}
-p.contact-us {
-  font-weight: 500;
-  color: #f6f6fa;
-  font-size: 2rem;
-  margin-bottom: 10px;
+  border-radius: 50% !important;
+  width: 10px;
+  height: 10px;
+  opacity: 0.5;
+  margin: -30px 15px 0px 15px !important;
+  color: #333;
+  background-color: #333 !important;
+  top: 50px !important;
+  position: relative
 }
 
-.footer-bottom {
-  padding-bottom: 30px;
-  overflow: hidden;
-}
-.footer-bottom ul.footer-link {
-  display: flex;
-  justify-content: center;
-  font-size: 18px;
-  opacity: 0.8;
-}
-.footer-bottom ul.footer-link li {
-  padding: 5px 30px;
-  position: relative;
-  cursor: pointer;
-  color: white;
-  transition: all 0.2s ease-in-out;
-}
-.footer-bottom ul.footer-link li:hover {
-  color: #1a12b1;
-}
-.footer-bottom ul.footer-link li::after {
-  position: absolute;
-  content: "";
-  width: 2px;
-  height: 25px;
-  right: 0;
-  background-color: #efefef;
-}
-.footer-bottom ul.footer-link li:last-child::after {
-  display: none;
+.carousel-inner {
+  border-radius: 15px !important
 }
 
-.copyright {
-  border-top: 1px solid #efefef4d;
-  padding: 18px 0 50px 0;
+.card {
+  color: #383431 !important;
+  background-color: #FFFFFF !important
 }
-.copyright p {
-  color: #efefef;
-  font-size: 18px;
-  margin-bottom: 0;
+
+.bonify {
+  font-weight: 600;
+  letter-spacing: 2px !important;
+  cursor: pointer
+}
+
+.list-menu li:hover{
+  transition: all 0.4s ease;
+  padding-left: 10px;
+}
+
+.bottom-row {
+  color: #aaaaaa
+}
+
+i {
+  font-size: 25px !important;
+  margin-left: calc(15px + (24 - 20) * ((100vw - 360px) / (1600 - 360))) !important;
+  cursor: pointer
+}
+
+.fa-firefox {
+  font-size: 19px !important;
+  color: #000 !important;
+  margin: 0 !important;
+  cursor: pointer
+}
+
+.description-img {
+  color: #2CB8FE;
+}
+
+.logo {
+  height: calc(70px + (100 - 70) * ((100vw - 360px) / (1600 - 360))) !important;
+  width: calc(90px + (134 - 90) * ((100vw - 360px) / (1600 - 360))) !important
+}
+
+.mobile-img {
+  width: calc(200px + (234 - 200) * ((100vw - 360px) / (1600 - 360))) !important;
+  height: calc(200px + (234 - 200) * ((100vw - 360px) / (1600 - 360))) !important
+}
+
+li {
+  font-size: calc(15px + (18 - 15) * ((100vw - 360px) / (1600 - 360))) !important
+}
+
+.row-1 {
+  margin-bottom: calc(100px + (150 - 100) * ((100vw - 360px) / (1600 - 360))) !important
 }

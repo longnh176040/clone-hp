@@ -75,11 +75,11 @@ export class ChatComponent implements OnInit, AfterViewChecked {
   getUserMessage(room_id: string, userSocketId: string, user_uid: string) {
     this.selectedUserId = user_uid;
     if (this.room_id) {
-      document.getElementById(this.room_id).classList.remove("bg-primary");
+      document.getElementById(this.room_id).classList.remove("active");
     }
     this.room_id = room_id;
     this.userSocketId = userSocketId;
-    document.getElementById(this.room_id).classList.add("bg-primary");
+    document.getElementById(this.room_id).classList.add("active");
     this._chatService.getUserMessages(room_id).subscribe((messages) => {
       this.messages = messages;
     });

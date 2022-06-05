@@ -1,0 +1,132 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.layout .img-slider {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+
+.header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.header h3 {
+    text-transform: uppercase;
+    font-weight: 600;
+    color: #333333;
+    line-height: 1.5;
+    letter-spacing: 1.1px;
+    font-family: 'Roboto', sans-serif;
+    margin-top: 30px;
+}
+
+.header p {
+    font-weight: 300;
+    letter-spacing: 0.8px;
+    line-height: 28px;
+    font-size: 16px;
+    color: #999999;
+    font-family: 'Roboto', sans-serif;
+}
+
+li {
+    list-style: none;
+}
+
+.career-row {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.career-row>li {
+    flex: 45%;
+    margin-bottom: 10px;
+    padding-left: 10px;
+    display: flex;
+}
+
+.career-table {
+    flex: 1;
+    border: 1px solid #ececec;
+    display: flex;
+}
+
+.career-table a img {
+    padding: 20px;
+}
+
+.career-table a {
+    flex-shrink: 0;
+}
+
+.career-text {
+    flex: 1;
+    padding: 15px 20px;
+    border-left: 1px solid #ececec;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.career-text h4 {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.career-text .career-option {
+    padding-top: 10px;
+    border-top: 1px solid #ececec;
+}
+
+.career-option ul {
+    display: flex;
+    justify-content: space-between;
+}
+
+.career-option ul li {
+    font-size: 14px;
+}
+
+.career-option ul li i {
+    color: #b1b7c1;
+    margin-right: 5px;
+}
+
+.career-option ul li span {
+    color: #b1b7c1;
+    font-size: 12px;
+}
+
+.career-option ul li a {
+    text-decoration: none;
+    background-color: red;
+    padding: 0.4rem;
+    border-radius: 5px;
+}
+
+.career-option ul li a span {
+    color: #fff;
+    font-size: 16px;
+    font-weight: 550;
+}
+
+@media only screen and (max-width: 999px) {
+    .career-row>li {
+        flex: 100%;
+        margin-bottom: 10px;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+}
+
+@media only screen and (max-width:768px) {
+    .header p {
+        font-size: 14px;
+    }
+}
