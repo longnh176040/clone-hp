@@ -5,7 +5,7 @@ import { AngularFireAuth } from "@angular/fire/auth";
 import { AngularFirestore } from "@angular/fire/firestore";
 import { Router } from "@angular/router";
 import firebase from "firebase/app";
-import { BehaviorSubject, Subject, throwError as observableThrowError } from "rxjs";
+import { BehaviorSubject, throwError as observableThrowError } from "rxjs";
 import { User } from "src/app/shared/models/user.model";
 import { Hash } from "../models/hashPass";
 
@@ -58,7 +58,6 @@ export class AuthService {
               value.name,
               value.email,
               value.phone,
-              value.gender,
               pass.md5(value.password)
             );
             this.resolveUser();
@@ -120,14 +119,13 @@ export class AuthService {
       .then((res) => this.resolveUser());
   }
 
-  addUser(uid, name, email, phone, gender, password) {
+  addUser(uid, name, email, phone, password) {
     return this.db.collection("users").doc(uid).set({
       user_id: uid,
       name: name,
       role: "user",
       email: email,
       phone: phone,
-      gender: gender,
       school: "",
       is_student: "",
       password: password,

@@ -2,6 +2,7 @@ import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 import { AuthService } from '../shared/services/auth.service';
 
 @Component({
@@ -71,7 +72,11 @@ export class AuthenticationComponent implements OnInit {
         this.router.navigate(['/']);
       })
       .catch(err => {
-        alert(err.message)
+        Swal.fire({
+          icon: 'error',
+          title: 'Không hợp lệ',
+          text: 'Vui lòng kiểm tra lại thông tin!',
+        });
       })
     }
 
