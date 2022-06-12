@@ -1,8 +1,8 @@
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ShowOnDirtyErrorStateMatcher } from '@angular/material/core';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 import { AuthService } from '../shared/services/auth.service';
 
 @Component({
@@ -16,7 +16,7 @@ export class AuthenticationComponent implements OnInit {
 
   constructor(
     private location: Location,
-    private authService: AuthService,
+    public authService: AuthService,
     private router: Router,
   ) { }
 
@@ -40,7 +40,6 @@ export class AuthenticationComponent implements OnInit {
         Validators.minLength(8),
       ]),
       phone: new FormControl('',[Validators.required]),
-      gender: new FormControl('')
     });
   }
 
@@ -50,10 +49,17 @@ export class AuthenticationComponent implements OnInit {
 
   onLogin(): void {
     this.authService.doEmailLogin(this.loginForm.value).then(res => {
-      // this.router.navigate(['/']);
+      Swal.fire({
+        icon: 'success',
+        title: 'Đăng nhập thành công',
+      });
       this.location.back();
     }).catch(err => {
-      alert(err.message);
+      Swal.fire({
+        icon: 'error',
+          title: 'Không hợp lệ',
+          text: 'Vui lòng kiểm tra lại thông tin',
+      });
     })
   }
 
@@ -70,21 +76,22 @@ export class AuthenticationComponent implements OnInit {
     else {
       this.authService.register(this.signupForm.value)
       .then(res => {
-        alert('Đăng kí thành công. Hãy kiểm tra email và xác nhận để có thể mua hàng trực tuyến');
+        Swal.fire({
+          icon: 'success',
+          title: 'Đăng ký thành công',
+        });
         this.router.navigate(['/']);
       })
       .catch(err => {
-        alert(err.message)
+        Swal.fire({
+          icon: 'error',
+          title: 'Không hợp lệ',
+          text: 'Vui lòng kiểm tra lại thông tin',
+        });
       })
     }
 
     
-  }
-
-  
-
-  goToPreviousPage(): void {
-    this.location.back();
   }
 
   toggleForm(): void {

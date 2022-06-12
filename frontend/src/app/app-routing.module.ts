@@ -3,6 +3,7 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { AuthenticationComponent } from './authentication/authentication.component';
 import { CheckCoverageComponent } from './check-coverage/check-coverage.component';
 import { CheckoutComponent } from './checkout/checkout.component';
+import { ContactComponent } from './contact/contact.component';
 import { HomeComponent } from './home/home.component';
 import { LayoutComponent } from './layout/layout.component';
 import { MessengerComponent } from './messenger/messenger.component';
@@ -14,6 +15,7 @@ import { ProductDetailComponent } from './products/product-detail/product-detail
 import { ProductListComponent } from './products/product-list/product-list.component';
 import { ProductsComponent } from './products/products.component';
 import { UserResolver } from './shared/guards/user.resolver';
+import { RecruitmentComponent } from './recruitment/recruitment.component';
 
 
 const routes: Routes = [
@@ -44,6 +46,8 @@ const routes: Routes = [
         ]
       },
       { path: 'check-coverage', component: CheckCoverageComponent },
+      { path: 'contact', component: ContactComponent },
+      { path: 'recruitment', component: RecruitmentComponent },
       { path: '', redirectTo: 'home', pathMatch: 'full' }
     ]
   },
@@ -61,7 +65,6 @@ const routes: Routes = [
     RouterModule.forRoot(routes, {
       scrollPositionRestoration: 'enabled',
       preloadingStrategy: PreloadAllModules,
-      // enableTracing: true,
       initialNavigation: 'enabled',
       relativeLinkResolution: 'legacy'
     })

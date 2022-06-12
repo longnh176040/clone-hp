@@ -1,12 +1,13 @@
-import { isPlatformBrowser } from "@angular/common";
+import { isPlatformBrowser, Location } from "@angular/common";
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { Inject, Injectable, PLATFORM_ID } from "@angular/core";
 import { AngularFireAuth } from "@angular/fire/auth";
 import { AngularFirestore } from "@angular/fire/firestore";
 import { Router } from "@angular/router";
 import firebase from "firebase/app";
-import { BehaviorSubject, Subject, throwError as observableThrowError } from "rxjs";
+import { BehaviorSubject, throwError as observableThrowError } from "rxjs";
 import { User } from "src/app/shared/models/user.model";
+import Swal from "sweetalert2";
 import { Hash } from "../models/hashPass";
 
 @Injectable({
@@ -27,7 +28,8 @@ export class AuthService {
     private http: HttpClient,
     private router: Router,
     private afAuth: AngularFireAuth,
-    private db: AngularFirestore
+    private db: AngularFirestore,
+    private location: Location
   ) {}
 
   private static _handleError(err: HttpErrorResponse | any) {
@@ -44,6 +46,35 @@ export class AuthService {
     return AuthService.authenticated;
   }
 
+  GoogleAuth() {
+    const googleProvider = new firebase.auth.GoogleAuthProvider();
+    return new Promise<any>((resolve, reject) => {
+      this.afAuth
+        .signInWithPopup(googleProvider)
+        .then((result) => {
+          let pass = new Hash();
+          result.user.sendEmailVerification();
+          this.addUser(
+            result.user?.uid,
+            result.user?.displayName,
+            result.user?.email,
+            result.user?.phoneNumber,
+            pass.md5("12345678")
+          );
+          this.resolveUser();
+          resolve(firebase.auth().currentUser);
+          Swal.fire({
+            icon: "success",
+            title: "Đăng nhập thành công",
+          });
+          this.location.back();
+        })
+        .catch((error) => {
+          reject(error);
+        });
+    });
+  }
+
   register(value) {
     return new Promise<any>((resolve, reject) => {
       firebase
@@ -58,7 +89,6 @@ export class AuthService {
               value.name,
               value.email,
               value.phone,
-              value.gender,
               pass.md5(value.password)
             );
             this.resolveUser();
@@ -88,7 +118,7 @@ export class AuthService {
           this.resolveUser().then(() => resolve(AuthService.user));
         });
       } else {
-        this.userListener.next(null)
+        this.userListener.next(null);
         reject();
       }
     });
@@ -120,14 +150,14 @@ export class AuthService {
       .then((res) => this.resolveUser());
   }
 
-  addUser(uid, name, email, phone, gender, password) {
+  addUser(uid, name, email, phone, password) {
+    console.log(password);
     return this.db.collection("users").doc(uid).set({
       user_id: uid,
       name: name,
       role: "user",
       email: email,
       phone: phone,
-      gender: gender,
       school: "",
       is_student: "",
       password: password,

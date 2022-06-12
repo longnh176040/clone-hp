@@ -1,0 +1,198 @@
+<div class="main-layout">
+  <div class="header-main">
+    <div class="header-admin"></div>
+    <div class="product-table">
+      <div class="sort-search">
+        <h2>
+          <b>Specfication List</b>
+        </h2>
+        <div class="box">
+          <div class="container-1">
+            <span class="icon">
+              <i class="fa fa-search"></i>
+            </span>
+            <input
+              type="search"
+              id="search"
+              placeholder="Search by name..."
+              [formControl]="search_by_name"
+            />
+          </div>
+        </div>
+        <div class="position-relative">
+          <button
+            type="button"
+            class="btn btn-primary"
+            aria-haspopup="true"
+            aria-expanded="false"
+            (click)="open_create_product('Specfic')"
+          >
+            <span>Create new specfication</span>
+          </button>
+        </div>
+      </div>
+      <table class="table">
+        <thead class="thead-light">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Code</th>
+            <th scope="col">
+              Name
+              <i
+                class="bi bi-caret-down"
+                (click)="sortByName()"
+                style="cursor: pointer"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  fill="currentColor"
+                  class="bi bi-caret-down"
+                  viewBox="0 0 16 16"
+                >
+                  <path
+                    d="M3.204 5h9.592L8 10.481 3.204 5zm-.753.659l4.796 5.48a1 1 0 0 0 1.506 0l4.796-5.48c.566-.647.106-1.659-.753-1.659H3.204a1 1 0 0 0-.753 1.659z"
+                  />
+                </svg>
+              </i>
+
+              <i
+                class="bi bi-caret-up"
+                (click)="deSortByName()"
+                style="cursor: pointer"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  fill="currentColor"
+                  class="bi bi-caret-up"
+                  viewBox="0 0 16 16"
+                >
+                  <path
+                    d="M3.204 11h9.592L8 5.519 3.204 11zm-.753-.659l4.796-5.48a1 1 0 0 1 1.506 0l4.796 5.48c.566.647.106 1.659-.753 1.659H3.204a1 1 0 0 1-.753-1.659z"
+                  />
+                </svg>
+              </i>
+            </th>
+            
+            <th scope="col">Edit/Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let spec of specfics; let i = index">
+            <th scope="row">{{ i + 1 }}</th>
+            <td>
+                <div class="status">
+                  {{ spec.code }}
+                </div>
+              </td>
+            <td>
+              <p class="laptop_name">
+                {{ spec.name }}
+              </p>
+            </td>
+            <td>
+              <div class="pencil" (click)="open_edit_product(spec, 'Specfic')">
+                <i class="bi bi-pencil">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    fill="currentColor"
+                    class="bi bi-pencil"
+                    viewbox="0 0 16 16"
+                  >
+                    <path
+                      d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5L13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175l-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z"
+                    />
+                  </svg>
+                </i>
+              </div>
+              <div class="trash">
+                <i (click)="delete(spec.code)" class="bi bi-trash">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    fill="currentColor"
+                    class="bi bi-trash"
+                    viewbox="0 0 16 16"
+                  >
+                    <path
+                      d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"
+                    />
+                    <path
+                      fill-rule="evenodd"
+                      d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"
+                    />
+                  </svg>
+                </i>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- Drawer -->
+<div
+  *ngIf="visible"
+  class="canvas-sidenav"
+  #canvas
+  (click)="close_create_product()"
+></div>
+<div id="mySidenav" class="sidenav" #mySidenav>
+  <div class="form-header">
+    <h3>{{ drawer_state }} {{ create_type }}</h3>
+    <a class="closebtn" (click)="close_create_product()">&times;</a>
+  </div>
+  <div class="form-body">
+    <form
+      [formGroup]="formCreateProduct"
+      (ngSubmit)="onSubmit()"
+      enctype="multipart/form-data"
+    >
+      <div class="form-group">
+        <label for="name">
+          <b>Name * </b>
+        </label>
+        <input
+          class="form-control"
+          type="text"
+          id="name"
+          placeholder=""
+          required
+          formControlName="name"
+        />
+        <small
+          class="text-danger"
+          role="alert"
+          *ngIf="
+            formCreateProduct.controls.name?.errors?.required &&
+            formCreateProduct.controls.name?.touched
+          "
+          >Name is required!</small
+        >
+      </div>
+
+      <div class="form-group">
+        <label for="value">
+          <b>Value </b>
+        </label>
+        <input
+          class="form-control"
+          type="text"
+          id="value"
+          placeholder=""
+          required
+          formControlName="value"
+        />
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+</div>

@@ -10,6 +10,7 @@ import { OrderComponent } from './order/order.component';
 import { CoverageComponent } from './coverage/coverage.component';
 import { OverviewComponent } from './overview/overview.component';
 import { BlogComponent } from './items/blog/blog.component';
+import { SkuComponent } from './sku/sku.component';
 
 
 const routes: Routes = [
@@ -47,6 +48,10 @@ const routes: Routes = [
       {
         path: 'chatting',
         component: ChatComponent
+      },
+      {
+        path: 'specifications',
+        component: SkuComponent
       },
       {
         path: '',

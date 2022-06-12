@@ -19,9 +19,6 @@
             />
           </div>
         </div>
-        <!-- <datalist id="encodings">
-                    <option value="ISO-8859-1">ISO-8859-1</option>
-                </datalist> -->
         <div class="position-relative">
           <button
             type="button"
@@ -37,9 +34,9 @@
             <button
               class="btn dropdown-item"
               type="button"
-              (click)="open_create_product('Laptop')"
+              (click)="open_create_product('Product')"
             >
-              <span>Laptop</span>
+              <span>Phone</span>
             </button>
           </div>
         </div>
@@ -178,7 +175,6 @@
         <tbody>
           <tr *ngFor="let laptop of laptops; let i = index">
             <th scope="row">{{ i + 1 }}</th>
-            <!-- <td>{{laptop.laptop_id}}</td> -->
             <td>{{ laptop.brand }}</td>
             <td>
               <p
@@ -241,7 +237,7 @@
               </div>
             </td>
             <td>
-              <div class="pencil" (click)="open_edit_product(laptop, 'Laptop')">
+              <div class="pencil" (click)="open_edit_product(laptop, 'Product')">
                 <i class="bi bi-pencil">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"

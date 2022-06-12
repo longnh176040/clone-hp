@@ -9,7 +9,7 @@
 
       <div class="messages-box">
         <div
-          class="list-group rounded-0 border-bottom my-3"
+          class="list-group rounded-0 border-bottom my-3 chat"
           *ngFor="let user of users; let i = index"
           id="{{ user.room_id }}"
           (click)="getUserMessage(user.room_id, user.socketId, user.uid)"

@@ -37,11 +37,11 @@
 .call-to-action button {
   font-family: "Noto Serif", sans-serif;
   padding: 10px 25px;
-  background-color: #3ba3eb;
+  background-color: #ff4040;
   color: white;
 }
 .call-to-action button:hover {
-  background-color: #276292;
+  background-color: #ff4040;
 }
 
 /* style check form */
@@ -79,7 +79,7 @@
 }
 .check-form .heading .heading-content p {
   margin-bottom: 0px;
-  color: #276292;
+  color: #0c5794;
 }
 
 /* style form */
@@ -99,7 +99,7 @@
 }
 .check-form form button {
   margin-left: 5px;
-  background-color: #3ba3eb;
+  background-color: #ff4040;
   color: white;
   border-radius: 5px !important;
   padding: 0.5rem;
@@ -108,7 +108,7 @@
   flex-grow: 1;
 }
 .check-form form button:hover {
-  background-color: #276292;
+  background-color: #ff4040;
 }
 
 @media (max-width: 576px) {
@@ -126,10 +126,10 @@
 }
 
 .modal-header {
-  background: #3ba3eb;
+  background: #ff4040;
   color: #fff;}
 .btn.btn-secondary{
-  background: #3ba3eb;
+  background: #ff4040;
   margin-right: 6px;
   border: none;
 }

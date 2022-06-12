@@ -95,11 +95,11 @@ button.explore {
   align-items: center;
   color: white;
   text-transform: uppercase;
-  background-color: #0096d6;
+  background-color: #ff4040;
   transition: all 0.2s ease-in-out;
 }
 button.explore:hover {
-  background: #3ba3eb;
+  background: #ff4040;
 }
 button.trailer {
   width: 50px;
@@ -117,13 +117,13 @@ button.trailer i {
   color: white;
   margin-left: 3px;
   margin-top: 3px;
-  transition: all 0.4s ease-in-out;
+  transition: all 0.2s ease-in-out;
 }
 button.trailer:hover {
-  border-color: #0096d6;
+  border-color: #ff4040;
 }
 button.trailer:hover i {
-  color: #0096d6;
+  color: #ff4040;
 }
 
 .best-seller,

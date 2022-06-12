@@ -32,7 +32,7 @@ export class HeaderComponent implements OnInit {
           for (let i = 0; i < liElement.length; i++) {
             liElement[i].classList.add("sticky");
           }
-        } else {
+        } else if(window.scrollY < 100) {
           headerElement.classList.remove("sticky");
           for (let i = 0; i < liElement.length; i++) {
             liElement[i].classList.remove("sticky");
