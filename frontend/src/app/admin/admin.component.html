@@ -1,10 +1,36 @@
-<app-admin-header (toggleSideBarForMe)="sideBarToggler($event)"></app-admin-header>
-
-<mat-drawer-container class="example-container" autosize>
-  <mat-drawer mode="side" [opened]="sideBarOpen">
-      <app-sidenav></app-sidenav>
-  </mat-drawer>
-  <mat-drawer-content>
-      <router-outlet></router-outlet>
-  </mat-drawer-content>
-</mat-drawer-container>
+<input type="checkbox" id="nav-toggle">
+<div class="sidebar">
+    <div class="sidebar-brand">
+        <h2 class="logo"><a routerLink="/"><span>Mobile<i class="fas fa-bolt"></i></span></a></h2>
+    </div>
+    <div class="sidebar-menu">
+        <ul>
+            <li routerLinkActive="active" routerLink='overview'><a><span>Tổng quan</span></a>
+            </li>
+            <li routerLinkActive="active" routerLink='./specifications'><a><span>Thuộc tính sản phẩm</span></a>
+            </li>
+            <li routerLinkActive="active" routerLink='./items'><a><span>Quản lý sản phẩm</span></a>
+            </li>
+            <li routerLinkActive="active" routerLink='./orders'><a><span>Quản lý đơn hàng</span></a>
+            </li>
+            <li routerLinkActive="active" routerLink='./chatting'><a><span>Chat</span></a>
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="main-content">
+    <header>
+        <div class="header-title">
+            <h2>
+                <label for="nav-toggle">
+                <span class="fas fa-bars"></span>
+                </label>Dashboard
+            </h2>
+        </div>
+    </header>
+    <main>
+        <div class="main">
+            <router-outlet></router-outlet>
+        </div>
+    </main>
+</div>
