@@ -1,5 +1,5 @@
 const Filter = require("../models/filter");
-const Laptop = require("../models/laptops");
+const Laptop = require("../models/product");
 const s3Delete = require("../utils/delete-aws-s3");
 const Blog = require("../models/blog");
 
@@ -11,6 +11,7 @@ exports.getLaptops = async (req, res, next) => {
     return res.status(500).json({ msg: err.message });
   }
 };
+
 exports.getLaptopsByIds = async (req, res, next) => {
   try {
     laptops = await Laptop.find({ laptop_id: { $in: req.body.id } });

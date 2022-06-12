@@ -1,5 +1,5 @@
 const Comment = require("../models/comment");
-const Laptop =require("../models/laptops");
+const Laptop =require("../models/product");
 
 exports.addComment = async (req, res) => {
   const comment = new Comment({
