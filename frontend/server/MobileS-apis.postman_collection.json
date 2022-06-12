@@ -1,0 +1,143 @@
+{
+	"info": {
+		"_postman_id": "3f4088c9-b2d9-4924-a0c6-45a8f04dbe63",
+		"name": "MobileS-apis",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Specification - sku",
+			"item": [
+				{
+					"name": "get danh sách",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{mobileSDomain}}/api/sku",
+							"host": [
+								"{{mobileSDomain}}"
+							],
+							"path": [
+								"api",
+								"sku"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "tạo",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\":\"kích thước màn hình\",\n    \"value\":\"kích thước màn hình\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{mobileSDomain}}/api/sku",
+							"host": [
+								"{{mobileSDomain}}"
+							],
+							"path": [
+								"api",
+								"sku"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "sửa thông tin",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"code\": \"771167\",\n    \"name\":\"Kích thước màn hình\",\n    \"value\":\"Kích thước màn hình\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{mobileSDomain}}/api/sku",
+							"host": [
+								"{{mobileSDomain}}"
+							],
+							"path": [
+								"api",
+								"sku"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "lấy thông tin chi tiết",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{mobileSDomain}}/api/sku/:code",
+							"host": [
+								"{{mobileSDomain}}"
+							],
+							"path": [
+								"api",
+								"sku",
+								":code"
+							],
+							"variable": [
+								{
+									"key": "code",
+									"value": "771167"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "xoá",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{mobileSDomain}}/api/sku/:code",
+							"host": [
+								"{{mobileSDomain}}"
+							],
+							"path": [
+								"api",
+								"sku",
+								":code"
+							],
+							"variable": [
+								{
+									"key": "code",
+									"value": "771167"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
