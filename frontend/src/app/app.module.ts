@@ -55,6 +55,7 @@ import { BannerComponent } from './shared/components/banner/banner.component';
 import { ProductCardComponent } from './shared/components/product-card/product-card.component';
 import { ContactComponent } from './contact/contact.component';
 import { RecruitmentComponent } from './recruitment/recruitment.component';
+import { CategoryComponent } from './shared/components/category/category.component';
 
 // Socket.io
 
@@ -84,6 +85,7 @@ import { RecruitmentComponent } from './recruitment/recruitment.component';
     ProductCardComponent,
     ContactComponent,
     RecruitmentComponent,
+    CategoryComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: "serverApp" }),

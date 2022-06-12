@@ -1,0 +1,120 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.categories {
+    width: 100%;
+}
+
+.wrapper {
+    --spacing: 25px;
+    --columns: 4;
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: calc(-1 * var(--spacing));
+    padding: 0px 20px 0;
+}
+
+.category-item {
+    position: relative;
+    width: calc(calc(100% / var(--columns)) - var(--spacing));
+    margin-left: var(--spacing);
+    margin-bottom: var(--spacing);
+    margin-top: var(--spacing);
+    overflow: hidden;
+    cursor: pointer;
+    height: 450px;
+}
+
+.category-item:nth-child(1){
+    background: url("https://cdn.mediamart.vn/images/product/apple-iphone-13-pro-128g-blue-Ek22oU.jpg") no-repeat;
+    background-size: cover;
+    transition: all 0.8s;
+}
+
+.category-item:nth-child(1):hover{
+    background: url("https://image.cellphones.com.vn/358x/media/catalog/product/i/p/iphone-13-pro-max-8_1.jpg") no-repeat;
+    background-size: cover;
+}
+
+
+.category-item:nth-child(2){
+    background: url("https://image.cellphones.com.vn/358x/media/catalog/product/s/a/samsung-galaxy-s21-ultra-1_1.jpg") no-repeat;
+    background-size: cover;
+    transition: all 0.8s;
+}
+
+.category-item:nth-child(2):hover{
+    background: url("https://image.cellphones.com.vn/358x/media/catalog/product/s/a/samsung-galaxy-s21-ultra-12.jpg") no-repeat;
+    background-size: cover;
+}
+
+.category-item:nth-child(3){
+    background: url("https://image.cellphones.com.vn/358x/media/catalog/product/x/i/xiaomi-mi-11-lite-2.jpg") no-repeat;
+    background-size: cover;
+    transition: all 0.8s;
+}
+
+.category-item:nth-child(3):hover{
+    background: url("https://image.cellphones.com.vn/358x/media/catalog/product/d/o/download_1__2.png") no-repeat;
+    background-size: cover;
+}
+
+.category-item:nth-child(4){
+    background: url("https://image.cellphones.com.vn/358x/media/catalog/product/r/e/realme-8-5g-blue-1-600x600_1.jpg") no-repeat;
+    background-size: cover;
+    transition: all 0.8s;
+}
+
+.category-item:nth-child(4):hover{
+    background: url("https://image.cellphones.com.vn/358x/media/catalog/product/r/e/realme-8-1_2.png") no-repeat;
+    background-size: cover;
+}
+
+
+img {
+    height: 100%;
+    width: 100%;
+    padding: 20px;
+    transition: all 0.6s;
+}
+
+.info-item {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0,0,0,0.2);
+}
+
+.info-item .title {
+    color: rgb(255, 255, 255);
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    text-shadow: 3px 3px rgb(61, 61, 61);
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+
+@media screen and (max-width: 1023px) {
+    .wrapper {
+        --spacing: 15px;
+        --columns: 2;
+        padding: 0 25px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .wrapper {
+        --spacing: 15px;
+        --columns: 1;
+        padding: 0 25px;
+    }
+}
