@@ -22,7 +22,7 @@ exports.createSpec = async ( req, res ) => {
         value
     });
     await spec.save();
-    return res.status(201).json({ msg: RESPONSE_MESSAGES.CREATE_SUCCESS.replace(MESSAGE_KEYS.object, MESSAGE_VALUES.sku.toLowerCase) })
+    return res.status(201).json({ msg: RESPONSE_MESSAGES.CREATE_SUCCESS.replace(MESSAGE_KEYS.object, MESSAGE_VALUES.sku.toLowerCase()) })
 }
 
 exports.editSpec = async ( req, res ) => {

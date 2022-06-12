@@ -35,4 +35,10 @@ export class SkuService {
       .post(this.SKU_URL, formdata)
       .pipe(catchError(SkuService._handleError));
   }
+
+  edit_sku_data(formdata): Observable<any> {
+    return this.http
+      .put(this.SKU_URL, formdata)
+      .pipe(catchError(SkuService._handleError));
+  }
 }

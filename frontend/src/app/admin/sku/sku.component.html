@@ -35,7 +35,7 @@
         <thead class="thead-light">
           <tr>
             <th scope="col">#</th>
-            <!-- <th scope="col">Product ID</th> -->
+            <th scope="col">Code</th>
             <th scope="col">
               Name
               <i
@@ -76,7 +76,7 @@
                 </svg>
               </i>
             </th>
-            <th scope="col">Value</th>
+            
             <th scope="col">Edit/Delete</th>
           </tr>
         </thead>
@@ -84,14 +84,14 @@
           <tr *ngFor="let spec of specfics; let i = index">
             <th scope="row">{{ i + 1 }}</th>
             <td>
+                <div class="status">
+                  {{ spec.code }}
+                </div>
+              </td>
+            <td>
               <p class="laptop_name">
                 {{ spec.name }}
               </p>
-            </td>
-            <td>
-              <div class="status">
-                {{ spec.value }}
-              </div>
             </td>
             <td>
               <div class="pencil" (click)="open_edit_product(spec, 'Specfic')">
@@ -111,7 +111,7 @@
                 </i>
               </div>
               <div class="trash">
-                <i (click)="delete(spec._id)" class="bi bi-trash">
+                <i (click)="delete(spec.code)" class="bi bi-trash">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="16"
@@ -181,7 +181,7 @@
 
       <div class="form-group">
         <label for="value">
-          <b>Value * </b>
+          <b>Value </b>
         </label>
         <input
           class="form-control"
@@ -191,15 +191,6 @@
           required
           formControlName="value"
         />
-        <small
-          class="text-danger"
-          role="alert"
-          *ngIf="
-            formCreateProduct.controls.value?.errors?.required &&
-            formCreateProduct.controls.value?.touched
-          "
-          >Value is required!</small
-        >
       </div>
       <button type="submit" class="btn btn-primary">Submit</button>
     </form>

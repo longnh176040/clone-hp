@@ -17,13 +17,13 @@ export class SkuComponent implements OnInit {
 
   showLaptop: Laptop;
   search_by_name = new FormControl("");
-  edit_product_id;
+  edit_sku_id;
   drawer_state;
   specfics: Laptop[];
   visible = false;
   formCreateProduct: FormGroup = new FormGroup({
     name: new FormControl(null, [Validators.required]),
-    value: new FormControl(null, [Validators.required]),
+    value: new FormControl(null),
   });
 
   listToDelete = [];
@@ -118,7 +118,7 @@ export class SkuComponent implements OnInit {
       name: laptop.name,
       value: laptop.value,
     });
-    this.edit_product_id = laptop.laptop_id;
+    this.edit_sku_id = laptop.code;
     this.drawer_state = "Edit";
     this.visible = true;
   }
@@ -136,9 +136,17 @@ export class SkuComponent implements OnInit {
   // submit product
   onSubmit() {
     if (this.drawer_state === "Create") {
-      this.SkuService.push_sku_data(this.formCreateProduct.value).subscribe((res) => {
-        this.visible = false;
+      this.SkuService.push_sku_data(this.formCreateProduct.value).subscribe(
+        (res) => {
+          this.visible = false;
+          this.ngOnInit();
+        }
+      );
+    } else if (this.drawer_state == "Edit") {
+      const data = {...this.formCreateProduct.value, code: this.edit_sku_id}
+      this.SkuService.edit_sku_data(data).subscribe((res) => {
         this.ngOnInit();
+        this.visible = false;
       });
     }
   }
