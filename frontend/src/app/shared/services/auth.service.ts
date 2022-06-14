@@ -5,7 +5,7 @@ import { AngularFireAuth } from "@angular/fire/auth";
 import { AngularFirestore } from "@angular/fire/firestore";
 import { Router } from "@angular/router";
 import firebase from "firebase/app";
-import { BehaviorSubject, throwError as observableThrowError } from "rxjs";
+import { BehaviorSubject, throwError as observableThrowError, Observable } from 'rxjs';
 import { User } from "src/app/shared/models/user.model";
 import Swal from "sweetalert2";
 import { Hash } from "../models/hashPass";
@@ -115,7 +115,10 @@ export class AuthService {
     return new Promise((resolve, reject) => {
       if (firebase.auth().currentUser) {
         this.afAuth.signOut().then(() => {
-          this.resolveUser().then(() => resolve(AuthService.user));
+          this.resolveUser().then(() => {
+            resolve(AuthService.user);
+            localStorage.removeItem("role")
+          });
         });
       } else {
         this.userListener.next(null);
@@ -211,6 +214,7 @@ export class AuthService {
               AuthService.verified = false;
             }
             AuthService.user = user;
+            localStorage.setItem("role", user.role)
             this.userListener.next(user);
           });
       },

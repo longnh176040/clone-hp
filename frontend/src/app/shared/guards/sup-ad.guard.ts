@@ -15,8 +15,7 @@ export class SupAdGuard implements CanActivate {
       return new Promise((resolve, reject) => {
         this.authService.resolveUser().then(
           () => {
-            // console.log(AuthService.user)
-            if (AuthService.user.role === 'admin') {
+            if (localStorage.getItem("role") === 'admin') {
               return resolve(true);
             } else {
               this.router.navigate(['/permission']);

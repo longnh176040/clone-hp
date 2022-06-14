@@ -131,20 +131,6 @@ button.trailer:hover i {
   padding-top: 70px;
 }
 
-button.load-more {
-  color: white;
-  background-color: #3ba3eb;
-  text-transform: uppercase;
-  padding: 10px 25px;
-  border: none;
-  border-radius: 5px;
-  display: block;
-  margin: 0 auto;
-  margin-top: 2rem;
-}
-button.load-more:hover {
-  background-color: #0096d6;
-}
 .buttons-wrapper button {
   width: 115px;
 }

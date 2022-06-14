@@ -3,6 +3,11 @@
   background-color: #efefef;
 }
 
+.policies h3 {
+  text-align: center;
+  padding-top: 50px;
+}
+
 .policies-wrapper {
   padding: 70px 0;
   display: grid;
@@ -47,11 +52,11 @@
 .call-to-action button {
   font-family: "Noto Serif", sans-serif;
   padding: 10px 25px;
-  background-color: #3ba3eb;
+  background-color: #ff4040;
   color: white;
 }
 .call-to-action button:hover {
-  background-color: #276292;
+  background-color: #ff4040;
 }
 
 @media (max-width: 992px) {

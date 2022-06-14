@@ -69,39 +69,6 @@
     ></span>
   </a>
 </div>
-<app-category></app-category>
-<div class="products-showcase">
-  <div class="container">
-    <div class="hot-deals">
-      <div class="heading-button">Deal sốc mỗi tuần</div>
-      <div class="products-wrapper">
-        <ng-container
-          [ngTemplateOutlet]="laptopList"
-          [ngTemplateOutletContext]="{ data: dealList }"
-        ></ng-container>
-      </div>
-    </div>
-    <div class="best-seller">
-      <div class="heading-button">Bán chạy nhất</div>
-      <div class="products-wrapper">
-        <ng-container
-          [ngTemplateOutlet]="laptopList"
-          [ngTemplateOutletContext]="{ data: bestList }"
-        ></ng-container>
-      </div>
-    </div>
-
-    <div class="featured-products">
-      <div class="heading-button">Sản phẩm nổi bật</div>
-      <div class="products-wrapper">
-        <ng-container
-          [ngTemplateOutlet]="laptopList"
-          [ngTemplateOutletContext]="{ data: promotionList }"
-        ></ng-container>
-      </div>
-    </div>
-  </div>
-</div>
 
 <ng-template
   #carouselItem
@@ -121,13 +88,5 @@
         <button class="btn trailer"><i class="fas fa-play"></i></button>
       </div>
     </div>
-  </div>
-</ng-template>
-
-<ng-template #laptopList let-data="data">
-  <div
-    *ngFor="let product of data"
-  >
-    <app-product-card [product]="product" #product></app-product-card>
   </div>
 </ng-template>

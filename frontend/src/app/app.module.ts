@@ -56,6 +56,7 @@ import { ProductCardComponent } from './shared/components/product-card/product-c
 import { ContactComponent } from './contact/contact.component';
 import { RecruitmentComponent } from './recruitment/recruitment.component';
 import { CategoryComponent } from './shared/components/category/category.component';
+import { SliderComponent } from './shared/components/slider/slider.component';
 
 // Socket.io
 
@@ -86,6 +87,7 @@ import { CategoryComponent } from './shared/components/category/category.compone
     ContactComponent,
     RecruitmentComponent,
     CategoryComponent,
+    SliderComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: "serverApp" }),
@@ -106,7 +108,6 @@ import { CategoryComponent } from './shared/components/category/category.compone
     MatTabsModule,
     NgAisModule.forRoot(),
     MatSnackBarModule,
-
   ],
   providers: [
     AuthService,

@@ -7,7 +7,6 @@ import algoliasearch from "algoliasearch/lite";
 import { environment } from "src/environments/environment";
 import { GoogleAnalyticsService } from "src/app/shared/services/google-analytics.service";
 
-
 const searchClient = algoliasearch(
   "MLKSBRTZ0H",
   "5802ef7ce07f5a39ce945e0533cbaadc"
@@ -48,6 +47,7 @@ export class ProductListComponent implements OnInit {
     //   // console.log(res);
     // });
   }
+
 
   activateFilter(id: number) {
     const filters = Array.from(document.getElementsByClassName("filter"));

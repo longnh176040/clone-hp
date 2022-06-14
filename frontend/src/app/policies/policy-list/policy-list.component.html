@@ -1,10 +1,4 @@
-<app-banner
-  [pageTitle]="'Chính sách của chúng tôi'"
-  [bannerImgUrl]="
-    '../../../../assets/banners/87813264_3052802644738096_2921796054523314176_o.jpg'
-  "
-></app-banner>
-
+<app-slider></app-slider>
 <ng-template
   #policy
   let-imgUrl="imgUrl"
@@ -30,6 +24,7 @@
 
 <section class="policies">
   <div class="container">
+    <h3>Danh mục chính sách</h3>
     <div class="policies-wrapper">
       <ng-container
         [ngTemplateOutlet]="policy"

@@ -1,41 +1,56 @@
-.warranty-list,
-.return_list,
-.delivery-list {
-  padding: 70px 0;
-}
-.list01 {
-  font-size: 20px;
-  color: #276292;
-}
-.list02 {
-  color: #2689da;
+.banner_return {
+  background-image: url("src/assets/policies page/banner-hoan-tra.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 700px;
+  background-size: cover;
+  position: relative;
 }
 
-li .list03 {
-  padding-top: 5px;
+.banner_return h1 {
+  color: #fff;
+  font-size: 50px;
+  font-weight: 600;
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
-.service-table td {
-  width: 360px;
-  border-right: 1px solid #4ea5e3;
-  border-left: 1px solid #4ea5e3;
-  padding: 15px;
-  text-align: center;
+
+.banner_warranty {
+  background-image: url("src/assets/policies page/phone-3.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 700px;
+  background-size: cover;
+  position: relative;
 }
-.row02 {
-  background-color: #cbe3f1;
-  color: #0290cd;
+
+.banner_warranty h1 {
+  color: #fff;
+  font-size: 50px;
+  font-weight: 600;
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
-.service-table tr {
-  border: 1px solid #1d5f8f;
-  text-align: center;
-  font-family: "Roboto", sans-serif;
+
+.banner_delivered {
+  background-image: url("src/assets/policies page/banner-giao-hang.jpeg");
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 700px;
+  background-size: cover;
+  position: relative;
 }
-.row01 {
-  background-color: #0096d6;
-  color: white;
-  font-size: 20px;
-  text-align: center;
-}
-.note {
-  padding-left: 30px;
+
+.banner_delivered h1 {
+  color: #fff;
+  font-size: 50px;
+  font-weight: 600;
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }

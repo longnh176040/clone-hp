@@ -237,23 +237,23 @@ span.ais-RefinementList-labelText {
 }
 
 .discount {
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  background: linear-gradient(
-    231deg,
-    rgba(59, 163, 235, 1) 0%,
-    rgba(58, 190, 174, 1) 100%
-  );
-  width: 45px;
-  height: 45px;
-  border-radius: 50%;
+  width: 39px;
+  height: 35px;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 14px;
-  color: white;
-  z-index: 2;
+  padding: 0 0 5px!important;
+  margin: 0!important;
+  background-image: url(https://cdn.cellphones.com.vn/media/icon/icons_menubar-11.svg);
+  background-size: 900px;
+  background-position: -594px -255px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #fff;
+  position: absolute;
+  top: 0;
+  left: 10px;
+  overflow: hidden;
 }
 
 .modal-backdrop {

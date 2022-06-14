@@ -1,331 +1,237 @@
-<!-- Đổi trả hàng miễn phí -->
-<div *ngIf="title == 'return'">
-  <app-banner
-    [pageTitle]="'Chính sách đổi trả hàng'"
-    [bannerImgUrl]="
-      '../../../assets/banners/84475910_2996648327020195_4959632468811448320_o.jpg'
-    "
-  ></app-banner>
-
-  <div class="container">
-    <div class="row">
-      <div class="col-12">
-        <div class="return_list">
-          <p style="color: red; font-size: 20px">
-            <em>Lưu ý: Các thiết bị bảo hành phải trong thời gian bảo hành </em>
-          </p>
-
-          <p class="list01">
-            <span>
-              <strong style="font-weight: 500"
-                >1. Quý khách được quyền đổi máy mới nếu máy của Quý khách mắc
-                lỗi kỹ thuật trong vòng 30 ngày kể từ thời điểm mua máy.
-              </strong>
-            </span>
-          </p>
-          <p style="padding-left: 20px">
-            • Lỗi kỹ thuật này được xác định do nhà sản xuất.
-          </p>
-
-          <span class="list01">
-            <strong style="font-weight: 500"
-              >2. Các sản phẩm của HP kinh doanh đều tuân thủ điều kiện bảo hành
-              của nhà cung cấp, của hãng sản xuất. Các trường hợp sau đây bị coi
-              là vi phạm điều kiện bảo hành và không được bảo hành:
-            </strong>
-          </span>
-          <br />
-          <div style="margin-left: 20px">
-            <div class="list03">
-              <ul style="margin-top: 16px">
-                <li>• Sản phẩm hết thời hạn bảo hành.</li>
-                <br />
-                <li>
-                  • Không có tem bảo hành hợp lệ của HP, nhà phân phối, hãng sản
-                  xuất hoặc bị rách, bị tẩy xóa, sửa chữa, mờ không đọc được,
-                  bong/tróc…
-                </li>
-                <br />
-                <li>
-                  • Trên sản phẩm không có số serial, mã vạch, thông số kỹ thuật
-                  hợp lệ hoặc các thông tin bị mờ không đọc được, bị cạo, bị
-                  sửa, bị rách, bị bong/tróc, bị thay đổi.
-                </li>
-                <br />
-                <li>
-                  • Sản phẩm bị lỗi do thiên tai, nguồn điện sử dụng không bình
-                  thường, sai điện áp quy định…
-                </li>
-                <br />
-                <li>
-                  • Sản phẩm bị lỗi do người sử dụng: bị biến dạng vật lý như
-                  trầy, xước, lồi, lõm, móp, méo, nứt, vỡ do bị rơi, bị va đập,
-                  do vận chuyển/lắp đặt sai quy cách, bị mốc, hoen rỉ, ẩm ướt,
-                  chất lỏng xâm nhập, ố vàng, mờ chữ, viết chữ không tẩy được,
-                  hư hỏng do chuột, bọ hoặc côn trùng xâm nhập…
-                </li>
-                <br />
-                <li>
-                  • Sản phẩm đã qua ép xung (Overclock) hoặc sử dụng sai theo
-                  thông số nhà sản xuất đưa ra.
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- Bảo hành chính hãng -->
+<!--Bảo hành -->
 <div *ngIf="title == 'warranty'">
-  <app-banner
-    [pageTitle]="'Chính sách bảo hành'"
-    [bannerImgUrl]="
-      '../../../assets/banners/27912461_1777126748972365_6631206558834973089_o.jpg'
-    "
-  ></app-banner>
-
-  <div class="container">
-    <div class="row">
-      <div class="col-12">
-        <div class="warranty-list">
-          <p>
-            <span class="list01">
-              <strong style="font-weight: 500">1. Thời gian bảo hành </strong>
-            </span>
-          </p>
-          <p>
-            <span>
-              Tất cả các dòng laptop HP đều có thời gian bảo hành chính hãng 1
-              năm tính từ ngày khách hàng cuối mua hàng. Khách hàng khi mua máy
-              yêu cầu cửa hàng cung cấp hóa đơn VAT có số Serial Number để giữ
-              làm phiếu bảo hành.
-            </span>
-          </p>
-
-          <p class="list01">
-            <strong style="font-weight: 500"
-              >2. Các trung tâm bảo hành chính hãng HP tại Việt Nam</strong
-            >
-          </p>
-          <div style="margin: 0px 0px 16px; padding-left: 30px">
-            <ul>
-              <li>• TP HCM: 162 Hai Bà Trưng, P. Đa Kao, Q1</li>
-              <li>• Hà Nội: 74 Cửa Bắc, Quận Ba Đình</li>
-              <li>• Đà Nẵng: 60 Nguyễn Du, Q. Hải Châu</li>
-              <li>• Cần Thơ: 129 Lý Tự Trọng, Q. Ninh Kiều</li>
-              <li>Hotline: 1800588868</li>
-            </ul>
-          </div>
-          <p class="list01">
-            <strong style="font-weight: 500"
-              >3. Các chương trình và chính sách bảo hành của HP</strong
-            >
-          </p>
-          <p class="list02">
-            <strong style="font-weight: 500"
-              >3.1 CALL CENTER SUPPORT 24/7 (Tổng đài hỗ trợ 24/7)</strong
-            >
-          </p>
-          <p>
-            - Call Center Support 24/7 là dịch vụ tổng đài hỗ trợ cho khách hàng
-            24h trên ngày và 7 ngày trong tuần
-          </p>
-          <p>
-            - Khi khách hàng sử dụng các sản phẩm của HP, trong quá trình sử
-            dụng bị lỗi khách hàng có thể liên hệ tổng đài 1800588868 bất cứ lúc
-            nào để được sự hỗ trợ tốt nhất từ đội ngũ kỹ sư của HP
-          </p>
-          <p class="list02">
-            <strong style="font-weight: 500"
-              >3.2 ONSITE WARRANTY SEVICES (Bảo hành tận nhà)</strong
-            >
-          </p>
-          <p>
-            - Onsite Sevices là dịch vụ bảo hành thay thế linh kiện tại nhà hoàn
-            toàn miễn phí được áp dụng cho các model sản phẩm sau: HP Pavilion,
-            HP Probook, HP Envy, HP Zbook.
-          </p>
-          <p class="list02">
-            <strong style="font-weight: 500"
-              >3.3 VIP WARRANTY SERVICE (Bảo Hành VIP)</strong
-            >
-          </p>
-          <p>
-            - VIP Services là dịch vụ bảo hành thay thế linh kiện trong vòng 30
-            phút được áp dụng hoàn toàn miễn phí cho các model sản phẩm sau: HP
-            Pavilion, HP Probook, HP Envy. Với 7 lỗi sau: Ram, HDD, ODD (DVD),
-            Keyboard, Battery, Adapter, Wifi card
-          </p>
-          <p>
-            - Dịch vụ bảo hành VIP sẽ được hỗ trợ toàn quốc với điều kiện sản
-            phẩm đó phải được phân phối chính hãng tại Việt Nam và phải còn
-            trong thời gian bảo hành trên hệ thống của HP với những lỗi do nhà
-            sản xuất.
-          </p>
-          <p class="list02">
-            <strong style="font-weight: 500"
-              >3.4. PICKUP & RETURN WARRANTY SERVICE (Giao Nhận Miễn Phí Tại
-              Nhà)</strong
-            >
-          </p>
-          <p>
-            - Pickup & Return Warranty Sevice là dịch vụ bảo hành giao và nhận
-            tại nhà hoàn toàn miễn phí tại 63 tỉnh thành, 64 điểm giao nhận và
-            được HP áp dụng cho sản phẩm: Notebook
-          </p>
-        </div>
+  <div class="banner_warranty">
+    <h1>Chính sách bảo hành</h1>
+  </div>
+  <div style="background-color: #efefef; padding: 70px 0">
+    <div class="container">
+      <h5>1. Bảo hành tiêu chuẩn</h5>
+      <div class="container" style="margin-bottom: 20px">
+        <img
+          src="../../../assets/policies page/bao-hanh-tieu-chuan.png"
+          alt=""
+        />
       </div>
+      <h5>2. Bảo hành mở rộng</h5>
+      <p>
+        Ngoài gói bảo hành tiêu chuẩn (mặc định), quý khách hàng được chọn thêm
+        gói bảo hành mở rộng: Rơi vỡ, rớt nước với những quyền lợi bảo hành vượt
+        trội. Nổi bật như: Bảo hành ngay cả khi rơi vỡ, rớt bể, 1 đổi 1 trong 1
+        năm...
+      </p>
+      <div class="container" style="margin-bottom: 20px">
+        <img src="../../../assets/policies page//bao-hanh-mo-rong.png" alt="" />
+      </div>
+      <h5>3. Thời gian bảo hành</h5>
+      <p>
+        <span>
+          Tất cả các dòng sản phẩm đều có thời gian bảo hành chính hãng 1 năm
+          tính từ ngày khách hàng cuối mua hàng. Khách hàng khi mua máy yêu cầu
+          cửa hàng cung cấp hóa đơn VAT có số Serial Number để giữ làm phiếu bảo
+          hành.
+        </span>
+      </p>
     </div>
   </div>
 </div>
 
-<!-- Giao hàng nhanh 2h -->
+<!-- Giao hàng -->
 <div *ngIf="title == 'delivery'">
-  <app-banner
-    [pageTitle]="'Chính sách giao hàng'"
-    [bannerImgUrl]="
-      '../../../assets/banners/21949760_1634236303261411_3080631426095855081_o.jpg'
-    "
-  ></app-banner>
-
-  <div class="container">
-    <div class="row">
-      <div class="col-12">
-        <div class="delivery-list">
-          <p class="list01">
-            <strong style="font-weight: 500">1. Lưu ý: </strong>
-          </p>
-          <div style="margin: 0px 0px 16px; padding-left: 30px">
-            <p>
-              - Sau khi bạn đặt hàng, trong vòng 12 giờ làm việc chúng tôi sẽ
-              liên lạc lại để xác nhận và kiểm tra thông tin.
-            </p>
-            <p>
-              - Những rủi ro phát sinh trong quá trình vận chuyển (va đập, ẩm
-              ướt, tai nạn..) có thể ảnh hưởng đến hàng hóa, vì thế xin Quý
-              Khách vui lòng kiểm tra hàng hóa thật kỹ trước khi ký nhận. Máy
-              tính Hà Nội sẽ không chịu trách nhiệm với những sai lệch hình thức
-              của hàng hóa sau khi Quý khách đã ký nhận hàng.
-            </p>
-          </div>
-          <p class="list01">
-            <strong style="font-weight: 500"
-              >2. Bảng giá dịch vụ giao hàng</strong
-            >
-          </p>
-          <table class="service-table">
-            <tbody>
-              <tr class="row01">
-                <td>Theo giá trị đơn hàng</td>
-                <td>Số Km được miễn phí</td>
-                <td>Thời gian đáp ứng</td>
-                <td>Thu phí</td>
-              </tr>
-              <tr class="row02">
-                <td>Dưới 200.000đ</td>
-                <td></td>
-                <td>Giao hàng trong vòng 6h</td>
-                <td>
-                  30.000đ/ 1 lần giao (trong vòng 10km) 40.000đ/1 lần giao
-                  (trong vòng 15km) 50.000đ/1 lần giao (trong vòng 20km)
-                </td>
-              </tr>
-              <tr class="row02">
-                <td>Trên 200.000đ</td>
-                <td></td>
-                <td>Giao hàng trong vòng 2h(*)</td>
-                <td>
-                  <p>20.000đ/1 lần giao (trong vòng 15km)</p>
-                  Từ km thứ 16 thu phí 6.000đ/km (chở hàng bằng ô tô thu phí
-                  10.000đ/km)
-                </td>
-              </tr>
-              <tr class="row02">
-                <td>Trên 500.000đ</td>
-                <td>20 km</td>
-                <td>Giao hàng trong vòng 2h(*)</td>
-                <td>
-                  Từ km 21 thu phí 6.000đ/km (chở hàng bằng ô tô thu phí
-                  10.000đ/km)
-                </td>
-              </tr>
-              <tr class="row02">
-                <td>Trên 1 triệu đồng</td>
-                <td>25 km</td>
-                <td>Giao hàng trong vòng 3h(*)</td>
-                <td>
-                  Từ km 26 thu phí 6.000đ/km (chở hàng bằng ô tô thu phí
-                  10.000đ/km)
-                </td>
-              </tr>
-              <tr class="row02">
-                <td>Trên 3 triệu đồng</td>
-                <td>35 km</td>
-                <td>Giao hàng trong vòng 24h(36km-45km)</td>
-                <td>
-                  Từ km 36 thu phí 6.000đ/km (chở hàng bằng ô tô thu phí
-                  10.000đ/km)
-                </td>
-              </tr>
-              <tr class="row02">
-                <td>Trên 50 triệu đồng</td>
-                <td>50 km</td>
-                <td>Theo thỏa thuận với khách hàng</td>
-                <td>
-                  Từ km 51 thu phí 10.000đ/km hoặc theo tư vấn nhân viên bán
-                  hàng
-                </td>
-              </tr>
-              <tr class="row02">
-                <td>Trên 100 triệu đồng</td>
-                <td>100 km</td>
-                <td>Theo thỏa thuận với khách hàng</td>
-                <td>
-                  Từ km 101 thu phí 10.000đ/km hoặc theo tư vấn nhân viên bán
-                  hàng
-                </td>
-              </tr>
-              <tr class="row02">
-                <td>Trên 200 triệu đồng</td>
-                <td>200 km</td>
-                <td>Theo thỏa thuận với khách hàng</td>
-                <td>
-                  Từ km 201 thu phí 10.000đ/km hoặc theo tư vấn nhân viên bán
-                  hàng
-                </td>
-              </tr>
-              <tr class="row02">
-                <td>Trên 300 triệu đồng</td>
-                <td>300 km</td>
-                <td>Theo thỏa thuận với khách hàng</td>
-                <td>
-                  Từ km 301 thu phí 10.000đ/km hoặc theo tư vấn nhân viên bán
-                  hàng
-                </td>
-              </tr>
-            </tbody>
-          </table>
-          <div class="note">
-            <p style="margin-top: 10px; color: red">Ghi chú (*):</p>
-            <p>
-              - Giao hàng nhanh 2h áp dụng cho những sản phẩm trong kho của HP
-              trong cùng tỉnh thành với điểm nhận hàng của khách hàng
-            </p>
-            <p>
-              - Giao hàng nhanh 2h áp dụng trong bán kính 2km từ các showroom
-              bán hàng của HP
-            </p>
-            <p>
-              - Giao hàng nhanh 2h chỉ áp dụng cho các đơn hàng bán lẻ (sản phẩm
-              có kích thước nhỏ gọn, các sản phẩm không yêu cầu lắp ráp, cài đặt
-              trước khi giao
-            </p>
-          </div>
-        </div>
+  <div class="banner_delivered">
+    <h1>Chính sách giao hàng</h1>
+  </div>
+  <div style="background-color: #efefef; padding: 70px 0">
+    <div class="container">
+      <h4>1. Phạm vi áp dụng</h4>
+      <p>- Trên toàn quốc</p>
+      <h4>2. Thời gian nhận hàng</h4>
+      <p>
+        - Chúng tôi nhận giao nhanh trong ngày với khoảng cách từ các siêu thị
+        có hàng đến điểm giao là 20 km. Khoảng cách lớn hơn nhân viên của chúng
+        tôi sẽ tư vấn cách thức giao hàng thuận tiện nhất cho khách hàng. Cụ thể
+        như sau
+      </p>
+      <div class="container">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Khoảng cách đến nhà khách từ siêu thị gần nhất có hàng</th>
+              <th>Hà Nội và TP. HCM</th>
+              <th>Các tỉnh thành khác</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Dưới 5km</td>
+              <td>Giao trong 30 phút</td>
+              <td>Giao trong 30 phút</td>
+            </tr>
+            <tr>
+              <td>Từ 5-10km</td>
+              <td>Giao trong 1 tiếng</td>
+              <td>Giao trong 1 tiếng</td>
+            </tr>
+            <tr>
+              <td>Từ 10-20km</td>
+              <td>Giao trong 2 tiếng</td>
+              <td>Giao trong 2 tiếng</td>
+            </tr>
+            <tr>
+              <td>Lưu ý</td>
+              <td>Thời gian giao hàng 9:00 đến 21:00</td>
+              <td>Thời gian giao hàng 9:00 đến 20:00</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
+      <p>
+        * Riêng đối với đơn hàng giá rẻ online, sản phẩm sẽ được giao sớm nhất
+        là 1 ngày sau khi đặt.
+      </p>
+      <h4>3. Phí giao hàng</h4>
+      <div class="container">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>MỨC GIÁ</th>
+              <th>PHÍ GIAO</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Giá trên 500.000đ</td>
+              <td>
+                - Miễn phí 10km đầu tiên <br />
+                - Mỗi km tiếp theo tính phí 5.000đ/km <br />
+                VD: Sạc dự phòng giá 600.000đ, khoảng cách giao hàng là 13 km
+                >>> Phí giao hàng là: 15.000đ
+              </td>
+            </tr>
+            <tr>
+              <td>Giá 500.000đ trở xuống</td>
+              <td>
+                - Phí giao hàng 20.000đ cho 10km đầu tiên <br />
+                - Mỗi km tiếp theo tính phí 5.000đ/km <br />
+                VD: Sạc dự phòng 500.000đ, khoảng cách giao hàng là 13 km >>>
+                Phí giao hàng là: 20.000đ + 15.000đ = 35.000đ
+              </td>
+            </tr>
+            <tr>
+              <td>Giá trên 5 triệu</td>
+              <td>
+                - Phí giao hàng 20.000đ cho 10km đầu tiên <br />
+                - Mỗi km tiếp theo tính phí 5.000đ/km
+              </td>
+            </tr>
+            <tr>
+              <td>Giá 5 triệu trở xuống</td>
+              <td>
+                - Phí giao hàng 50.000đ cho 10km đầu tiên <br />
+                - Mỗi km tiếp theo tính phí 5.000đ/km <br />
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <h5>Lưu ý:</h5>
+      <p>
+        Nếu có sự băn khoăn trong việc lựa chọn sản phẩm, hãy để nhân viên giao
+        hàng của chúng tôi sẽ đem hơn 2 sản phẩm (đem thêm mẫu máy khác, đem
+        thêm màu khác) theo yêu cầu của bạn đến tận nơi tư vấn.
+      </p>
+      <p>
+        - Kỹ thuật viên của chúng tôi sẽ giúp Quý khách khám phá kỹ hơn những
+        tính năng ưu việt của từng sản phầm để Quý khách có được lựa chọn tốt
+        nhất. <br />
+        - Quý khách chỉ thanh toán khi thật sự hài lòng với sản phẩm và chất
+        lượng dịch vụ của chúng tôi. Chúng tôi sẽ không tính bất kỳ khoản phí
+        nào cho đến khi Quý khách hoàn toàn đồng ý. <br />
+        - Khi Quý khách hoàn toàn hài lòng với sự lựa chọn của mình, Quý khách
+        có thể thanh toán ngay bằng các thẻ quốc tế, nội địa mà không cần phải
+        ra ngân hàng rút tiền mặt trước.
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- Đổi trả -->
+<div *ngIf="title == 'return'">
+  <div class="banner_return">
+    <h1>Chính sách đổi trả</h1>
+  </div>
+  <div style="background-color: #efefef; padding: 70px 0">
+    <div class="container">
+      <h4>1. Sản phẩm mới</h4>
+      <h5>- Sản phẩm lỗi do nhà sản xuất:</h5>
+      <div class="container">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Tháng 1</th>
+              <th>Tháng 2-12</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <span>- 1 đổi 1 (cùng mẫu, cùng màu, cùng dung lượng...).</span>
+                <p>
+                  - Trường hợp sản phẩm đổi hết hàng, khách hàng có thể đổi sang
+                  sản phẩm khác cùng nhóm hàng có giá trị lớn hơn 50% giá trị
+                  sản phẩm lỗi
+                </p>
+                <p>
+                  Hoặc: Khách hàng trả máy & chúng tôi hoàn lại tiền với mức giá
+                  bằng 80% giá trên hoá đơn.
+                </p>
+              </td>
+              <td>
+                <p>
+                  Khách hàng trả máy & Chúng tôi hoàn lại tiền và thu phí thêm
+                  5% so với mức hoàn tiền khi trả ở tháng thứ 1.
+                </p>
+                <p>
+                  VD: Ở tháng thứ nhất, nếu khách hàng trả sản phẩm sẽ được hoàn
+                  lại tiền với mức giá bằng 80% thì sang tháng thứ 2 nếu khách
+                  hàng trả máy sẽ thu phí thêm 5% nên mức hoàn tiền sẽ còn 75%
+                  giá trị sản phẩm trên hoá đơn, tháng thứ 3 mức hoàn tiền sẽ
+                  trừ thêm 5% thành 70%....
+                </p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <h5 style="margin-top: 20px">- Sản phẩm không lỗi (không phù hợp với nhu cầu của khách hàng):</h5>
+      <div class="container">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Tháng 1</th>
+              <th>Tháng 2-12</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Hoàn lại tiền máy với giá bằng 80% giá trên hoá đơn.</td>
+              <td>
+                Hoàn lại tiền với mức phí thêm 5% so với tháng thứ 1 (80%). VD:
+                tháng thứ 2 hoàn lại tiền với mức giá 75% giá trên hoá đơn,
+                tháng thứ 3 là 70%...
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <h5 style="margin-top: 20px">- Sản phẩm lỗi do người sử dụng:</h5>
+      <ul>
+        <li>Không đủ điều kiện bảo hành theo qui định của hãng.</li>
+        <li>Máy không giữ nguyên 100% hình dạng ban đầu.</li>
+        <li>Màn hình bị trầy xước.</li>
+      </ul>
+      <h5 style="margin-top: 20px">=> Không áp dụng đổi trả</h5>
+      <h4 style="margin-top: 50px">2. Sản phẩm đổi trả, đã qua sử dụng</h4>
+      <h5>(*) Rất tiếc, chúng tôi chưa áp dụng đổi trả trong trường hợp này</h5>
     </div>
   </div>
 </div>
