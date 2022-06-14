@@ -2,7 +2,8 @@
 	"info": {
 		"_postman_id": "3f4088c9-b2d9-4924-a0c6-45a8f04dbe63",
 		"name": "MobileS-apis",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "11503844"
 	},
 	"item": [
 		{
@@ -33,7 +34,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"name\":\"kích thước màn hình\",\n    \"value\":\"kích thước màn hình\"\n}",
+							"raw": "{\n    \"name\":\"màu\",\n    \"value\":\"màu\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -131,6 +132,163 @@
 								{
 									"key": "code",
 									"value": "771167"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "product",
+			"item": [
+				{
+					"name": "tạo",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"brand\": \"string\",\n    \"name\": \"string\",\n    \"series\": \"string\",\n    \"CPU\": {\n        \"name\": \"string\",\n        \"speed\": \"string\",\n        \"cache\": \"string\"\n    },\n    \"RAM\": {\n        \"capacity\": \"string\",\n        \"socket_number\": \"string\"\n    },\n    \"storage\": \"string\",\n    \"display\": \"string\",\n    \"graphic\": \"string\",\n    \"wireless\": \"string\",\n    \"LAN\": \"string\",\n    \"connection\": {\n        \"USB\": \"string\",\n        \"HDMI_VGA\": \"string\"\n    },\n    \"keyboard\": \"string\",\n    \"webcam\": \"string\",\n    \"audio\": \"string\",\n    \"battery\": \"string\",\n    \"OS\": \"string\",\n    \"dimension\": \"string\",\n    \"weight\": \"string\",\n    \"color\": [\n        \"string\"\n    ],\n    \"security\": \"string\",\n    \"price\": 123,\n    \"sale\": 123,\n    \"status\": true,\n    \"imageUrls\": [\n        \"string\"\n    ],\n    \"filter\": {\n        \"need\": \"string\",\n        \"cpu\": \"string\",\n        \"ram\": \"string\",\n        \"storage\": \"string\",\n        \"vga\": \"string\",\n        \"screen_size\": \"string\",\n        \"screen_resolution\": \"string\",\n        \"os\": \"string\",\n        \"price_range\": \"string\"\n    },\n    \"specification\": {\n            \"skus\": [\n            {\n                    \"type\": \"Id\",\n                    \"value\": \"string\"\n            }\n        ],\n            \"price\": 12,\n            \"salePrice\": 123,\n            \"amount\": 12,\n            \"isAvailable\": true\n    },\n    \"saleAmount\": 123,\n    \"category\": \"Id\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{mobileSDomain}}/api/product",
+							"host": [
+								"{{mobileSDomain}}"
+							],
+							"path": [
+								"api",
+								"product"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "sửa",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"brand\": \"string\",\n    \"name\": \"string\",\n    \"series\": \"string\",\n    \"CPU\": {\n        \"name\": \"string\",\n        \"speed\": \"string\",\n        \"cache\": \"string\"\n    },\n    \"RAM\": {\n        \"capacity\": \"string\",\n        \"socket_number\": \"string\"\n    },\n    \"storage\": \"string\",\n    \"display\": \"string\",\n    \"graphic\": \"string\",\n    \"wireless\": \"string\",\n    \"LAN\": \"string\",\n    \"connection\": {\n        \"USB\": \"string\",\n        \"HDMI_VGA\": \"string\"\n    },\n    \"keyboard\": \"string\",\n    \"webcam\": \"string\",\n    \"audio\": \"string\",\n    \"battery\": \"string\",\n    \"OS\": \"string\",\n    \"dimension\": \"string\",\n    \"weight\": \"string\",\n    \"color\": [\n        \"string\"\n    ],\n    \"security\": \"string\",\n    \"price\": 123,\n    \"sale\": 123,\n    \"status\": true,\n    \"imageUrls\": [\n        \"string\"\n    ],\n    \"filter\": {\n        \"need\": \"string\",\n        \"cpu\": \"string\",\n        \"ram\": \"string\",\n        \"storage\": \"string\",\n        \"vga\": \"string\",\n        \"screen_size\": \"string\",\n        \"screen_resolution\": \"string\",\n        \"os\": \"string\",\n        \"price_range\": \"string\"\n    },\n    \"specification\": {\n            \"skus\": [\n            {\n                    \"type\": \"Id\",\n                    \"value\": \"string\"\n            }\n        ],\n            \"price\": 12,\n            \"salePrice\": 123,\n            \"amount\": 12,\n            \"isAvailable\": true\n    },\n    \"saleAmount\": 123,\n    \"category\": \"Id\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{mobileSDomain}}/api/product",
+							"host": [
+								"{{mobileSDomain}}"
+							],
+							"path": [
+								"api",
+								"product"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "lấy danh sách sản phẩm",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{mobileSDomain}}/api/product",
+							"host": [
+								"{{mobileSDomain}}"
+							],
+							"path": [
+								"api",
+								"product"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "lấy chi tiết sản phẩm theo Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{mobileSDomain}}/api/product?id=123",
+							"host": [
+								"{{mobileSDomain}}"
+							],
+							"path": [
+								"api",
+								"product"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "123"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "đánh giá sản phẩm",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{mobileSDomain}}/api/product/rating?id=123&rating=5",
+							"host": [
+								"{{mobileSDomain}}"
+							],
+							"path": [
+								"api",
+								"product",
+								"rating"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "123",
+									"description": "_id sản phẩm"
+								},
+								{
+									"key": "rating",
+									"value": "5",
+									"description": "giá trị vote của sản phẩm"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "xoá",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{mobileSDomain}}/api/product?id=123",
+							"host": [
+								"{{mobileSDomain}}"
+							],
+							"path": [
+								"api",
+								"product"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "123",
+									"description": "_id của sản phẩm"
 								}
 							]
 						}

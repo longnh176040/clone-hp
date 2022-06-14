@@ -36,7 +36,7 @@ let productSchema = new mongoose.Schema({
     price: { type: Number },
     sale: { type: Number },
     status: { type: Boolean },
-    thumbnails: [{ type: String }],
+    imageUrls: [{ type: String }],
     // tương tác
     interaction: {
         rating_point: { type: Number, default: 5 },

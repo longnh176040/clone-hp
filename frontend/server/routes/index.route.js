@@ -8,5 +8,6 @@ router.use("/api/chat/", require("./apis/chat.route"));
 router.use("/api/analytics/", require("./apis/utils.route"));
 router.use("/api/blog/", require("./apis/blog.route"));
 router.use("/api/sku/", require("./apis/spec.route"))
+router.use("/api/product", require("./apis/product.route"))
 
 module.exports = router;
