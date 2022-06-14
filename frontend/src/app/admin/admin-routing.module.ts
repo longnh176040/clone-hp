@@ -18,7 +18,7 @@ const routes: Routes = [
     path: '',
     component: AdminComponent,
     resolve: { user: UserResolver },
-    // canActivate: [SupAdGuard],
+    canActivate: [SupAdGuard],
     children: [
       {
         path: 'items',
