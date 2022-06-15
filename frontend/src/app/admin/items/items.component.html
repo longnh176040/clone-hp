@@ -237,7 +237,10 @@
               </div>
             </td>
             <td>
-              <div class="pencil" (click)="open_edit_product(laptop, 'Product')">
+              <div
+                class="pencil"
+                (click)="open_edit_product(laptop, 'Product')"
+              >
                 <i class="bi bi-pencil">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -275,7 +278,11 @@
               </div>
             </td>
             <td>
-              <img style="width: 40px; height: 40px; cursor: pointer" src="https://img.icons8.com/wired/50/000000/google-blog-search.png" (click)="onEditBlog(laptop.laptop_id)"/>
+              <img
+                style="width: 40px; height: 40px; cursor: pointer"
+                src="https://img.icons8.com/wired/50/000000/google-blog-search.png"
+                (click)="onEditBlog(laptop.laptop_id)"
+              />
             </td>
           </tr>
         </tbody>
@@ -324,7 +331,6 @@
           >Name is required!</small
         >
       </div>
-
       <div class="form-group">
         <label for="series">
           <b>Series * </b>
@@ -347,203 +353,144 @@
           >Series is required!</small
         >
       </div>
-
       <div formGroupName="filter">
-
         <div class="form-group">
-          <label for="series">
-            <b>Nhu cầu * </b>
+          <label for="brand">
+            <b>Brand * </b>
           </label>
-          <select class="form-control" formControlName="need">
-            <option *ngFor="let need of needs" value="{{need}}">
-              {{ need }}
-            </option>
-          </select>
+          <input
+            class="form-control"
+            type="text"
+            id="brand"
+            placeholder=""
+            required
+            formControlName="brand"
+          />
         </div>
-
         <div class="form-group">
-          <label for="series">
-            <b>CPU</b>
-          </label>
-          <select class="form-control" formControlName="cpu">
-            <option *ngFor="let cpu of cpus" value="{{cpu}}">
-              {{ cpu }}
-            </option>
-          </select>
-        </div>
-
-        <div class="form-group">
-          <label for="series">
-            <b>RAM</b>
-          </label>
-          <select class="form-control" formControlName="ram">
-            <option *ngFor="let ram of rams" value="{{ram}}">
-              {{ ram }}
-            </option>
-          </select>
-        </div>
-
-        <div class="form-group">
-          <label for="series">
-            <b>Ổ cứng</b>
+          <label for="storage">
+            <b>Bộ nhớ</b>
           </label>
           <select class="form-control" formControlName="storage">
-            <option *ngFor="let storage of storages" value="{{storage}}">
+            <option *ngFor="let storage of storages" value="{{ storage }}">
               {{ storage }}
             </option>
           </select>
         </div>
-
         <div class="form-group">
-          <label for="series">
-            <b>VGA - Card màn hình* </b>
+          <label for="ram">
+            <b>RAM</b>
           </label>
-          <select class="form-control" formControlName="vga">
-            <option *ngFor="let vga of vgas" value="{{vga}}">
-              {{ vga }}
+          <select class="form-control" formControlName="ram">
+            <option *ngFor="let ram of rams" value="{{ ram }}">
+              {{ ram }}
             </option>
           </select>
         </div>
-
         <div class="form-group">
-          <label for="series">
+          <label for="screen_size">
             <b>Kích thước màn hình</b>
           </label>
-          <select class="form-control" formControlName="screen_size">
-            <option *ngFor="let size of screenSize" value="{{size}}">
-              {{ size }}
-            </option>
-          </select>
+          <input
+            class="form-control"
+            type="text"
+            id="screen_size"
+            placeholder=""
+            required
+            formControlName="screen_size"
+          />
         </div>
-
         <div class="form-group">
-          <label for="series">
-            <b>Độ phân giải màn hình</b>
+          <label for="screen_resolution">
+            <b>Công nghệ màn hình</b>
           </label>
           <select class="form-control" formControlName="screen_resolution">
-            <option *ngFor="let screen of screenResolution" value="{{screen}}">
+            <option
+              *ngFor="let screen of screenResolution"
+              value="{{ screen }}"
+            >
               {{ screen }}
             </option>
           </select>
         </div>
-
         <div class="form-group">
-          <label for="series">
-            <b>OS</b>
-          </label>
-          <select class="form-control" formControlName="os">
-            <option *ngFor="let os of oss" value="{{os}}">
-              {{ os }}
-            </option>
-          </select>
-        </div>
-
-        <div class="form-group">
-          <label for="series">
+          <label for="price_range">
             <b>Khoảng giá</b>
           </label>
           <select class="form-control" formControlName="price_range">
-            <option *ngFor="let price of priceRange" value="{{price}}">
+            <option *ngFor="let price of priceRange" value="{{ price }}">
               {{ price }}
             </option>
           </select>
         </div>
-
+        <div class="form-group">
+          <label for="size_range">
+            <b>Khoảng màn hình</b>
+          </label>
+          <select class="form-control" formControlName="size_range">
+            <option *ngFor="let price of screenSize" value="{{ price }}">
+              {{ price }}
+            </option>
+          </select>
+        </div>
       </div>
-
       <div class="form-group">
-        <label for="CPU">
-          <b>CPU: </b>
+        <label for="chipset">
+          <b>Chipset: </b>
         </label>
-        <table>
-          <tr>
-            <td>Name</td>
-            <td>
-              <input
-                class="cpu"
-                type="text"
-                placeholder=""
-                formControlName="CPU_name"
-              />
-            </td>
-          </tr>
-          <tr>
-            <td>Speed</td>
-            <td>
-              <input
-                class="cpu"
-                type="text"
-                placeholder=""
-                formControlName="CPU_speed"
-              />
-            </td>
-          </tr>
-          <tr>
-            <td>Cache</td>
-            <td>
-              <input
-                class="cpu"
-                type="text"
-                placeholder=""
-                formControlName="CPU_cache"
-              />
-            </td>
-          </tr>
-        </table>
+        <input
+          class="form-control"
+          type="text"
+          id="sim"
+          placeholder=""
+          formControlName="chipset"
+        />
       </div>
-
       <div class="form-group">
-        <label for="RAM">
-          <b>RAM:</b>
-        </label>
-        <table>
-          <tr>
-            <td>Capacity</td>
-            <td>
-              <input
-                class="ram"
-                type="text"
-                placeholder=""
-                formControlName="RAM_capacity"
-              />
-            </td>
-          </tr>
-          <tr>
-            <td>Socket Number</td>
-            <td>
-              <input
-                class="ram"
-                type="text"
-                placeholder=""
-                formControlName="RAM_socket_number"
-              />
-            </td>
-          </tr>
-        </table>
-
-        <span></span>
-      </div>
-
-      <div class="form-group">
-        <label for="storage">
-          <b>Storage: </b>
+        <label for="sim">
+          <b>Thẻ SIM: </b>
         </label>
         <input
           class="form-control"
           type=""
-          id="storage"
+          id="sim"
           placeholder=""
-          formControlName="storage"
+          formControlName="sim"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="wifi">
+          <b>Wi-Fi: </b>
+        </label>
+        <input
+          class="form-control"
+          type=""
+          id="wifi"
+          placeholder=""
+          formControlName="wifi"
+        />
+      </div>
+      <div class="form-group">
+        <label for="camera">
+          <b>Camera: </b>
+        </label>
+        <input
+          class="form-control"
+          type=""
+          id="camera"
+          placeholder=""
+          formControlName="camera"
         />
       </div>
 
       <div class="form-group">
         <label for="display">
-          <b>Display: </b>
+          <b>Độ phân giải màn hình: </b>
         </label>
         <input
           class="form-control"
-          type="text"
+          type=""
           id="display"
           placeholder=""
           formControlName="display"
@@ -551,116 +498,8 @@
       </div>
 
       <div class="form-group">
-        <label for="graphic">
-          <b>Graphic: </b>
-        </label>
-        <input
-          class="form-control"
-          type="text"
-          id="graphic"
-          placeholder=""
-          formControlName="graphic"
-        />
-      </div>
-
-      <div class="form-group">
-        <label for="wireless">
-          <b>Wireless: </b>
-        </label>
-        <input
-          class="form-control"
-          type=""
-          id="wireless"
-          placeholder=""
-          formControlName="wireless"
-        />
-      </div>
-
-      <div class="form-group">
-        <label for="LAN">
-          <b>LAN: </b>
-        </label>
-        <input
-          class="form-control"
-          type=""
-          id="LAN"
-          placeholder=""
-          formControlName="LAN"
-        />
-      </div>
-
-      <div class="form-group">
-        <label for="">
-          <b>Connection: </b>
-        </label>
-        <table>
-          <tr>
-            <td>USB</td>
-            <td>
-              <textarea
-                class="connection"
-                type="text"
-                placeholder=""
-                formControlName="connection_USB"
-              ></textarea>
-            </td>
-          </tr>
-          <tr>
-            <td>HDMI/VGA</td>
-            <td>
-              <input
-                class="connection"
-                type="text"
-                placeholder=""
-                formControlName="connection_HDMI_VGA"
-              />
-            </td>
-          </tr>
-        </table>
-      </div>
-
-      <div class="form-group">
-        <label for="keyboard">
-          <b>Keyboard: </b>
-        </label>
-        <input
-          class="form-control"
-          type=""
-          id="keyboard"
-          placeholder=""
-          formControlName="keyboard"
-        />
-      </div>
-
-      <div class="form-group">
-        <label for="webcam">
-          <b>Webcam: </b>
-        </label>
-        <input
-          class="form-control"
-          type=""
-          id="webcam"
-          placeholder=""
-          formControlName="webcam"
-        />
-      </div>
-
-      <div class="form-group">
-        <label for="audio">
-          <b>Audio: </b>
-        </label>
-        <input
-          class="form-control"
-          type=""
-          id="audio"
-          placeholder=""
-          formControlName="audio"
-        />
-      </div>
-
-      <div class="form-group">
         <label for="battery">
-          <b>Battery: </b>
+          <b>Pin: </b>
         </label>
         <input
           class="form-control"
@@ -670,7 +509,6 @@
           formControlName="battery"
         />
       </div>
-
       <div class="form-group">
         <label for="OS">
           <b>OS: </b>
@@ -683,33 +521,6 @@
           formControlName="OS"
         />
       </div>
-
-      <div class="form-group">
-        <label for="dimension">
-          <b>Dimension: </b>
-        </label>
-        <input
-          class="form-control"
-          type=""
-          id="dimension"
-          placeholder=""
-          formControlName="dimension"
-        />
-      </div>
-
-      <div class="form-group">
-        <label for="weight">
-          <b>Weight: </b>
-        </label>
-        <input
-          class="form-control"
-          type=""
-          id="weight"
-          placeholder=""
-          formControlName="weight"
-        />
-      </div>
-
       <div class="form-group">
         <label><b>Color:</b></label>
         <label *ngFor="let color of allColors" style="margin-right: 10px">
@@ -722,20 +533,6 @@
           {{ color }}
         </label>
       </div>
-
-      <div class="form-group">
-        <label for="security">
-          <b>Security: </b>
-        </label>
-        <input
-          class="form-control"
-          type=""
-          id="security"
-          placeholder=""
-          formControlName="security"
-        />
-      </div>
-
       <div class="form-group">
         <label for="price">
           <b>Price * </b>

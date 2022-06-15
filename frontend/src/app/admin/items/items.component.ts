@@ -31,13 +31,6 @@ export class ItemsComponent implements OnInit {
   private convert: Converter = new Converter();
   public laptop_id: string;
 
-  public needs: string[] = [
-    "Laptop Gaming",
-    "Mỏng nhẹ, văn phòng",
-    "Phổ thông, văn phòng",
-    "Đồ hoạ, kỹ thuật",
-  ];
-
   public cpus: string[] = [
     "Intel Celeron/Pentium",
     "Intel Core i3",
@@ -49,35 +42,32 @@ export class ItemsComponent implements OnInit {
     "AMD Ryzen 7",
   ];
 
-  public rams: string[] = ["4GB", "8GB", "16GB", "32GB"];
+  public rams: string[] = ["2GB","4GB", "8GB", "16GB", "32GB"];
 
   public storages: string[] = [
-    "500GB HDD",
-    "1T HDD",
-    "256GB SSD",
-    "512GB SSD",
-    "1T SSD",
-    "2T SSD",
+    "16GB",
+    "32GB",
+    "64GB",
+    "128GB",
+    "256GB",
+    "512GB",
+    "1TB"
   ];
 
-  public vgas: string[] = ["VGA Onboard", "VGA NVDIA", "VGA AMD"];
-
   public screenSize: string[] = [
-    "12.5 inch",
-    "13.3 inch",
-    "14 inch",
-    "15.6 inch",
-    "> 15.6 inch",
+    " < 4.7 inch",
+    "4 inch - 5 inch",
+    "5 inch - 6 inch",
+    "> 6.5 inch",
   ];
 
   public screenResolution: string[] = [
-    "HD (1366x768)",
-    "Full HD (1920x1080)",
-    "2K (2560x1440)",
-    "4K (3840x2160)",
+    "OLED",
+    "AMOLED",
+    "IPS LCD",
   ];
 
-  public oss: string[] = ["Win 10", "DOS"];
+  public oss: string[] = ["Android", "IOS", "Windows"];
 
   public priceRange: string[] = [
     "Dưới 10 triệu",
@@ -102,40 +92,29 @@ export class ItemsComponent implements OnInit {
   formCreateProduct: FormGroup = new FormGroup({
     name: new FormControl(null, [Validators.required]),
     series: new FormControl(null, [Validators.required]),
-    CPU_name: new FormControl(""),
-    CPU_speed: new FormControl(""),
-    CPU_cache: new FormControl(""),
-    RAM_capacity: new FormControl(""),
-    RAM_socket_number: new FormControl(""),
+    brand: new FormControl(null, [Validators.required]),
     storage: new FormControl(""),
-    display: new FormControl(""),
-    graphic: new FormControl(""),
-    wireless: new FormControl(""),
-    LAN: new FormControl(""),
-    connection_USB: new FormControl(""),
-    connection_HDMI_VGA: new FormControl(""),
-    keyboard: new FormControl(""),
-    webcam: new FormControl(""),
-    audio: new FormControl(""),
+    ram: new FormControl(""),
+    screen_size: new FormControl(""),
+    screen_resolution: new FormControl(""),
+    price_range: new FormControl(""),
+    size_range: new FormControl(""),
+    chipset: new FormControl(""),
+    sim: new FormControl(""),
+    wifi: new FormControl(""),
+    camera: new FormControl(""),
     battery: new FormControl(""),
     OS: new FormControl(""),
-    dimension: new FormControl(""),
-    weight: new FormControl(""),
-    security: new FormControl(""),
-    need: new FormControl(""),
-    vga: new FormControl(""),
     price: new FormControl(null, [Validators.required]),
     sale: new FormControl(null, [Validators.required]),
     filter: new FormGroup({
-      vga: new FormControl(),
-      need: new FormControl(),
-      cpu: new FormControl(),
+      brand: new FormControl(),
       ram: new FormControl(),
       storage: new FormControl(),
-      screen_size: new FormControl(),
-      screen_resolution: new FormControl(),
-      os: new FormControl(),
+      OS: new FormControl(),
       price_range: new FormControl(),
+      size_range: new FormControl(),
+      sim: new FormControl()
     }),
   });
 

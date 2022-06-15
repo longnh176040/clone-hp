@@ -1,5 +1,4 @@
 let io;
-
 let users = [];
 let admins = [];
 

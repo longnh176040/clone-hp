@@ -94,6 +94,7 @@ th {
 
 /* style sidenav */
 .sidenav {
+  height: calc(100% - 85px)!important;
   margin-top: 85px;
   position: fixed;
   z-index: 2;
@@ -137,7 +138,6 @@ l .sidenav a:hover {
 }
 
 .canvas-sidenav {
-  height: 100%;
   opacity: 1;
   position: fixed;
   top: 0;
