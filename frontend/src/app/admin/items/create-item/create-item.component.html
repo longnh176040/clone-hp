@@ -1,0 +1,320 @@
+<div class="main-layout">
+  <div class="form-layout">
+    <div class="header-title mb-3">
+      <h3>Thêm sản phẩm</h3>
+      <a (click)="goBack()" style="cursor: pointer">Trở lại</a>
+    </div>
+    <form
+      (ngSubmit)="onSubmit()"
+      [formGroup]="mobileForm"
+      autocomplete="off"
+      novalidate="true"
+    >
+      <div class="form-body">
+        <div class="form-text form-content">
+          <div class="form-group mb-3">
+            <label for="name">
+                <b>Tên sản phẩm *</b>
+            </label>
+            <input
+              type="text"
+              class="form-control"
+              formControlName="name"
+              required
+            />
+            <div *ngIf="showValidateCreate">
+              <small
+                class="form-text text-info"
+                *ngIf="mobileForm.controls.productName.errors?.required"
+                >Nhập tên sản phẩm</small
+              >
+            </div>
+          </div>
+          <div class="form-group mb-3">
+            <label for="series">
+              <b>Series * </b>
+            </label>
+            <input
+              class="form-control"
+              type="text"
+              id="series"
+              placeholder=""
+              required
+              formControlName="series"
+            />
+            <small
+              class="text-danger"
+              role="alert"
+              *ngIf="
+                mobileForm.controls.series?.errors?.required &&
+                mobileForm.controls.series?.touched
+              "
+              >Series is required!</small
+            >
+          </div>
+          <div formGroupName="filter">
+            <div class="form-group mb-3">
+              <label for="name">
+                <b>
+                    Hãng *
+                </b>
+              </label>
+              <input
+                type="text"
+                class="form-control"
+                formControlName="brand"
+                required
+              />
+              <div *ngIf="showValidateCreate">
+                <small
+                  class="form-text text-info"
+                  *ngIf="mobileForm.controls.brand.errors?.required"
+                  >Nhập tên hãng</small
+                >
+              </div>
+            </div>
+            <div class="form-group mb-3">
+              <label for="storage">
+                <b>Bộ nhớ</b>
+              </label>
+              <select class="form-control" formControlName="storage">
+                <option *ngFor="let storage of storages" value="{{ storage }}">
+                  {{ storage }}
+                </option>
+              </select>
+            </div>
+            <div class="form-group mb-3">
+              <label><b>RAM:</b></label>
+              <br />
+              <label *ngFor="let ram of rams" style="margin-right: 20px">
+                <input
+                  type="radio"
+                  name="ram"
+                  [value]="ram"
+                  formControlName="ram"
+                />
+                {{ ram }}
+              </label>
+            </div>
+            <div class="form-group mb-3">
+              <label for="price_range">
+                <b>Khoảng giá</b>
+              </label>
+              <select class="form-control" formControlName="price_range">
+                <option *ngFor="let price of priceRange" value="{{ price }}">
+                  {{ price }}
+                </option>
+              </select>
+            </div>
+            <div class="form-group mb-3">
+              <label for="size_range">
+                <b>Khoảng kích thước màn hình</b>
+              </label>
+              <select class="form-control" formControlName="size_range">
+                <option *ngFor="let screen of screenSize" value="{{ screen }}">
+                  {{ screen }}
+                </option>
+              </select>
+            </div>
+            <div class="form-group mb-3">
+              <label for="sim">
+                <b>Thẻ SIM: </b>
+              </label>
+              <input
+                class="form-control"
+                type=""
+                id="sim"
+                placeholder=""
+                formControlName="sim"
+              />
+            </div>
+            <div class="form-group mb-3">
+              <label for="name">
+                <b> Hệ điều hành </b>
+              </label>
+              <input type="text" class="form-control" formControlName="OS" />
+            </div>
+          </div>
+          <div class="form-group mb-3">
+            <label><b>Color:</b></label>
+            <br />
+            <label *ngFor="let color of colors" style="margin-right: 20px">
+              <input
+                type="checkbox"
+                [value]="color"
+                (change)="onChangeColor($event)"
+              />
+              {{ color }}
+            </label>
+          </div>
+
+          <div class="form-group mb-3">
+            <label for="screen_size">
+              <b>Kích thước màn hình</b>
+            </label>
+            <input
+              class="form-control"
+              type="text"
+              id="screen_size"
+              placeholder=""
+              formControlName="screen_size"
+            />
+          </div>
+          <div class="form-group mb-3">
+            <label for="name">
+              <b>Chipset</b>
+            </label>
+            <input type="text" class="form-control" formControlName="chipset" />
+          </div>
+
+          <div class="form-group mb-3">
+            <label for="name">
+              <b> Price </b>
+            </label>
+            <input
+              type="text"
+              class="form-control"
+              formControlName="price"
+              required
+            />
+            <div *ngIf="showValidateCreate">
+              <small
+                class="form-text text-info"
+                *ngIf="mobileForm.controls.price.errors?.required"
+                >Nhập giá tiền</small
+              >
+            </div>
+            <small
+              class="form-text text-muted"
+              *ngIf="
+                mobileForm.controls.price.dirty &&
+                mobileForm.controls.price.errors?.pattern
+              "
+              >Vui lòng nhập đúng giá tiền</small
+            >
+          </div>
+          <div class="form-group mb-3">
+            <label for="camera">
+              <b>Camera: </b>
+            </label>
+            <input
+              class="form-control"
+              type=""
+              id="camera"
+              placeholder=""
+              formControlName="camera"
+            />
+          </div>
+
+          <div class="form-group mb-3">
+            <label for="display">
+              <b>Độ phân giải màn hình: </b>
+            </label>
+            <input
+              class="form-control"
+              type=""
+              id="display"
+              placeholder=""
+              formControlName="display"
+            />
+          </div>
+          <div class="form-group mb-3">
+            <label for="wifi">
+              <b>Wi-Fi: </b>
+            </label>
+            <input
+              class="form-control"
+              type=""
+              id="wifi"
+              placeholder=""
+              formControlName="wifi"
+            />
+          </div>
+          <div class="form-group mb-3">
+            <label for="screen_resolution">
+              <b>Công nghệ màn hình</b>
+            </label>
+            <select class="form-control" formControlName="screen_resolution">
+              <option
+                *ngFor="let screen of screenResolution"
+                value="{{ screen }}"
+              >
+                {{ screen }}
+              </option>
+            </select>
+          </div>
+          <div class="form-group mb-3">
+            <label for="battery">
+              <b>Pin: </b>
+            </label>
+            <input
+              class="form-control"
+              type=""
+              id="battery"
+              placeholder=""
+              formControlName="battery"
+            />
+          </div>
+          <div class="form-group mb-3">
+            <label for="name">
+              <b>Sale</b>
+            </label>
+            <input
+              type="text"
+              class="form-control"
+              formControlName="sale"
+              required
+            />
+            <div *ngIf="showValidateCreate">
+              <small
+                class="form-text text-info"
+                *ngIf="mobileForm.controls.sale.errors?.required"
+                >Nhập giá sale</small
+              >
+            </div>
+            <small
+              class="form-text text-muted"
+              *ngIf="
+                mobileForm.controls.price.dirty &&
+                mobileForm.controls.price.errors?.pattern
+              "
+              >Vui lòng nhập đúng giá tiền</small
+            >
+          </div>
+        </div>
+        <div class="form-image form-content">
+          <div class="button-image mt-4">
+            <button
+              mat-stroked-button
+              type="button"
+              class="btn btn-primary"
+              (click)="filePicker.click()"
+            >
+              Thêm ảnh
+            </button>
+            <input
+              type="file"
+              id="file"
+              style="visibility: hidden"
+              #filePicker
+              name="image"
+              (change)="onFileSelected($event)"
+              accept="image/x-png,image/gif,image/jpeg"
+            />
+          </div>
+          <div class="main-image">
+            <div class="item-image" *ngIf="imagePreview !== '' && imagePreview">
+              <img [src]="imagePreview" alt="" />
+              <a (click)="deleteImage()"><i class="fas fa-times"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="footer-form mt-5">
+        <button mat-stroked-button type="submit" class="btn btn-primary">
+          Thêm
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

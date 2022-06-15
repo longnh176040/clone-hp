@@ -28,6 +28,7 @@
     "@editorjs/header": "^2.6.1",
     "@editorjs/link": "^2.3.1",
     "@editorjs/list": "^1.6.2",
+    "@firebase/storage": "^0.9.7",
     "@nguniversal/express-engine": "^9.0.2",
     "algoliasearch": "^4.9.1",
     "angular": "^1.8.2",

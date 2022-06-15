@@ -35,6 +35,8 @@ import { MatMenuModule } from '@angular/material/menu';
 import { BlogComponent } from './items/blog/blog.component';
 import { MatButtonModule } from '@angular/material/button';
 import { SkuComponent } from './sku/sku.component';
+import { CreateItemComponent } from './items/create-item/create-item.component';
+import { ItemsListComponent } from './items/items-list/items-list.component';
 @NgModule({
   declarations: [
     AdminComponent,
@@ -50,6 +52,8 @@ import { SkuComponent } from './sku/sku.component';
     AdminHeaderComponent,
     BlogComponent,
     SkuComponent,
+    CreateItemComponent,
+    ItemsListComponent,
   ],
   imports: [
     CommonModule,
