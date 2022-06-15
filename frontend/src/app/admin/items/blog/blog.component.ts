@@ -79,9 +79,6 @@ export class BlogComponent implements OnInit {
           class: List,
           inlineToolbar: ["link", "bold"],
         },
-        // linkTool: {
-        //   class: LinkTool,
-        // },
         marker: {
           class: Marker,
           shortcut: "CMD + SHIFT + M",

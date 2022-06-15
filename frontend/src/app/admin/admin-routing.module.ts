@@ -6,6 +6,8 @@ import { AdminComponent } from './admin.component';
 import { ChatComponent } from './chat/chat.component';
 import { CoverageComponent } from './coverage/coverage.component';
 import { BlogComponent } from './items/blog/blog.component';
+import { CreateItemComponent } from './items/create-item/create-item.component';
+import { ItemsListComponent } from './items/items-list/items-list.component';
 import { ItemsComponent } from './items/items.component';
 import { OrderComponent } from './order/order.component';
 import { OverviewComponent } from './overview/overview.component';
@@ -22,7 +24,12 @@ const routes: Routes = [
       {
         path: 'items',
         component: ItemsComponent,
-        resolve: { user: UserResolver }
+        resolve: { user: UserResolver },
+        children: [
+          { path: 'items-list', component: ItemsListComponent }, 
+          { path: 'create-item', component: CreateItemComponent },
+          { path: '', redirectTo: 'items-list', pathMatch: 'full' },
+        ],
       },
       {
         path: 'items/:id',
