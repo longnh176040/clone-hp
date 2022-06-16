@@ -3,7 +3,6 @@ import { Component, OnInit } from "@angular/core";
 import { AngularFireStorage } from "@angular/fire/storage";
 import {
   FormBuilder,
-  FormControl,
   FormGroup,
   Validators,
 } from "@angular/forms";
@@ -24,8 +23,8 @@ export class CreateItemComponent implements OnInit {
   productROM = [];
   fb;
   downloadURL$: Observable<string>;
-  mobileImage: FileList = null;
   imgURL = [];
+  file: any;
 
   public readonly colors = [
     "white",
@@ -77,7 +76,7 @@ export class CreateItemComponent implements OnInit {
       OS: [null],
       price: [null, [Validators.required, Validators.pattern("^[0-9]*$")]],
       sale: [null, [Validators.required, Validators.pattern("^[0-9]*$")]],
-      filter: [
+      filter: this._formBuilder.group(
         {
           brand: [null],
           ram: [null],
@@ -87,7 +86,7 @@ export class CreateItemComponent implements OnInit {
           size_range: [null],
           sim: [null],
         },
-      ],
+        ),
       imageUrls: [null],
     });
   }
@@ -122,15 +121,6 @@ export class CreateItemComponent implements OnInit {
     "Trên 40 triệu",
   ];
 
-  onImagePicked(event: Event): void {
-    const files = (event.target as HTMLInputElement).files[0];
-    const reader = new FileReader();
-    reader.onload = () => {
-      this.imagePreview = reader.result as string;
-    };
-    reader.readAsDataURL(files);
-  }
-
   goBack() {
     this._location.back();
   }
@@ -150,17 +140,19 @@ export class CreateItemComponent implements OnInit {
   }
 
   onFileSelected(event) {
-    var n = Date.now();
-    const file = (event.target as HTMLInputElement).files[0];
+    this.file = (event.target as HTMLInputElement).files[0];
     const reader = new FileReader();
     reader.onload = () => {
       this.imagePreview = reader.result as string;
     };
-    reader.readAsDataURL(file);
+    reader.readAsDataURL(this.file);
+  }
 
+  uploadImage(){
+    var n = Date.now();
     const filePath = `MobileImages/${n}`;
     const fileRef = this._storage.ref(filePath);
-    const task = this._storage.upload(`MobileImages/${n}`, file);
+    const task = this._storage.upload(`MobileImages/${n}`, this.file);
     task
       .snapshotChanges()
       .pipe(
@@ -169,6 +161,8 @@ export class CreateItemComponent implements OnInit {
           this.downloadURL$.subscribe((url) => {
             if (url) {
               this.fb = url;
+              this.imgURL = [...this.imgURL, url]
+              this.imagePreview = null;
             }
           });
         })

@@ -147,7 +147,6 @@
               {{ color }}
             </label>
           </div>
-
           <div class="form-group mb-3">
             <label for="screen_size">
               <b>Kích thước màn hình</b>
@@ -283,18 +282,19 @@
           </div>
         </div>
         <div class="form-image form-content">
-          <div class="button-image mt-4">
+          <div class="button-image mb-4">
             <button
               mat-stroked-button
               type="button"
               class="btn btn-primary"
               (click)="filePicker.click()"
             >
-              Thêm ảnh
+              Chọn ảnh
             </button>
             <input
               type="file"
               id="file"
+              multiple
               style="visibility: hidden"
               #filePicker
               name="image"
@@ -304,15 +304,23 @@
           </div>
           <div class="main-image">
             <div class="item-image" *ngIf="imagePreview !== '' && imagePreview">
-              <img [src]="imagePreview" alt="" />
+              <img class="mb-3" [src]="imagePreview" alt="" />
               <a (click)="deleteImage()"><i class="fas fa-times"></i></a>
+              <button
+              mat-stroked-button
+              type="button"
+              class="btn btn-primary"
+              (click)="uploadImage()"
+            >
+              Thêm ảnh
+            </button>
             </div>
           </div>
         </div>
       </div>
       <div class="footer-form mt-5">
         <button mat-stroked-button type="submit" class="btn btn-primary">
-          Thêm
+          Thêm sản phẩm
         </button>
       </div>
     </form>
