@@ -8,7 +8,7 @@ import {
 } from "@angular/forms";
 import { Observable } from "rxjs";
 import { finalize } from "rxjs/operators";
-import { LaptopService } from "src/app/shared/services/laptop.service";
+import { ProductService } from '../../../shared/services/product.service';
 
 @Component({
   selector: "app-create-item",
@@ -23,7 +23,7 @@ export class CreateItemComponent implements OnInit {
   productROM = [];
   fb;
   downloadURL$: Observable<string>;
-  imgURL = [];
+  imgURL;
   file: any;
 
   public readonly colors = [
@@ -52,7 +52,7 @@ export class CreateItemComponent implements OnInit {
   constructor(
     private readonly _formBuilder: FormBuilder,
     private readonly _location: Location,
-    private readonly _productService: LaptopService,
+    private readonly _productService: ProductService,
     private readonly _storage: AngularFireStorage
   ) {}
 
@@ -126,7 +126,7 @@ export class CreateItemComponent implements OnInit {
   }
 
   deleteImage() {
-    this.imagePreview = null;
+   this.imagePreview = null
   }
 
   onChangeColor(event) {
@@ -162,7 +162,6 @@ export class CreateItemComponent implements OnInit {
             if (url) {
               this.fb = url;
               this.imgURL = [...this.imgURL, url]
-              this.imagePreview = null;
             }
           });
         })
@@ -175,17 +174,31 @@ export class CreateItemComponent implements OnInit {
 
   onSubmit() {
     const formSubmit = new FormData();
-    formSubmit.append("name", this.mobileForm.value.productName);
-    formSubmit.append("brand", this.mobileForm.value.brand);
+    formSubmit.append("name", this.mobileForm.value.name);
+    formSubmit.append("brand", this.mobileForm.value.filter.brand);
+    formSubmit.append("series", this.mobileForm.value.series);
     this.productColor.map((item) => formSubmit.append("color", item));
-    formSubmit.append("ram", this.mobileForm.value.ram);
-    formSubmit.append("desc", this.mobileForm.value.desc);
+    formSubmit.append("storage", this.mobileForm.value.filter.storage);
+    formSubmit.append("ram", this.mobileForm.value.filter.ram);
+    formSubmit.append("screen_size", this.mobileForm.value.screen_size);
+    formSubmit.append("price_range", this.mobileForm.value.filter.price_range);
+    formSubmit.append("size_range", this.mobileForm.value.filter.size_range);
+    formSubmit.append("chipset", this.mobileForm.value.chipset);
+    formSubmit.append("sim", this.mobileForm.value.filter.sim);
+    formSubmit.append("wifi", this.mobileForm.value.wifi);
+    formSubmit.append("camera", this.mobileForm.value.camera);
+    formSubmit.append("display", this.mobileForm.value.display);
+    formSubmit.append("battery", this.mobileForm.value.battery);
+    formSubmit.append("OS", this.mobileForm.value.filter.OS);
     formSubmit.append("price", this.mobileForm.value.price);
     formSubmit.append("sale", this.mobileForm.value.sale);
-    formSubmit.append("imageUrls", this.fb);
-    if (this.fb && this.productColor && this.productROM) {
-      this._productService.push_laptop_data(formSubmit);
-      window.location.reload();
+    formSubmit.append(
+      "filter",
+      JSON.stringify(this.mobileForm.value.filter)
+    );
+    formSubmit.append("imageUrls", this.imgURL);
+    if (this.fb && this.productColor) {
+      this._productService.createProduct(formSubmit);
     } else {
       console.log("Đang tải ảnh lên");
     }

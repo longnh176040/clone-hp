@@ -37,7 +37,6 @@
             <input
               class="form-control"
               type="text"
-              id="series"
               placeholder=""
               required
               formControlName="series"
@@ -122,7 +121,7 @@
               </label>
               <input
                 class="form-control"
-                type=""
+                type="text"
                 id="sim"
                 placeholder=""
                 formControlName="sim"
@@ -296,6 +295,7 @@
               id="file"
               multiple
               style="visibility: hidden"
+              multiple
               #filePicker
               name="image"
               (change)="onFileSelected($event)"

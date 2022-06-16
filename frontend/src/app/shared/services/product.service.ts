@@ -7,7 +7,7 @@ import { environment } from 'src/environments/environment';
 })
 export class ProductService {
   constructor(private _httpClient: HttpClient) { }
-  private readonly api_porduct = environment.apiURL + "/laptop/";
+  private readonly api_porduct = environment.apiURL + "/product/";
   createProduct(formData): void {
     this._httpClient.post<{msg: string}>(this.api_porduct, formData).subscribe(data => {
       console.log(data.msg);
