@@ -1,6 +1,5 @@
 const router = require("express").Router();
 
-// router.use("/api/laptop/", require("./apis/laptop.route"));
 router.use("/api/cart/", require("./apis/cart.route"));
 router.use("/api/comment/", require("./apis/comment.route"));
 router.use("/api/order/", require("./apis/order.route"));
