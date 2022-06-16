@@ -296,16 +296,17 @@
               type="file"
               id="file"
               style="visibility: hidden"
+              multiple
               #filePicker
               name="image"
               (change)="onFileSelected($event)"
               accept="image/x-png,image/gif,image/jpeg"
             />
           </div>
-          <div class="main-image">
-            <div class="item-image" *ngIf="imagePreview !== '' && imagePreview">
-              <img [src]="imagePreview" alt="" />
-              <a (click)="deleteImage()"><i class="fas fa-times"></i></a>
+          <div *ngFor="let image of imageUrls" class="main-image">
+            <div  class="item-image">
+              <img [src]="image.url" alt="" />
+              <a (click)="deleteImage(image.url, image.id)"><i class="fas fa-times"></i></a>
             </div>
           </div>
         </div>

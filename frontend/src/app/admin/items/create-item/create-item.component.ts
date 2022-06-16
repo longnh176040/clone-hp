@@ -10,6 +10,7 @@ import {
 import { Observable } from "rxjs";
 import { finalize } from "rxjs/operators";
 import { LaptopService } from "src/app/shared/services/laptop.service";
+import { imagesValidator } from '../../../shared/validator/images-mime-type.validator';
 
 @Component({
   selector: "app-create-item",
@@ -25,7 +26,8 @@ export class CreateItemComponent implements OnInit {
   fb;
   downloadURL$: Observable<string>;
   mobileImage: FileList = null;
-  imgURL = [];
+  images: Array<{ id: number; File: File }> = [];
+  imageUrls: Array<{ id: number; url: string }> = [];
 
   public readonly colors = [
     "white",
@@ -135,8 +137,18 @@ export class CreateItemComponent implements OnInit {
     this._location.back();
   }
 
-  deleteImage() {
-    this.imagePreview = null;
+  deleteImage(imageUrl: any, id: number) {
+    if (imageUrl.slice(0, 5) === 'data:') {
+      this.images = this.images.filter((image) => {
+        return image.id !== id;
+      });
+      this.imageUrls = this.imageUrls.filter((image) => {
+        return image.id !== id;
+      });
+      this.mobileForm.patchValue({
+        imageUrls: this.imageUrls,
+      });
+    }
   }
 
   onChangeColor(event) {
@@ -149,34 +161,65 @@ export class CreateItemComponent implements OnInit {
     }
   }
 
-  onFileSelected(event) {
-    var n = Date.now();
-    const file = (event.target as HTMLInputElement).files[0];
-    const reader = new FileReader();
-    reader.onload = () => {
-      this.imagePreview = reader.result as string;
-    };
-    reader.readAsDataURL(file);
+  // onFileSelected(event) {
+  //   var n = Date.now();
+  //   const file = (event.target as HTMLInputElement).files[0];
+  //   const reader = new FileReader();
+  //   reader.onload = () => {
+  //     this.imagePreview = reader.result as string;
+  //   };
+  //   reader.readAsDataURL(file);
 
-    const filePath = `MobileImages/${n}`;
-    const fileRef = this._storage.ref(filePath);
-    const task = this._storage.upload(`MobileImages/${n}`, file);
-    task
-      .snapshotChanges()
-      .pipe(
-        finalize(() => {
-          this.downloadURL$ = fileRef.getDownloadURL();
-          this.downloadURL$.subscribe((url) => {
-            if (url) {
-              this.fb = url;
-            }
-          });
-        })
-      )
-      .subscribe((url) => {
-        if (url) {
-        }
-      });
+  //   const filePath = `MobileImages/${n}`;
+  //   const fileRef = this._storage.ref(filePath);
+  //   const task = this._storage.upload(`MobileImages/${n}`, file);
+  //   task
+  //     .snapshotChanges()
+  //     .pipe(
+  //       finalize(() => {
+  //         this.downloadURL$ = fileRef.getDownloadURL();
+  //         this.downloadURL$.subscribe((url) => {
+  //           if (url) {
+  //             this.fb = url;
+  //           }
+  //         });
+  //       })
+  //     )
+  //     .subscribe((url) => {
+  //       if (url) {
+  //       }
+  //     });
+  // }
+
+
+  
+  
+  onFileSelected(event): void {    
+    const n = Date.now();
+    if(event.target.files && event.target.files[0]) {
+      const filesAmount = event.target.files.length;
+      for(let i = 0; i< filesAmount; i++) {
+        const file = (event.target as HTMLInputElement).files[i];
+        const fileReader = new FileReader();
+        imagesValidator(file).subscribe(() => {
+          fileReader.onload = (readedFile: any) => {
+            const now = Date.now();
+            this.imageUrls.push({
+              id: now,
+              url: readedFile.target.result as string,
+            });
+            this.mobileForm.patchValue({
+              imageUrls: this.imageUrls,
+            });
+            this.images.push({
+              id: now,
+              File: event.target.files[i],
+            });
+          };
+          fileReader.readAsDataURL(event.target.files[i]);
+        });
+      }
+    }
   }
 
   onSubmit() {
