@@ -61,9 +61,9 @@ exports.createProduct = async ( req, res ) => {
         // specification
     });
 
-    await filter.save();
+    await filterData.save();
     await product.save();
-    return res.status(201).json({ msg: RESPONSE_MESSAGES.FIELD_REQUIRED.replace(MESSAGE_KEYS.object, MESSAGE_VALUES.imageProductUrls) });
+    return res.status(201).json({ msg: RESPONSE_MESSAGES.CREATE_SUCCESS.replace(MESSAGE_KEYS.object, MESSAGE_VALUES.product.toLowerCase()) });
 }
 
 exports.editProduct = async ( req, res ) => {

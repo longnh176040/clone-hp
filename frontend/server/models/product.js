@@ -39,19 +39,19 @@ let productSchema = new mongoose.Schema({
         comments: { type: Number, default: 0 },
     },
     filter: { type: mongoose.Types.ObjectId, ref: "Filter" },
-    specification:
-        {
-            skus: [
-                {
-                    type: { type: mongoose.Types.ObjectId, ref: "Specification" },
-                    value: { type: String }
-                }
-            ],
-            price: { type: Number, required: true },
-            salePrice: { type: Number, required: true },
-            amount: { type: Number, required: true },
-            isAvailable: { type: Boolean, default: true }
-        },
+    // specification:
+    //     {
+    //         skus: [
+    //             {
+    //                 type: { type: mongoose.Types.ObjectId, ref: "Specification" },
+    //                 value: { type: String }
+    //             }
+    //         ],
+    //         price: { type: Number, required: true },
+    //         salePrice: { type: Number, required: true },
+    //         amount: { type: Number, required: true },
+    //         isAvailable: { type: Boolean, default: true }
+    //     },
     saleAmount: { type: Number, default: 0 },
     category: { type: mongoose.Types.ObjectId, ref: "Category" },
     createdAt: { type: Date, default: Date.now },
