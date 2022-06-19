@@ -23,7 +23,7 @@ export class CreateItemComponent implements OnInit {
   productROM = [];
   fb;
   downloadURL$: Observable<string>;
-  imgURL;
+  imgURL: any = [];
   file: any;
 
   public readonly colors = [
@@ -196,7 +196,7 @@ export class CreateItemComponent implements OnInit {
       "filter",
       JSON.stringify(this.mobileForm.value.filter)
     );
-    formSubmit.append("imageUrls", this.imgURL);
+    formSubmit.append("imageUrls", JSON.stringify(this.imgURL));
     if (this.fb && this.productColor) {
       this._productService.createProduct(formSubmit);
     } else {
