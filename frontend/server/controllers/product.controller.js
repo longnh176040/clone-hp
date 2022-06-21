@@ -38,6 +38,7 @@ exports.createProduct = async ( req, res ) => {
         wifi,
         screen_size: req.body.screen_size,
         screen_resolution: req.body.screen_resolution,
+        size_range: req.body.size_range,
         price_range: req.body.price_range,
         camera: req.body.camera,
         display: req.body.display,
@@ -48,6 +49,9 @@ exports.createProduct = async ( req, res ) => {
         webcam: req.body.webcam,
         audio: req.body.audio,
         battery: req.body.battery,
+        GPU: req.body.gpu,
+        GPS: req.body.gps,
+        bluetooth: req.body.bluetooth,
         OS: req.body.OS,
         dimension: req.body.dimension,
         weight: req.body.weight,
@@ -97,6 +101,7 @@ exports.editProduct = async ( req, res ) => {
         wifi: req.body.wifi,
         screen_size: req.body.screen_size,
         screen_resolution: req.body.screen_resolution,
+        size_range: req.body.size_range,
         price_range: req.body.price_range,
         camera: req.body.camera,
         display: req.body.display,
@@ -107,6 +112,9 @@ exports.editProduct = async ( req, res ) => {
         webcam: req.body.webcam,
         audio: req.body.audio,
         battery: req.body.battery,
+        GPU: req.body.gpu,
+        GPS: req.body.gps,
+        bluetooth: req.body.bluetooth,
         OS: req.body.OS,
         dimension: req.body.dimension,
         weight: req.body.weight,
@@ -166,3 +174,16 @@ exports.getProductById = async ( req, res ) => {
 
     return res.status(200).json(product);
 }
+
+
+exports.changeStatus = async (req, res) => {
+      const product = await Product.findOneAndUpdate(
+        { _id: req.query.id },
+        { status: req.query.value },
+        { new: true }
+      );
+      if(!product){
+        return res.status(500).json({ msg: RESPONSE_MESSAGES.UPDATE_SUCCESS.replace(MESSAGE_KEYS.object, MESSAGE_VALUES.status)  })
+      }
+      return res.status(200).json({ msg: "Cập nhật thành công" });
+};

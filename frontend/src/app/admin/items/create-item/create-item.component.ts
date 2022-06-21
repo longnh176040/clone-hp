@@ -3,14 +3,12 @@ import { Component, OnInit } from "@angular/core";
 import { AngularFireStorage } from "@angular/fire/storage";
 import {
   FormBuilder,
-  FormControl,
   FormGroup,
   Validators,
 } from "@angular/forms";
 import { Observable } from "rxjs";
 import { finalize } from "rxjs/operators";
-import { LaptopService } from "src/app/shared/services/laptop.service";
-import { imagesValidator } from '../../../shared/validator/images-mime-type.validator';
+import { ProductService } from '../../../shared/services/product.service';
 
 @Component({
   selector: "app-create-item",
@@ -25,9 +23,8 @@ export class CreateItemComponent implements OnInit {
   productROM = [];
   fb;
   downloadURL$: Observable<string>;
-  mobileImage: FileList = null;
-  images: Array<{ id: number; File: File }> = [];
-  imageUrls: Array<{ id: number; url: string }> = [];
+  imgURL: any = [];
+  file: any;
 
   public readonly colors = [
     "white",
@@ -55,7 +52,7 @@ export class CreateItemComponent implements OnInit {
   constructor(
     private readonly _formBuilder: FormBuilder,
     private readonly _location: Location,
-    private readonly _productService: LaptopService,
+    private readonly _productService: ProductService,
     private readonly _storage: AngularFireStorage
   ) {}
 
@@ -76,10 +73,13 @@ export class CreateItemComponent implements OnInit {
       camera: [null],
       display: [null],
       battery: [null],
+      gpu: [null],
+      gps:[null],
+      bluetooth: [null],
       OS: [null],
       price: [null, [Validators.required, Validators.pattern("^[0-9]*$")]],
       sale: [null, [Validators.required, Validators.pattern("^[0-9]*$")]],
-      filter: [
+      filter: this._formBuilder.group(
         {
           brand: [null],
           ram: [null],
@@ -89,7 +89,7 @@ export class CreateItemComponent implements OnInit {
           size_range: [null],
           sim: [null],
         },
-      ],
+        ),
       imageUrls: [null],
     });
   }
@@ -124,31 +124,12 @@ export class CreateItemComponent implements OnInit {
     "Trên 40 triệu",
   ];
 
-  onImagePicked(event: Event): void {
-    const files = (event.target as HTMLInputElement).files[0];
-    const reader = new FileReader();
-    reader.onload = () => {
-      this.imagePreview = reader.result as string;
-    };
-    reader.readAsDataURL(files);
-  }
-
   goBack() {
     this._location.back();
   }
 
-  deleteImage(imageUrl: any, id: number) {
-    if (imageUrl.slice(0, 5) === 'data:') {
-      this.images = this.images.filter((image) => {
-        return image.id !== id;
-      });
-      this.imageUrls = this.imageUrls.filter((image) => {
-        return image.id !== id;
-      });
-      this.mobileForm.patchValue({
-        imageUrls: this.imageUrls,
-      });
-    }
+  deleteImage() {
+   this.imagePreview = null
   }
 
   onChangeColor(event) {
@@ -161,80 +142,54 @@ export class CreateItemComponent implements OnInit {
     }
   }
 
-  // onFileSelected(event) {
-  //   var n = Date.now();
-  //   const file = (event.target as HTMLInputElement).files[0];
-  //   const reader = new FileReader();
-  //   reader.onload = () => {
-  //     this.imagePreview = reader.result as string;
-  //   };
-  //   reader.readAsDataURL(file);
+  onFileSelected(event) {
+    this.file = (event.target as HTMLInputElement).files[0];
+    const reader = new FileReader();
+    reader.onload = () => {
+      this.imagePreview = reader.result as string;
+    };
+    reader.readAsDataURL(this.file);
+  }
 
-  //   const filePath = `MobileImages/${n}`;
-  //   const fileRef = this._storage.ref(filePath);
-  //   const task = this._storage.upload(`MobileImages/${n}`, file);
-  //   task
-  //     .snapshotChanges()
-  //     .pipe(
-  //       finalize(() => {
-  //         this.downloadURL$ = fileRef.getDownloadURL();
-  //         this.downloadURL$.subscribe((url) => {
-  //           if (url) {
-  //             this.fb = url;
-  //           }
-  //         });
-  //       })
-  //     )
-  //     .subscribe((url) => {
-  //       if (url) {
-  //       }
-  //     });
-  // }
-
-
-  
-  
-  onFileSelected(event): void {    
-    const n = Date.now();
-    if(event.target.files && event.target.files[0]) {
-      const filesAmount = event.target.files.length;
-      for(let i = 0; i< filesAmount; i++) {
-        const file = (event.target as HTMLInputElement).files[i];
-        const fileReader = new FileReader();
-        imagesValidator(file).subscribe(() => {
-          fileReader.onload = (readedFile: any) => {
-            const now = Date.now();
-            this.imageUrls.push({
-              id: now,
-              url: readedFile.target.result as string,
-            });
-            this.mobileForm.patchValue({
-              imageUrls: this.imageUrls,
-            });
-            this.images.push({
-              id: now,
-              File: event.target.files[i],
-            });
-          };
-          fileReader.readAsDataURL(event.target.files[i]);
-        });
-      }
-    }
+  uploadImage(){
+    var n = Date.now();
+    const filePath = `MobileImages/${n}`;
+    const fileRef = this._storage.ref(filePath);
+    const task = this._storage.upload(`MobileImages/${n}`, this.file);
+    task
+      .snapshotChanges()
+      .pipe(
+        finalize(() => {
+          this.downloadURL$ = fileRef.getDownloadURL();
+          this.downloadURL$.subscribe((url) => {
+            if (url) {
+              this.fb = url;
+              this.imgURL = [...this.imgURL, url]
+            }
+          });
+        })
+      )
+      .subscribe((url) => {
+        if (url) {
+        }
+      });
   }
 
   onSubmit() {
-    const formSubmit = new FormData();
-    formSubmit.append("name", this.mobileForm.value.productName);
-    formSubmit.append("brand", this.mobileForm.value.brand);
-    this.productColor.map((item) => formSubmit.append("color", item));
-    formSubmit.append("ram", this.mobileForm.value.ram);
-    formSubmit.append("desc", this.mobileForm.value.desc);
-    formSubmit.append("price", this.mobileForm.value.price);
-    formSubmit.append("sale", this.mobileForm.value.sale);
-    formSubmit.append("imageUrls", this.fb);
-    if (this.fb && this.productColor && this.productROM) {
-      this._productService.push_laptop_data(formSubmit);
-      window.location.reload();
+    const payload = {
+      ...this.mobileForm.value,
+      color: this.productColor.map((item) => item),
+      imageUrls: this.imgURL,
+      ram: this.mobileForm.value.filter.ram,
+      brand: this.mobileForm.value.filter.brand,
+      storage:this.mobileForm.value.filter.storage,
+      price_range: this.mobileForm.value.filter.price_range,
+      size_range: this.mobileForm.value.filter.size_range,
+      sim: this.mobileForm.value.filter.sim,
+      OS: this.mobileForm.value.filter.OS
+    }
+    if (this.fb && this.productColor) {
+      this._productService.createProduct(payload);
     } else {
       console.log("Đang tải ảnh lên");
     }

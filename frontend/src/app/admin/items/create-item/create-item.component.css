@@ -76,7 +76,8 @@ textarea.form-control {
 
 .item-image {
     position: relative;
-    height: 550px;
+    height: 250px;
+    width: 150px;
 }
 
 .item-image a {
@@ -92,6 +93,10 @@ textarea.form-control {
     border: 2px solid #ff0000;
 }
 
+.main-image{
+    display: flex;
+}
+
 .main-image a i {
     color: red;
 }
@@ -102,6 +107,7 @@ textarea.form-control {
     border: 2px solid black;
     font-weight: 550;
     border-radius: 0;
+    padding: 0 10px;
 }
 
 

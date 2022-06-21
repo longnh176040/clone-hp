@@ -13,11 +13,15 @@ let productSchema = new mongoose.Schema({
     wifi: { type: String },
     screen_size: { type: String },
     screen_resolution: { type: String },
+    size_range: { type: String },
     price_range: { type: String },
     camera: {type: String},
     display: { type: String },
     graphic: { type: String },
     wireless: { type: String },
+    GPS: { type: String },
+    GPU: { type: String },
+    bluetooth: { type: String },
     LAN: { type: String },
     keyboard: { type: String },
     webcam: { type: String },
@@ -73,7 +77,7 @@ productSchema.plugin(mongooseAlgolia, {
     debug: true,
 });
 
-const Product = mongoose.model("Laptop", productSchema);
+const Product = mongoose.model("Product", productSchema);
 Product.SyncToAlgolia();
 Product.SetAlgoliaSettings({
     searchableAttributes: ["_id", "brand", "name", "series", "filter.slug"],

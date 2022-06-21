@@ -4,7 +4,7 @@
       <div class="product-table">
         <div class="sort-search">
           <h2>
-            <b>Product List</b>
+            <b>Danh sách sản phẩm</b>
           </h2>
           <div class="box">
             <div class="container-1">
@@ -21,24 +21,14 @@
           </div>
           <div class="position-relative">
             <button
-              type="button"
-              class="btn btn-primary dropdown-toggle"
-              id="dropdownMenuProduct"
-              data-toggle="dropdown"
-              aria-haspopup="true"
-              aria-expanded="false"
-            >
-              <span>Create new product</span>
-            </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuProduct">
-              <button
-                class="btn dropdown-item"
-                type="button"
-                (click)="open_create_product('Product')"
-              >
-                <span>Phone</span>
-              </button>
-            </div>
+            type="button"
+            class="btn btn-primary"
+            aria-haspopup="true"
+            aria-expanded="false"
+            (click)="open_create_product()"
+          >
+            <span>Thêm sản phẩm</span>
+          </button>
           </div>
         </div>
         <table class="table">
@@ -127,7 +117,7 @@
                 </i>
               </th>
               <th scope="col">
-                CPU
+                  Series
                 <i
                   class="bi bi-caret-down"
                   (click)="sortByCPU()"
@@ -177,14 +167,14 @@
               <th scope="row">{{ i + 1 }}</th>
               <td>{{ laptop.brand }}</td>
               <td>
-                <p
+                <span
                   class="laptop_name"
                   routerLink="/products/laptop/{{ laptop.laptop_id }}"
                 >
                   {{ laptop.name }}
-                </p>
+              </span>
               </td>
-              <td>{{ laptop.CPU.name }}</td>
+              <td>{{ laptop.series }}</td>
               <td>
                 <div
                   style="cursor: pointer"
@@ -192,16 +182,16 @@
                   data-target="#modalThumbnail"
                   type="button"
                   (click)="
-                    showThumbnail(laptop.thumbnails, laptop.laptop_id, laptop)
+                    showThumbnail(laptop.imageUrls, laptop._id, laptop)
                   "
                 >
-                  <img src="{{ bucket }}{{ laptop.thumbnails[0] }}" />
+                  <img src="{{ laptop.imageUrls[0] }}" />
                 </div>
               </td>
               <td>
                 <div
                   class="status"
-                  (click)="change_item_status(laptop.laptop_id, laptop.status)"
+                  (click)="change_item_status(laptop._id, laptop.status)"
                 >
                   <i class="bi bi-check2-all" [hidden]="laptop.status == false">
                     <svg
@@ -257,7 +247,7 @@
                   </i>
                 </div>
                 <div class="trash">
-                  <i (click)="delete(laptop.laptop_id)" class="bi bi-trash">
+                  <i (click)="handleDelete(laptop._id)" class="bi bi-trash">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="16"
@@ -635,7 +625,7 @@
                 <div class="ml-auto">
                   <img
                     class="image"
-                    src="{{ bucket }}{{ thumbnail }}"
+                    src="{{ thumbnail }}"
                     (click)="pick_image_to_delete(thumbnail)"
                   />
                   <span

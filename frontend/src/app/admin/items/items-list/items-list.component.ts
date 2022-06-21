@@ -9,6 +9,8 @@ import { Converter } from "src/app/shared/utils/util.convert";
 import { environment } from "src/environments/environment";
 import * as _collection from "lodash/collection";
 import { BehaviorSubject } from "rxjs";
+import { ProductService } from "src/app/shared/services/product.service";
+import Swal from "sweetalert2";
 
 @Component({
   selector: "app-items-list",
@@ -138,13 +140,14 @@ export class ItemsListComponent implements OnInit {
 
   constructor(
     private laptopService: LaptopService,
+    private productService: ProductService,
     private spaceToUnderscore: SpaceToUnderscorePipe,
     private getCoreName: GetCoreNamePipe,
     private router: Router,
   ) {}
 
   ngOnInit(): void {
-    this.laptopService.get_laptops().subscribe((res) => {
+    this.productService.get_product().subscribe((res) => {
       this.laptops = res;
       let filterLaptop = res;
       this.search_by_name.valueChanges.subscribe((ref) => {
@@ -162,6 +165,7 @@ export class ItemsListComponent implements OnInit {
           });
         }
         this.laptops = filterLaptop;
+        console.log(this.laptops)
       });
     });
   }
@@ -248,7 +252,7 @@ export class ItemsListComponent implements OnInit {
   }
 
   // open create product
-  open_create_product(value) {
+  open_create_product() {
     // this.formCreateProduct.reset();
     // this.productColor = [];
     // this.imgURL = [];
@@ -317,9 +321,22 @@ export class ItemsListComponent implements OnInit {
     this.visible = false;
   }
   // delete product
-  delete(value) {
-    this.laptopService.delete_item_by_id(value).subscribe((res) => {
-      this.ngOnInit();
+  handleDelete(id) {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.productService.delete_item_by_id(id).subscribe((res) => {
+          Swal.fire('Deleted!', 'Your file has been deleted.', 'success');
+          this.ngOnInit();
+        }); 
+      }
     });
   }
   // submit product
@@ -411,13 +428,12 @@ export class ItemsListComponent implements OnInit {
         this.imgURL.push(reader.result);
       };
     }
-    // this.thumbnails.concat(this.imgURL);
   }
   // change status
   change_item_status(id, status) {
-    this.laptopService.change_item_status(id, !status).subscribe((res) => {
+    this.productService.change_item_status(id, !status).subscribe((res) => {
       this.laptops = this.laptops.map((lap) =>
-        lap.laptop_id === id ? { ...lap, status: !status } : lap
+        lap._id === id ? { ...lap, status: !status } : lap
       );
     });
   }
@@ -432,49 +448,26 @@ export class ItemsListComponent implements OnInit {
     }
   }
 
-  showThumbnail(thumbnails, laptop_id, laptop) {
+  showThumbnail(thumbnails, _id, laptop) {
     this.thumbnails = [];
     this.listToDelete = [];
     this.imgURL = [];
     this.currentLaptopThumbnail = null;
-    // this.showThumbnails.push(laptop.laptop_id, laptop.name, laptop.series);
-    // this.showThumbnails = this.showThumbnails.concat(thumbnail);
     this.showLaptop = laptop;
     this.thumbnails = thumbnails;
-    this.laptop_id = laptop_id;
+    this.laptop_id = _id
   }
 
   addMoreThumbnail(laptop) {
     const formThumbnail = new FormData();
     if (this.currentLaptopThumbnail) {
-      //   let max_index_thumbnail;
       formThumbnail.append("prefix", "thumbnails");
       formThumbnail.append("product_type", "laptop");
       formThumbnail.append("brand", "HP");
       formThumbnail.append("series", laptop.series.toLowerCase());
       formThumbnail.append("laptop_id", laptop.laptop_id);
-      //   laptop.thumbnail.map((thumbnail) => {
-      //     formThumbnail.append(
-      //       "thumbnails",
-      //       thumbnail.slice(
-      //         thumbnail.lastIndexOf("-") + 1,
-      //         thumbnail.lastIndexOf(".")
-      //       )
-      //     );
-      //     max_index_thumbnail = Number(
-      //       thumbnail.slice(
-      //         thumbnail.lastIndexOf("-") + 1,
-      //         thumbnail.lastIndexOf(".")
-      //       )
-      //     );
-      //   });
-      //   formThumbnail.append("max_index_thumbnail", max_index_thumbnail);
       for (let i = 0; i < this.currentLaptopThumbnail.length; i++) {
         formThumbnail.append("laptop", this.currentLaptopThumbnail[i]);
-        // formThumbnail.append(
-        //   "thumbnails",
-        //   (i + 1 + max_index_thumbnail).toString()
-        // );
       }
     }
     this.laptopService
