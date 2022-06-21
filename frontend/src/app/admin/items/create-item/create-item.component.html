@@ -74,7 +74,7 @@
             </div>
             <div class="form-group mb-3">
               <label for="storage">
-                <b>Bộ nhớ</b>
+                <b>Bộ nhớ:</b>
               </label>
               <select class="form-control" formControlName="storage">
                 <option *ngFor="let storage of storages" value="{{ storage }}">
@@ -97,7 +97,7 @@
             </div>
             <div class="form-group mb-3">
               <label for="price_range">
-                <b>Khoảng giá</b>
+                <b>Khoảng giá:</b>
               </label>
               <select class="form-control" formControlName="price_range">
                 <option *ngFor="let price of priceRange" value="{{ price }}">
@@ -107,7 +107,7 @@
             </div>
             <div class="form-group mb-3">
               <label for="size_range">
-                <b>Khoảng kích thước màn hình</b>
+                <b>Khoảng kích thước màn hình:</b>
               </label>
               <select class="form-control" formControlName="size_range">
                 <option *ngFor="let screen of screenSize" value="{{ screen }}">
@@ -129,7 +129,7 @@
             </div>
             <div class="form-group mb-3">
               <label for="name">
-                <b> Hệ điều hành </b>
+                <b> Hệ điều hành: </b>
               </label>
               <input type="text" class="form-control" formControlName="OS" />
             </div>
@@ -148,7 +148,7 @@
           </div>
           <div class="form-group mb-3">
             <label for="screen_size">
-              <b>Kích thước màn hình</b>
+              <b>Kích thước màn hình:</b>
             </label>
             <input
               class="form-control"
@@ -160,36 +160,21 @@
           </div>
           <div class="form-group mb-3">
             <label for="name">
-              <b>Chipset</b>
+              <b>Chipset:</b>
             </label>
             <input type="text" class="form-control" formControlName="chipset" />
           </div>
-
           <div class="form-group mb-3">
-            <label for="name">
-              <b> Price </b>
+            <label for="gpu">
+              <b>GPU: </b>
             </label>
             <input
-              type="text"
               class="form-control"
-              formControlName="price"
-              required
+              type=""
+              id="gpu"
+              placeholder=""
+              formControlName="gpu"
             />
-            <div *ngIf="showValidateCreate">
-              <small
-                class="form-text text-info"
-                *ngIf="mobileForm.controls.price.errors?.required"
-                >Nhập giá tiền</small
-              >
-            </div>
-            <small
-              class="form-text text-muted"
-              *ngIf="
-                mobileForm.controls.price.dirty &&
-                mobileForm.controls.price.errors?.pattern
-              "
-              >Vui lòng nhập đúng giá tiền</small
-            >
           </div>
           <div class="form-group mb-3">
             <label for="camera">
@@ -230,7 +215,7 @@
           </div>
           <div class="form-group mb-3">
             <label for="screen_resolution">
-              <b>Công nghệ màn hình</b>
+              <b>Công nghệ màn hình: </b>
             </label>
             <select class="form-control" formControlName="screen_resolution">
               <option
@@ -254,8 +239,58 @@
             />
           </div>
           <div class="form-group mb-3">
+            <label for="gps">
+              <b>GPS: </b>
+            </label>
+            <input
+              class="form-control"
+              type=""
+              id="gps"
+              placeholder=""
+              formControlName="gps"
+            />
+          </div>
+          <div class="form-group mb-3">
+            <label for="bluetooth">
+              <b>Bluetooth: </b>
+            </label>
+            <input
+              class="form-control"
+              type=""
+              id="gps"
+              placeholder=""
+              formControlName="bluetooth"
+            />
+          </div>
+          <div class="form-group mb-3">
             <label for="name">
-              <b>Sale</b>
+              <b> Price: *</b>
+            </label>
+            <input
+              type="text"
+              class="form-control"
+              formControlName="price"
+              required
+            />
+            <div *ngIf="showValidateCreate">
+              <small
+                class="form-text text-info"
+                *ngIf="mobileForm.controls.price.errors?.required"
+                >Nhập giá tiền</small
+              >
+            </div>
+            <small
+              class="form-text text-muted"
+              *ngIf="
+                mobileForm.controls.price.dirty &&
+                mobileForm.controls.price.errors?.pattern
+              "
+              >Vui lòng nhập đúng giá tiền</small
+            >
+          </div>
+          <div class="form-group mb-3">
+            <label for="name">
+              <b>Sale: *</b>
             </label>
             <input
               type="text"

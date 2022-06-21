@@ -73,6 +73,9 @@ export class CreateItemComponent implements OnInit {
       camera: [null],
       display: [null],
       battery: [null],
+      gpu: [null],
+      gps:[null],
+      bluetooth: [null],
       OS: [null],
       price: [null, [Validators.required, Validators.pattern("^[0-9]*$")]],
       sale: [null, [Validators.required, Validators.pattern("^[0-9]*$")]],
@@ -173,32 +176,20 @@ export class CreateItemComponent implements OnInit {
   }
 
   onSubmit() {
-    const formSubmit = new FormData();
-    formSubmit.append("name", this.mobileForm.value.name);
-    formSubmit.append("brand", this.mobileForm.value.filter.brand);
-    formSubmit.append("series", this.mobileForm.value.series);
-    this.productColor.map((item) => formSubmit.append("color", item));
-    formSubmit.append("storage", this.mobileForm.value.filter.storage);
-    formSubmit.append("ram", this.mobileForm.value.filter.ram);
-    formSubmit.append("screen_size", this.mobileForm.value.screen_size);
-    formSubmit.append("price_range", this.mobileForm.value.filter.price_range);
-    formSubmit.append("size_range", this.mobileForm.value.filter.size_range);
-    formSubmit.append("chipset", this.mobileForm.value.chipset);
-    formSubmit.append("sim", this.mobileForm.value.filter.sim);
-    formSubmit.append("wifi", this.mobileForm.value.wifi);
-    formSubmit.append("camera", this.mobileForm.value.camera);
-    formSubmit.append("display", this.mobileForm.value.display);
-    formSubmit.append("battery", this.mobileForm.value.battery);
-    formSubmit.append("OS", this.mobileForm.value.filter.OS);
-    formSubmit.append("price", this.mobileForm.value.price);
-    formSubmit.append("sale", this.mobileForm.value.sale);
-    formSubmit.append(
-      "filter",
-      JSON.stringify(this.mobileForm.value.filter)
-    );
-    formSubmit.append("imageUrls", JSON.stringify(this.imgURL));
+    const payload = {
+      ...this.mobileForm.value,
+      color: this.productColor.map((item) => item),
+      imageUrls: this.imgURL,
+      ram: this.mobileForm.value.filter.ram,
+      brand: this.mobileForm.value.filter.brand,
+      storage:this.mobileForm.value.filter.storage,
+      price_range: this.mobileForm.value.filter.price_range,
+      size_range: this.mobileForm.value.filter.size_range,
+      sim: this.mobileForm.value.filter.sim,
+      OS: this.mobileForm.value.filter.OS
+    }
     if (this.fb && this.productColor) {
-      this._productService.createProduct(formSubmit);
+      this._productService.createProduct(payload);
     } else {
       console.log("Đang tải ảnh lên");
     }
