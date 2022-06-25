@@ -25,51 +25,51 @@
     margin-top: var(--spacing);
     overflow: hidden;
     cursor: pointer;
-    height: 450px;
+    height: 550px;
 }
 
 .category-item:nth-child(1){
-    background: url("https://cdn.mediamart.vn/images/product/apple-iphone-13-pro-128g-blue-Ek22oU.jpg") no-repeat;
+    background: url("https://cdn.mediamart.vn/images/product/apple-iphone-13-pro-128g-blue-Ek22oU.jpg") no-repeat center;
     background-size: cover;
     transition: all 0.8s;
 }
 
 .category-item:nth-child(1):hover{
-    background: url("https://image.cellphones.com.vn/358x/media/catalog/product/i/p/iphone-13-pro-max-8_1.jpg") no-repeat;
+    background: url("https://image.cellphones.com.vn/358x/media/catalog/product/i/p/iphone-13-pro-max-8_1.jpg") no-repeat center;
     background-size: cover;
 }
 
 
 .category-item:nth-child(2){
-    background: url("https://image.cellphones.com.vn/358x/media/catalog/product/s/a/samsung-galaxy-s21-ultra-1_1.jpg") no-repeat;
+    background: url("https://image.cellphones.com.vn/358x/media/catalog/product/s/a/samsung-galaxy-s21-ultra-1_1.jpg") no-repeat center;
     background-size: cover;
     transition: all 0.8s;
 }
 
 .category-item:nth-child(2):hover{
-    background: url("https://image.cellphones.com.vn/358x/media/catalog/product/s/a/samsung-galaxy-s21-ultra-12.jpg") no-repeat;
+    background: url("https://image.cellphones.com.vn/358x/media/catalog/product/s/a/samsung-galaxy-s21-ultra-12.jpg") no-repeat center;
     background-size: cover;
 }
 
 .category-item:nth-child(3){
-    background: url("https://image.cellphones.com.vn/358x/media/catalog/product/x/i/xiaomi-mi-11-lite-2.jpg") no-repeat;
+    background: url("https://image.cellphones.com.vn/358x/media/catalog/product/x/i/xiaomi-mi-11-lite-2.jpg") no-repeat center;
     background-size: cover;
     transition: all 0.8s;
 }
 
 .category-item:nth-child(3):hover{
-    background: url("https://image.cellphones.com.vn/358x/media/catalog/product/d/o/download_1__2.png") no-repeat;
+    background: url("https://image.cellphones.com.vn/358x/media/catalog/product/d/o/download_1__2.png") no-repeat center;
     background-size: cover;
 }
 
 .category-item:nth-child(4){
-    background: url("https://image.cellphones.com.vn/358x/media/catalog/product/r/e/realme-8-5g-blue-1-600x600_1.jpg") no-repeat;
+    background: url("https://image.cellphones.com.vn/358x/media/catalog/product/r/e/realme-8-5g-blue-1-600x600_1.jpg") no-repeat center;
     background-size: cover;
     transition: all 0.8s;
 }
 
 .category-item:nth-child(4):hover{
-    background: url("https://image.cellphones.com.vn/358x/media/catalog/product/r/e/realme-8-1_2.png") no-repeat;
+    background: url("https://image.cellphones.com.vn/358x/media/catalog/product/r/e/realme-8-1_2.png") no-repeat center;
     background-size: cover;
 }
 

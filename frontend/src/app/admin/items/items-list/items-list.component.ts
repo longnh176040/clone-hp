@@ -1,7 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from "@angular/core";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
-import { Laptop } from "src/app/shared/models/laptop.model";
+import { Product } from "src/app/shared/models/product.model";
 import { GetCoreNamePipe } from "src/app/shared/pipe/get-core-name.pipe";
 import { SpaceToUnderscorePipe } from "src/app/shared/pipe/space-to-underscore.pipe";
 import { LaptopService } from "src/app/shared/services/laptop.service";
@@ -84,12 +84,12 @@ export class ItemsListComponent implements OnInit {
 
 
   productColor = [];
-  showLaptop: Laptop;
+  showLaptop: Product;
   search_by_name = new FormControl("");
   edit_product_id;
   drawer_state;
   currentLaptopThumbnail: FileList = null;
-  laptops: Laptop[];
+  laptops: Product[];
   visible = false;
   formCreateProduct: FormGroup = new FormGroup({
     name: new FormControl(null, [Validators.required]),
@@ -224,33 +224,6 @@ export class ItemsListComponent implements OnInit {
     });
   }
 
-  sortByCPU() {
-    this.laptops.sort((a, b) => {
-      let nameA = this.getCoreName.transform(a.CPU.name, "CPU");
-      let nameB = this.getCoreName.transform(b.CPU.name, "CPU");
-      if (nameA < nameB) {
-        return -1;
-      }
-      if (nameA > nameB) {
-        return 1;
-      }
-      return 0;
-    });
-  }
-  deSortByCPU() {
-    this.laptops.sort((a, b) => {
-      let nameA = this.getCoreName.transform(a.CPU.name, "CPU");
-      let nameB = this.getCoreName.transform(b.CPU.name, "CPU");
-      if (nameA > nameB) {
-        return -1;
-      }
-      if (nameA < nameB) {
-        return 1;
-      }
-      return 0;
-    });
-  }
-
   // open create product
   open_create_product() {
     // this.formCreateProduct.reset();
@@ -268,52 +241,52 @@ export class ItemsListComponent implements OnInit {
     this.visible = false;
   }
   // open edit product
-  open_edit_product(laptop, value) {
-    this.productColor = laptop.color != null ? laptop.color : [];
-    this.create_type = value;
-
-    this.formCreateProduct.patchValue({
-      name: laptop.name,
-      series: laptop.series,
-      CPU_name: laptop.CPU.name,
-      CPU_speed: laptop.CPU.speed,
-      CPU_cache: laptop.CPU.cache,
-      RAM_capacity: laptop.RAM.capacity,
-      RAM_socket_number: laptop.RAM.socket_number,
-      storage: laptop.storage,
-      display: laptop.display,
-      // display: this.getCoreName.transform(laptop.display, 'display'),
-      graphic: laptop.graphic,
-      wireless: laptop.wireless,
-      LAN: laptop.LAN,
-      connection_USB: laptop.connection.USB,
-      connection_HDMI_VGA: laptop.connection.HDMI_VGA,
-      keyboard: laptop.keyboard,
-      webcam: laptop.webcam,
-      audio: laptop.audio,
-      battery: laptop.battery,
-      OS: laptop.OS,
-      dimension: laptop.dimension,
-      weight: laptop.weight,
-      security: laptop.security,
-      price: laptop.price,
-      sale: laptop.sale,
-      filter: {
-        vga: laptop.filter.vga,
-        need: laptop.filter.need,
-        cpu: laptop.filter.cpu,
-        ram: laptop.filter.ram,
-        storage: laptop.filter.storage,
-        screen_size: laptop.filter.screen_size,
-        screen_resolution: laptop.filter.screen_resolution,
-        os: laptop.filter.os,
-        price_range: laptop.filter.price_range,
-      },
-    });
-    this.edit_product_id = laptop.laptop_id;
-    this.drawer_state = "Edit";
-    this.currentLaptopThumbnail = null;
-    this.visible = true;
+  open_edit_product(id) {
+    this.router.navigate(['/admin/items/edit-item/' + id])
+    // this.productColor = laptop.color != null ? laptop.color : [];
+    // this.create_type = value;
+    // this.formCreateProduct.patchValue({
+    //   name: laptop.name,
+    //   series: laptop.series,
+    //   CPU_name: laptop.CPU.name,
+    //   CPU_speed: laptop.CPU.speed,
+    //   CPU_cache: laptop.CPU.cache,
+    //   RAM_capacity: laptop.RAM.capacity,
+    //   RAM_socket_number: laptop.RAM.socket_number,
+    //   storage: laptop.storage,
+    //   display: laptop.display,
+    //   // display: this.getCoreName.transform(laptop.display, 'display'),
+    //   graphic: laptop.graphic,
+    //   wireless: laptop.wireless,
+    //   LAN: laptop.LAN,
+    //   connection_USB: laptop.connection.USB,
+    //   connection_HDMI_VGA: laptop.connection.HDMI_VGA,
+    //   keyboard: laptop.keyboard,
+    //   webcam: laptop.webcam,
+    //   audio: laptop.audio,
+    //   battery: laptop.battery,
+    //   OS: laptop.OS,
+    //   dimension: laptop.dimension,
+    //   weight: laptop.weight,
+    //   security: laptop.security,
+    //   price: laptop.price,
+    //   sale: laptop.sale,
+    //   filter: {
+    //     vga: laptop.filter.vga,
+    //     need: laptop.filter.need,
+    //     cpu: laptop.filter.cpu,
+    //     ram: laptop.filter.ram,
+    //     storage: laptop.filter.storage,
+    //     screen_size: laptop.filter.screen_size,
+    //     screen_resolution: laptop.filter.screen_resolution,
+    //     os: laptop.filter.os,
+    //     price_range: laptop.filter.price_range,
+    //   },
+    // });
+    // this.edit_product_id = laptop.laptop_id;
+    // this.drawer_state = "Edit";
+    // this.currentLaptopThumbnail = null;
+    // this.visible = true;
   }
   // close edit product
   close_edit_product() {

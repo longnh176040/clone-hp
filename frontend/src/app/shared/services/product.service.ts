@@ -44,4 +44,23 @@ export class ProductService {
       .pipe(catchError(ProductService._handleError));
   }
 
+  get_product_by_id(id): Observable<any> {
+    return this._httpClient
+      .get(this.api_porduct + id)
+      .pipe(catchError(ProductService._handleError));
+  }
+
+  get_edit_product_by_id(id): Observable<any> {
+    return this._httpClient
+      .get(this.api_porduct + "edit/" + id)
+      .pipe(catchError(ProductService._handleError));
+  }
+
+  get_many_product_by_id(formdata): Observable<any> {
+    return this._httpClient
+      .post<any[]>(this.api_porduct + "many/by-id", formdata)
+      .pipe(catchError(ProductService._handleError));
+  }
+
+
 }

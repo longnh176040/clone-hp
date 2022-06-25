@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const mongooseAlgolia = require("mongoose-algolia");
 
 let productSchema = new mongoose.Schema({
-    laptop_id: { type: String },
+    product_id: { type: String },
     brand: { type: String },
     name: { type: String },
     series: { type: String, toLowerCase: true },
@@ -15,7 +15,8 @@ let productSchema = new mongoose.Schema({
     screen_resolution: { type: String },
     size_range: { type: String },
     price_range: { type: String },
-    camera: {type: String},
+    camera: {type: String},    
+    webcam: { type: String },
     display: { type: String },
     graphic: { type: String },
     wireless: { type: String },
@@ -24,7 +25,6 @@ let productSchema = new mongoose.Schema({
     bluetooth: { type: String },
     LAN: { type: String },
     keyboard: { type: String },
-    webcam: { type: String },
     audio: { type: String },
     battery: { type: String },
     OS: { type: String },
@@ -63,13 +63,13 @@ let productSchema = new mongoose.Schema({
 });
 
 productSchema.plugin(mongooseAlgolia, {
-    appId: "MLKSBRTZ0H",
-    apiKey: "d50250b74183352f94c94ea59bdc5966",
-    indexName: "Support HP",
-    selector: "_id brand name series laptop_id filter thumbnails CPU.name graphic RAM.capacity sale price status display",
+    appId: "FKYKG6XW0M",
+    apiKey: "a2329f11e8a305675fdcb4b9c7e1851a",
+    indexName: "products",
+    selector: "id brand name product_id filter imageUrls sale price status chipset ram OS",
     populate: {
         path: "filter",
-        select: "ram need screen_resolution screen_size cpu hard_drive vga os storage price_range",
+        select: "ram sim brand size_range storage OS price_range",
     },
     defaults: {
         author: "unknown",
@@ -77,9 +77,10 @@ productSchema.plugin(mongooseAlgolia, {
     debug: true,
 });
 
+
 const Product = mongoose.model("Product", productSchema);
 Product.SyncToAlgolia();
 Product.SetAlgoliaSettings({
-    searchableAttributes: ["_id", "brand", "name", "series", "filter.slug"],
+    searchableAttributes: ["ram", "brand", "OS", "sim", "storage"],
 });
 module.exports = Product;

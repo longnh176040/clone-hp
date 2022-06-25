@@ -37,7 +37,7 @@
               <th scope="col">#</th>
               <!-- <th scope="col">Product ID</th> -->
               <th scope="col">
-                Brand
+                Hãng
                 <i
                   class="bi bi-caret-down"
                   (click)="sortByBrand()"
@@ -77,7 +77,7 @@
                 </i>
               </th>
               <th scope="col">
-                Name
+                Tên sản phẩm
                 <i
                   class="bi bi-caret-down"
                   (click)="sortByName()"
@@ -116,49 +116,10 @@
                   </svg>
                 </i>
               </th>
-              <th scope="col">
-                  Series
-                <i
-                  class="bi bi-caret-down"
-                  (click)="sortByCPU()"
-                  style="cursor: pointer"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="16"
-                    height="16"
-                    fill="currentColor"
-                    class="bi bi-caret-down"
-                    viewBox="0 0 16 16"
-                  >
-                    <path
-                      d="M3.204 5h9.592L8 10.481 3.204 5zm-.753.659l4.796 5.48a1 1 0 0 0 1.506 0l4.796-5.48c.566-.647.106-1.659-.753-1.659H3.204a1 1 0 0 0-.753 1.659z"
-                    />
-                  </svg>
-                </i>
-  
-                <i
-                  class="bi bi-caret-up"
-                  (click)="deSortByCPU()"
-                  style="cursor: pointer"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="16"
-                    height="16"
-                    fill="currentColor"
-                    class="bi bi-caret-up"
-                    viewBox="0 0 16 16"
-                  >
-                    <path
-                      d="M3.204 11h9.592L8 5.519 3.204 11zm-.753-.659l4.796-5.48a1 1 0 0 1 1.506 0l4.796 5.48c.566.647.106 1.659-.753 1.659H3.204a1 1 0 0 1-.753-1.659z"
-                    />
-                  </svg>
-                </i>
-              </th>
-              <th scope="col">Thumbnail</th>
-              <th scope="col">Status</th>
-              <th scope="col">Edit/Delete</th>
+              <th scope="col">Series</th>
+              <th scope="col">Ảnh</th>
+              <th scope="col">Trạng thái</th>
+              <th scope="col">Thao tác</th>
               <th scope="col">Blog</th>
             </tr>
           </thead>
@@ -229,7 +190,7 @@
               <td>
                 <div
                   class="pencil"
-                  (click)="open_edit_product(laptop, 'Product')"
+                  (click)="open_edit_product(laptop._id)"
                 >
                   <i class="bi bi-pencil">
                     <svg
@@ -271,7 +232,7 @@
                 <img
                   style="width: 40px; height: 40px; cursor: pointer"
                   src="https://img.icons8.com/wired/50/000000/google-blog-search.png"
-                  (click)="onEditBlog(laptop.laptop_id)"
+                  (click)="onEditBlog(laptop._id)"
                 />
               </td>
             </tr>

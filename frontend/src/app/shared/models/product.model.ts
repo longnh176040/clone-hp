@@ -1,33 +1,27 @@
-export class Laptop {
+export class Product {
   constructor(
     public _id: string,
-    public laptop_id: string,
+    public product_id: string,
     public brand: string,
     public name: string,
     public series: string,
-    public CPU: {
-      name: string;
-      speed: string;
-      cache: string;
-    },
-    public RAM: {
-      capacity: string;
-      socket_number: string;
-    },
     public storage: string,
-    public display: string,
-    public graphic: string,
-    public wireless: string,
-    public LAN: string,
-    public connection: {
-      USB: string;
-      HDMI_VGA: string;
-    },
-    public keyboard: string,
+    public chipset: string,
+    public ram: string,
+    public sim: string,
+    public wifi: string,
+    public camera: string,
     public webcam: string,
-    public audio: string,
+    public screen_size: string,
+    public screen_resolution: string,
+    public price_range: string,
+    public size_range: string,
     public battery: string,
+    public display: string,
     public OS: string,
+    public GPU: string,
+    public GPS: string,
+    public bluetooth: string,
     public dimension: string,
     public weight: string,
     public color: Array<string>,
@@ -35,7 +29,7 @@ export class Laptop {
     public price: number,
     public sale: number,
     public status: boolean,
-    public thumbnails: any,
+    public imageUrls: Array<string>,
     public interaction: {
       rating_point: number,
       rates: number,

@@ -1,21 +1,18 @@
 import {
   AfterViewInit,
-  Component,
-  ElementRef,
-  OnInit,
-  ViewChild,
+  Component, OnInit
 } from "@angular/core";
-import { MatTab, MatTabGroup } from "@angular/material/tabs";
+import { MatTabGroup } from "@angular/material/tabs";
+import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from "@angular/router";
 import { tap } from "rxjs/operators";
-import { Laptop } from "src/app/shared/models/laptop.model";
-import { AuthService } from "src/app/shared/services/auth.service";
+import { Product } from "src/app/shared/models/product.model";
 import { CartService } from "src/app/shared/services/cart.service";
 import { Comment } from "src/app/shared/services/comment.service";
 import { GoogleAnalyticsService } from "src/app/shared/services/google-analytics.service";
 import { LaptopService } from "src/app/shared/services/laptop.service";
+import { ProductService } from "src/app/shared/services/product.service";
 import { environment } from "src/environments/environment";
-import {DomSanitizer} from '@angular/platform-browser';
 @Component({
   selector: "app-product-detail",
   templateUrl: "./product-detail.component.html",
@@ -41,13 +38,13 @@ export class ProductDetailComponent implements OnInit, AfterViewInit {
     "../../../assets/product-detail/top_view_closed_facing.png",
   ];
 
-  laptop: Laptop;
+  product: Product;
 
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private laptopService: LaptopService,
-    private authService: AuthService,
+    private productService: ProductService,
     private cartService: CartService,
     private _gaService: GoogleAnalyticsService, private sanitizer: DomSanitizer
   ) {}
@@ -55,8 +52,8 @@ export class ProductDetailComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe((id) => {
-      this.laptopService
-        .get_laptop_by_id(id["id"])
+      this.productService
+        .get_product_by_id(id["id"])
         .pipe(
           tap((p) => {
             const data = [
@@ -75,19 +72,19 @@ export class ProductDetailComponent implements OnInit, AfterViewInit {
           })
         )
         .subscribe((res) => {
-          this.productColors = res.laptop.color;
-          this.laptop = res.laptop;
-          this.blog = res.blog?.content;
+          this.productColors = res.product.color;
+          this.product = res.product;
+          this.blog = res.blog ? res.blog.content : "<p>Đang cập nhật</p>";
           this.blog = this.sanitizer.bypassSecurityTrustHtml(this.blog)
-          this.laptopId = this.laptop._id;
+          this.laptopId = this.product._id;
 
-          this.series = res.laptop.series.toLowerCase();
-          this.laptopService.get_laptops().subscribe((ref) => {
+          this.series = res.product.series.toLowerCase();
+          this.productService.get_product().subscribe((ref) => {
             this.allLaptop = ref;
-            this.similarProducts = ref.filter((laptop) => {
+            this.similarProducts = ref.filter((product) => {
               return (
-                laptop.series.toLowerCase() == this.series &&
-                laptop.name != this.laptop.name
+                product.series.toLowerCase() == this.series &&
+                product.name != this.product.name
               );
             });
           });
@@ -96,12 +93,12 @@ export class ProductDetailComponent implements OnInit, AfterViewInit {
   }
 
   chooseColor(id: number): void {
-    const colors = Array.from(document.getElementsByClassName("color"));
+    const colors = Array.from(document.getElementsByClassName("filter-color"));
     colors.forEach((color, index) => {
-      if (index !== id) {
-        color.classList.add("unselected");
+      if (index === id) {
+        color.classList.add("selected");
       } else {
-        color.classList.remove("unselected");
+        color.classList.remove("selected");
       }
     });
   }
@@ -110,17 +107,17 @@ export class ProductDetailComponent implements OnInit, AfterViewInit {
     this.router.navigate(["checkout"]);
   }
 
-  add_to_cart(laptop_id) {
-    this.cartService.add_to_cart(laptop_id).then(() => {
+  add_to_cart(id) {
+    this.cartService.add_to_cart(id).then(() => {
       this._gaService.ecommerceEvent("add_to_cart", {
         items: [
           {
-            id: this.laptop.laptop_id,
-            name: this.laptop.name,
+            id: this.product._id,
+            name: this.product.name,
             list_name: "Click Detail",
-            brand: this.laptop.brand,
-            category: this.laptop.series,
-            price: this.laptop.price,
+            brand: this.product.brand,
+            category: this.product.series,
+            price: this.product.price,
             quantity: 1,
           },
         ],

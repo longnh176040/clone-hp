@@ -33,7 +33,7 @@ const routes: Routes = [
       {
         path: 'products', component: ProductsComponent, resolve: {user: UserResolver}, children: [
           { path: '', component: ProductListComponent },
-          { path: ':name/:id', component: ProductDetailComponent }
+          { path: ':id', component: ProductDetailComponent }
         ]
       },
       {

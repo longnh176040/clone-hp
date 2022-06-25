@@ -17,7 +17,12 @@ app.use(express.json());
 
 // Set up database
 mongoose.set("useNewUrlParser", true);
-mongoose.connect(process.env.MONGODB_URI).then(
+mongoose.connect(process.env.MONGODB_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useFindAndModify: false,
+    useCreateIndex: true,
+}).then(
     ( _ ) => {
 
         console.log("Database has been connected !");

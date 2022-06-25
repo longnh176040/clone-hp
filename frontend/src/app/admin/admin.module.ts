@@ -37,6 +37,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { SkuComponent } from './sku/sku.component';
 import { CreateItemComponent } from './items/create-item/create-item.component';
 import { ItemsListComponent } from './items/items-list/items-list.component';
+import { EditItemComponent } from './items/edit-item/edit-item.component';
 @NgModule({
   declarations: [
     AdminComponent,
@@ -54,6 +55,7 @@ import { ItemsListComponent } from './items/items-list/items-list.component';
     SkuComponent,
     CreateItemComponent,
     ItemsListComponent,
+    EditItemComponent,
   ],
   imports: [
     CommonModule,

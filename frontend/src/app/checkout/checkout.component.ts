@@ -4,11 +4,12 @@ import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
 import { tap } from "rxjs/operators";
 import { environment } from "src/environments/environment";
-import { Laptop } from "../shared/models/laptop.model";
+import { Product } from "../shared/models/product.model";
 import { AuthService } from "../shared/services/auth.service";
 import { CartService } from "../shared/services/cart.service";
 import { GoogleAnalyticsService } from "../shared/services/google-analytics.service";
 import { LaptopService } from "../shared/services/laptop.service";
+import { ProductService } from '../shared/services/product.service';
 
 @Component({
   selector: "app-checkout",
@@ -21,12 +22,13 @@ export class CheckoutComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private laptopService: LaptopService,
+    private productService: ProductService,
     private cartService: CartService,
     public authService: AuthService,
     private _gaService: GoogleAnalyticsService
   ) {}
 
-  laptop: Laptop;
+  laptop: Product;
   bucket = environment.bucket;
   user_cart = [];
   value = 1;
@@ -71,14 +73,12 @@ export class CheckoutComponent implements OnInit {
         this.amount = this.amount + Number(item.amount);
       });
     });
-    const formData = new FormData();
-    array.map((item) => {
-      formData.append("id", item.product_id);
-      formData.append("amount", item.amount);
-    });
-
-    this.laptopService
-      .get_many_laptop_by_id(formData)
+    const payload = {
+      id:  array.map((item) => item._id),
+      amout: array.map((item) => item.amount)
+    }
+    this.productService
+      .get_many_product_by_id(payload)
       .pipe(
         tap((res) => {
           if (res.length > 0) {

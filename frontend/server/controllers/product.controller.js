@@ -2,6 +2,7 @@ const { RESPONSE_MESSAGES, MESSAGE_KEYS, MESSAGE_VALUES } = require("../utils/me
 const { removeVietnameseTones } = require("../utils/string");
 const Filter = require("../models/filter");
 const Product = require("../models/product");
+const Blog = require("../models/blog");
 
 exports.createProduct = async ( req, res ) => {
     const { imageUrls,
@@ -27,7 +28,7 @@ exports.createProduct = async ( req, res ) => {
     });
 
     const product = new Product({
-        laptop_id: unsignedName,
+        product_id: unsignedName,
         brand,
         name,
         series,
@@ -90,7 +91,7 @@ exports.editProduct = async ( req, res ) => {
     };
 
     const updateData = {
-        laptop_id: unsignedName,
+        product_id: unsignedName,
         brand,
         name,
         series,
@@ -127,7 +128,6 @@ exports.editProduct = async ( req, res ) => {
         filter: filterData._id,
         // specification
     };
-
     await Filter.updateOne({ _id: filter._id }, filterData);
     await Product.updateOne({ _id: productId }, updateData);
     return res.status(200).json({ msg: RESPONSE_MESSAGES.UPDATE_SUCCESS.replace(MESSAGE_KEYS.object, MESSAGE_VALUES.product.toLowerCase()) })
@@ -135,10 +135,13 @@ exports.editProduct = async ( req, res ) => {
 
 exports.deleteProduct = async ( req, res ) => {
     const { id } = req.params;
-    const product = await Product.deleteOne({ _id: id });
-    if (!product.n || product.n === 0) {
+    const product = await Product.findOneAndDelete({ _id: id });
+    await Filter.deleteOne({ _id: product.filter });
+    await Blog.deleteOne({ belong_to: product._id });
+    if (!product) {
         return res.status(400).json({ msg: RESPONSE_MESSAGES.NOT_FOUND.replace(MESSAGE_KEYS.object, MESSAGE_VALUES.product) })
     }
+    product.RemoveFromAlgolia();
     return res.status(200).json({ msg: RESPONSE_MESSAGES.DELETE_SUCCESS.replace(MESSAGE_KEYS.object, MESSAGE_VALUES.product.toLowerCase()) });
 }
 
@@ -166,15 +169,70 @@ exports.getListProduct = async ( req, res ) => {
 
 exports.getProductById = async ( req, res ) => {
     const { id } = req.params;
-    const product = await Product.findById(id);
-
+    const product = await Product.findOne({
+        _id: id,
+      });
+    const blog = await Blog.findOne(
+        { belong_to: id },
+        "content"
+      );
     if (!product) {
         return res.status(400).json({ msg: RESPONSE_MESSAGES.NOT_FOUND.replace(MESSAGE_KEYS.object, MESSAGE_VALUES.product) })
     }
+    return res.status(200).json({product: product, blog: blog});
+}
 
+exports.getEditProductById = async ( req, res ) => {
+    const { id } = req.params;
+    const product = await Product.findOne({
+        _id: id,
+      });
+    if (!product) {
+        return res.status(400).json({ msg: RESPONSE_MESSAGES.NOT_FOUND.replace(MESSAGE_KEYS.object, MESSAGE_VALUES.product) })
+    }
     return res.status(200).json(product);
 }
 
+
+exports.getProductsByIds = async (req, res, next) => {
+    try {
+      products = await Product.find({ _id: { $in: req.body.id } });
+      products = products.map((product, index) => {
+        return {
+          amount: req.body.amount[index],
+          ram: product.ram,
+          color: product.color,
+          thumbnails: product.imageUrls,
+          product_id: product.product_id,
+          brand: product.brand,
+          name: product.name,
+          series: product.series,
+          storage: product.storage,
+          display: product.display,
+          camera: product.camera,
+          webcam: product.webcam,
+          audio: laptop.audio,
+          battery: product.battery,
+          OS: product.OS,
+          price: product.price,
+          sale: product.sale,
+          status: product.status,
+          GPU: product.gpu,
+          GPS: product.gps,
+          bluetooth: product.bluetooth,
+          dimension: product.dimension,
+          weight: product.weight,
+          chipset: product.chipset,
+          sim: product.sim,
+          screen_size: product.screen_size,
+          screen_resolution: product.screen_resolution,
+        };
+      });
+      return res.status(200).json(products);
+    } catch (err) {
+      return res.status(400).json({ msg: RESPONSE_MESSAGES.NOT_FOUND.replace(MESSAGE_KEYS.object, MESSAGE_VALUES.product) })
+    }
+  };
 
 exports.changeStatus = async (req, res) => {
       const product = await Product.findOneAndUpdate(
@@ -185,5 +243,6 @@ exports.changeStatus = async (req, res) => {
       if(!product){
         return res.status(500).json({ msg: RESPONSE_MESSAGES.UPDATE_SUCCESS.replace(MESSAGE_KEYS.object, MESSAGE_VALUES.status)  })
       }
+      product.SyncToAlgolia();
       return res.status(200).json({ msg: "Cập nhật thành công" });
 };

@@ -135,18 +135,6 @@
             </div>
           </div>
           <div class="form-group mb-3">
-            <label><b>Color:</b></label>
-            <br />
-            <label *ngFor="let color of colors" style="margin-right: 20px">
-              <input
-                type="checkbox"
-                [value]="color"
-                (change)="onChangeColor($event)"
-              />
-              {{ color }}
-            </label>
-          </div>
-          <div class="form-group mb-3">
             <label for="screen_size">
               <b>Kích thước màn hình:</b>
             </label>
@@ -158,37 +146,6 @@
               formControlName="screen_size"
             />
           </div>
-          <div class="form-group mb-3">
-            <label for="name">
-              <b>Chipset:</b>
-            </label>
-            <input type="text" class="form-control" formControlName="chipset" />
-          </div>
-          <div class="form-group mb-3">
-            <label for="gpu">
-              <b>GPU: </b>
-            </label>
-            <input
-              class="form-control"
-              type=""
-              id="gpu"
-              placeholder=""
-              formControlName="gpu"
-            />
-          </div>
-          <div class="form-group mb-3">
-            <label for="camera">
-              <b>Camera: </b>
-            </label>
-            <input
-              class="form-control"
-              type=""
-              id="camera"
-              placeholder=""
-              formControlName="camera"
-            />
-          </div>
-
           <div class="form-group mb-3">
             <label for="display">
               <b>Độ phân giải màn hình: </b>
@@ -202,17 +159,54 @@
             />
           </div>
           <div class="form-group mb-3">
-            <label for="wifi">
-              <b>Wi-Fi: </b>
+            <label for="camera">
+              <b>Camera trước: </b>
             </label>
             <input
               class="form-control"
               type=""
-              id="wifi"
+              id="camera"
               placeholder=""
-              formControlName="wifi"
+              formControlName="camera"
             />
           </div>
+          <div class="form-group mb-3">
+            <label for="webcam">
+              <b>Camera sau: </b>
+            </label>
+            <input
+              class="form-control"
+              type=""
+              id="webcam"
+              placeholder=""
+              formControlName="webcam"
+            />
+          </div>
+          <div class="form-group mb-3">
+            <label for="dimension">
+              <b>Kích thước: </b>
+            </label>
+            <input
+              class="form-control"
+              type=""
+              id="dimension"
+              placeholder=""
+              formControlName="dimension"
+            />
+          </div>
+          <div class="form-group mb-3">
+            <label for="weight">
+              <b>Trọng lượng: </b>
+            </label>
+            <input
+              class="form-control"
+              type=""
+              id="weight"
+              placeholder=""
+              formControlName="weight"
+            />
+          </div>
+
           <div class="form-group mb-3">
             <label for="screen_resolution">
               <b>Công nghệ màn hình: </b>
@@ -238,6 +232,38 @@
               formControlName="battery"
             />
           </div>
+        </div>
+        <div class="form-image form-content">
+          <div class="form-group mb-3">
+            <label><b>Màu sắc:</b></label>
+            <br />
+            <label *ngFor="let color of colors" style="margin-right: 20px">
+              <input
+                type="checkbox"
+                [value]="color"
+                (change)="onChangeColor($event)"
+              />
+              {{ color }}
+            </label>
+          </div>
+          <div class="form-group mb-3">
+            <label for="name">
+              <b>Chipset:</b>
+            </label>
+            <input type="text" class="form-control" formControlName="chipset" />
+          </div>
+          <div class="form-group mb-3">
+            <label for="gpu">
+              <b>GPU: </b>
+            </label>
+            <input
+              class="form-control"
+              type=""
+              id="gpu"
+              placeholder=""
+              formControlName="gpu"
+            />
+          </div>
           <div class="form-group mb-3">
             <label for="gps">
               <b>GPS: </b>
@@ -251,20 +277,32 @@
             />
           </div>
           <div class="form-group mb-3">
+            <label for="wifi">
+              <b>Wi-Fi: </b>
+            </label>
+            <input
+              class="form-control"
+              type=""
+              id="wifi"
+              placeholder=""
+              formControlName="wifi"
+            />
+          </div>
+          <div class="form-group mb-3">
             <label for="bluetooth">
               <b>Bluetooth: </b>
             </label>
             <input
               class="form-control"
               type=""
-              id="gps"
+              id="bluetooth"
               placeholder=""
               formControlName="bluetooth"
             />
           </div>
           <div class="form-group mb-3">
             <label for="name">
-              <b> Price: *</b>
+              <b> Giá: *</b>
             </label>
             <input
               type="text"
@@ -290,7 +328,7 @@
           </div>
           <div class="form-group mb-3">
             <label for="name">
-              <b>Sale: *</b>
+              <b>Giá khuyến mại: *</b>
             </label>
             <input
               type="text"
@@ -314,8 +352,6 @@
               >Vui lòng nhập đúng giá tiền</small
             >
           </div>
-        </div>
-        <div class="form-image form-content">
           <div class="button-image mb-4">
             <button
               mat-stroked-button
@@ -350,6 +386,7 @@
               Thêm ảnh
             </button>
             </div>
+            
           </div>
         </div>
       </div>

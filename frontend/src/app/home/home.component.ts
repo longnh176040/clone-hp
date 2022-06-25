@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { LaptopService } from '../shared/services/laptop.service';
+import { ProductService } from '../shared/services/product.service';
 
 declare var $: any;
 
@@ -13,7 +13,7 @@ export class HomeComponent implements OnInit {
   isTouched = false;
   touchedStartX: number = null;
   touchedEndX: number = null;
-  laptops = [];
+  products = [];
   dealList = [];
   bestList= [];
   promotionList = []
@@ -32,14 +32,14 @@ export class HomeComponent implements OnInit {
     { name: 'HP Spectre X360 13', originalPrice: '25.000.000', salePrice: '20.000.000', discount: '15%', imgLink: 'https://store.hp.com/app/assets/images/product/2C5A6UA%23ABA/center_facing.png?_=1602667371454&imwidth=270&imdensity=1', briefDesc: 'Micro Edge 13.3” UHD touch screen\nIntel UHD Graphics 8th generation Intel® Core™ vPro processor\n16 GB memory, 1TB SSD storage\nSuper light- weight - Under 1kg', onSale: true }
   ];
 
-  constructor(private laptopService: LaptopService) { }
+  constructor(private productService: ProductService) { }
 
   ngOnInit(): void {
-    this.laptopService.get_laptops().subscribe(res => {
-      this.laptops = res;
-      this.dealList = this.laptops.slice(0,4);
-      this.bestList = this.laptops.slice(4,8);
-      this.promotionList = this.laptops.slice(8,12)
+    this.productService.get_product().subscribe(res => {
+      this.products = res;
+      this.dealList = this.products.slice(0,4);
+      this.bestList = this.products.slice(4,8);
+      this.promotionList = this.products.slice(8,12)
       
     })
   }

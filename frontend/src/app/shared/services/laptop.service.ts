@@ -8,7 +8,7 @@ import {
 // import 'rxjs/add/operator/catch';
 import { catchError, map } from "rxjs/operators";
 import { environment } from "src/environments/environment";
-import { Laptop } from "../models/laptop.model";
+import { Product } from "../models/product.model";
 @Injectable({
   providedIn: "root",
 })

@@ -13,6 +13,7 @@ export class ProductCardComponent implements OnInit {
 
   @Input() product: any;
   @Input() comparable: boolean;
+  
 
   @Output() startComparing = new EventEmitter<string>();
 
@@ -45,7 +46,9 @@ export class ProductCardComponent implements OnInit {
     private _gaService: GoogleAnalyticsService
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log(this.product)
+  }
 
   add_to_cart(laptop_id: string) {
     this.cartService.add_to_cart(laptop_id);

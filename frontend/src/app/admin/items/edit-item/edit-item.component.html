@@ -1,0 +1,365 @@
+<div class="main-layout">
+    <div class="form-layout">
+      <div class="header-title mb-3">
+        <h3>Chỉnh sửa thông tin sản phẩm</h3>
+        <a (click)="goBack()" style="cursor: pointer">Trở lại</a>
+      </div>
+      <form
+        (ngSubmit)="onSubmit()"
+        [formGroup]="mobileForm"
+        autocomplete="off"
+        novalidate="true"
+      >
+        <div class="form-body">
+          <div class="form-text form-content">
+            <div class="form-group mb-3">
+              <label for="name">
+                  <b>Tên sản phẩm *</b>
+              </label>
+              <input
+                type="text"
+                class="form-control"
+                formControlName="name"
+                required
+              />
+              <div *ngIf="showValidateCreate">
+                <small
+                  class="form-text text-info"
+                  *ngIf="mobileForm.controls.productName.errors?.required"
+                  >Nhập tên sản phẩm</small
+                >
+              </div>
+            </div>
+            <div class="form-group mb-3">
+              <label for="series">
+                <b>Series * </b>
+              </label>
+              <input
+                class="form-control"
+                type="text"
+                placeholder=""
+                required
+                formControlName="series"
+              />
+              <small
+                class="text-danger"
+                role="alert"
+                *ngIf="
+                  mobileForm.controls.series?.errors?.required &&
+                  mobileForm.controls.series?.touched
+                "
+                >Series is required!</small
+              >
+            </div>
+            <div formGroupName="filter">
+              <div class="form-group mb-3">
+                <label for="name">
+                  <b>
+                      Hãng *
+                  </b>
+                </label>
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="brand"
+                  required
+                />
+                <div *ngIf="showValidateCreate">
+                  <small
+                    class="form-text text-info"
+                    *ngIf="mobileForm.controls.brand.errors?.required"
+                    >Nhập tên hãng</small
+                  >
+                </div>
+              </div>
+              <div class="form-group mb-3">
+                <label for="storage">
+                  <b>Bộ nhớ:</b>
+                </label>
+                <select class="form-control" formControlName="storage">
+                  <option *ngFor="let storage of storages" value="{{ storage }}">
+                    {{ storage }}
+                  </option>
+                </select>
+              </div>
+              <div class="form-group mb-3">
+                <label><b>RAM:</b></label>
+                <br />
+                <label *ngFor="let ram of rams" style="margin-right: 20px">
+                  <input
+                    type="radio"
+                    name="ram"
+                    [value]="ram"
+                    formControlName="ram"
+                  />
+                  {{ ram }}
+                </label>
+              </div>
+              <div class="form-group mb-3">
+                <label for="price_range">
+                  <b>Khoảng giá:</b>
+                </label>
+                <select class="form-control" formControlName="price_range">
+                  <option *ngFor="let price of priceRange" value="{{ price }}">
+                    {{ price }}
+                  </option>
+                </select>
+              </div>
+              <div class="form-group mb-3">
+                <label for="size_range">
+                  <b>Khoảng kích thước màn hình:</b>
+                </label>
+                <select class="form-control" formControlName="size_range">
+                  <option *ngFor="let screen of screenSize" value="{{ screen }}">
+                    {{ screen }}
+                  </option>
+                </select>
+              </div>
+              <div class="form-group mb-3">
+                <label for="sim">
+                  <b>Thẻ SIM: </b>
+                </label>
+                <input
+                  class="form-control"
+                  type="text"
+                  id="sim"
+                  placeholder=""
+                  formControlName="sim"
+                />
+              </div>
+              <div class="form-group mb-3">
+                <label for="name">
+                  <b> Hệ điều hành: </b>
+                </label>
+                <input type="text" class="form-control" formControlName="OS" />
+              </div>
+            </div>
+            <div class="form-group mb-3">
+              <label for="screen_size">
+                <b>Kích thước màn hình:</b>
+              </label>
+              <input
+                class="form-control"
+                type="text"
+                id="screen_size"
+                placeholder=""
+                formControlName="screen_size"
+              />
+            </div>
+            <div class="form-group mb-3">
+              <label for="display">
+                <b>Độ phân giải màn hình: </b>
+              </label>
+              <input
+                class="form-control"
+                type=""
+                id="display"
+                placeholder=""
+                formControlName="display"
+              />
+            </div>
+            <div class="form-group mb-3">
+              <label for="camera">
+                <b>Camera trước: </b>
+              </label>
+              <input
+                class="form-control"
+                type=""
+                id="camera"
+                placeholder=""
+                formControlName="camera"
+              />
+            </div>
+            <div class="form-group mb-3">
+              <label for="webcam">
+                <b>Camera sau: </b>
+              </label>
+              <input
+                class="form-control"
+                type=""
+                id="webcam"
+                placeholder=""
+                formControlName="webcam"
+              />
+            </div>
+            <div class="form-group mb-3">
+              <label for="dimension">
+                <b>Kích thước: </b>
+              </label>
+              <input
+                class="form-control"
+                type=""
+                id="dimension"
+                placeholder=""
+                formControlName="dimension"
+              />
+            </div>
+            <div class="form-group mb-3">
+              <label for="weight">
+                <b>Trọng lượng: </b>
+              </label>
+              <input
+                class="form-control"
+                type=""
+                id="weight"
+                placeholder=""
+                formControlName="weight"
+              />
+            </div>
+  
+            <div class="form-group mb-3">
+              <label for="screen_resolution">
+                <b>Công nghệ màn hình: </b>
+              </label>
+              <select class="form-control" formControlName="screen_resolution">
+                <option
+                  *ngFor="let screen of screenResolution"
+                  value="{{ screen }}"
+                >
+                  {{ screen }}
+                </option>
+              </select>
+            </div>
+            <div class="form-group mb-3">
+              <label for="battery">
+                <b>Pin: </b>
+              </label>
+              <input
+                class="form-control"
+                type=""
+                id="battery"
+                placeholder=""
+                formControlName="battery"
+              />
+            </div>
+          </div>
+          <div class="form-image form-content">
+            <div class="form-group mb-3">
+              <label><b>Màu sắc:</b></label>
+              <br />
+              <label *ngFor="let color of colors" style="margin-right: 20px">
+                <input
+                  type="checkbox"
+                  [value]="color"
+                  (change)="onChangeColor($event)"
+                />
+                {{ color }}
+              </label>
+            </div>
+            <div class="form-group mb-3">
+              <label for="name">
+                <b>Chipset:</b>
+              </label>
+              <input type="text" class="form-control" formControlName="chipset" />
+            </div>
+            <div class="form-group mb-3">
+              <label for="gpu">
+                <b>GPU: </b>
+              </label>
+              <input
+                class="form-control"
+                type=""
+                id="gpu"
+                placeholder=""
+                formControlName="gpu"
+              />
+            </div>
+            <div class="form-group mb-3">
+              <label for="gps">
+                <b>GPS: </b>
+              </label>
+              <input
+                class="form-control"
+                type=""
+                id="gps"
+                placeholder=""
+                formControlName="gps"
+              />
+            </div>
+            <div class="form-group mb-3">
+              <label for="wifi">
+                <b>Wi-Fi: </b>
+              </label>
+              <input
+                class="form-control"
+                type=""
+                id="wifi"
+                placeholder=""
+                formControlName="wifi"
+              />
+            </div>
+            <div class="form-group mb-3">
+              <label for="bluetooth">
+                <b>Bluetooth: </b>
+              </label>
+              <input
+                class="form-control"
+                type=""
+                id="bluetooth"
+                placeholder=""
+                formControlName="bluetooth"
+              />
+            </div>
+            <div class="form-group mb-3">
+              <label for="name">
+                <b> Giá: *</b>
+              </label>
+              <input
+                type="text"
+                class="form-control"
+                formControlName="price"
+                required
+              />
+              <div *ngIf="showValidateCreate">
+                <small
+                  class="form-text text-info"
+                  *ngIf="mobileForm.controls.price.errors?.required"
+                  >Nhập giá tiền</small
+                >
+              </div>
+              <small
+                class="form-text text-muted"
+                *ngIf="
+                  mobileForm.controls.price.dirty &&
+                  mobileForm.controls.price.errors?.pattern
+                "
+                >Vui lòng nhập đúng giá tiền</small
+              >
+            </div>
+            <div class="form-group mb-3">
+              <label for="name">
+                <b>Giá khuyến mại: *</b>
+              </label>
+              <input
+                type="text"
+                class="form-control"
+                formControlName="sale"
+                required
+              />
+              <div *ngIf="showValidateCreate">
+                <small
+                  class="form-text text-info"
+                  *ngIf="mobileForm.controls.sale.errors?.required"
+                  >Nhập giá sale</small
+                >
+              </div>
+              <small
+                class="form-text text-muted"
+                *ngIf="
+                  mobileForm.controls.price.dirty &&
+                  mobileForm.controls.price.errors?.pattern
+                "
+                >Vui lòng nhập đúng giá tiền</small
+              >
+            </div>
+          </div>
+        </div>
+        <div class="footer-form mt-5">
+          <button mat-stroked-button type="submit" class="btn btn-primary">
+            Lưu lại
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+  

@@ -1,5 +1,5 @@
 <div class="single-product">
-  <div class="discount" *ngIf="product.sale != 0">-{{ product.sale }}%</div>
+  <div class="discount" *ngIf="product.price - product.sale != 0">-{{((product.price - product.sale) / product.price)* 100 | number:'1.0-0' }}%</div>
   <div class="card-top position-relative">
     <div class="status" *ngIf="!product.status">
       <span>{{ product.status ? "" : "Hết hàng" }}</span>
@@ -7,54 +7,19 @@
     <img
       class="img-thumb"
       [src]="product.imageUrls[0]"
-      [routerLink]="['/products', 'laptop', product.laptop_id]"
+      [routerLink]="['/products', product.id ? product.id : product._id]"
     />
   </div>
   <div>
-    <h6 [routerLink]="['/products', 'laptop', product.laptop_id]">
+    <h3 [routerLink]="['/products', product.id ? product.id : product._id]">
       {{ product.name }}
-    </h6>
-    <p class="screensize-icon">
-      <img
-        src="../../../assets/products-list-page-banner/icon screen size.png"
-        alt="cart icon"
-      />
-      <span>{{ product.filter.screen_size | getCoreName: "display" }}</span>
-    </p>
-    <p class="cpu-icon">
-      <img
-        src="../../../assets/products-list-page-banner/icon-cpu.png"
-        alt="cpu icon"
-      />
-      <span>{{ product.CPU.name }}</span>
-    </p>
-    <p class="ram-icon">
-      <img
-        src="../../../assets/products-list-page-banner/icon-ram.png"
-        alt="ram icon"
-      />
-      <span>{{ product.RAM.capacity }}</span>
-    </p>
-    <p class="storage-icon">
-      <img
-        src="../../../assets/products-list-page-banner/Storage-icon.png"
-        alt="cpu icon"
-      />
-      <span>{{ product.filter.storage }}</span>
-    </p>
-    <p class="graphic-icon">
-      <img
-        src="../../../assets/products-list-page-banner/icon-vga.png"
-        alt="graphic icon"
-      />
-      <span>{{ product.graphic }}</span>
-    </p>
+    </h3>
   </div>
-  <div style="margin-top: auto">
-    <div class="price my-3">
+  <div>
+    <div class="price mb-3">
       <span class="sale" *ngIf="product.sale != 0"
         >{{
-          product.price - (product.price / 100) * product.sale | convertPrice
+          product.sale | convertPrice
         }}
         ₫</span
       >

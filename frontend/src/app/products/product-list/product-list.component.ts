@@ -8,8 +8,8 @@ import { environment } from "src/environments/environment";
 import { GoogleAnalyticsService } from "src/app/shared/services/google-analytics.service";
 
 const searchClient = algoliasearch(
-  "MLKSBRTZ0H",
-  "5802ef7ce07f5a39ce945e0533cbaadc"
+  "FKYKG6XW0M",
+  "a2329f11e8a305675fdcb4b9c7e1851a"
 );
 @Component({
   selector: "app-product-list",
@@ -21,7 +21,7 @@ export class ProductListComponent implements OnInit {
   @ViewChildren("productHTML") productElements: any;
 
   public config = {
-    indexName: "Support HP",
+    indexName: "products",
     searchClient,
   };
 

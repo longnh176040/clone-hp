@@ -1,7 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from "@angular/core";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
-import { Laptop } from "src/app/shared/models/laptop.model";
+import { Sku } from "src/app/shared/models/sku.model";
 import { GetCoreNamePipe } from "src/app/shared/pipe/get-core-name.pipe";
 import { SkuService } from "src/app/shared/services/sku.service";
 
@@ -15,11 +15,10 @@ export class SkuComponent implements OnInit {
   public thumbnails: string[] = [];
   public laptop_id: string;
 
-  showLaptop: Laptop;
   search_by_name = new FormControl("");
   edit_sku_id;
   drawer_state;
-  specfics: Laptop[];
+  specfics: Sku[];
   visible = false;
   formCreateProduct: FormGroup = new FormGroup({
     name: new FormControl(null, [Validators.required]),

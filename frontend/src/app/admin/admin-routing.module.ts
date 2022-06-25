@@ -7,6 +7,7 @@ import { ChatComponent } from './chat/chat.component';
 import { CoverageComponent } from './coverage/coverage.component';
 import { BlogComponent } from './items/blog/blog.component';
 import { CreateItemComponent } from './items/create-item/create-item.component';
+import { EditItemComponent } from './items/edit-item/edit-item.component';
 import { ItemsListComponent } from './items/items-list/items-list.component';
 import { ItemsComponent } from './items/items.component';
 import { OrderComponent } from './order/order.component';
@@ -28,6 +29,7 @@ const routes: Routes = [
         children: [
           { path: 'items-list', component: ItemsListComponent }, 
           { path: 'create-item', component: CreateItemComponent },
+          { path: 'edit-item/:id', component: EditItemComponent },
           { path: '', redirectTo: 'items-list', pathMatch: 'full' },
         ],
       },

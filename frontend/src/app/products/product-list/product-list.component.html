@@ -47,24 +47,10 @@
                   ></span>
                 </button>
                 <ais-refinement-list
-                  attribute="series"
+                  attribute="brand"
                   [transformItems]="transformSeriesName"
                 ></ais-refinement-list>
               </div>
-
-              <div class="filter-block">
-                <button class="btn p-0 filter-heading mb-2">
-                  <span>CPU</span>
-                  <span style="opacity: 0; pointer-events: none"
-                    ><i class="fas fa-caret-up"></i
-                  ></span>
-                </button>
-                <ais-refinement-list
-                  attribute="filter.cpu"
-                  [sortBy]="['count:asc']"
-                ></ais-refinement-list>
-              </div>
-
               <div class="filter-block">
                 <button class="btn p-0 filter-heading mb-2">
                   <span>RAM</span>
@@ -88,19 +74,6 @@
                   attribute="filter.storage"
                 ></ais-refinement-list>
               </div>
-
-              <div class="filter-block">
-                <button class="btn p-0 filter-heading mb-2">
-                  <span>Nhu cầu sử dụng</span>
-                  <span style="opacity: 0; pointer-events: none"
-                    ><i class="fas fa-caret-up"></i
-                  ></span>
-                </button>
-                <ais-refinement-list
-                  attribute="filter.need"
-                ></ais-refinement-list>
-              </div>
-
               <div class="filter-block">
                 <button class="btn p-0 filter-heading mb-2">
                   <span>Khoảng giá</span>
@@ -112,19 +85,6 @@
                   attribute="filter.price_range"
                 ></ais-refinement-list>
               </div>
-
-              <div class="filter-block">
-                <button class="btn p-0 filter-heading mb-2">
-                  <span>VGA - Card màn hình</span>
-                  <span style="opacity: 0; pointer-events: none"
-                    ><i class="fas fa-caret-up"></i
-                  ></span>
-                </button>
-                <ais-refinement-list
-                  attribute="filter.vga"
-                ></ais-refinement-list>
-              </div>
-
               <div class="filter-block">
                 <button class="btn p-0 filter-heading mb-2">
                   <span>Kích thước màn hình</span>
