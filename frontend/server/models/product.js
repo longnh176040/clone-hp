@@ -20,6 +20,7 @@ let productSchema = new mongoose.Schema({
     display: { type: String },
     graphic: { type: String },
     wireless: { type: String },
+    frequency: { type: String },
     GPS: { type: String },
     GPU: { type: String },
     bluetooth: { type: String },

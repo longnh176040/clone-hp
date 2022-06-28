@@ -57,15 +57,6 @@ export class CheckoutComponent implements OnInit {
   }
 
   initUserCart(array: any[]) {
-    // this.laptopService.get_laptop_by_id(item.product_id).subscribe((res) => {
-    //   res.amount = item.amount;
-    //   this.user_cart.push(res);
-    //   this.old_price =
-    //     this.old_price + Number(res.price) * Number(item.amount);
-    //   this.sale =
-    //     this.sale +
-    //     (Number(res.price) / 100) * Number(res.sale) * Number(item.amount);
-    // });
     this.cartService.currentCart.subscribe((res) => {
       res = [].concat(res);
       this.amount = 0;
@@ -74,8 +65,8 @@ export class CheckoutComponent implements OnInit {
       });
     });
     const payload = {
-      id:  array.map((item) => item._id),
-      amout: array.map((item) => item.amount)
+      id:  array.map((item) => item.product_id),
+      amount: array.map((item) => item.amount)
     }
     this.productService
       .get_many_product_by_id(payload)
@@ -84,7 +75,7 @@ export class CheckoutComponent implements OnInit {
           if (res.length > 0) {
             res.forEach((product) => {
               this.ecomerceItems.push({
-                id: product.laptop_id,
+                id: product.id,
                 name: product.name,
                 list_name: "Click Detail",
                 brand: product.brand,
@@ -114,30 +105,28 @@ export class CheckoutComponent implements OnInit {
         this.old_price + Number(product.price) * Number(product.amount);
       this.sale =
         this.sale +
-        (Number(product.price) / 100) *
-          Number(product.sale) *
-          Number(product.amount);
+        (Number(product.price) - Number(product.sale)) * Number(product.amount);
     });
   }
 
   goToDetailPage(id): void {
-    this.router.navigate(["products/laptop/" + id]);
+    this.router.navigate(["products/" + id]);
   }
 
-  handleMinus(laptop_id) {
+  handleMinus(id) {
     let check_product = this.user_cart.find(
-      (product) => product.laptop_id == laptop_id
+      (product) => product.id == id
     );
     if (Number(check_product.amount) == 1) {
-      this.remove_product_from_cart(laptop_id);
+      this.remove_product_from_cart(id);
     } else {
       this.user_cart = this.user_cart.map((product) => {
-        if (product.laptop_id == laptop_id) {
+        if (product.id == id) {
           product.amount = (Number(product.amount) - 1).toString();
           this._gaService.ecommerceEvent("remove_from_cart", {
             items: [
               {
-                id: product.laptop_id,
+                id: product.id,
                 name: product.name,
                 list_name: "Click Detail",
                 brand: product.brand,
@@ -151,17 +140,17 @@ export class CheckoutComponent implements OnInit {
         return product;
       });
       this.calculatePrice(this.user_cart);
-      this.cartService.subtract_to_cart(laptop_id);
+      this.cartService.subtract_to_cart(id);
     }
   }
-  handlePlus(laptop_id) {
+  handlePlus(id) {
     this.user_cart = this.user_cart.map((product) => {
-      if (product.laptop_id == laptop_id) {
+      if (product.id == id) {
         product.amount = (Number(product.amount) + 1).toString();
         this._gaService.ecommerceEvent("add_to_cart", {
           items: [
             {
-              id: product.laptop_id,
+              id: product.id,
               name: product.name,
               list_name: "Click Detail",
               brand: product.brand,
@@ -175,15 +164,15 @@ export class CheckoutComponent implements OnInit {
       return product;
     });
     this.calculatePrice(this.user_cart);
-    this.cartService.add_to_cart(laptop_id);
+    this.cartService.add_to_cart(id);
   }
 
-  remove_product_from_cart(laptop_id) {
+  remove_product_from_cart(id) {
     this.user_cart = this.user_cart.filter((product) => {
       this._gaService.ecommerceEvent("remove_from_cart", {
         items: [
           {
-            id: product.laptop_id,
+            id: product.id,
             name: product.name,
             list_name: "Click Detail",
             brand: product.brand,
@@ -193,17 +182,17 @@ export class CheckoutComponent implements OnInit {
           },
         ],
       });
-      return product.laptop_id != laptop_id;
+      return product.id != id;
     });
     this.calculatePrice(this.user_cart);
 
     if (!this.authService.isAuthenticated()) {
-      this.cartService.remove_in_anonymous_cart(laptop_id);
+      this.cartService.remove_in_anonymous_cart(id);
     } else {
       //update on mongodb
       const formSubmit = new FormData();
       formSubmit.append("user_id", AuthService.user.id);
-      formSubmit.append("product_id", laptop_id);
+      formSubmit.append("product_id", id);
 
       this.cartService.remove_cart_by_id(formSubmit).subscribe((res) => {
         this.cartService.cartSource.next(res.products);

@@ -77,6 +77,7 @@ export class CreateItemComponent implements OnInit {
       display: [null],
       battery: [null],
       weight: [null],
+      frequency: [null],
       gpu: [null],
       gps:[null],
       bluetooth: [null],

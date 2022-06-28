@@ -29,15 +29,6 @@ export class ProductDetailComponent implements OnInit, AfterViewInit {
   public laptopId: string;
 
   blog: any;
-
-  thumbnailImages = [
-    "../../../assets/product-detail/center_facing.png",
-    "../../../assets/product-detail/left_facing.png",
-    "../../../assets/product-detail/left_rear_facing.png",
-    "../../../assets/product-detail/right_rear_facing.png",
-    "../../../assets/product-detail/top_view_closed_facing.png",
-  ];
-
   product: Product;
 
   constructor(

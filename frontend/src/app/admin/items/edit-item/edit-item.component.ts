@@ -15,10 +15,7 @@ export class EditItemComponent implements OnInit {
   showValidateCreate: boolean = false;
   productColor = [];
   productROM = [];
-  fb;
-  downloadURL$: Observable<string>;
-  imgURL: any = [];
-  file: any;
+  id: string;
 
   public readonly colors = [
     "Trắng",
@@ -87,13 +84,13 @@ export class EditItemComponent implements OnInit {
         size_range: [null],
         sim: [null],
       }),
-      imageUrls: [null],
     });
 
     this.activatedRoute.params.subscribe((id) => {
       this._productService
         .get_edit_product_by_id(id["id"])
         .subscribe((data) => {
+          this.id = data._id
           this.productColor = data.color != null ? data.color : [];
           this.mobileForm.patchValue({
             name: data["name"],
@@ -178,6 +175,7 @@ export class EditItemComponent implements OnInit {
   onSubmit() {
     const payload = {
       ...this.mobileForm.value,
+      productId: this.id,
       color: this.productColor.map((item) => item),
       ram: this.mobileForm.value.filter.ram,
       brand: this.mobileForm.value.filter.brand,
@@ -187,10 +185,6 @@ export class EditItemComponent implements OnInit {
       sim: this.mobileForm.value.filter.sim,
       OS: this.mobileForm.value.filter.OS,
     };
-    if (this.fb && this.productColor) {
-      this._productService.createProduct(payload);
-    } else {
-      console.log("Đang tải ảnh lên");
-    }
+    this._productService.edit_product_data(payload);
   }
 }

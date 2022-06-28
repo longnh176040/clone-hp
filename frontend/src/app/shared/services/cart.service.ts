@@ -45,20 +45,20 @@ export class CartService {
       .pipe(catchError(CartService._handleError));
   }
 
-  update_anonymous_cart(laptop_id, method) {
+  update_anonymous_cart(product_id, method) {
     let res = this.get_anonymous_cart();
-    let result = res.find((obj) => obj.product_id == laptop_id);
+    let result = res.find((obj) => obj.product_id == product_id);
     if (result) {
       if (method == "add")
         result.amount = (Number(result.amount) + 1).toString();
       else if (method == "subtract")
         result.amount = (Number(result.amount) - 1).toString();
       for (let i = 0; i < res.length; i++) {
-        if (res[i].product_id == laptop_id) res[i].amount = result.amount;
+        if (res[i].product_id == product_id) res[i].amount = result.amount;
       }
     } else {
       res.push({
-        product_id: laptop_id,
+        product_id: product_id,
         amount: "1",
       });
     }
@@ -89,13 +89,13 @@ export class CartService {
       .pipe(catchError(CartService._handleError));
   }
 
-  add_to_cart(laptop_id) {
+  add_to_cart(product_id) {
     return new Promise<any>((resolve, reject) => {
       if (this.authService.isAuthenticated()) {
         //update cart on DB
         const formSubmit = new FormData();
         formSubmit.append("user_id", AuthService.user.id);
-        formSubmit.append("product_id", laptop_id);
+        formSubmit.append("product_id", product_id);
         this.update_cart_by_id(formSubmit).subscribe((res) => {
           this.cartSource.next(res.products);
           this.utilService.openSnackBar("Thêm sản phẩm ", "Thành công")
@@ -103,27 +103,27 @@ export class CartService {
         });
       } else {
         //update cart on Session Storage
-        this.update_anonymous_cart(laptop_id, "add");
+        this.update_anonymous_cart(product_id, "add");
         this.utilService.openSnackBar("Thêm sản phẩm ", "Thành công")
         resolve("");
       }
     });
   }
 
-  subtract_to_cart(laptop_id) {
+  subtract_to_cart(product_id) {
     return new Promise<any>((resolve, reject) => {
       if (this.authService.isAuthenticated()) {
         //decrease cart on DB
         const formSubmit = new FormData();
         formSubmit.append("user_id", AuthService.user.id);
-        formSubmit.append("product_id", laptop_id);
+        formSubmit.append("product_id", product_id);
         this.decrease_cart_by_id(formSubmit).subscribe((res) => {
           this.cartSource.next(res.products);
           resolve("");
         });
       } else {
         //update cart on Session Storage
-        this.update_anonymous_cart(laptop_id, "subtract");
+        this.update_anonymous_cart(product_id, "subtract");
         resolve("");
       }
     });

@@ -47,6 +47,7 @@ exports.createProduct = async ( req, res ) => {
         wireless: req.body.wireless,
         LAN: req.body.LAN,
         keyboard: req.body.keyboard,
+        frequency: req.body.frequency,
         webcam: req.body.webcam,
         audio: req.body.audio,
         battery: req.body.battery,
@@ -72,11 +73,7 @@ exports.createProduct = async ( req, res ) => {
 }
 
 exports.editProduct = async ( req, res ) => {
-    const { imageUrls, name, filter, brand, series, specification, productId } = req.body;
-
-    if (!imageUrls || imageUrls.length === 0) {
-        return res.status(400).json({ msg: RESPONSE_MESSAGES.FIELD_REQUIRED.replace(MESSAGE_KEYS.object, MESSAGE_VALUES.imageProductUrls) });
-    }
+    const {name, filter, brand, series, productId } = req.body;
 
     const unsignedName = removeVietnameseTones(name).trim().replace(" ", "-");
 
@@ -113,6 +110,7 @@ exports.editProduct = async ( req, res ) => {
         webcam: req.body.webcam,
         audio: req.body.audio,
         battery: req.body.battery,
+        frequency: req.body.frequency,
         GPU: req.body.gpu,
         GPS: req.body.gps,
         bluetooth: req.body.bluetooth,
@@ -199,33 +197,18 @@ exports.getProductsByIds = async (req, res, next) => {
       products = await Product.find({ _id: { $in: req.body.id } });
       products = products.map((product, index) => {
         return {
+          id: product._id,
           amount: req.body.amount[index],
           ram: product.ram,
           color: product.color,
-          thumbnails: product.imageUrls,
+          imageUrls: product.imageUrls,
           product_id: product.product_id,
           brand: product.brand,
           name: product.name,
           series: product.series,
           storage: product.storage,
-          display: product.display,
-          camera: product.camera,
-          webcam: product.webcam,
-          audio: laptop.audio,
-          battery: product.battery,
-          OS: product.OS,
           price: product.price,
           sale: product.sale,
-          status: product.status,
-          GPU: product.gpu,
-          GPS: product.gps,
-          bluetooth: product.bluetooth,
-          dimension: product.dimension,
-          weight: product.weight,
-          chipset: product.chipset,
-          sim: product.sim,
-          screen_size: product.screen_size,
-          screen_resolution: product.screen_resolution,
         };
       });
       return res.status(200).json(products);

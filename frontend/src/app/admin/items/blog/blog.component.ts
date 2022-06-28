@@ -25,7 +25,7 @@ import LinkTool from "@editorjs/embed";
 export class BlogComponent implements OnInit {
   editor: any;
   data: any = null;
-  laptop_id: string;
+  product_id: string;
   final_data: string;
   converted_news_html: any[];
   raw_news_data: any;
@@ -51,7 +51,7 @@ export class BlogComponent implements OnInit {
   ngOnInit(): void {
     this.activatedRoute.params
       .pipe(
-        tap((params: any) => (this.laptop_id = params.id)),
+        tap((params: any) => (this.product_id = params.id)),
         switchMap((params) => this.laptopService.getBlog(params.id)),
         take(1)
       )
@@ -192,14 +192,14 @@ export class BlogComponent implements OnInit {
         });
         if (this.mode == "create") {
           this.laptopService
-            .createBlog(this.blogForm.value, this.laptop_id)
+            .createBlog(this.blogForm.value, this.product_id)
             .subscribe((res: any) => {
               this._location.back();
               this._utilService.openSnackBar(res.msg, "Thành công");
             });
         } else {
           this.laptopService
-            .editBlog(this.blogForm.value, this.laptop_id)
+            .editBlog(this.blogForm.value, this.product_id)
             .subscribe((res: any) => {
               this._location.back();
               this._utilService.openSnackBar(res.msg, "Thành công");

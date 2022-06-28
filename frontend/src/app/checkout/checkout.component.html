@@ -35,7 +35,7 @@
               <div
                 class="remove-item-btn"
                 style="cursor: pointer"
-                (click)="remove_product_from_cart(laptop.laptop_id)"
+                (click)="remove_product_from_cart(laptop.id)"
               >
                 <img
                   src="https://img.icons8.com/officel/20/000000/close-window.png"
@@ -47,7 +47,7 @@
               >
                 <div class="thumb-img">
                   <img
-                    [src]="bucket + laptop.thumbnails[0]"
+                    [src]="laptop.imageUrls"
                     class="img-fluid"
                   />
                 </div>
@@ -56,7 +56,7 @@
                 <div class="product-info">
                   <h6>{{ laptop.name }}</h6>
                   <span class="d-sm-inline-block d-none"
-                    ><a (click)="goToDetailPage(laptop.laptop_id)"
+                    ><a (click)="goToDetailPage(laptop.id)"
                       >Xem cấu hình chi tiết</a
                     ></span
                   >
@@ -75,7 +75,7 @@
                     <input
                       style="color: #0290cd; font-size: 18px; height: 30px"
                       class="minus is-form"
-                      (click)="handleMinus(laptop.laptop_id)"
+                      (click)="handleMinus(laptop.id)"
                       type="button"
                       value="-"
                     />
@@ -97,7 +97,7 @@
                     <input
                       style="color: #0290cd; font-size: 18px; height: 30px"
                       class="plus is-form"
-                      (click)="handlePlus(laptop.laptop_id)"
+                      (click)="handlePlus(laptop.id)"
                       type="button"
                       value="+"
                     />

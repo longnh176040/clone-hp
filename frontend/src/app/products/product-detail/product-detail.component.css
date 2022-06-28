@@ -14,14 +14,14 @@
   margin-left: 5px;
 }
 .users-overview span.active-stars i {
-  color: #3ba3eb;
+  color: #F59E0B;
 }
 .users-overview span.inactive-star i {
   margin-left: 5px;
   color: #b8c6d0;
 }
 span.total-ratings {
-  color: #3ba3eb;
+  color: #F59E0B;
   font-size: 17px;
   text-decoration: underline;
   cursor: pointer;
@@ -31,7 +31,7 @@ span.total-ratings {
   margin-left: 15px;
 }
 span.total-ratings:hover {
-  color: #00447c;
+  color: #F59E0B;
 }
 
 /* style price section */
@@ -141,7 +141,7 @@ ul.specs-overview li img {
 /* style buy now button */
 button.purchase-now {
   margin-top: 2rem;
-  background-color: #3ba3eb;
+  background-color: #ff4040;
   color: white;
   border: none;
   width: 120px;
@@ -151,15 +151,7 @@ button.purchase-now {
   transition: all 0.4s ease-in-out;
 }
 button.purchase-now:hover {
-  background: #00447c;
-  /* background-image: linear-gradient(
-    to right,
-    #25aae1,
-    #40e495,
-    #30dd8a,
-    #2bb673
-  );
-  background-position: 100% 0; */
+  background: #ff4040;
 }
 
 /* style info section */

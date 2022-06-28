@@ -119,10 +119,10 @@
                     <app-product-card
                       [product]="hit"
                       #product
-                      [comparable]="true"
+                      [comparable]="compareList.length < 3 ? true : false"
                       (startComparing)="addToCompare($event)"
                       (removingFromComparison)="
-                        removeComparedItem($event.laptop_id)
+                        removeComparedItem($event._id)
                       "
                     ></app-product-card>
                   </div>
@@ -133,30 +133,6 @@
               </ng-template>
             </ais-infinite-hits>
           </div>
-
-          <!-- <div class="col-12 d-xl-none">
-            <div class="actions-wrapper">
-              <div class="main-actions">
-                <button
-                  class="filter-btn btn d-xl-none d-block"
-                  (click)="showMobileFiters = true"
-                >
-                  
-                  Bộ lọc
-                </button>
-
-                <ais-search-box></ais-search-box>
-
-                <button
-                  class="compare-btn btn d-xl-none d-block"
-                  (click)="showMobileFiters = true"
-                >
-                 
-                  So sánh
-                </button>
-              </div>
-            </div>
-          </div> -->
         </div>
       </div>
     </ais-instantsearch>
@@ -189,12 +165,12 @@
             *ngFor="let product of compareList; let id = index"
           >
             <div class="compared-product">
-              <img [src]="bucket + product.thumbnails[0]" class="img-fluid" />
+              <img [src]="product.imageUrls[0]" class="img-fluid" />
               <p>{{ product.name }}</p>
-              <span>{{ id }}</span>
+              <span>{{ id + 1 }}</span>
               <i
                 class="fas fa-times"
-                (click)="removeComparedItem(product.laptop_id, id)"
+                (click)="removeComparedItem(product._id, id)"
               ></i>
             </div>
           </div>

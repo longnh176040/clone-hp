@@ -50,12 +50,12 @@ export class ProductCardComponent implements OnInit {
     console.log(this.product)
   }
 
-  add_to_cart(laptop_id: string) {
-    this.cartService.add_to_cart(laptop_id);
+  add_to_cart(product_id: string) {
+    this.cartService.add_to_cart(product_id);
     this._gaService.ecommerceEvent("add_to_cart", {
       items: [
         {
-          id: this.product.laptop_id,
+          id: this.product.product_id,
           name: this.product.name,
           list_name: "Click Detail",
           brand: this.product.brand,

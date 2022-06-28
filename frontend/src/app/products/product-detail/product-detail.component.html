@@ -92,6 +92,13 @@
               </span> -->
             </span>
             <span
+              *ngIf="product.interaction.comments === 0 || product.interaction.rates === 0"
+              class="total-ratings"
+               (click)="goToComment(matTabGroup, comment)"
+              >Chưa có bình luận và đánh giá</span
+            >
+            <span
+              *ngIf="product.interaction.comments !== 0 && product.interaction.rates !== 0"
               (click)="goToComment(matTabGroup, comment)"
               class="total-ratings"
               >Xem <span>{{ product.interaction.comments }}</span> bình luận và
@@ -114,55 +121,32 @@
           </div>
           <ul class="specs-overview">
             <li>
-              <img
-                src="../../../assets/product-detail/hardware-icons/036-windows-operating-system.png"
-              />
-              <span>{{ product.OS }}</span>
+              <strong>Kích thước màn hình: </strong>
+              <span>{{ product.screen_size }}</span>
             </li>
             <li>
-              <img
-                src="../../../assets/product-detail/hardware-icons/013-processor.png"
-              />
+              <strong>Công nghệ màn hình: </strong>
+              <span>{{ product.screen_resolution}}</span>
+            </li>
+            <li>
+              <strong>Độ phân giải màn hình: </strong>
+              <span>{{ product.display }}</span>
+            </li>
+            <li>
+              <strong>Dung lượng RAM: </strong>
               <span>{{ product.ram }}</span>
             </li>
             <li>
-              <img
-                src="../../../assets/product-detail/hardware-icons/022-memory.png"
-              />
-              <span>{{ product.ram }}</span>
-            </li>
-            <li>
-              <img
-                src="../../../assets/product-detail/hardware-icons/006-ssd.png"
-              />
+              <strong>Bộ nhớ: </strong>
               <span>{{ product.storage }}</span>
             </li>
             <li>
-              <img
-                src="../../../assets/product-detail/hardware-icons/021-monitor.png"
-              />
-              <span>{{ product.storage }}</span>
-            </li>
-            <li>
-              <img
-                src="../../../assets/product-detail/hardware-icons/003-vga-card.png"
-              />
-              <span>{{ product.storage }}</span>
+              <strong>Dung lượng pin: </strong>
+              <span>{{ product.battery }}</span>
             </li>
           </ul>
           <div class="choose-colors">
             <span class="mr-2">Chọn màu sắc</span>
-            <!-- <span
-              class="color"
-              (click)="chooseColor(id)"
-              *ngFor="let color of productColors; let id = index"
-              [ngStyle]="{ borderColor: color }"
-            >
-              <button
-                class="btn"
-                [ngStyle]="{ backgroundColor: color, fontWeight: 'bold' }"
-              ></button>
-            </span> -->
             <div class="filter">
               <div
                 class="filter-color"
@@ -269,7 +253,7 @@
                     [ngTemplateOutlet]="policy"
                     [ngTemplateOutletContext]="{
                       img: '../../../assets/product-detail/gifts/undraw_On_the_way_re_swjt.png',
-                      title: 'Giao hàng tận nơi'
+                      title: 'Giao hàng toàn quốc'
                     }"
                   ></ng-container>
 
@@ -277,7 +261,7 @@
                     [ngTemplateOutlet]="policy"
                     [ngTemplateOutletContext]="{
                       img: '../../../assets/product-detail/gifts/undraw_business_deal_cpi9.png',
-                      title: '1 đổi 1 trong 30 ngày đầu'
+                      title: '1 đổi 1 trong 15 ngày đầu'
                     }"
                   ></ng-container>
 
@@ -285,7 +269,7 @@
                     [ngTemplateOutlet]="policy"
                     [ngTemplateOutletContext]="{
                       img: '../../../assets/product-detail/gifts/undraw_video_call_kxyp.png',
-                      title: 'Hỗ trợ kĩ thuật từ xa'
+                      title: 'Hỗ trợ bảo hành'
                     }"
                   ></ng-container>
                 </div>
@@ -435,6 +419,38 @@
                             <p style="margin: 0cm; margin-bottom: 0.0001pt">
                               <span class="detail_table_column2">{{
                                 product.ram
+                              }}</span>
+                            </p>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            style="
+                              width: 226.95pt;
+                              padding: 0.75pt 0.75pt 0.75pt 0.75pt;
+                            "
+                            width="303"
+                          >
+                            <p style="margin: 0cm; margin-bottom: 0.0001pt">
+                              <span class="detail_table_column2"
+                                ><strong
+                                  ><span style="color: black"
+                                    >Tần số quét</span
+                                  ></strong
+                                ></span
+                              >
+                            </p>
+                          </td>
+                          <td
+                            style="
+                              width: 578.2pt;
+                              padding: 0.75pt 0.75pt 0.75pt 0.75pt;
+                            "
+                            width="771"
+                          >
+                            <p style="margin: 0cm; margin-bottom: 0.0001pt">
+                              <span class="detail_table_column2">{{
+                                product.frequency
                               }}</span>
                             </p>
                           </td>
@@ -799,6 +815,38 @@
                             <p style="margin: 0cm; margin-bottom: 0.0001pt">
                               <span class="detail_table_column2">{{
                                 product.dimension
+                              }}</span>
+                            </p>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            style="
+                              width: 226.95pt;
+                              padding: 0.75pt 0.75pt 0.75pt 0.75pt;
+                            "
+                            width="303"
+                          >
+                            <p style="margin: 0cm; margin-bottom: 0.0001pt">
+                              <span class="detail_table_column2"
+                                ><strong
+                                  ><span style="color: black"
+                                    >Trọng lượng</span
+                                  ></strong
+                                ></span
+                              >
+                            </p>
+                          </td>
+                          <td
+                            style="
+                              width: 578.2pt;
+                              padding: 0.75pt 0.75pt 0.75pt 0.75pt;
+                            "
+                            width="771"
+                          >
+                            <p style="margin: 0cm; margin-bottom: 0.0001pt">
+                              <span class="detail_table_column2">{{
+                                product.weight
                               }}</span>
                             </p>
                           </td>

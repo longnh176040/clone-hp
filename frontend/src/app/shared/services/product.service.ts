@@ -23,6 +23,12 @@ export class ProductService {
     }, err => console.error(err.error.msg));
   }
 
+  edit_product_data(payload): void {
+    this._httpClient.put<{msg: string}>(this.api_porduct, payload).subscribe(data => {
+      console.log(data.msg);
+    }, err => console.error(err.error.msg));
+  }
+
   get_product(): Observable<any> {
     return this._httpClient
       .get(this.api_porduct)

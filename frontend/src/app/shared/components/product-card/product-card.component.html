@@ -39,16 +39,9 @@
 
     <div class="buttons-wrapper text-center" [ngClass]="{'has-one-btn': !product.status}">
       <button
-        class="explore-more btn"
-        [routerLink]="['/products', 'laptop', product.laptop_id]"
-      >
-        <i class="fas fa-search mr-1"></i>Tìm hiểu
-      </button>
-
-      <button
         class="buy-now btn"
         *ngIf="product.status"
-        (click)="add_to_cart(product.laptop_id)"
+        (click)="add_to_cart(product.id ? product.id : product._id)"
       >
         <i class="fas fa-shopping-cart mr-1"></i>Mua ngay
       </button>

@@ -18,6 +18,7 @@ export class Product {
     public size_range: string,
     public battery: string,
     public display: string,
+    public frequency: string,
     public OS: string,
     public GPU: string,
     public GPS: string,
