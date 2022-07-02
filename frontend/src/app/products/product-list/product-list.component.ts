@@ -19,7 +19,6 @@ const searchClient = algoliasearch(
 export class ProductListComponent implements OnInit {
   @ViewChildren("product") productComponents: any;
   @ViewChildren("productHTML") productElements: any;
-
   public config = {
     indexName: "products",
     searchClient,
@@ -66,17 +65,17 @@ export class ProductListComponent implements OnInit {
   removeComparedItem(id: number, index?: number) {
     this.compareList.splice(index, 1);
     this.compareList.filter((laptop) => {
-      if (laptop.laptop_id == id) return false;
+      if (laptop.id === id) return false;
       else return true;
     });
-
     const productComponents = this.productComponents._results;
+    console.log(productComponents)
     const productElements = this.productElements._results;
 
     const correspondingComponentId = productComponents.findIndex(
-      (component) => component.product.laptop_id === id
+      (component) => component.product.id === id
     );
-
+    console.log(correspondingComponentId)
     productElements[correspondingComponentId].nativeElement.querySelector(
       ".compare"
     ).innerText = "Thêm vào so sánh";
@@ -84,8 +83,8 @@ export class ProductListComponent implements OnInit {
 
   clearComparedItems() {
     const productData = [].concat(this.compareList);
-    productData.forEach((laptop, index) => {
-      this.removeComparedItem(laptop.laptop_id, index);
+    productData.forEach((product, index) => {
+      this.removeComparedItem(product.id, index);
     });
     this.compareList = [];
   }

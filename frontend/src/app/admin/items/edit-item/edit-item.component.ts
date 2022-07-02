@@ -16,18 +16,19 @@ export class EditItemComponent implements OnInit {
   productColor = [];
   productROM = [];
   id: string;
+  filter: string;
 
   public readonly colors = [
-    "Trắng",
-    "Đen",
-    "Xanh dương",
-    "Xanh lá",
-    "Bạc",
-    "Đỏ",
-    "Vàng",
-    "Hồng",
-    "Tím",
-    "Xám",
+    "white",
+    "black",
+    "blue",
+    "green",
+    "silver",
+    "red",
+    "gold",
+    "pink",
+    "violet",
+    "gray",
   ];
 
   public readonly roms = [
@@ -68,6 +69,7 @@ export class EditItemComponent implements OnInit {
       display: [null],
       battery: [null],
       weight: [null],
+      frequency: [null],
       gpu: [null],
       gps: [null],
       bluetooth: [null],
@@ -90,6 +92,7 @@ export class EditItemComponent implements OnInit {
       this._productService
         .get_edit_product_by_id(id["id"])
         .subscribe((data) => {
+          this.filter = data.filter
           this.id = data._id
           this.productColor = data.color != null ? data.color : [];
           this.mobileForm.patchValue({
@@ -103,6 +106,7 @@ export class EditItemComponent implements OnInit {
             battery: data.battery,
             OS: data.OS,
             dimension: data.dimension,
+            frequency: data.frequency,
             weight: data.weight,
             security: data.security,
             price: data.price,
@@ -176,6 +180,7 @@ export class EditItemComponent implements OnInit {
     const payload = {
       ...this.mobileForm.value,
       productId: this.id,
+      filterId: this.filter,
       color: this.productColor.map((item) => item),
       ram: this.mobileForm.value.filter.ram,
       brand: this.mobileForm.value.filter.brand,
@@ -186,5 +191,6 @@ export class EditItemComponent implements OnInit {
       OS: this.mobileForm.value.filter.OS,
     };
     this._productService.edit_product_data(payload);
+    console.log(payload)
   }
 }

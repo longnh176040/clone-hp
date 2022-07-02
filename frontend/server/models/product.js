@@ -67,7 +67,7 @@ productSchema.plugin(mongooseAlgolia, {
     appId: "FKYKG6XW0M",
     apiKey: "a2329f11e8a305675fdcb4b9c7e1851a",
     indexName: "products",
-    selector: "id brand name product_id filter imageUrls sale price status chipset ram OS",
+    selector: "id brand name product_id filter imageUrls sale price status chipset ram OS battery camera storage screen_resolution screen_size",
     populate: {
         path: "filter",
         select: "ram sim brand size_range storage OS price_range",

@@ -1,6 +1,6 @@
 <app-banner
   [pageTitle]="''"
-  [bannerImgUrl]="'../../assets/banners/elite-banner.png'"
+  [bannerImgUrl]="'../../assets/banners/phone-1.jpeg'"
 ></app-banner>
 
 <div class="main-content-wrapper">
@@ -190,54 +190,6 @@
                     </div>
                   </div>
                 </ng-template>
-
-                <div class="row gifts-group">
-                  <ng-container
-                    [ngTemplateOutlet]="promotion"
-                    [ngTemplateOutletContext]="{
-                      img: 'src=../../../assets/product-detail/gifts/Image 10.png',
-                      title: 'Balo laptop chống sốc HP',
-                      price: '450.000 đ'
-                    }"
-                  ></ng-container>
-
-                  <ng-container
-                    [ngTemplateOutlet]="promotion"
-                    [ngTemplateOutletContext]="{
-                      img: 'src=../../../assets/product-detail/gifts/Image 11.png',
-                      title: 'Bàn di chuột size lớn',
-                      price: '100.000 đ'
-                    }"
-                  ></ng-container>
-
-                  <ng-container
-                    [ngTemplateOutlet]="promotion"
-                    [ngTemplateOutletContext]="{
-                      img: 'src=../../../assets/product-detail/gifts/Image 12.png',
-                      title: 'Dán skin mặt lưng laptop',
-                      price: '200.000 đ',
-                      className: 'special-gift'
-                    }"
-                  ></ng-container>
-                </div>
-
-                <div class="row gifts-group group-2">
-                  <ng-container
-                    [ngTemplateOutlet]="promotion"
-                    [ngTemplateOutletContext]="{
-                      img: '../../../assets/product-detail/gifts/window_logo-removebg-preview.png',
-                      title: 'Win 10 bản quyền'
-                    }"
-                  ></ng-container>
-
-                  <ng-container
-                    [ngTemplateOutlet]="promotion"
-                    [ngTemplateOutletContext]="{
-                      img: '../../../assets/product-detail/gifts/warranty icon.png',
-                      title: 'Bảo hành trọn đời'
-                    }"
-                  ></ng-container>
-                </div>
 
                 <div class="row gifts-group group-3">
                   <ng-template #policy let-img="img" let-title="title">

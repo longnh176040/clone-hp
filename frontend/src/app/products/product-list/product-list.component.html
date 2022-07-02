@@ -119,10 +119,10 @@
                     <app-product-card
                       [product]="hit"
                       #product
-                      [comparable]="compareList.length < 3 ? true : false"
+                      [comparable]="true"
                       (startComparing)="addToCompare($event)"
                       (removingFromComparison)="
-                        removeComparedItem($event._id)
+                        removeComparedItem($event.id)
                       "
                     ></app-product-card>
                   </div>
@@ -170,7 +170,7 @@
               <span>{{ id + 1 }}</span>
               <i
                 class="fas fa-times"
-                (click)="removeComparedItem(product._id, id)"
+                (click)="removeComparedItem(product.id, id)"
               ></i>
             </div>
           </div>
@@ -198,25 +198,41 @@
       <table class="table">
         <tr>
           <th>#</th>
-          <th scope="col" *ngFor="let laptop of compareList">
-            {{ laptop.name }}
+          <th scope="col" *ngFor="let product of compareList">
+            {{ product.name }}
           </th>
         </tr>
         <tr>
-          <th scope="col">CPU</th>
-          <td *ngFor="let laptop of compareList">{{ laptop.CPU.name }}</td>
+          <th scope="col">Hệ điều hành</th>
+          <td *ngFor="let product of compareList">{{ product.OS }}</td>
         </tr>
         <tr>
-          <th scope="col">RAM</th>
-          <td *ngFor="let laptop of compareList">{{ laptop.RAM.capacity }}</td>
+          <th scope="col">Chipset</th>
+          <td *ngFor="let product of compareList">{{ product.chipset }}</td>
         </tr>
         <tr>
           <th scope="col">Màn hình</th>
-          <td *ngFor="let laptop of compareList">{{ laptop.display }}</td>
+          <td *ngFor="let product of compareList">{{ product.screen_size }}</td>
         </tr>
         <tr>
-          <th scope="col">Card đồ họa</th>
-          <td *ngFor="let laptop of compareList">{{ laptop.graphic }}</td>
+          <th scope="col">Công nghệ màn hình</th>
+          <td *ngFor="let product of compareList">{{ product.screen_resolution }}</td>
+        </tr>
+        <tr>
+          <th scope="col">Bộ nhớ</th>
+          <td *ngFor="let product of compareList">{{ product.storage }}</td>
+        </tr>
+        <tr>
+          <th scope="col">RAM</th>
+          <td *ngFor="let product of compareList">{{ product.ram }}</td>
+        </tr>
+        <tr>
+          <th scope="col">Pin</th>
+          <td *ngFor="let product of compareList">{{ product.battery }}</td>
+        </tr>
+        <tr>
+          <th scope="col">Camera</th>
+          <td *ngFor="let product of compareList">{{ product.camera }}</td>
         </tr>
       </table>
     </div>

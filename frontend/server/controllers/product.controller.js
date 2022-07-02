@@ -73,11 +73,12 @@ exports.createProduct = async ( req, res ) => {
 }
 
 exports.editProduct = async ( req, res ) => {
-    const {name, filter, brand, series, productId } = req.body;
+    const {name, filter, brand, series, productId, filterId } = req.body;
 
     const unsignedName = removeVietnameseTones(name).trim().replace(" ", "-");
 
     const filterData = {
+        id: filter._id,
         brand: filter.brand,
         ram: filter.ram,
         storage: filter.storage,
@@ -103,12 +104,7 @@ exports.editProduct = async ( req, res ) => {
         price_range: req.body.price_range,
         camera: req.body.camera,
         display: req.body.display,
-        graphic: req.body.graphic,
-        wireless: req.body.wireless,
-        LAN: req.body.LAN,
-        keyboard: req.body.keyboard,
         webcam: req.body.webcam,
-        audio: req.body.audio,
         battery: req.body.battery,
         frequency: req.body.frequency,
         GPU: req.body.gpu,
@@ -118,15 +114,13 @@ exports.editProduct = async ( req, res ) => {
         dimension: req.body.dimension,
         weight: req.body.weight,
         color: req.body.color,
-        security: req.body.security,
         price: req.body.price,
         sale: req.body.sale,
         status: true,
-        imageUrls,
-        filter: filterData._id,
+        filter: filterId,
         // specification
     };
-    await Filter.updateOne({ _id: filter._id }, filterData);
+    await Filter.updateOne({ _id: filterId }, filterData);
     await Product.updateOne({ _id: productId }, updateData);
     return res.status(200).json({ msg: RESPONSE_MESSAGES.UPDATE_SUCCESS.replace(MESSAGE_KEYS.object, MESSAGE_VALUES.product.toLowerCase()) })
 }

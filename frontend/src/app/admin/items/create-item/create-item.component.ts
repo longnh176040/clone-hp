@@ -27,16 +27,16 @@ export class CreateItemComponent implements OnInit {
   file: any;
 
   public readonly colors = [
-    "Trắng",
-    "Đen",
-    "Xanh dương",
-    "Xanh lá",
-    "Bạc",
-    "Đỏ",
-    "Vàng",
-    "Hồng",
-    "Tím",
-    "Xám",
+    "white",
+    "black",
+    "blue",
+    "green",
+    "silver",
+    "red",
+    "gold",
+    "pink",
+    "violet",
+    "gray",
   ];
 
   public readonly roms = [

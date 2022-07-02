@@ -10,7 +10,6 @@ import { GoogleAnalyticsService } from "../../services/google-analytics.service"
 })
 export class ProductCardComponent implements OnInit {
   bucket = environment.bucket;
-
   @Input() product: any;
   @Input() comparable: boolean;
   

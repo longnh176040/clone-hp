@@ -1,14 +1,17 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { Location } from "@angular/common";
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { Observable, throwError as observableThrowError } from "rxjs";
 import { catchError } from "rxjs/operators";
+import Swal from 'sweetalert2';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
-  constructor(private _httpClient: HttpClient) { }
+  constructor(private _httpClient: HttpClient,
+    private location: Location) { }
   private readonly api_porduct = environment.apiURL + "/product/";
 
   private static _handleError(err: HttpErrorResponse | any) {
@@ -19,14 +22,30 @@ export class ProductService {
 
   createProduct(payload): void {
     this._httpClient.post<{msg: string}>(this.api_porduct, payload).subscribe(data => {
-      console.log(data.msg);
-    }, err => console.error(err.error.msg));
+      Swal.fire({
+        icon: "success",
+        title: data.msg,
+      });
+      this.location.back();
+    }, err => Swal.fire({
+          icon: 'error',
+          title: 'Không hợp lệ',
+          text: 'Vui lòng kiểm tra lại thông tin',
+        }));
   }
 
   edit_product_data(payload): void {
     this._httpClient.put<{msg: string}>(this.api_porduct, payload).subscribe(data => {
-      console.log(data.msg);
-    }, err => console.error(err.error.msg));
+      Swal.fire({
+        icon: "success",
+        title: data.msg,
+      });
+      this.location.back();
+    }, err => Swal.fire({
+      icon: 'error',
+      title: 'Không hợp lệ',
+      text: 'Vui lòng kiểm tra lại thông tin',
+    }));
   }
 
   get_product(): Observable<any> {
