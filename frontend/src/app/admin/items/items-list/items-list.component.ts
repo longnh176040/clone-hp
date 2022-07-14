@@ -8,9 +8,11 @@ import { LaptopService } from "src/app/shared/services/laptop.service";
 import { Converter } from "src/app/shared/utils/util.convert";
 import { environment } from "src/environments/environment";
 import * as _collection from "lodash/collection";
-import { BehaviorSubject } from "rxjs";
+import { BehaviorSubject, forkJoin, of } from "rxjs";
 import { ProductService } from "src/app/shared/services/product.service";
 import Swal from "sweetalert2";
+import { finalize, map, switchMap, tap } from 'rxjs/operators';
+import { AngularFireStorage } from '@angular/fire/storage';
 
 @Component({
   selector: "app-items-list",
@@ -144,6 +146,7 @@ export class ItemsListComponent implements OnInit {
     private spaceToUnderscore: SpaceToUnderscorePipe,
     private getCoreName: GetCoreNamePipe,
     private router: Router,
+    private storage: AngularFireStorage
   ) {}
 
   ngOnInit(): void {
@@ -308,7 +311,7 @@ export class ItemsListComponent implements OnInit {
         this.productService.delete_item_by_id(id).subscribe((res) => {
           Swal.fire('Deleted!', 'Your file has been deleted.', 'success');
           this.ngOnInit();
-        }); 
+        });
       }
     });
   }
@@ -391,14 +394,14 @@ export class ItemsListComponent implements OnInit {
 
   //detect upload thumbnail event
   fileChangeEvent(event) {
-    this.currentLaptopThumbnail = <FileList>event.target.files;
+    this.currentLaptopThumbnail = event.target.files as FileList;
     this.visible_thumbnail = true;
 
     for (let i = 0; i < this.currentLaptopThumbnail.length; i++) {
       let reader = new FileReader();
       reader.readAsDataURL(this.currentLaptopThumbnail[i]);
       reader.onload = (_event) => {
-        this.imgURL.push(reader.result);
+        this.thumbnails.push(reader.result as string)
       };
     }
   }
@@ -432,24 +435,32 @@ export class ItemsListComponent implements OnInit {
   }
 
   addMoreThumbnail(laptop) {
-    const formThumbnail = new FormData();
-    if (this.currentLaptopThumbnail) {
-      formThumbnail.append("prefix", "thumbnails");
-      formThumbnail.append("product_type", "laptop");
-      formThumbnail.append("brand", "HP");
-      formThumbnail.append("series", laptop.series.toLowerCase());
-      formThumbnail.append("laptop_id", laptop.laptop_id);
-      for (let i = 0; i < this.currentLaptopThumbnail.length; i++) {
-        formThumbnail.append("laptop", this.currentLaptopThumbnail[i]);
+     of(this.thumbnails).pipe(map((res) => res.map((item) => {
+      if (item.includes('base64')) {
+        const time = Date.now();
+        const filePath = `MobileImages/${time}`;
+        const fileRef = this.storage.ref(filePath);
+        this.storage.upload(filePath, item).snapshotChanges().pipe(
+          finalize(() => {
+            fileRef.getDownloadURL().subscribe((url) => {
+                console.log(url);
+              return item = url;
+            }
+            );
+          })
+        ) .subscribe(() => {
+
+        });
+      } else {
+        return item;
       }
-    }
-    this.laptopService
-      .update_laptop_thumbnails(formThumbnail)
-      .subscribe((res) => this.ngOnInit());
-    // }
+    }))).subscribe((res) => {
+       console.log(res, "ress")
+
+    });
   }
 
-  pick_image_to_delete(thumbnail) {
+  pick_image_to_delete(thumbnail, index) {
     if (!this.listToDelete.includes(thumbnail) && this.thumbnails.length >= 4) {
       this.listToDelete.push(thumbnail);
     } else {
