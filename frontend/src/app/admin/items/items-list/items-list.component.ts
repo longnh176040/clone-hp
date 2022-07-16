@@ -8,7 +8,7 @@ import { LaptopService } from "src/app/shared/services/laptop.service";
 import { Converter } from "src/app/shared/utils/util.convert";
 import { environment } from "src/environments/environment";
 import * as _collection from "lodash/collection";
-import { BehaviorSubject, forkJoin, from, iif, Observable, of } from "rxjs";
+import { from, iif, Observable, of, Subject } from "rxjs";
 import { ProductService } from "src/app/shared/services/product.service";
 import Swal from "sweetalert2";
 import { finalize, map, mergeMap, switchMap, tap } from 'rxjs/operators';
@@ -31,10 +31,10 @@ export class ItemsListComponent implements OnInit {
 		"pink",
 		"gold",
 	];
-	
+
 	private convert: Converter = new Converter();
 	public laptop_id: string;
-	
+
 	public cpus: string[] = [
 		"Intel Celeron/Pentium",
 		"Intel Core i3",
@@ -45,9 +45,9 @@ export class ItemsListComponent implements OnInit {
 		"AMD Ryzen 5",
 		"AMD Ryzen 7",
 	];
-	
+
 	public rams: string[] = ["2GB", "4GB", "8GB", "16GB", "32GB"];
-	
+
 	public storages: string[] = [
 		"16GB",
 		"32GB",
@@ -57,22 +57,22 @@ export class ItemsListComponent implements OnInit {
 		"512GB",
 		"1TB"
 	];
-	
+
 	public screenSize: string[] = [
 		" < 4.7 inch",
 		"4 inch - 5 inch",
 		"5 inch - 6 inch",
 		"> 6.5 inch",
 	];
-	
+
 	public screenResolution: string[] = [
 		"OLED",
 		"AMOLED",
 		"IPS LCD",
 	];
-	
+
 	public oss: string[] = ["Android", "IOS", "Windows"];
-	
+
 	public priceRange: string[] = [
 		"Dưới 10 triệu",
 		"10 triệu - 15 triệu",
@@ -83,8 +83,10 @@ export class ItemsListComponent implements OnInit {
 		"35 triệu - 40 triệu",
 		"Trên 40 triệu",
 	];
-	
-	
+
+  uploadProgressSubject = new Subject<any>()
+
+
 	productColor = [];
 	showLaptop: Product;
 	search_by_name = new FormControl("");
@@ -122,14 +124,14 @@ export class ItemsListComponent implements OnInit {
 			sim: new FormControl()
 		}),
 	});
-	
+
 	listToDelete = [];
 	visible_thumbnail = true;
 	create_type;
 	imgURL = [];
-	
+
 	@ViewChild("mySidenav") mySidenav: ElementRef;
-	
+
 	@ViewChild("canvas", { static: false }) set content( content: ElementRef ) {
 		if (content) {
 			this.mySidenav.nativeElement.style.width = "600px";
@@ -139,7 +141,7 @@ export class ItemsListComponent implements OnInit {
 			this.mySidenav.nativeElement.style.height = "0";
 		}
 	}
-	
+
 	constructor(
 		private laptopService: LaptopService,
 		private productService: ProductService,
@@ -149,7 +151,7 @@ export class ItemsListComponent implements OnInit {
 		private storage: AngularFireStorage
 	) {
 	}
-	
+
 	ngOnInit(): void {
 		this.productService.get_product().subscribe(( res ) => {
 			this.laptops = res;
@@ -169,11 +171,10 @@ export class ItemsListComponent implements OnInit {
 					});
 				}
 				this.laptops = filterLaptop;
-				console.log(this.laptops)
 			});
 		});
 	}
-	
+
 	sortByName() {
 		this.laptops.sort(( a, b ) => {
 			let nameA = a.name.toLowerCase();
@@ -187,7 +188,7 @@ export class ItemsListComponent implements OnInit {
 			return 0;
 		});
 	}
-	
+
 	deSortByName() {
 		this.laptops.sort(( a, b ) => {
 			let nameA = a.name.toLowerCase();
@@ -201,7 +202,7 @@ export class ItemsListComponent implements OnInit {
 			return 0;
 		});
 	}
-	
+
 	sortByBrand() {
 		this.laptops.sort(( a, b ) => {
 			let nameA = a.brand.toLowerCase();
@@ -215,7 +216,7 @@ export class ItemsListComponent implements OnInit {
 			return 0;
 		});
 	}
-	
+
 	deSortByBrand() {
 		this.laptops.sort(( a, b ) => {
 			let nameA = a.brand.toLowerCase();
@@ -229,7 +230,7 @@ export class ItemsListComponent implements OnInit {
 			return 0;
 		});
 	}
-	
+
 	// open create product
 	open_create_product() {
 		// this.formCreateProduct.reset();
@@ -241,13 +242,13 @@ export class ItemsListComponent implements OnInit {
 		// this.create_type = value;
 		this.router.navigateByUrl('/admin/items/create-item');
 	}
-	
+
 	// close create product
 	close_create_product() {
 		this.drawer_state = null;
 		this.visible = false;
 	}
-	
+
 	// open edit product
 	open_edit_product( id ) {
 		this.router.navigate(['/admin/items/edit-item/' + id])
@@ -296,13 +297,13 @@ export class ItemsListComponent implements OnInit {
 		// this.currentLaptopThumbnail = null;
 		// this.visible = true;
 	}
-	
+
 	// close edit product
 	close_edit_product() {
 		this.drawer_state = null;
 		this.visible = false;
 	}
-	
+
 	// delete product
 	handleDelete( id ) {
 		Swal.fire({
@@ -322,7 +323,7 @@ export class ItemsListComponent implements OnInit {
 			}
 		});
 	}
-	
+
 	// submit product
 	onSubmit() {
 		const formSubmit = new FormData();
@@ -369,12 +370,12 @@ export class ItemsListComponent implements OnInit {
 		formSubmit.append("security", this.formCreateProduct.value.security);
 		formSubmit.append("price", this.formCreateProduct.value.price);
 		formSubmit.append("sale", this.formCreateProduct.value.sale);
-		
+
 		formSubmit.append(
 			"filter",
 			JSON.stringify(this.formCreateProduct.value.filter)
 		);
-		
+
 		if (this.drawer_state === "Create") {
 			if (this.currentLaptopThumbnail) {
 				formSubmit.append("prefix", "thumbnails");
@@ -399,12 +400,12 @@ export class ItemsListComponent implements OnInit {
 				});
 		}
 	}
-	
+
 	//detect upload thumbnail event
 	fileChangeEvent( event ) {
 		this.currentLaptopThumbnail = event.target.files as FileList;
 		this.visible_thumbnail = true;
-		
+
 		for (let i = 0; i < this.currentLaptopThumbnail.length; i++) {
 			let reader = new FileReader();
 			reader.readAsDataURL(this.currentLaptopThumbnail[i]);
@@ -413,7 +414,7 @@ export class ItemsListComponent implements OnInit {
 			};
 		}
 	}
-	
+
 	// change status
 	change_item_status( id, status ) {
 		this.productService.change_item_status(id, !status).subscribe(( res ) => {
@@ -422,7 +423,7 @@ export class ItemsListComponent implements OnInit {
 			);
 		});
 	}
-	
+
 	onCheckChange( event ) {
 		if (event.target.checked) {
 			this.productColor.push(event.target.value);
@@ -432,7 +433,7 @@ export class ItemsListComponent implements OnInit {
 			);
 		}
 	}
-	
+
 	showThumbnail( thumbnails, _id, laptop ) {
 		this.thumbnails = [];
 		this.listToDelete = [];
@@ -441,34 +442,44 @@ export class ItemsListComponent implements OnInit {
 		this.showLaptop = laptop;
 		this.thumbnails = thumbnails;
 		this.laptop_id = _id
+    console.log(this.thumbnails, "thumbnails")
 	}
-	
-	addMoreThumbnail( laptop ) {
-		const urls = [];
-		from(this.thumbnails).pipe(
-			mergeMap(( item ) => iif(() => item.includes('base64'), this.getUrlFromFirebase(item), of(item)))
-		).subscribe({
-			next: ( url ) => {
-				urls.push(url)
-			},
-			complete: () => {
-				console.log(urls);
-				// TODO: gọi service save url
-			}
-		});
+
+	async addMoreThumbnail( laptop ) {
+    const urls = await Promise.all(this.thumbnails.map( async (item) => {
+      if(item.includes("base64")){
+        item = await this.getUrlFromFirebase(item);
+        return item;
+      }else {
+        return item
+      }
+    }));
+    if(urls.length > 5){
+      return Swal.fire({
+        icon: 'error',
+        title: 'Không hợp lệ',
+        text: 'Tối đa 5 ảnh'
+      });
+    }
+    return this.productService.editImageUrls(urls, laptop._id).subscribe((res) => {
+      Swal.fire({
+        icon: "success",
+        title: res.msg,
+      }).then(() => this.ngOnInit());
+    });
 	}
-	
-	private getUrlFromFirebase( item: any ): Observable<string> {
+
+	private async getUrlFromFirebase( item ): Promise<string> {
 		const time = Date.now();
 		const filePath = `MobileImages/${time}`;
 		const fileRef = this.storage.ref(filePath);
-		return this.storage.upload(filePath, item)
-			.snapshotChanges()
-			.pipe(
-				mergeMap(() => fileRef.getDownloadURL()),
-			)
+    return this.storage.upload(filePath, item).snapshotChanges().toPromise().then(() => {
+      return fileRef.getDownloadURL().toPromise().then((url) => {
+        return url
+      });
+    });
 	}
-	
+
 	pick_image_to_delete( thumbnail, index ) {
 		if (!this.listToDelete.includes(thumbnail) && this.thumbnails.length >= 4) {
 			this.listToDelete.push(thumbnail);
@@ -476,15 +487,17 @@ export class ItemsListComponent implements OnInit {
 			this.listToDelete = this.listToDelete.filter(( item ) => item != thumbnail);
 		}
 	}
-	
-	delete_laptop_thumbnail() {
-		this.laptopService
-			.delete_laptop_thumbnail(this.listToDelete, this.laptop_id)
-			.subscribe(( res ) => {
-				this.ngOnInit();
-			});
+
+	delete_laptop_thumbnail(laptop) {
+    const newThumbnails = this.thumbnails.filter(( item ) => !this.listToDelete.includes(item));
+    this.productService.editImageUrls(newThumbnails, laptop._id).subscribe((res) => {
+      Swal.fire({
+        icon: "success",
+        title: res.msg,
+      }).then(() => this.ngOnInit());
+    });
 	}
-	
+
 	onEditBlog( laptop_id: string ) {
 		this.router.navigate(['/admin/items', laptop_id])
 	}
