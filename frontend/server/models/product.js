@@ -82,6 +82,6 @@ productSchema.plugin(mongooseAlgolia, {
 const Product = mongoose.model("Product", productSchema);
 Product.SyncToAlgolia();
 Product.SetAlgoliaSettings({
-    searchableAttributes: ["ram", "brand", "OS", "sim", "storage"],
+    searchableAttributes: ["name", "brand"],
 });
 module.exports = Product;

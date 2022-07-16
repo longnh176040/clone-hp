@@ -1,6 +1,7 @@
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from "@angular/core";
-import { tap } from "rxjs/operators";
+import { Observable, throwError as observableThrowError } from "rxjs";
+import { catchError, tap } from "rxjs/operators";
 import { environment } from "src/environments/environment";
 import { CartService } from "./cart.service";
 
@@ -15,6 +16,12 @@ export class OrderService {
     private _cartService: CartService
   ) {}
 
+  private static _handleError(err: HttpErrorResponse | any) {
+    return observableThrowError(
+      err.message || "Error: Unable to complete request."
+    );
+  }
+
   createOrder(data: any, userId: string) {
     return this.httpClient
       .post<{ msg: string; order: any }>(
@@ -28,8 +35,23 @@ export class OrderService {
         })
       );
   }
+  
 
-  getOrders() {
+  confirm_status(id, status): Observable<any> {
+    return this.httpClient
+      .get(
+        this.ORDER_URL + "/confirm?value=" + status + "&id=" + id
+      )
+      .pipe(catchError(OrderService._handleError));
+  }
+
+  delete_item_by_id(id): Observable<any> {
+    return this.httpClient
+      .delete(this.ORDER_URL + "/" + id)
+      .pipe(catchError(OrderService._handleError));
+  }
+
+  getOrders(): Observable<any> {
     return this.httpClient.get(this.ORDER_URL);
   }
   getOrdersById(coverageId: string) {
@@ -38,7 +60,7 @@ export class OrderService {
 
 
   getCoverage() {
-    return this.httpClient.get(this.ORDER_URL + '/coverage');
+    return this.httpClient.get(this.ORDER_URL + '/coverage')
   }
 
   getCoverageStatusByPhone(coveragePhone: string) {
@@ -47,7 +69,7 @@ export class OrderService {
   createCoverage(coverage: any) {
     return this.httpClient.post(this.ORDER_URL + '/coverage', coverage);
   }
-  editCoverage(coveragePhone: string, coverage: any) {
-    return this.httpClient.put(this.ORDER_URL + '/coverage/' + coveragePhone, coverage);
+  editCoverage(coverageId: string, coverage: any) {
+    return this.httpClient.put(this.ORDER_URL + '/coverage/' + coverageId, coverage);
   }
 }

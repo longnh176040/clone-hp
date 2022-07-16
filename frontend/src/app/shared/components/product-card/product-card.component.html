@@ -1,5 +1,5 @@
 <div class="single-product">
-  <div class="discount" *ngIf="product.price - product.sale != 0">-{{((product.price - product.sale) / product.price)* 100 | number:'1.0-0' }}%</div>
+  <div class="discount" *ngIf="product.status && (product.price - product.sale != 0)">-{{((product.price - product.sale) / product.price)* 100 | number:'1.0-0' }}%</div>
   <div class="card-top position-relative">
     <div class="status" *ngIf="!product.status">
       <span>{{ product.status ? "" : "Hết hàng" }}</span>
@@ -16,7 +16,7 @@
     </h3>
   </div>
   <div>
-    <div class="price mb-3">
+    <div class="price mb-3" *ngIf="product.status">
       <span class="sale" *ngIf="product.sale != 0"
         >{{
           product.sale | convertPrice
@@ -28,6 +28,9 @@
           >{{ product.price | convertPrice }} ₫</span
         >
       </div>
+    </div>
+    <div *ngIf="!product.status">
+      <h4>Liên hệ</h4>
     </div>
     <button
       *ngIf="comparable"

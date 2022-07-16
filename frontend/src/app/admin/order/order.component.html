@@ -1,12 +1,12 @@
 <div>
   <div>
-    <h1 class="mx-4 pt-2 font-weight-bold">Quản lý đơn hàng</h1>
-    <div class="row ml-3">
+    <h2 class="mx-4">
+      <b>Danh sách đơn hàng</b>
+    </h2>
+    <!-- <div class="row ml-3">
       <div class="col-sm-4 pt-3">
         <form class="form-inline my-1 my-lg-0">
-          <label class="search-label"
-            ><i class="fa fa-search" aria-hidden="true"></i
-          ></label>
+          <label class="search-label"><i class="fa fa-search" aria-hidden="true"></i></label>
           <mat-form-field class="example-full-width">
             <mat-label>Tìm kiếm</mat-label>
             <input matInput placeholder="Ex. HP" value="" />
@@ -19,17 +19,10 @@
             <mat-label>Enter a date range</mat-label>
             <mat-date-range-input [rangePicker]="picker">
               <input matStartDate placeholder="Start date" #dateRangeStart />
-              <input
-                matEndDate
-                placeholder="End date"
-                #dateRangeEnd
-                (dateChange)="dateRangeChange(dateRangeStart, dateRangeEnd)"
-              />
+              <input matEndDate placeholder="End date" #dateRangeEnd
+                (dateChange)="dateRangeChange(dateRangeStart, dateRangeEnd)" />
             </mat-date-range-input>
-            <mat-datepicker-toggle
-              matSuffix
-              [for]="picker"
-            ></mat-datepicker-toggle>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-date-range-picker #picker></mat-date-range-picker>
           </mat-form-field>
         </div>
@@ -38,11 +31,7 @@
         <div class="">
           <mat-form-field appearance="fill">
             <mat-label>Trạng thái</mat-label>
-            <select
-              matNativeControl
-              required
-              (change)="onChange($event.target.value)"
-            >
+            <select matNativeControl required (change)="onChange($event.target.value)">
               <option value="1">Tất cả</option>
               <option value="2">Chưa xác nhận</option>
               <option value="3">Đã xác nhận</option>
@@ -53,7 +42,7 @@
           </mat-form-field>
         </div>
       </div>
-    </div>
+    </div> -->
   </div>
   <!-- <div class="my-3">
     <mat-paginator
@@ -63,7 +52,7 @@
     >
     </mat-paginator>
   </div> -->
-  <div class="container-fluid">
+  <div class="container-fluid mt-3">
     <table class="table table-bordered table-hover table-striped table-md">
       <thead>
         <tr>
@@ -71,10 +60,10 @@
           <th>Ngày đặt</th>
           <th>Tên khách hàng</th>
           <th>Số điện thoại</th>
-          <th>Trạng thái</th>
           <th>Địa chỉ nhận hàng</th>
           <th>Giá</th>
-          <th>Chờ xác nhận</th>
+          <th>Xác nhận đơn</th>
+          <th>Hủy đơn</th>
         </tr>
       </thead>
       <tbody>
@@ -83,17 +72,32 @@
           <td>{{ order.created_at }}</td>
           <td>{{ order.username }}</td>
           <td>{{ order.phone }}</td>
-          <td>{{ order.status }}</td>
           <td>{{ order.address }}</td>
           <td>đ {{ order.total_price | currency: " ":"code":"3.0" }}</td>
           <td>
-            <button
-              class="btn btn-outline-success"
-              type="submit"
-              (click)="onClick()"
-            >
+            <button class="btn btn-outline-success" type="submit" (click)="change_item_status(order._id, order.status)" [hidden]="order.status">
               Xác nhận đơn
             </button>
+            <div style="color: #28a745" [hidden]="!order.status">
+              <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
+                class="bi bi-check2-all" viewBox="0 0 16 16">
+                <path
+                  d="M12.354 4.354a.5.5 0 0 0-.708-.708L5 10.293 1.854 7.146a.5.5 0 1 0-.708.708l3.5 3.5a.5.5 0 0 0 .708 0l7-7zm-4.208 7l-.896-.897.707-.707.543.543 6.646-6.647a.5.5 0 0 1 .708.708l-7 7a.5.5 0 0 1-.708 0z" />
+                <path d="M5.354 7.146l.896.897-.707.707-.897-.896a.5.5 0 1 1 .708-.708z" />
+              </svg>
+              Đã xác nhận
+            </div>
+          </td>
+          <td>
+            <p style="cursor: pointer; display: flex; justify-content: center; color: red" (click)="handleDelete(order._id)">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash"
+                viewbox="0 0 16 16">
+                <path
+                  d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />
+                <path fill-rule="evenodd"
+                  d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z" />
+              </svg>
+            </p>
           </td>
         </tr>
       </tbody>

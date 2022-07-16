@@ -10,9 +10,10 @@ import { OrderService } from "src/app/shared/services/order.service";
   styleUrls: ['./coverage.component.css']
 })
 export class CoverageComponent implements OnInit {
-
+  type: string = 'Tạo'
+  visible: boolean = false;
   coverages: Observable<any> = new Observable();
-  statuss = [
+  status = [
     'Chưa tiếp nhận',
     'Đã tiếp nhận',
     'Đang gửi bảo hành',
@@ -27,10 +28,11 @@ export class CoverageComponent implements OnInit {
   coverageProduct: string = "";
   coverageReason: string = "";
   coverageStatus: string = "";
+  id: string;
 
   submitted = false;
 
-  constructor(private orderService: OrderService) {}
+  constructor(private orderService: OrderService) { }
 
   ngOnInit(): void {
     this.coverages = this.orderService.getCoverage()
@@ -42,35 +44,44 @@ export class CoverageComponent implements OnInit {
       coverageReason: new FormControl(null, Validators.required),
       coverageStatus: new FormControl(null, Validators.required),
     });
-    this.editCoverageForm = new FormGroup({
-      coverageDate: new FormControl(null, Validators.required),
-      coveragePhone: new FormControl(null, Validators.required),
-      coverageProduct: new FormControl(null, Validators.required),
-      coverageReason: new FormControl(null, Validators.required),
-      coverageStatus: new FormControl(null, Validators.required),
-    });
   }
 
-  save() {}
-  addCoverage(){
-    this.orderService.createCoverage(this.addCoverageForm.value)
-    .subscribe(
-      res => {
-        this.addCoverageForm.reset();
-      }
-      )
+  open() {
+    this.visible = true
   }
-  editCoverage(){
-    this.orderService.editCoverage(this.editCoverageForm.get("coveragePhone").value , this.editCoverageForm.value)
-    .subscribe(
-      res => {
-        this.editCoverageForm.reset();
-      }
-      )
+
+  addCoverage() {
+    if (this.type === "Chỉnh sửa") {
+      this.orderService.editCoverage(this.id, this.addCoverageForm.value)
+        .subscribe(
+          res => {
+            this.editCoverageForm.reset();
+            this.ngOnInit()
+          }
+        )
+    }
+    else {
+      this.orderService.createCoverage(this.addCoverageForm.value)
+        .subscribe(
+          res => {
+            this.addCoverageForm.reset();
+            this.ngOnInit()
+          }
+        )
+    }
   }
-  open_edit_coverage(){
+  open_edit_coverage(coverage) {
+    this.id = coverage._id;
+    this.type = "Chỉnh sửa"
+    this.addCoverageForm.patchValue({
+      coveragePhone: coverage.phone,
+      coverageDate: coverage.date,
+      coverageProduct: coverage.product,
+      coverageReason: coverage.reason,
+      coverageStatus: coverage.status,
+    })
   }
-  delete(){}
+  delete() { }
 
   onChange(value) {
   }
@@ -80,6 +91,3 @@ export class CoverageComponent implements OnInit {
   ) {
   }
 }
-
-
-

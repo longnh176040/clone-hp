@@ -1,6 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { Observable, Subject } from "rxjs";
 import { OrderService } from "src/app/shared/services/order.service";
+import { map } from 'rxjs/operators';
+import Swal from "sweetalert2";
 
 @Component({
   selector: "app-order",
@@ -8,12 +10,11 @@ import { OrderService } from "src/app/shared/services/order.service";
   styleUrls: ["./order.component.css"],
 })
 export class OrderComponent implements OnInit {
-  orders: Observable<any> = new Observable();
+  orders: any;
   constructor(private orderService: OrderService) {}
 
   ngOnInit(): void {
     this.orders = this.orderService.getOrders()
-
   }
 
   onChange(value) {
@@ -29,5 +30,30 @@ export class OrderComponent implements OnInit {
   ) {
     // console.log(dateRangeStart.value);
     // console.log(dateRangeEnd.value);
+  }
+
+  change_item_status(id, status) {
+    this.orderService.confirm_status(id, !status).subscribe((res) => {
+      this.ngOnInit();
+    });
+  }
+
+  handleDelete(id) {
+    Swal.fire({
+      title: 'Bạn có chắc chắn muốn xóa đơn hàng?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Đồng ý!',
+      cancelButtonText: "Hủy bỏ"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.orderService.delete_item_by_id(id).subscribe((res) => {
+          Swal.fire('Đã xóa đơn hàng!');
+          this.ngOnInit();
+        }); 
+      }
+    });
   }
 }

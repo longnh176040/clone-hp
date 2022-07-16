@@ -28,8 +28,8 @@ export class CommentService {
 
   constructor(private http: HttpClient) { }
 
-  getComments(laptopId: string) {
-    return this.http.get<Comment[]>(this.CMT_URL + "?product=" + laptopId);
+  getComments(productId: string) {
+    return this.http.get<Comment[]>(this.CMT_URL + "?product=" + productId);
   }
 
   addComment(comment: Comment) {

@@ -296,17 +296,17 @@ export class ItemsListComponent implements OnInit {
   // delete product
   handleDelete(id) {
     Swal.fire({
-      title: 'Are you sure?',
-      text: "You won't be able to revert this!",
+      title: 'Bạn có chắc chắn muốn xóa sản phẩm?',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, delete it!',
+      confirmButtonText: 'Đồng ý!',
+      cancelButtonText: "Hủy bỏ"
     }).then((result) => {
       if (result.isConfirmed) {
         this.productService.delete_item_by_id(id).subscribe((res) => {
-          Swal.fire('Deleted!', 'Your file has been deleted.', 'success');
+          Swal.fire('Đã xóa sản phẩm!');
           this.ngOnInit();
         }); 
       }

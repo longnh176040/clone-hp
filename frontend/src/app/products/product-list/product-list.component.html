@@ -1,141 +1,133 @@
-<app-slider></app-slider>
 <div class="products-showcase">
-  <div class="container">
-    <ais-instantsearch [config]="config">
-      <div>
-        <div class="searchbox-filter-wrapper d-xl-none">
-          <ais-search-box></ais-search-box>
-          <button
-            class="filter-btn btn d-xl-none d-inline-flex"
-            (click)="showComparison()"
-          >
-            <i class="bx bx-filter-alt mr-2"></i> So sánh
-          </button>
-          <button
-            class="filter-btn btn d-xl-none d-inline-flex"
-            (click)="showMobileFiters = true"
-          >
-            <i class="bx bx-filter-alt mr-2"></i> Bộ lọc
-          </button>
-        </div>
-        <div class="row">
-          <div
-            class="col-xl-3 become-fixed"
-            (click)="showMobileFiters = false"
-            [ngClass]="{ show: showMobileFiters }"
-          >
-            <div class="filters-wrapper">
-              <!-- <ais-clear-refinements
-              [autoHideContainer]="true"
-            ></ais-clear-refinements> -->
-
-              <div class="searchbox-filter-wrapper d-none d-xl-block mb-3">
-                <ais-search-box></ais-search-box>
-                <!-- <button
-                  class="filter-btn btn"
-                  (click)="showMobileFiters = true"
-                >
-                  <i class="bx bx-filter-alt mr-2"></i> Bộ lọc
-                </button> -->
-              </div>
-
-              <div class="filter-block">
-                <button class="btn p-0 filter-heading mb-2">
-                  <span>Thương hiệu</span>
-                  <span style="opacity: 0; pointer-events: none"
-                    ><i class="fas fa-caret-up"></i
-                  ></span>
-                </button>
-                <ais-refinement-list
-                  attribute="brand"
-                  [transformItems]="transformSeriesName"
-                ></ais-refinement-list>
-              </div>
-              <div class="filter-block">
-                <button class="btn p-0 filter-heading mb-2">
-                  <span>RAM</span>
-                  <span style="opacity: 0; pointer-events: none"
-                    ><i class="fas fa-caret-up"></i
-                  ></span>
-                </button>
-                <ais-refinement-list
-                  attribute="filter.ram"
-                ></ais-refinement-list>
-              </div>
-
-              <div class="filter-block">
-                <button class="btn p-0 filter-heading mb-2">
-                  <span>Bộ nhớ</span>
-                  <span style="opacity: 0; pointer-events: none"
-                    ><i class="fas fa-caret-up"></i
-                  ></span>
-                </button>
-                <ais-refinement-list
-                  attribute="filter.storage"
-                ></ais-refinement-list>
-              </div>
-              <div class="filter-block">
-                <button class="btn p-0 filter-heading mb-2">
-                  <span>Khoảng giá</span>
-                  <span style="opacity: 0; pointer-events: none"
-                    ><i class="fas fa-caret-up"></i
-                  ></span>
-                </button>
-                <ais-refinement-list
-                  attribute="filter.price_range"
-                ></ais-refinement-list>
-              </div>
-              <div class="filter-block">
-                <button class="btn p-0 filter-heading mb-2">
-                  <span>Kích thước màn hình</span>
-                  <span style="opacity: 0; pointer-events: none"
-                    ><i class="fas fa-caret-up"></i
-                  ></span>
-                </button>
-                <ais-refinement-list
-                  attribute="filter.size_range"
-                ></ais-refinement-list>
-              </div>
-
-              <div class="filters-actions d-xl-none">
-                <button class="btn remove-filters-btn">Bỏ lọc</button>
-                <button class="btn apply-filters-btn">Áp dụng</button>
+  <div style="margin-top: 50px">
+    <div class="container">
+      <ais-instantsearch [config]="config">
+        <div>
+          <div class="searchbox-filter-wrapper d-xl-none">
+            <ais-search-box></ais-search-box>
+            <button
+              class="filter-btn btn d-xl-none d-inline-flex"
+              (click)="showComparison()"
+            >
+              <i class="bx bx-filter-alt mr-2"></i> So sánh
+            </button>
+            <button
+              class="filter-btn btn d-xl-none d-inline-flex"
+              (click)="showMobileFiters = true"
+            >
+              <i class="bx bx-filter-alt mr-2"></i> Bộ lọc
+            </button>
+          </div>
+          <div class="row">
+            <div
+              class="col-xl-3 become-fixed"
+              (click)="showMobileFiters = false"
+              [ngClass]="{ show: showMobileFiters }"
+            >
+              <div class="filters-wrapper">
+                <div class="searchbox-filter-wrapper d-none d-xl-block mb-3">
+                  <ais-search-box></ais-search-box>
+                </div>
+  
+                <div class="filter-block">
+                  <button class="btn p-0 filter-heading mb-2">
+                    <span>Thương hiệu</span>
+                    <span style="opacity: 0; pointer-events: none"
+                      ><i class="fas fa-caret-up"></i
+                    ></span>
+                  </button>
+                  <ais-refinement-list
+                    attribute="brand"
+                    [transformItems]="transformSeriesName"
+                  ></ais-refinement-list>
+                </div>
+                <div class="filter-block">
+                  <button class="btn p-0 filter-heading mb-2">
+                    <span>RAM</span>
+                    <span style="opacity: 0; pointer-events: none"
+                      ><i class="fas fa-caret-up"></i
+                    ></span>
+                  </button>
+                  <ais-refinement-list
+                    attribute="filter.ram"
+                  ></ais-refinement-list>
+                </div>
+  
+                <div class="filter-block">
+                  <button class="btn p-0 filter-heading mb-2">
+                    <span>Bộ nhớ</span>
+                    <span style="opacity: 0; pointer-events: none"
+                      ><i class="fas fa-caret-up"></i
+                    ></span>
+                  </button>
+                  <ais-refinement-list
+                    attribute="filter.storage"
+                  ></ais-refinement-list>
+                </div>
+                <div class="filter-block">
+                  <button class="btn p-0 filter-heading mb-2">
+                    <span>Khoảng giá</span>
+                    <span style="opacity: 0; pointer-events: none"
+                      ><i class="fas fa-caret-up"></i
+                    ></span>
+                  </button>
+                  <ais-refinement-list
+                    attribute="filter.price_range"
+                  ></ais-refinement-list>
+                </div>
+                <div class="filter-block">
+                  <button class="btn p-0 filter-heading mb-2">
+                    <span>Kích thước màn hình</span>
+                    <span style="opacity: 0; pointer-events: none"
+                      ><i class="fas fa-caret-up"></i
+                    ></span>
+                  </button>
+                  <ais-refinement-list
+                    attribute="filter.size_range"
+                  ></ais-refinement-list>
+                </div>
+  
+                <div class="filters-actions d-xl-none">
+                  <button class="btn remove-filters-btn">Bỏ lọc</button>
+                  <button class="btn apply-filters-btn">Áp dụng</button>
+                </div>
               </div>
             </div>
-          </div>
-
-          <div class="col-xl-9">
-            <ais-infinite-hits>
-              <ng-template
-                let-hits="hits"
-                let-results="results"
-                let-refine="showMore"
-              >
-                <div class="products-wrapper pt-0">
-                  <div
-                    *ngFor="let hit of hits"
-                    #productHTML
-                  >
-                    <app-product-card
-                      [product]="hit"
-                      #product
-                      [comparable]="true"
-                      (startComparing)="addToCompare($event)"
-                      (removingFromComparison)="
-                        removeComparedItem($event.id)
-                      "
-                    ></app-product-card>
-                  </div>
+            <div class="col-xl-9">
+              <div class="app-filter">
+                <div class="sort">
+                  <app-sort></app-sort>
                 </div>
-                <button class="btn btn-primary load-more" (click)="refine()">
-                  Xem Thêm
-                </button>
-              </ng-template>
-            </ais-infinite-hits>
+              </div>
+              <ais-hits>
+                <ng-template
+                  let-hits="hits"
+                  let-results="results"
+                >
+                  <div class="products-wrapper pt-0">
+                    <div
+                      *ngFor="let hit of hits"
+                      #productHTML
+                    >
+                      <app-product-card
+                        [product]="hit"
+                        #product
+                        [comparable]="true"
+                        (startComparing)="addToCompare($event)"
+                        (removingFromComparison)="
+                          removeComparedItem($event.id)
+                        "
+                      ></app-product-card>
+                    </div>
+                  </div>
+                </ng-template>
+              </ais-hits>
+              <ais-pagination></ais-pagination>
+            </div>
           </div>
         </div>
-      </div>
-    </ais-instantsearch>
+      </ais-instantsearch>
+    </div>
   </div>
 </div>
 

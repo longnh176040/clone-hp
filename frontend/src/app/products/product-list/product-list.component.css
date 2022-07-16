@@ -198,7 +198,12 @@ button.clear-all:hover {
   border-color: black;
   color: black;
 }
-
+.app-filter {
+  display: flex;
+}
+.sort {
+  margin-bottom: 40px;
+}
 .modal-lgp {
   max-width: 80% !important;
 }

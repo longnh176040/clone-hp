@@ -8,7 +8,7 @@ import { LaptopService } from "src/app/shared/services/laptop.service";
 })
 export class StarComponent implements OnInit {
   @Input() avarageRating = 0;
-  @Input() laptopId: string;
+  @Input() productId: string;
 
   public readonly stars: number[] = [1, 2, 3, 4, 5];
   public selectedValue = 0;
@@ -21,7 +21,7 @@ export class StarComponent implements OnInit {
     this.selectedValue = star;
     
     this.laptopService
-      .rateLaptop(this.laptopId, this.selectedValue)
+      .rateLaptop(this.productId, this.selectedValue)
       .subscribe();
   }
 

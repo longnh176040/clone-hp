@@ -6,13 +6,10 @@ header {
   width: 100vw;
   z-index: 999;
   transition: all 0.4s ease-in-out;
+  background-color: #141414;
   /* backdrop-filter: blur(3px); */
 }
 
-header.sticky {
-  background-color: #ebedf1;
-  border-bottom: 1px solid #ddd;
-}
 
 .header-content {
   display: flex;
@@ -115,7 +112,6 @@ li.router-link-active:not(:last-child)::before {
 
 header.sticky li.router-link-active:not(:last-child)::before {
   color: black;
-  background: #ff4040;
 }
 
 /* style search icon, cart-icon */
@@ -158,10 +154,10 @@ header.sticky li.router-link-active:not(:last-child)::before {
   cursor: pointer;
 }
 
-li.sticky,
+/* li.sticky,
 li#email.sticky {
   color: #ff4040 !important;
-}
+} */
 
 /* style mobile menu */
 .mobile-menu {

@@ -1,6 +1,7 @@
 const Order = require("../models/order");
 const Coverage = require("../models/coverage");
 const Cart = require("../models/cart");
+const { RESPONSE_MESSAGES, MESSAGE_KEYS, MESSAGE_VALUES } = require("../utils/message");
 const mailer = require("../utils/mailer");
 
 exports.createOrder = async (req, res) => {
@@ -21,9 +22,9 @@ exports.createOrder = async (req, res) => {
       order_id: Math.random().toString(36).substring(6),
     });
     await order.save();
-    const emailContent = `<div>username: ${req.body.username}</div><div>phone: ${req.body.phone}</div><div>price: ${req.body.total_price} vnđ</div>`;
+    const emailContent = `<div>username: ${req.body.username}</div><div>phone: ${req.body.phone}</div><div>price: ${req.body.total_price} vnđ</div><div>Mã bảo hành: ${order.order_id} vnđ</div>`;
     mailer.sendAnEmail(
-      "ha.ln010399@gmail.com",
+      "admin@gmail.com",
       "Đơn đặt hàng mới",
       emailContent
     );
@@ -43,7 +44,7 @@ exports.getOrders = async (req, res) => {
   }
 };
 
-exports.getOrdersById = async (req, res) => {
+exports.getCovarageById = async (req, res) => {
   try {
     const coverageId = req.params.coverageId;
 
@@ -89,10 +90,10 @@ exports.getCoverageStatusByPhone = async (req, res) => {
     return res.status(500).json({ msg: error.message });
   }
 };
-exports.updateCoverageStatusByPhone = async (req, res) => {
+exports.updateCoverageStatusById = async (req, res) => {
   try {
-    const coveragePhone = req.params.coveragePhone;
-    const coverage = await Coverage.findOne({ phone: coveragePhone });
+    const coverageId = req.params.id;
+    const coverage = await Coverage.findOne({ _id: coverageId });
     coverage.product = req.body.coverageProduct;
     coverage.date = req.body.coverageDate;
     coverage.reason = req.body.coverageReason;
@@ -103,3 +104,35 @@ exports.updateCoverageStatusByPhone = async (req, res) => {
     return res.status(500).json({ msg: error.message });
   }
 };
+
+exports.deleteCoverage = async (req, res) => {
+  try {
+    const coverageId = req.params.id;
+    const coverage = await Coverage.findOneAndDelete({ _id: coverageId });
+    return res.status(200).json({ msg: "Xóa thành công"});
+  }catch (error) {
+    return res.status(500).json({ msg: error.message });
+  }
+};
+
+
+exports.changeStatus = async (req, res) => {
+  const order = await Order.findOneAndUpdate(
+    { _id: req.query.id },
+    { status: req.query.value },
+    { new: true }
+  );
+  if(!order){
+    return res.status(500).json({ msg: RESPONSE_MESSAGES.UPDATE_SUCCESS.replace(MESSAGE_KEYS.object, MESSAGE_VALUES.status)  })
+  }
+  return res.status(200).json({ msg: "Xác nhận đơn hàng thành công" });
+};
+
+exports.deleteOrder = async ( req, res ) => {
+  const { id } = req.params;
+  const order = await Order.findOneAndDelete({ _id: id });
+  if (!order) {
+      return res.status(400).json({ msg: RESPONSE_MESSAGES.NOT_FOUND.replace(MESSAGE_KEYS.object, MESSAGE_VALUES.product) })
+  }
+  return res.status(200).json({ msg: RESPONSE_MESSAGES.DELETE_SUCCESS.replace(MESSAGE_KEYS.object, MESSAGE_VALUES.product.toLowerCase()) });
+}

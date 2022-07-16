@@ -20,7 +20,7 @@ let orderSchema = new mongoose.Schema({
     created_at: { type: String },
     created_time_stamp: { type: Number },
     order_id: { type: String },
-    status: { type: String, default: "Đặt thành công" }
+    status: { type: Boolean, default: false }
 });
 
 module.exports = mongoose.model("Order", orderSchema);

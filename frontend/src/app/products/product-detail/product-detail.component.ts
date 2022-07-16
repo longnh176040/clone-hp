@@ -21,12 +21,11 @@ import { environment } from "src/environments/environment";
 export class ProductDetailComponent implements OnInit, AfterViewInit {
   productColors = [];
   bucket = environment.bucket;
-  series;
+  brand;
   similarProducts = [];
-  allLaptop = [];
   public comments: Comment[];
 
-  public laptopId: string;
+  public productId: string;
 
   blog: any;
   product: Product;
@@ -67,14 +66,13 @@ export class ProductDetailComponent implements OnInit, AfterViewInit {
           this.product = res.product;
           this.blog = res.blog ? res.blog.content : "<p>Đang cập nhật</p>";
           this.blog = this.sanitizer.bypassSecurityTrustHtml(this.blog)
-          this.laptopId = this.product._id;
+          this.productId = this.product._id;
 
-          this.series = res.product.series.toLowerCase();
+          this.brand = res.product.brand.toLowerCase();
           this.productService.get_product().subscribe((ref) => {
-            this.allLaptop = ref;
             this.similarProducts = ref.filter((product) => {
               return (
-                product.series.toLowerCase() == this.series &&
+                product.brand.toLowerCase() == this.brand &&
                 product.name != this.product.name
               );
             });

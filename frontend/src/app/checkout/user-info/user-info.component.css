@@ -18,11 +18,7 @@ h3 {
 
 button.place-order {
   margin-top: 30px;
-  background: linear-gradient(
-    231deg,
-    rgba(59, 163, 235, 1) 0%,
-    rgba(58, 190, 174, 1) 100%
-  );
+  background: #ff4040;
   color: white;
   width: 140px;
   padding: 8px 0;

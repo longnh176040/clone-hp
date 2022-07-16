@@ -1,5 +1,7 @@
 const Comment = require("../models/comment");
 const Laptop =require("../models/product");
+const mongoose = require("mongoose");
+const { SSL_OP_ALLOW_UNSAFE_LEGACY_RENEGOTIATION } = require("constants");
 
 exports.addComment = async (req, res) => {
   const comment = new Comment({
@@ -20,7 +22,6 @@ exports.addComment = async (req, res) => {
 };
 
 exports.addReply = async (req, res) => {
-  // const comment = await Comment.findById(req.query.comment);
   try {
     await Comment.updateOne(
       { _id: req.query.id },
@@ -36,6 +37,7 @@ exports.addReply = async (req, res) => {
     );
     return res.status(200).json({ msg: "Bình luận thành công" });
   } catch (err) {
+    console.log(err)
     return res.status(500).json({ msg: err.message });
   }
 };

@@ -57,6 +57,7 @@ import { ContactComponent } from './contact/contact.component';
 import { RecruitmentComponent } from './recruitment/recruitment.component';
 import { CategoryComponent } from './shared/components/category/category.component';
 import { SliderComponent } from './shared/components/slider/slider.component';
+import { SortComponent } from './products/product-list/sort/sort.component';
 
 // Socket.io
 
@@ -88,6 +89,7 @@ import { SliderComponent } from './shared/components/slider/slider.component';
     RecruitmentComponent,
     CategoryComponent,
     SliderComponent,
+    SortComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: "serverApp" }),

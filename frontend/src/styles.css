@@ -260,6 +260,37 @@ span.ais-RefinementList-labelText {
   z-index: 0 !important;
 }
 
+.ais-Hits{
+  margin-top: 10px;
+}
+
+.ais-Pagination-list {
+  list-style: none;
+  justify-content: center;
+  display: flex;
+}
+
+.ais-Pagination-list li {
+  margin-left: 1rem;
+}
+
+.ais-Pagination-link {
+  padding: 0.2rem 0.6rem;
+  display: block;
+  border: 1px solid #c4c8d8;
+  border-radius: 5px;
+}
+
+.ais-Pagination-item a {
+  text-decoration: none;
+}
+
+.ais-Pagination-item--selected .ais-Pagination-link {
+  color: #fff;
+  background-color: #0096db;
+  border-color: #0096db;
+}
+
 @media (min-width: 1600px) {
   .container {
     max-width: 1400px;

@@ -1,107 +1,58 @@
 <div>
-  <div class="sort-search pt-4">
-    <h2 class="mx-4">
-      <b>Danh sách sản phẩm bảo hành</b>
-    </h2>
-    <div class="position-relative">
-      <button type="button" class="btn btn-primary create" data-toggle="modal" data-target="#editCoverage">
-        Cập nhật đơn bảo hành
-      </button>
-      <button type="button" class="btn btn-primary create" data-toggle="modal" data-target="#addCoverage">
-        Tạo đơn bảo hành
-      </button>
-    </div>
+  <div class="bg-light">
+    <h1 class="mx-4 pt-2 font-weight-bold">Quản lý bảo hành</h1>
   </div>
+  <button type="button" class="btn btn-primary create" data-toggle="modal" data-target="#addCoverage">
+    Tạo đơn bảo hành
+  </button>
 
-  <div class="modal fade" id="addCoverage" tabindex="-1" role="dialog" aria-labelledby="addCoverageTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="addCoverageTitle">Tạo đơn bảo hành</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
 
-      <div class="modal-body" class = "form-group">
-        <form [formGroup]="addCoverageForm">
-          <div>
-            Số điện thoại:
-            <input type="text" formControlName="coveragePhone" class="form-control"/>
-          </div>
-          <div>
-            Sản phẩm:
-            <input formControlName="coverageProduct" type="text" class="form-control">
-          </div>
-          <div>
-            Ngày gửi:
-            <input formControlName="coverageDate" type="text" class="form-control">
-          </div>
-          <div>
-            Lý do bảo hành:
-            <input formControlName="coverageReason" type="text" class="form-control">
-          </div>
-          <div>
-            Trạng thái
-            <select formControlName="coverageStatus" class="form-control">
-              <option *ngFor="let status of statuss" [value] = "status">
-                {{ status }}
-              </option>
-            </select>
-          </div>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary save" data-dismiss="modal" (click)="addCoverage()" [disabled]= "addCoverageForm.invalid">Save</button>
+  <div class="modal fade" id="addCoverage" tabindex="-1" role="dialog" aria-labelledby="addCoverageTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="addCoverageTitle">{{type}} bảo hành</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+        <div class="modal-body" class="form-group">
+          <form [formGroup]="addCoverageForm">
+            <div>
+              Số điện thoại:
+              <input type="text" formControlName="coveragePhone" class="form-control" />
+            </div>
+            <div>
+              Sản phẩm:
+              <input formControlName="coverageProduct" type="text" class="form-control">
+            </div>
+            <div>
+              Ngày gửi:
+              <input formControlName="coverageDate" type="text" class="form-control">
+            </div>
+            <div>
+              Lý do bảo hành:
+              <input formControlName="coverageReason" type="text" class="form-control">
+            </div>
+            <div>
+              Trạng thái
+              <select formControlName="coverageStatus" class="form-control">
+                <option *ngFor="let status of status" [value]="status">
+                  {{ status }}
+                </option>
+              </select>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary save" data-dismiss="modal" (click)="addCoverage()"
+            [disabled]="addCoverageForm.invalid">Save</button>
+        </div>
       </div>
     </div>
   </div>
-</div>
-
-<div class="modal fade" id="editCoverage" tabindex="-1" role="dialog" aria-labelledby="editCoverageTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="editCoverageTitle">Cập nhật bảo hành</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-
-      <div class="modal-body" class = "form-group">
-        <form [formGroup]="editCoverageForm">
-          <div>
-            Số điện thoại:
-            <input type="text" formControlName="coveragePhone" class="form-control"/>
-          </div>
-          <div>
-            Sản phẩm:
-            <input formControlName="coverageProduct" type="text" class="form-control">
-          </div>
-          <div>
-            Ngày gửi:
-            <input formControlName="coverageDate" type="text" class="form-control">
-          </div>
-          <div>
-            Lý do bảo hành:
-            <input formControlName="coverageReason" type="text" class="form-control">
-          </div>
-          <div>
-            Trạng thái
-            <select formControlName="coverageStatus" class="form-control">
-              <option *ngFor="let status of statuss" [value] = "status">
-                {{ status }}
-              </option>
-            </select>
-          </div>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary save" data-dismiss="modal" (click)="editCoverage()" [disabled]= "editCoverageForm.invalid">Save</button>
-      </div>
-    </div>
-  </div>
-</div>
 
   <div class="container-fluid">
     <table class="table table-bordered table-hover table-striped table-md">
@@ -117,45 +68,29 @@
       </thead>
       <tbody>
         <tr *ngFor="let coverage of coverages|async">
-          <td>{{ coverage.phone }}</td>
-          <td>{{ coverage.date }}</td>
-          <td>{{ coverage.product }}</td>
-          <td>{{ coverage.reason }}</td>
-          <td>{{ coverage.status }}</td>
-          <td>
-            <div class="pencil" (click)="open_edit_coverage()">
+          <td style="vertical-align: middle">{{ coverage.phone }}</td>
+          <td style="vertical-align: middle">{{ coverage.date }}</td>
+          <td style="vertical-align: middle">{{ coverage.product }}</td>
+          <td style="vertical-align: middle">{{ coverage.reason }}</td>
+          <td style="vertical-align: middle">{{ coverage.status }}</td>
+          <td style="text-align: center;">
+            <div class="pencil" style="cursor: pointer;" (click)="open_edit_coverage(coverage)" data-toggle="modal" data-target="#addCoverage">
               <i class="bi bi-pencil">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="16"
-                  height="16"
-                  fill="currentColor"
-                  class="bi bi-pencil"
-                  viewbox="0 0 16 16"
-                >
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil"
+                  viewbox="0 0 16 16">
                   <path
-                    d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5L13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175l-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z"
-                  />
+                    d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5L13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175l-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z" />
                 </svg>
               </i>
             </div>
-            <div class="trash">
+            <div class="trash" style="color: red; padding: 10px; cursor: pointer;">
               <i (click)="delete()" class="bi bi-trash">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="16"
-                  height="16"
-                  fill="currentColor"
-                  class="bi bi-trash"
-                  viewbox="0 0 16 16"
-                >
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash"
+                  viewbox="0 0 16 16">
                   <path
-                    d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"
-                  />
-                  <path
-                    fill-rule="evenodd"
-                    d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"
-                  />
+                    d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />
+                  <path fill-rule="evenodd"
+                    d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z" />
                 </svg>
               </i>
             </div>

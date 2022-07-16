@@ -1,0 +1,9 @@
+<div class="select-style" (change)="state.refine($event.target.value)">
+    <select>
+      <option *ngFor="let option of state.options" [value]="option.value" >
+        {{ option.label }}
+      </option>
+    </select>
+    <span><i class="fas fa-sort-down"></i> </span>
+</div> 
+

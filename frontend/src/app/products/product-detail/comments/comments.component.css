@@ -12,6 +12,7 @@
 .your-cmt {
   display: flex;
   align-items: center;
+  margin-bottom: 20px;
 }
 .avatar {
   width: 35px;

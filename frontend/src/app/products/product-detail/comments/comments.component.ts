@@ -18,7 +18,7 @@ export class CommentsComponent implements OnInit {
   public comments: Comment[] = [];
   private converter: Converter = new Converter();
 
-  @Input() laptopId: string;
+  @Input() productId: string;
   @Input() storedComment: Comment[] = [];
   @Output() commentEmitter = new EventEmitter<Comment[]>();
 
@@ -38,7 +38,7 @@ export class CommentsComponent implements OnInit {
   ngOnInit(): void {
     
     if (!this.storedComment) {
-      this.commentService.getComments(this.laptopId).subscribe((res) => {
+      this.commentService.getComments(this.productId).subscribe((res) => {
         this.comments = res;
         this.emitComments(this.comments);
       });
@@ -56,7 +56,7 @@ export class CommentsComponent implements OnInit {
     this.form.patchValue({
       username: this.authService.getUser().getDisplayName(),
       created_at: this.converter.timeConvert(),
-      product: this.laptopId,
+      product: this.productId,
     });
     this.commentService
       .addComment(this.form.value)

@@ -1,9 +1,4 @@
-<app-banner
-  [pageTitle]="''"
-  [bannerImgUrl]="'../../assets/banners/phone-1.jpeg'"
-></app-banner>
-
-<div class="main-content-wrapper">
+<div class="main-content-wrapper mt-5">
   <div class="container">
     <div class="row" *ngIf="product">
       <div class="col-lg-6">
@@ -92,13 +87,13 @@
               </span> -->
             </span>
             <span
-              *ngIf="product.interaction.comments === 0 || product.interaction.rates === 0"
+              *ngIf="product.interaction.comments === 0 && product.interaction.rates === 0"
               class="total-ratings"
                (click)="goToComment(matTabGroup, comment)"
               >Chưa có bình luận và đánh giá</span
             >
             <span
-              *ngIf="product.interaction.comments !== 0 && product.interaction.rates !== 0"
+              *ngIf="product.interaction.comments !== 0 || product.interaction.rates !== 0"
               (click)="goToComment(matTabGroup, comment)"
               class="total-ratings"
               >Xem <span>{{ product.interaction.comments }}</span> bình luận và
@@ -879,11 +874,11 @@
                   <span style="color: #00447c; font-size: 24px"
                     ><strong>Nhận xét & Đánh giá</strong></span
                   >
-                  <app-star [laptopId]="laptopId"></app-star>
+                  <app-star [productId]="productId"></app-star>
                   <div class="row justify-content-center">
                     <div class="col-lg-10">
                       <app-comments
-                        [laptopId]="laptopId"
+                        [productId]="productId"
                         (commentEmitter)="getComments($event)"
                         [storedComment]="comments"
                       ></app-comments>
