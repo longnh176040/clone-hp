@@ -7,7 +7,7 @@
 }
 
 .sidebar {
-  width: 345px;
+  width: 280px;
   position: fixed;
   left: 0;
   top: 0;
@@ -68,16 +68,16 @@
 }
 
 .main-content {
-  margin-left: 345px;
+  margin-left: 280px;
   transition: margin-left 300ms;
 }
 
 header {
   position: absolute;
-  left: 345px;
+  left: 280px;
   top: 0;
   z-index: 100;
-  width: calc(100% - 345px);
+  width: calc(100% - 280px);
   background: #fff;
   height: 85px;
   padding: 0rem 1rem;

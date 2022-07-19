@@ -37,10 +37,10 @@
       class="compare btn"
       (click)="compareOrRemove(product, $event)"
     >
-      Thêm vào so sánh
+      So sánh chi tiết
     </button>
 
-    <div class="buttons-wrapper text-center" [ngClass]="{'has-one-btn': !product.status}">
+    <!-- <div class="buttons-wrapper text-center" [ngClass]="{'has-one-btn': !product.status}">
       <button
         class="buy-now btn"
         *ngIf="product.status"
@@ -48,6 +48,6 @@
       >
         <i class="fas fa-shopping-cart mr-1"></i>Mua ngay
       </button>
-    </div>
+    </div> -->
   </div>
 </div>

@@ -69,6 +69,7 @@ exports.createProduct = async ( req, res ) => {
 
     await filterData.save();
     await product.save();
+    product.SyncToAlgolia();
     return res.status(201).json({ msg: RESPONSE_MESSAGES.CREATE_SUCCESS.replace(MESSAGE_KEYS.object, MESSAGE_VALUES.product.toLowerCase()) });
 }
 
@@ -223,3 +224,18 @@ exports.changeStatus = async (req, res) => {
       product.SyncToAlgolia();
       return res.status(200).json({ msg: "Cập nhật thành công" });
 };
+
+exports.updateImages = async (req, res) => {
+  const { id, imageUrls } = req.body;
+  const product = await Product.findOneAndUpdate(
+    { _id: id },
+    { imageUrls: imageUrls },
+    { new: true }
+  );
+  if(!product){
+    return res.status(500).json({ msg: RESPONSE_MESSAGES.UPDATE_SUCCESS.replace(MESSAGE_KEYS.object, MESSAGE_VALUES.image)  })
+  }
+  product.SyncToAlgolia();
+  return res.status(200).json({ msg: "Cập nhật thành công" });
+
+}

@@ -20,7 +20,7 @@ export class ProductCardComponent implements OnInit {
     const element = event.target;
     if (element.innerText.toLowerCase() === "đã thêm") {
       this.onRemovingFromComparison(product, event);
-    } else if (element.innerText.toLowerCase() === "thêm vào so sánh") {
+    } else if (element.innerText.toLowerCase() === "so sánh chi tiết") {
       this.onAddingToCompare(product, event);
     }
   }
@@ -36,7 +36,7 @@ export class ProductCardComponent implements OnInit {
 
   onRemovingFromComparison(product: any, event: any) {
     const element = event.target;
-    element.innerText = "Thêm vào so sánh";
+    element.innerText = "So sánh chi tiêt";
     this.removingFromComparison.emit(product);
   }
 

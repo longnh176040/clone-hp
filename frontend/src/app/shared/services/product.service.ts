@@ -3,15 +3,16 @@ import { Location } from "@angular/common";
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { Observable, throwError as observableThrowError } from "rxjs";
-import { catchError } from "rxjs/operators";
+import { catchError, finalize } from "rxjs/operators";
 import Swal from 'sweetalert2';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
   constructor(private _httpClient: HttpClient,
-    private location: Location) { }
+    private location: Location, ) { }
   private readonly api_porduct = environment.apiURL + "/product/";
 
   private static _handleError(err: HttpErrorResponse | any) {
@@ -46,6 +47,15 @@ export class ProductService {
       title: 'Không hợp lệ',
       text: 'Vui lòng kiểm tra lại thông tin',
     }));
+  }
+
+  editImageUrls(imageUrls: [string][number][], id: string): Observable<any> {
+    return this._httpClient.put(this.api_porduct + id + '/edit/image-urls', {
+      imageUrls,
+      id
+    }).pipe(
+      catchError(ProductService._handleError)
+    );
   }
 
   get_product(): Observable<any> {

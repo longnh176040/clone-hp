@@ -227,6 +227,7 @@ button.clear-all:hover {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   grid-gap: 1rem;
+  margin-bottom: 50px;
 }
 
 /* responsive */
@@ -305,6 +306,7 @@ button.clear-all:hover {
 @media (max-width: 992px) {
   .products-wrapper {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+    margin-bottom: 50px;
   }
 
   .searchbox-filter-wrapper {

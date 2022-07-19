@@ -8,6 +8,7 @@ import {
 } from "@angular/forms";
 import { Observable } from "rxjs";
 import { finalize } from "rxjs/operators";
+import Swal from "sweetalert2";
 import { ProductService } from '../../../shared/services/product.service';
 
 @Component({
@@ -197,7 +198,11 @@ export class CreateItemComponent implements OnInit {
     if (this.fb && this.productColor) {
       this._productService.createProduct(payload);
     } else {
-      console.log("Đang tải ảnh lên");
+      Swal.fire({
+        icon: 'error',
+        title: 'Không hợp lệ',
+        text: 'Chưa tải ảnh lên',
+      })
     }
   }
 }

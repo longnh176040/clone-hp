@@ -164,64 +164,6 @@
       <div class="col-12">
         <div class="product-info-wrapper" #comment>
           <mat-tab-group mat-align-tabs="center" dynamicHeight #matTabGroup>
-            <mat-tab label="Khuyến mãi">
-              <div class="gifts">
-                <ng-template
-                  #promotion
-                  let-img="img"
-                  let-title="title"
-                  let-price="price"
-                  let-className="className"
-                >
-                  <div class="col-xl-3 col-md-4 col-sm-6 mb-sm-0 mb-30">
-                    <div class="single-gift" [class]="className">
-                      <div class="gift-img-wrapper">
-                        <img [src]="img" />
-                      </div>
-                      <div class="gift-info">
-                        <p class="title">{{ title }}</p>
-                        <p class="price mb-0">{{ price }}</p>
-                      </div>
-                    </div>
-                  </div>
-                </ng-template>
-
-                <div class="row gifts-group group-3">
-                  <ng-template #policy let-img="img" let-title="title">
-                    <div class="col-xl-3 col-md-4 col-sm-6 mb-30">
-                      <div class="bonus">
-                        <img [src]="img" class="img-fluid" />
-                        <p>{{ title }}</p>
-                      </div>
-                    </div>
-                  </ng-template>
-
-                  <ng-container
-                    [ngTemplateOutlet]="policy"
-                    [ngTemplateOutletContext]="{
-                      img: '../../../assets/product-detail/gifts/undraw_On_the_way_re_swjt.png',
-                      title: 'Giao hàng toàn quốc'
-                    }"
-                  ></ng-container>
-
-                  <ng-container
-                    [ngTemplateOutlet]="policy"
-                    [ngTemplateOutletContext]="{
-                      img: '../../../assets/product-detail/gifts/undraw_business_deal_cpi9.png',
-                      title: '1 đổi 1 trong 15 ngày đầu'
-                    }"
-                  ></ng-container>
-
-                  <ng-container
-                    [ngTemplateOutlet]="policy"
-                    [ngTemplateOutletContext]="{
-                      img: '../../../assets/product-detail/gifts/undraw_video_call_kxyp.png',
-                      title: 'Hỗ trợ bảo hành'
-                    }"
-                  ></ng-container>
-                </div>
-              </div>
-            </mat-tab>
             <mat-tab label="Đánh giá chi tiết">
               <div class="row features-specs-wrapper">
                 <div class="col-lg-6">

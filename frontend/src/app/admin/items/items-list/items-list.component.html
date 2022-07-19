@@ -56,7 +56,7 @@
                     />
                   </svg>
                 </i>
-  
+
                 <i
                   class="bi bi-caret-up"
                   (click)="deSortByBrand()"
@@ -96,7 +96,7 @@
                     />
                   </svg>
                 </i>
-  
+
                 <i
                   class="bi bi-caret-up"
                   (click)="deSortByName()"
@@ -241,7 +241,7 @@
       </div>
     </div>
   </div>
-  
+
   <!-- Modal -->
   <div
     class="modal fade"
@@ -274,7 +274,7 @@
                   <img
                     class="image"
                     src="{{ thumbnail }}"
-                    (click)="pick_image_to_delete(thumbnail)"
+                    (click)="pick_image_to_delete(thumbnail, i)"
                   />
                   <span
                     class="delete-thumbnail"
@@ -347,7 +347,7 @@
             *ngIf="listToDelete.length > 0"
             type="button"
             class="btn btn-primary"
-            (click)="delete_laptop_thumbnail()"
+            (click)="delete_laptop_thumbnail(showLaptop)"
             data-dismiss="modal"
           >
             Delete thumbnails
@@ -356,4 +356,4 @@
       </div>
     </div>
   </div>
-  
+
