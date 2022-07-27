@@ -50,23 +50,14 @@ li {
 
 /* style product showcase section */
 .products-showcase {
-  padding: 70px 0;
+  padding: 50px 100px;
   background-color: #efefef;
 }
 .heading-button {
-  width: 260px;
-  height: 60px;
-  border-radius: 5px;
-  background: linear-gradient(
-    231deg,
-    rgba(59, 163, 235, 1) 0%,
-    rgba(58, 190, 174, 1) 100%
-  );
-  color: white;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 22px;
+  font-size: 24px;
   font-weight: 600;
   margin: 0 auto;
 }

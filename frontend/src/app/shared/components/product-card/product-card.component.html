@@ -11,9 +11,9 @@
     />
   </div>
   <div>
-    <h3 [routerLink]="['/products', product.id ? product.id : product._id]">
+    <h5 [routerLink]="['/products', product.id ? product.id : product._id]">
       {{ product.name }}
-    </h3>
+    </h5>
   </div>
   <div>
     <div class="price mb-3" *ngIf="product.status">

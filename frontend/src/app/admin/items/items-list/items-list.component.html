@@ -270,7 +270,7 @@
           <div class="container-fluid">
             <div class="row">
               <ng-container *ngFor="let thumbnail of thumbnails; let i = index">
-                <div class="ml-auto">
+                <div *ngIf="onTypeOfThumbnail(thumbnail)" class="ml-auto">
                   <img
                     class="image"
                     src="{{ thumbnail }}"

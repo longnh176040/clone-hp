@@ -254,7 +254,7 @@ button.trailer:hover i {
 /* style product list */
 .products-wrapper {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(5, minmax(0, 1fr));
   grid-gap: 1rem;
 }
 

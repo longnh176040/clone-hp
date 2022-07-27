@@ -92,7 +92,7 @@ export class ItemsListComponent implements OnInit {
 	search_by_name = new FormControl("");
 	edit_product_id;
 	drawer_state;
-	currentLaptopThumbnail: FileList = null;
+	currentLaptopThumbnail: any;
 	laptops: Product[];
 	visible = false;
 	formCreateProduct: FormGroup = new FormGroup({
@@ -390,17 +390,17 @@ export class ItemsListComponent implements OnInit {
 	}
 
 	//detect upload thumbnail event
-	fileChangeEvent(event) {
-		this.currentLaptopThumbnail = event.target.files as FileList;
+	fileChangeEvent( event ) {
+		this.currentLaptopThumbnail = (event.target as HTMLInputElement).files;
 		this.visible_thumbnail = true;
-
 		for (let i = 0; i < this.currentLaptopThumbnail.length; i++) {
-			let reader = new FileReader();
-			reader.readAsDataURL(this.currentLaptopThumbnail[i]);
-			reader.onload = (_event) => {
-				this.thumbnails.push(reader.result as string)
+      let reader = new FileReader();
+      reader.onload = ( _event ) => {
+				this.imgURL.push(reader.result as string)
 			};
-		}
+      this.thumbnails.push(this.currentLaptopThumbnail[i]);
+      reader.readAsDataURL(this.currentLaptopThumbnail[i]);
+    }
 	}
 
 	// change status
@@ -432,30 +432,28 @@ export class ItemsListComponent implements OnInit {
 		this.laptop_id = _id
 		console.log(this.thumbnails, "thumbnails")
 	}
-
-	async addMoreThumbnail(laptop) {
-		console.log(this.thumbnails)
-		const urls = await Promise.all(this.thumbnails.map(async(item) => {
-			if (item.includes("base64")) {
-				const result = await this.getUrlFromFirebase(item);
-				return result;
-			} else {
-				return item
-			}
-		}));
-		if (urls.length > 5) {
-			return Swal.fire({
-				icon: 'error',
-				title: 'Không hợp lệ',
-				text: 'Tối đa 5 ảnh'
-			});
-		}
-		return this.productService.editImageUrls(urls, laptop._id).subscribe((res) => {
-			Swal.fire({
-				icon: "success",
-				title: res.msg,
-			}).then(() => this.ngOnInit());
-		});
+	async addMoreThumbnail( laptop ) {
+    const urls = await Promise.all(this.thumbnails.map( async (item) => {
+      if(typeof(item) !== 'string'){
+        item = await this.getUrlFromFirebase(item);
+        return item;
+      }else {
+        return item
+      }
+    }));
+    if(urls.length > 5){
+      return Swal.fire({
+        icon: 'error',
+        title: 'Không hợp lệ',
+        text: 'Tối đa 5 ảnh'
+      });
+    }
+    return this.productService.editImageUrls(urls, laptop._id).subscribe((res) => {
+      Swal.fire({
+        icon: "success",
+        title: res.msg,
+      }).then(() => this.ngOnInit());
+    });
 	}
 
 	private async getUrlFromFirebase(item): Promise<string> {
@@ -490,4 +488,9 @@ export class ItemsListComponent implements OnInit {
 	onEditBlog(product_id: string) {
 		this.router.navigate(['/admin/items', product_id])
 	}
+
+  onTypeOfThumbnail(type): boolean {
+    if(typeof(type) === 'string') return true;
+    return false
+  }
 }

@@ -1,4 +1,4 @@
-h3 {
+h5 {
   text-align: center;
   margin: 1rem 0px;
   cursor: pointer;
@@ -50,7 +50,6 @@ img.img-thumb {
   height: 100%;
   object-fit: cover;
 }
-
 /* style specs icons */
 .screensize-icon img,
 .ram-icon img {

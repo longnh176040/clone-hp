@@ -1,104 +1,53 @@
-<div
-  id="carouselExampleIndicators"
-  class="carousel slide carousel-fade"
-  data-ride="carousel"
-  data-pause="false"
-  data-interval="5000"
-  (touchstart)="touchStart($event)"
-  (touchend)="touchEnd($event)"
->
+<div id="carouselExampleIndicators" class="carousel slide carousel-fade" data-ride="carousel" data-pause="false"
+  data-interval="5000" (touchstart)="touchStart($event)" (touchend)="touchEnd($event)">
   <ol class="carousel-indicators">
-    <li
-      data-target="#carouselExampleIndicators"
-      data-slide-to="0"
-      class="active"
-    ></li>
+    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
     <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
     <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
   </ol>
   <div class="carousel-inner">
     <div class="carousel-item active">
-      <ng-container
-        [ngTemplateOutlet]="carouselItem"
-        [ngTemplateOutletContext]="{
+      <ng-container [ngTemplateOutlet]="carouselItem" [ngTemplateOutletContext]="{
           imgUrl: '../../assets/slide show images/samsung.jpg',
           productTitle: 'Samsung Z Fold3',
           desc: 'Thiết kế độc đáo tiện lợi, khẳng định đẳng cấp - Thiết kế gập mở, chất liệu cao cấp, bản lề chắc chắn'
-        }"
-      ></ng-container>
+        }"></ng-container>
     </div>
     <div class="carousel-item">
-      <ng-container
-        [ngTemplateOutlet]="carouselItem"
-        [ngTemplateOutletContext]="{
+      <ng-container [ngTemplateOutlet]="carouselItem" [ngTemplateOutletContext]="{
           imgUrl: '../../assets/slide show images/iphone.jpg',
           productTitle: 'iPhone 13 Pro Max',
           desc: 'Hiệu năng vượt trội - Chip Apple A15 Bionic mạnh mẽ, hỗ trợ mạng 5G tốc độ cao'
-        }"
-      ></ng-container>
+        }"></ng-container>
     </div>
     <div class="carousel-item">
-      <ng-container
-        [ngTemplateOutlet]="carouselItem"
-        [ngTemplateOutletContext]="{
+      <ng-container [ngTemplateOutlet]="carouselItem" [ngTemplateOutletContext]="{
           imgUrl: '../../assets/slide show images/banner-mi.jpg',
           productTitle: 'Xiaomi 12 Pro',
           desc: 'Cân mọi tác vụ với CPU thế hệ mới - Vi xử lí Snapdragon 8 Gen 1 cùng RAM 12GB'
-        }"
-      ></ng-container>
+        }"></ng-container>
     </div>
   </div>
-  <a
-    class="carousel-control-prev"
-    href="#carouselExampleIndicators"
-    role="button"
-    data-slide="prev"
-  >
-    <span class="carousel-control carousel-control-prev-icon" aria-hidden="true"
-      ><i class="fas fa-chevron-left"></i
-    ></span>
+  <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+    <span class="carousel-control carousel-control-prev-icon" aria-hidden="true"><i
+        class="fas fa-chevron-left"></i></span>
   </a>
-  <a
-    class="carousel-control-next"
-    href="#carouselExampleIndicators"
-    role="button"
-    data-slide="next"
-  >
-    <span class="carousel-control carousel-control-next-icon" aria-hidden="true"
-      ><i class="fas fa-chevron-right"></i
-    ></span>
+  <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+    <span class="carousel-control carousel-control-next-icon" aria-hidden="true"><i
+        class="fas fa-chevron-right"></i></span>
   </a>
 </div>
 <app-category></app-category>
 <div class="products-showcase">
-  <div class="container">
-    <div class="hot-deals">
-      <div class="heading-button">Deal sốc mỗi tuần</div>
-      <div class="products-wrapper">
-        <ng-container
-          [ngTemplateOutlet]="laptopList"
-          [ngTemplateOutletContext]="{ data: dealList }"
-        ></ng-container>
-      </div>
-    </div>
-    <div class="best-seller">
-      <div class="heading-button">Bán chạy nhất</div>
-      <div class="products-wrapper">
-        <ng-container
-          [ngTemplateOutlet]="laptopList"
-          [ngTemplateOutletContext]="{ data: bestList }"
-        ></ng-container>
-      </div>
+  <div class="hot-deals">
+    <div class="products-wrapper">
+      <ng-container [ngTemplateOutlet]="laptopList" [ngTemplateOutletContext]="{ data: dealList }"></ng-container>
+      <ng-container [ngTemplateOutlet]="laptopList" [ngTemplateOutletContext]="{ data: bestList }"></ng-container>
     </div>
   </div>
 </div>
 
-<ng-template
-  #carouselItem
-  let-imgUrl="imgUrl"
-  let-productTitle="productTitle"
-  let-desc="desc"
->
+<ng-template #carouselItem let-imgUrl="imgUrl" let-productTitle="productTitle" let-desc="desc">
   <img class="d-block w-100" [src]="imgUrl" />
   <div class="carousel-caption container">
     <div class="col-lg-6 col-10">
@@ -115,9 +64,7 @@
 </ng-template>
 
 <ng-template #laptopList let-data="data">
-  <div
-    *ngFor="let product of data"
-  >
+  <div *ngFor="let product of data">
     <app-product-card [product]="product" #product></app-product-card>
   </div>
 </ng-template>
