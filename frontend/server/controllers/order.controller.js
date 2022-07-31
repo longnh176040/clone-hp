@@ -22,12 +22,12 @@ exports.createOrder = async (req, res) => {
       order_id: Math.random().toString(36).substring(6),
     });
     await order.save();
-    const emailContent = `<div>username: ${req.body.username}</div><div>phone: ${req.body.phone}</div><div>price: ${req.body.total_price} vnđ</div><div>Mã bảo hành: ${order.order_id} vnđ</div>`;
-    mailer.sendAnEmail(
-      "admin@gmail.com",
-      "Đơn đặt hàng mới",
-      emailContent
-    );
+    // const emailContent = `<div>Tên người nhận: ${req.body.username}</div><div>Số điện thoại liên hệ: ${req.body.phone}</div><div>Giá: ${req.body.total_price} vnđ</div><div>Mã bảo hành: ${order.order_id} vnđ</div>`;
+    // mailer.sendAnEmail(
+    //   "longluucong1308@gmail.com",
+    //   "Đơn đặt hàng mới",
+    //   emailContent
+    // );
     await Cart.deleteOne({ user_id: userId });
     return res.status(201).json({ msg: "Đặt hàng", order: order });
   } catch (error) {

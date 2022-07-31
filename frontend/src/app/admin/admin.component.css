@@ -124,8 +124,7 @@ header label span {
 }
 
 main {
-  background: #f1f5f9;
-  min-height: 110vh;
+  min-height: calc(100vh - 85px);
   padding: 2rem 3rem;
 }
 

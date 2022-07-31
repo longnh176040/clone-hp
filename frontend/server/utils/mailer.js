@@ -5,12 +5,12 @@ const mailer = nodemailer.createTransport({
   port: 587,
   secure: false,
   auth: {
-    user: "gbhalloday@gmail.com",
-    pass: "qbisziycudimdeoc",
+    user: 'longluucong1308@gmail.com',
+    pass: 'qmdutxakkhjqsnmf',
   },
 });
 
-const from = '"HP Vietnam" <gbhalloday@gmail.com>';
+const from = 'MobileS <longluucong1308@gmail.com>';
 
 exports.sendAnEmail = (to, subject, body) => {
   mailer.sendMail({

@@ -3,6 +3,7 @@ import { Observable, Subject } from "rxjs";
 import { OrderService } from "src/app/shared/services/order.service";
 import { map } from 'rxjs/operators';
 import Swal from "sweetalert2";
+import { FormControl, FormGroup, Validators } from "@angular/forms";
 
 @Component({
   selector: "app-order",
@@ -12,9 +13,10 @@ import Swal from "sweetalert2";
 export class OrderComponent implements OnInit {
   orders: any;
   constructor(private orderService: OrderService) {}
+  search_by_phone = new FormControl("");
 
   ngOnInit(): void {
-    this.orders = this.orderService.getOrders()
+    this.orders = this.orderService.getOrders();
   }
 
   onChange(value) {
