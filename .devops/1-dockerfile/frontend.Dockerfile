@@ -14,7 +14,7 @@ FROM nginx:1.18-alpine as release
 
 WORKDIR /frontend
 
-COPY ./frontend/conf.d/ /etc/nginx/conf.d/
+COPY ./.devops/conf.d/ /etc/nginx/conf.d/
 
 COPY --from=builder /frontend/dist/frontend/browser/ /usr/share/nginx/html/
 
