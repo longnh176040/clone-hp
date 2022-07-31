@@ -1,8 +1,8 @@
 export const environment = {
   production: true,
-  apiURL: "https://hp.minastik.com/api",
+  apiURL: "http://116.118.49.234:5009/api",
   bucket: "https://s3-ap-southeast-1.amazonaws.com/hp.minastik.com/",
-  socketServer: "https://hp.minastik.com",
+  socketServer: "http://116.118.49.234:5009",
 
   firebaseConfig: {
     apiKey: "AIzaSyCfcw0QH-4YHMDemD9oCZceA1YG0RU9dN4",
@@ -12,7 +12,7 @@ export const environment = {
     storageBucket: "mobiles-113.appspot.com",
     messagingSenderId: "979795380907",
     appId: "1:979795380907:web:1a6b1c86f470eb24a705ee",
-    measurementId: "G-QHDB87LEBH"
+    measurementId: "G-QHDB87LEBH",
   },
 
   viewID: "ga:245019971",
