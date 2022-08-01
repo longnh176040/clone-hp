@@ -1,0 +1,42 @@
+#### BUILD #####
+build_backend:
+  stage: build
+  variables:
+    MODULE_NAME: backend
+    CI_IMAGE_NAME: $CI_REGISTRY_IMAGE/$MODULE_NAME:$CI_COMMIT_REF_SLUG
+  script:
+    - echo -n $CI_JOB_TOKEN | docker login -u $CI_REGISTRY_USER --password-stdin $CI_REGISTRY
+    # - docker login -u $CI_REGISTRY_USER -p $CI_JOB_TOKEN $CI_REGISTRY
+    - docker build -f $DOCKERFILE_PATH/$MODULE_NAME.Dockerfile -t $CI_IMAGE_NAME $SRC_PATH
+    - docker push $CI_IMAGE_NAME
+  tags:
+    - minastik-runner-0
+  only:
+    refs:
+      - develop
+    changes:
+      - frontend/server/**/*
+      - .devops/1-dockerfile/backend.Dockerfile
+      - .devops/2-cicd/backend.yml
+      - .gitlab-ci.yml
+
+### DEPLOY #####
+deploy_backend:
+  stage: deploy
+  variables:
+    MODULE_NAME: backend
+    CONTAINER_NAME: long.lc-datn_backend
+    CI_IMAGE_NAME: $CI_REGISTRY_IMAGE/$MODULE_NAME:$CI_COMMIT_REF_SLUG
+  script:
+    - ssh -o StrictHostKeyChecking=no -i $RUNNER_HOME_PATH/duybc.pem $SERVER_STG 
+      "docker rm -f $CONTAINER_NAME; docker pull $CI_IMAGE_NAME; docker run -d --name $CONTAINER_NAME --restart unless-stopped -p 5009:3200 $CI_IMAGE_NAME"
+  tags:
+    - minastik-runner-0
+  only:
+    refs:
+      - develop
+    changes:
+      - frontend/server/**/*
+      - .devops/1-dockerfile/backend.Dockerfile
+      - .devops/2-cicd/backend.yml
+      - .gitlab-ci.yml

@@ -1,0 +1,12 @@
+variables:
+  SRC_PATH: ./frontend
+  DOCKERFILE_PATH: .devops/1-dockerfile
+  RUNNER_HOME_PATH: /home/gitlab-runner
+
+stages:
+  - build
+  - deploy
+
+include:    
+    - local: .devops/2-cicd/backend.yml
+    - local: .devops/2-cicd/frontend.yml
