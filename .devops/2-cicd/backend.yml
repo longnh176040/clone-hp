@@ -27,8 +27,6 @@ deploy_backend:
     MODULE_NAME: backend
     CONTAINER_NAME: long.lc-datn_backend
     CI_IMAGE_NAME: $CI_REGISTRY_IMAGE/$MODULE_NAME:$CI_COMMIT_REF_SLUG
-  before_script:
-    - echo DEPLOY backend
   script:
     - ssh -o StrictHostKeyChecking=no -i $RUNNER_HOME_PATH/duybc.pem $SERVER_STG 
       "docker rm -f $CONTAINER_NAME; docker pull $CI_IMAGE_NAME; docker run -d --name $CONTAINER_NAME --restart unless-stopped -p 5009:3200 $CI_IMAGE_NAME"
