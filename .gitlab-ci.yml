@@ -1,5 +1,5 @@
 variables:
-  SRC_PATH: ./frontend
+  SRC_PATH: .
   DOCKERFILE_PATH: .devops/1-dockerfile
   RUNNER_HOME_PATH: /home/gitlab-runner
 
