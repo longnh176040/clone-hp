@@ -24,7 +24,6 @@ export class AuthService {
   public user$ = this.userListener.asObservable();
 
   constructor(
-    @Inject(PLATFORM_ID) private platformId: Object,
     private http: HttpClient,
     private router: Router,
     private afAuth: AngularFireAuth,
@@ -175,14 +174,11 @@ export class AuthService {
   }
 
   setAnonymousCart() {
-    const isServer = !isPlatformBrowser(this.platformId);
-    if (!isServer) {
       if (sessionStorage.getItem("cart") != null) {
         AuthService.anonymous_user_cart = JSON.parse(
           sessionStorage.getItem("cart")
         );
       }
-    }
   }
 
   resolveUser() {

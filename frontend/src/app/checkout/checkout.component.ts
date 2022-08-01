@@ -18,7 +18,6 @@ import { ProductService } from '../shared/services/product.service';
 })
 export class CheckoutComponent implements OnInit {
   constructor(
-    @Inject(PLATFORM_ID) private platformId: Object,
     private router: Router,
     private route: ActivatedRoute,
     private laptopService: LaptopService,
@@ -49,10 +48,7 @@ export class CheckoutComponent implements OnInit {
         this.initUserCart(res.products);
       });
     } else {
-      const isServer = !isPlatformBrowser(this.platformId);
-      if (!isServer) {
         this.initUserCart(this.cartService.get_anonymous_cart());
-      }
     }
   }
 

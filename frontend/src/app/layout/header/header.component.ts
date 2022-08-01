@@ -11,10 +11,9 @@ import { CartService } from "src/app/shared/services/cart.service";
 })
 export class HeaderComponent implements OnInit {
   constructor(
-    @Inject(PLATFORM_ID) private platformId: Object,
     public cartService: CartService,
     public authService: AuthService
-  ) {}
+  ) { }
 
   anonymous_user_cart;
   amount = 0;
@@ -22,24 +21,21 @@ export class HeaderComponent implements OnInit {
   showMobileMenu = false;
 
   ngOnInit(): void {
-    const isServer = !isPlatformBrowser(this.platformId);
-    if (!isServer) {
-      window.addEventListener("scroll", () => {
-        const headerElement = document.getElementById("header");
-        const liElement = document.getElementsByClassName("desktop-nav-item");
-        if (window.scrollY > 100) {
-          headerElement.classList.add("sticky");
-          for (let i = 0; i < liElement.length; i++) {
-            liElement[i].classList.add("sticky");
-          }
-        } else if(window.scrollY < 100) {
-          headerElement.classList.remove("sticky");
-          for (let i = 0; i < liElement.length; i++) {
-            liElement[i].classList.remove("sticky");
-          }
+    window.addEventListener("scroll", () => {
+      const headerElement = document.getElementById("header");
+      const liElement = document.getElementsByClassName("desktop-nav-item");
+      if (window.scrollY > 100) {
+        headerElement.classList.add("sticky");
+        for (let i = 0; i < liElement.length; i++) {
+          liElement[i].classList.add("sticky");
         }
-      });
-    }
+      } else if (window.scrollY < 100) {
+        headerElement.classList.remove("sticky");
+        for (let i = 0; i < liElement.length; i++) {
+          liElement[i].classList.remove("sticky");
+        }
+      }
+    });
 
     this.cartService.currentCart.subscribe((res) => {
       res = [].concat(res);
@@ -55,9 +51,7 @@ export class HeaderComponent implements OnInit {
         .pipe(filter((cart) => cart !== null))
         .subscribe((cart) => this.cartService.cartSource.next(cart.products));
     } else {
-      if (!isServer) {
-        this.cartService.cartSource.next(this.cartService.get_anonymous_cart());
-      }
+      this.cartService.cartSource.next(this.cartService.get_anonymous_cart());
     }
   }
 
