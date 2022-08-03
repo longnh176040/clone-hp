@@ -5,14 +5,14 @@ export const environment = {
   socketServer: "http://116.118.49.234:5009",
 
   firebaseConfig: {
-    apiKey: "AIzaSyARr7HqnHfapA4QmEhA_ICfpj_d3SXeI04",
-    authDomain: "support-hp-0103.firebaseapp.com",
-    databaseURL: "https://support-hp-0103.firebaseio.com",
-    projectId: "support-hp-0103",
-    storageBucket: "support-hp-0103.appspot.com",
-    messagingSenderId: "897773920815",
-    appId: "1:897773920815:web:54b6c0513769a68a75dcda",
-    measurementId: "G-LZ27M5MC4E",
+    apiKey: "AIzaSyCfcw0QH-4YHMDemD9oCZceA1YG0RU9dN4",
+    authDomain: "mobiles-113.firebaseapp.com",
+    databaseURL: "https://mobiles-113.firebaseio.com",
+    projectId: "mobiles-113",
+    storageBucket: "mobiles-113.appspot.com",
+    messagingSenderId: "979795380907",
+    appId: "1:979795380907:web:1a6b1c86f470eb24a705ee",
+    measurementId: "G-QHDB87LEBH"
   },
 
   viewID: "ga:245019971",
