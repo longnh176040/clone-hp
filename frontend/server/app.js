@@ -24,7 +24,6 @@ mongoose.connect(process.env.MONGODB_URI, {
     useCreateIndex: true,
 }).then(
     ( _ ) => {
-
         console.log("Database has been connected !");
     },
     ( err ) => console.log(err)
