@@ -46,32 +46,32 @@ export class AuthService {
   }
 
   GoogleAuth() {
-    const googleProvider = new firebase.auth.GoogleAuthProvider();
-    return new Promise<any>((resolve, reject) => {
-      this.afAuth
-        .signInWithPopup(googleProvider)
-        .then((result) => {
-          let pass = new Hash();
-          result.user.sendEmailVerification();
-          this.addUser(
-            result.user?.uid,
-            result.user?.displayName,
-            result.user?.email,
-            result.user?.phoneNumber,
-            pass.md5("12345678")
-          );
-          this.resolveUser();
-          resolve(firebase.auth().currentUser);
-          Swal.fire({
-            icon: "success",
-            title: "Đăng nhập thành công",
-          });
-          this.location.back();
-        })
-        .catch((error) => {
-          reject(error);
-        });
-    });
+    // const googleProvider = new firebase.auth.GoogleAuthProvider();
+    // return new Promise<any>((resolve, reject) => {
+    //   this.afAuth
+    //     .signInWithPopup(googleProvider)
+    //     .then((result) => {
+    //       let pass = new Hash();
+    //       result.user.sendEmailVerification();
+    //       this.addUser(
+    //         result.user?.uid,
+    //         result.user?.displayName,
+    //         result.user?.email,
+    //         result.user?.phoneNumber,
+    //         pass.md5("12345678")
+    //       );
+    //       this.resolveUser();
+    //       resolve(firebase.auth().currentUser);
+    //       Swal.fire({
+    //         icon: "success",
+    //         title: "Đăng nhập thành công",
+    //       });
+    //       this.location.back();
+    //     })
+    //     .catch((error) => {
+    //       reject(error);
+    //     });
+    // });
   }
 
   register(value) {
