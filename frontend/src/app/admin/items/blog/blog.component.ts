@@ -96,7 +96,7 @@ export class BlogComponent implements OnInit {
           class: ImageTool,
           config: {
             endpoints: {
-              byFile: `${this.BLOG_URL}/image`,
+              byFile: `${this.BLOG_URL}image`,
             },
             field: "image",
             types: "image/*",
