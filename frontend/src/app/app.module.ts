@@ -4,6 +4,7 @@ import { AngularFireModule } from "@angular/fire";
 import { AngularFireAuthModule } from "@angular/fire/auth";
 import { AngularFirestoreModule } from "@angular/fire/firestore";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { AngularFireDatabaseModule } from '@angular/fire/database';
 import {
   BrowserModule,
   BrowserTransferStateModule,
@@ -98,6 +99,7 @@ import { SortComponent } from './products/product-list/sort/sort.component';
     AngularFireAuthModule,
     AngularFirestoreModule,
     AdminModule,
+    AngularFireDatabaseModule,
     NzFormModule,
     NzInputModule,
     NzButtonModule,

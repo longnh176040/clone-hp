@@ -1,8 +1,8 @@
 const AWS = require("aws-sdk");
 
-const ID = "AKIA3S6P576YXOQDOU5E";
-const SECRET = "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";
-const BUCKET_NAME = "tranhviet.minastik.com";
+const ID = "AKIA3S6P576Y4AQIJW4U";
+const SECRET = "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";
+const BUCKET_NAME = "anhquynh.name.vn";
 
 const s3Config = new AWS.S3({
   accessKeyId: ID,
