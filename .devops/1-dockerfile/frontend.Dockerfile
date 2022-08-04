@@ -8,15 +8,17 @@ RUN npm i
 
 COPY ./frontend/ .
 
-RUN npm run build
+EXPOSE 4200
 
-FROM nginx:1.18-alpine as release
+CMD ["npm", "run", "start"]
 
-WORKDIR /frontend
+# FROM nginx:1.18-alpine as release
 
-COPY ./.devops/conf.d/ /etc/nginx/conf.d/
+# WORKDIR /frontend
 
-COPY --from=builder /frontend/dist/frontend/browser/ /usr/share/nginx/html/
+# COPY ./.devops/conf.d/ /etc/nginx/conf.d/
 
-CMD ["nginx", "-g", "daemon off;"]
+# COPY --from=builder /frontend/dist/frontend/browser/ /usr/share/nginx/html/
+
+# CMD ["nginx", "-g", "daemon off;"]
 
