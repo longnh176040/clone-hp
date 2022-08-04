@@ -2,9 +2,9 @@ import { HttpClientModule } from "@angular/common/http";
 import { NgModule } from "@angular/core";
 import { AngularFireModule } from "@angular/fire";
 import { AngularFireAuthModule } from "@angular/fire/auth";
+import { AngularFireDatabaseModule } from "@angular/fire/database";
 import { AngularFirestoreModule } from "@angular/fire/firestore";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { AngularFireDatabaseModule } from '@angular/fire/database';
 import {
   BrowserModule,
   BrowserTransferStateModule,
@@ -31,34 +31,32 @@ import { PipeModule } from "./shared/pipe/pipe.module";
 import { AuthService } from "./shared/services/auth.service";
 import { LaptopService } from "./shared/services/laptop.service";
 
-
 // angular material modules
 
-import { CommentsComponent } from './products/product-detail/comments/comments.component';
-import { PoliciesComponent } from './policies/policies.component';
-import { PolicyDetailComponent } from './policies/policy-detail/policy-detail.component';
-import { CheckCoverageComponent } from './check-coverage/check-coverage.component';
-import { PolicyListComponent } from './policies/policy-list/policy-list.component';
-import { MessengerComponent } from './messenger/messenger.component';
-import { StarComponent } from './products/product-detail/star/star.component';
-import { MatTabsModule } from "@angular/material/tabs";
 import { MatSnackBarModule } from "@angular/material/snack-bar";
-import { NzFormModule } from 'ng-zorro-antd/form';
-import { NzInputModule } from 'ng-zorro-antd/input';
-import { NzButtonModule } from 'ng-zorro-antd/button';
-
+import { MatTabsModule } from "@angular/material/tabs";
+import { NzButtonModule } from "ng-zorro-antd/button";
+import { NzFormModule } from "ng-zorro-antd/form";
+import { NzInputModule } from "ng-zorro-antd/input";
+import { CheckCoverageComponent } from "./check-coverage/check-coverage.component";
+import { MessengerComponent } from "./messenger/messenger.component";
+import { PoliciesComponent } from "./policies/policies.component";
+import { PolicyDetailComponent } from "./policies/policy-detail/policy-detail.component";
+import { PolicyListComponent } from "./policies/policy-list/policy-list.component";
+import { CommentsComponent } from "./products/product-detail/comments/comments.component";
+import { StarComponent } from "./products/product-detail/star/star.component";
 
 // Alogila search
 
-import { NgAisModule } from 'angular-instantsearch';
-import { UserInfoComponent } from './checkout/user-info/user-info.component';
-import { BannerComponent } from './shared/components/banner/banner.component';
-import { ProductCardComponent } from './shared/components/product-card/product-card.component';
-import { ContactComponent } from './contact/contact.component';
-import { RecruitmentComponent } from './recruitment/recruitment.component';
-import { CategoryComponent } from './shared/components/category/category.component';
-import { SliderComponent } from './shared/components/slider/slider.component';
-import { SortComponent } from './products/product-list/sort/sort.component';
+import { NgAisModule } from "angular-instantsearch";
+import { UserInfoComponent } from "./checkout/user-info/user-info.component";
+import { ContactComponent } from "./contact/contact.component";
+import { SortComponent } from "./products/product-list/sort/sort.component";
+import { RecruitmentComponent } from "./recruitment/recruitment.component";
+import { BannerComponent } from "./shared/components/banner/banner.component";
+import { CategoryComponent } from "./shared/components/category/category.component";
+import { ProductCardComponent } from "./shared/components/product-card/product-card.component";
+import { SliderComponent } from "./shared/components/slider/slider.component";
 
 // Socket.io
 
