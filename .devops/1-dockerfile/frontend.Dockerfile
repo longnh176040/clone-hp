@@ -7,7 +7,7 @@ COPY ./frontend/package.json ./
 RUN npm i
 
 ARG file_change=/frontend/node_modules/@angular/fire/fesm2015/angular-fire.js
-RUN sed -i "s@platformId\.toString@platformId\?\.toString@g" ${file_change}
+# RUN sed -i "s@platformId\.toString@platformId\?\.toString@g" ${file_change}
 RUN cat /frontend/node_modules/@angular/fire/fesm2015/angular-fire.js
 
 COPY ./frontend/ .
