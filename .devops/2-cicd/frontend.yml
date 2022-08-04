@@ -26,8 +26,7 @@ deploy_frontend:
     - echo DEPLOY frontend
   script:
     - ssh -o StrictHostKeyChecking=no -i $RUNNER_HOME_PATH/duybc.pem $SERVER_STG 
-      "docker rm -f $CONTAINER_NAME; docker pull $CI_IMAGE_NAME; docker run -d --name $CONTAINER_NAME -p 3009:4200 --restart unless-stopped $CI_IMAGE_NAME"
-      # "docker rm -f $CONTAINER_NAME; docker pull $CI_IMAGE_NAME; docker run -d --name $CONTAINER_NAME -p 3009:80 --restart unless-stopped $CI_IMAGE_NAME"
+      "docker rm -f $CONTAINER_NAME; docker pull $CI_IMAGE_NAME; docker run -d --name $CONTAINER_NAME -p 3009:80 --restart unless-stopped $CI_IMAGE_NAME"
   tags:
     - minastik-runner-0
   only:
