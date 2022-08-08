@@ -1,8 +1,8 @@
 export const environment = {
   production: true,
-  apiURL: "http://116.118.49.234:5009/api",
+  apiURL: "https://116.118.49.234:5009/api",
   bucket: "https://s3-ap-southeast-1.amazonaws.com/hp.minastik.com/",
-  socketServer: "http://116.118.49.234:5009",
+  socketServer: "https://116.118.49.234:5009",
 
   firebaseConfig: {
     apiKey: "AIzaSyCfcw0QH-4YHMDemD9oCZceA1YG0RU9dN4",

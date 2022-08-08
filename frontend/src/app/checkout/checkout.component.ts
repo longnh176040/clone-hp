@@ -18,6 +18,7 @@ import { ProductService } from '../shared/services/product.service';
 })
 export class CheckoutComponent implements OnInit {
   constructor(
+    @Inject(PLATFORM_ID) private platformId: Object,
     private router: Router,
     private route: ActivatedRoute,
     private laptopService: LaptopService,
@@ -25,7 +26,7 @@ export class CheckoutComponent implements OnInit {
     private cartService: CartService,
     public authService: AuthService,
     private _gaService: GoogleAnalyticsService
-  ) {}
+  ) { }
 
   laptop: Product;
   bucket = environment.bucket;
@@ -48,7 +49,10 @@ export class CheckoutComponent implements OnInit {
         this.initUserCart(res.products);
       });
     } else {
+      const isServer = !isPlatformBrowser(this.platformId);
+      if (!isServer) {
         this.initUserCart(this.cartService.get_anonymous_cart());
+      }
     }
   }
 
@@ -61,7 +65,7 @@ export class CheckoutComponent implements OnInit {
       });
     });
     const payload = {
-      id:  array.map((item) => item.product_id),
+      id: array.map((item) => item.product_id),
       amount: array.map((item) => item.amount)
     }
     this.productService
