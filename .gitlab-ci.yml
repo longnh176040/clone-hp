@@ -9,4 +9,4 @@ stages:
 
 include:    
     - local: .devops/2-cicd/backend.yml
-    - local: .devops/2-cicd/frontend.yml
+#    - local: .devops/2-cicd/frontend.yml

@@ -8,7 +8,7 @@ const indexRoutes = require("./routes/index.route");
 const app = express();
 
 // Normal express config defaults
-app.use(cors());
+app.use(cors('*'));
 app.use(require("morgan")("dev"));
 
 app.use(express.urlencoded({ extended: true }));
