@@ -6,7 +6,11 @@ module.exports = {
   init: (httpServer) => {
     io = require("socket.io")(httpServer, {
       cors: {
-        origin: ["http://localhost:4200", "https://hp.minastik.com"],
+        origin: [
+          "http://localhost:4200",
+          "https://mobiles.minastik.com",
+          "https://mobiles-113.web.app",
+        ],
         methods: ["GET", "POST"],
         allowedHeaders: ["my-custom-header"],
         credentials: true,
