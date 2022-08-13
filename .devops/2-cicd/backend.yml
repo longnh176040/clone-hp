@@ -6,7 +6,7 @@ build_backend:
     CI_IMAGE_NAME: $CI_REGISTRY_IMAGE/$MODULE_NAME:$CI_COMMIT_REF_SLUG
   script:
     - echo -n $CI_JOB_TOKEN | docker login -u $CI_REGISTRY_USER --password-stdin $CI_REGISTRY
-    - docker build -f $DOCKERFILE_PATH/$MODULE_NAME.Dockerfile -t $CI_IMAGE_NAME $SRC_PATH
+    - docker build -f $DOCKERFILE_PATH/$MODULE_NAME.Dockerfile --build-arg ENV_FILE="$ENV_FILE" -t $CI_IMAGE_NAME $SRC_PATH
     - docker push $CI_IMAGE_NAME
   tags:
     - minastik-runner-0
